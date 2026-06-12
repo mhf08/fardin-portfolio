@@ -1,0 +1,3 @@
+# Internal files — never deploy
+tools
+*.md

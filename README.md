@@ -12,6 +12,8 @@ sitemap.xml           single-URL sitemap
 robots.txt            allow-all + sitemap pointer
 llms.txt              summary for AI assistants that index/cite the site
 vercel.json           CSP + security + caching headers (Vercel)
+.vercelignore         keeps tools/ and *.md out of the deploy
+HANDOFF.md            living session state for AI continuity (never deployed)
 css/styles.css        design system + all styles + @font-face
 js/theme-init.js      pre-paint theme pick (external so CSP needs no unsafe-inline)
 js/main.js            ruler, scroll-spy, carousels, transitions, lightbox, cursor, HUD
