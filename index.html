@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mostofa Habib Fardin — Industrial Engineer &amp; Visual Storyteller</title>
+  <meta name="description" content="Portfolio of Mostofa Habib Fardin, an Industrial and Production Engineer specializing in Machine Learning, Supply Chain optimization, and Quality Management.">
+  <meta name="author" content="Mostofa Habib Fardin">
+  <meta name="keywords" content="Mostofa Habib Fardin, Industrial Engineer, BUET, Supply Chain, Machine Learning, Quality Control, Portfolio">
+  <meta name="theme-color" content="#F3EFE6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#181A16" media="(prefers-color-scheme: dark)">
+
+  <!-- Canonical + social. UPDATE the domain in one place after deploy: see all "mostofahabibfardin.com" -->
+  <link rel="canonical" href="https://mostofahabibfardin.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mostofahabibfardin.com/">
+  <meta property="og:title" content="Mostofa Habib Fardin — Industrial Engineer & Visual Storyteller">
+  <meta property="og:description" content="Turning production data into resilient systems — ML forecasting, supply-chain optimization, and quality control on the factory floor.">
+  <meta property="og:image" content="https://mostofahabibfardin.com/assets/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mostofa Habib Fardin — Industrial Engineer & Visual Storyteller">
+  <meta name="twitter:description" content="ML forecasting, supply-chain optimization, and quality control — plus photography of the systems nobody designed.">
+  <meta name="twitter:image" content="https://mostofahabibfardin.com/assets/og.jpg">
+
+  <link rel="icon" type="image/png" href="favicon-v2.png">
+  <link rel="shortcut icon" href="favicon-v2.png">
+
+  <!-- Theme set before paint to avoid flash -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+
+  <!-- Self-hosted fonts: preload the two the hero paints with -->
+  <link rel="preload" href="assets/fonts/fraunces-normal-400_650.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-normal-400_600.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Preload the LCP hero image (AVIF for modern browsers) -->
+  <link rel="preload" href="assets/img/hero.avif" as="image" type="image/avif" fetchpriority="high">
+  <noscript>
+    <style>.reveal{opacity:1!important;transform:none!important}.sheet-head::after{transform:scaleX(1)!important}.anim{opacity:1!important;transform:none!important}</style>
+  </noscript>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+
+  <!-- Structured data: identity for search + AI assistants -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mostofa Habib Fardin",
+    "url": "https://mostofahabibfardin.com/",
+    "image": "https://mostofahabibfardin.com/assets/img/portrait.jpg",
+    "jobTitle": "Industrial and Production Engineer",
+    "email": "mailto:mostofahabibfardin08@gmail.com",
+    "description": "Industrial and Production Engineer specializing in machine-learning demand forecasting, supply-chain optimization, and quality control. Photographer.",
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Bangladesh University of Engineering and Technology" },
+      { "@type": "EducationalOrganization", "name": "Notre Dame College, Dhaka" }
+    ],
+    "knowsAbout": ["Supply Chain Management", "Machine Learning", "Demand Forecasting", "Quality Control", "Lean Manufacturing", "SolidWorks", "Ansys", "Blockchain"],
+    "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "Bangladesh" },
+    "sameAs": [
+      "https://www.linkedin.com/in/mostofahabibfardin/",
+      "https://github.com/mhf08",
+      "https://www.instagram.com/most.of.a_fardin"
+    ]
+  }
+  </script>
+
+  <!-- Privacy-first analytics (cookieless, no consent banner needed).
+       To enable: sign up at plausible.io, add your domain, then uncomment.
+  <script defer data-domain="mostofahabibfardin.com" src="https://plausible.io/js/script.js"></script>
+  -->
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Loader: the title block prints itself in -->
+<div class="loader" id="loader">
+  <div class="loader__block" aria-hidden="true">
+    <span class="loader__edge loader__edge--t"></span>
+    <span class="loader__edge loader__edge--b"></span>
+    <span class="loader__edge loader__edge--l"></span>
+    <span class="loader__edge loader__edge--r"></span>
+    <p class="loader__label mono">The Drawing Set</p>
+    <p class="loader__name">Mostofa Habib Fardin</p>
+    <p class="loader__rev mono"><span class="loader__dot"></span>Rev 2026.06 — Printing…</p>
+  </div>
+</div>
+
+<!-- Sheet-wipe transition overlay -->
+<div class="wipe" aria-hidden="true">
+  <div class="wipe__panel wipe__panel--brass"></div>
+  <div class="wipe__panel wipe__panel--ink"></div>
+</div>
+
+<!-- Bespoke registration-mark cursor (desktop, fine pointer only) -->
+<div class="cursor" aria-hidden="true">
+  <svg class="cursor__mark" viewBox="0 0 44 44" width="44" height="44">
+    <circle cx="22" cy="22" r="10" fill="none" stroke="currentColor" stroke-width="1"/>
+    <line x1="22" y1="0" x2="22" y2="14" stroke="currentColor" stroke-width="1"/>
+    <line x1="22" y1="30" x2="22" y2="44" stroke="currentColor" stroke-width="1"/>
+    <line x1="0" y1="22" x2="14" y2="22" stroke="currentColor" stroke-width="1"/>
+    <line x1="30" y1="22" x2="44" y2="22" stroke="currentColor" stroke-width="1"/>
+  </svg>
+  <span class="cursor__label mono"></span>
+</div>
+
+<!-- Left-edge ruler (desktop) -->
+<div class="ruler" aria-hidden="true">
+  <div class="ruler__ticks"></div>
+  <div class="ruler__progress"></div>
+  <div class="ruler__readout"><span class="ruler__sheet">01</span><span class="ruler__label">Title</span></div>
+</div>
+
+<!-- Living title-block HUD: current sheet + drafting coordinates -->
+<aside class="hud mono" aria-hidden="true">
+  <span class="hud__row"><span class="hud__k">Sheet</span><b class="hud__sheet">01 / 09</b><span class="hud__name">Title</span></span>
+  <span class="hud__row"><span class="hud__k">X</span><b class="hud__x">0000</b><span class="hud__k">Y</span><b class="hud__y">0000</b></span>
+  <span class="hud__row"><span class="hud__k">Rev</span><b>2026.06</b></span>
+</aside>
+
+<header class="site-head">
+  <a class="site-head__mark" href="#sheet-01" data-wipe>
+    <span class="site-head__mono">MHF</span><span class="site-head__dot">.</span>
+  </a>
+
+  <nav class="site-nav" id="site-nav" aria-label="Sheets">
+    <ul>
+      <li><a href="#sheet-02" data-wipe data-spy="sheet-02"><span class="n">02</span>About</a></li>
+      <li><a href="#sheet-03" data-wipe data-spy="sheet-03"><span class="n">03</span>Toolkit</a></li>
+      <li><a href="#sheet-04" data-wipe data-spy="sheet-04"><span class="n">04</span>Experience</a></li>
+      <li><a href="#sheet-05" data-wipe data-spy="sheet-05"><span class="n">05</span>Projects</a></li>
+      <li><a href="#sheet-06" data-wipe data-spy="sheet-06"><span class="n">06</span>Thesis</a></li>
+      <li><a href="#sheet-07" data-wipe data-spy="sheet-07"><span class="n">07</span>Achievements</a></li>
+      <li><a href="#sheet-08" data-wipe data-spy="sheet-08"><span class="n">08</span>Photography</a></li>
+      <li><a href="#sheet-09" data-wipe data-spy="sheet-09" class="site-nav__cta"><span class="n">09</span>Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="site-head__tools">
+    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to night mode">
+      <span class="theme-toggle__txt theme-toggle__txt--day">NIGHT&nbsp;SHIFT</span>
+      <span class="theme-toggle__txt theme-toggle__txt--night">DAY&nbsp;SHIFT</span>
+    </button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ SHEET 01 — TITLE ============ -->
+  <section class="sheet hero" id="sheet-01" aria-labelledby="hero-title" data-sheet="01" data-name="Title">
+    <div class="hero__bg" aria-hidden="true">
+      <picture>
+        <source type="image/avif" srcset="assets/img/hero.avif">
+        <source type="image/webp" srcset="assets/img/hero.webp">
+        <img src="assets/img/hero.jpg" alt="" width="1408" height="768" fetchpriority="high">
+      </picture>
+      <div class="hero__scrim"></div>
+    </div>
+
+    <div class="hero__inner">
+      <p class="hero__eyebrow mono anim" style="--d:0">Machine Learning&ensp;·&ensp;Supply Chain Management&ensp;·&ensp;Quality Control</p>
+
+      <h1 class="hero__title anim" style="--d:1" id="hero-title">
+        Mostofa Habib <em>Fardin</em>
+      </h1>
+
+      <p class="hero__role anim" style="--d:2">Industrial and Production Engineer</p>
+
+      <p class="hero__value anim" style="--d:3">
+        Turning production data into resilient systems — machine-learning forecasting,
+        supply-chain optimization, and quality control on the factory floor.
+      </p>
+
+      <p class="hero__story anim" style="--d:4">
+        <span class="hero__rule" aria-hidden="true"></span>Visual Storyteller<span class="hero__rule" aria-hidden="true"></span>
+      </p>
+
+      <div class="hero__cta anim" style="--d:5">
+        <a class="btn btn--solid" href="#sheet-05" data-wipe>View Projects</a>
+        <a class="btn" href="assets/resume.pdf" download="Mostofa-Habib-Fardin-Resume.pdf">Download Resume</a>
+        <ul class="iconrow" aria-label="Profiles">
+          <li><a class="icon-btn" href="https://www.linkedin.com/in/mostofahabibfardin/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.763z"/></svg>
+          </a></li>
+          <li><a class="icon-btn" href="https://github.com/mhf08" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.372.79 1.102.79 2.222v3.293c0 .319.192.694.805.576 4.765-1.583 8.185-6.074 8.185-11.385 0-6.627-5.373-12-12-12z"/></svg>
+          </a></li>
+          <li><a class="icon-btn" href="https://www.instagram.com/most.of.a_fardin" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a></li>
+        </ul>
+      </div>
+
+      <!-- Signature element: the title block -->
+      <dl class="titleblock anim" style="--d:6" aria-label="Drawing title block">
+        <div class="titleblock__cell">
+          <dt>Drawn by</dt>
+          <dd>Mostofa Habib Fardin</dd>
+        </div>
+        <div class="titleblock__cell">
+          <dt>Discipline</dt>
+          <dd>Industrial &amp; Production Engineering, BUET</dd>
+        </div>
+        <div class="titleblock__cell">
+          <dt>Sheet</dt>
+          <dd>01 of 09</dd>
+        </div>
+        <div class="titleblock__cell">
+          <dt>Rev</dt>
+          <dd>2026.06</dd>
+        </div>
+        <div class="titleblock__cell titleblock__cell--status">
+          <dt>Status</dt>
+          <dd><span class="status-dot" aria-hidden="true"></span>Open to roles &amp; collaborations</dd>
+        </div>
+      </dl>
+    </div>
+
+    <a class="hero__scroll mono" href="#sheet-02" data-wipe>
+      Explore
+      <span class="hero__scrollline" aria-hidden="true"><span></span></span>
+    </a>
+  </section>
+
+  <!-- ============ SHEET 02 — ABOUT ME ============ -->
+  <section class="sheet" id="sheet-02" aria-labelledby="t-02" data-sheet="02" data-name="About">
+    <header class="sheet-head reveal">
+      <h2 id="t-02">About Me</h2>
+      <p class="sheet-head__meta mono">Sheet 02 / 09&ensp;·&ensp;Rev 2026.06&ensp;·&ensp;Scale 1:1</p>
+    </header>
+
+    <div class="profile">
+      <figure class="profile__fig reveal">
+        <picture>
+          <source type="image/avif" srcset="assets/img/portrait.avif">
+          <source type="image/webp" srcset="assets/img/portrait.webp">
+          <img src="assets/img/portrait.jpg" alt="Mostofa Habib Fardin" width="600" height="800" loading="lazy">
+        </picture>
+        <figcaption class="mono">FIG. 02-A — Mostofa Habib Fardin</figcaption>
+      </figure>
+
+      <div class="profile__body">
+        <p class="profile__pull reveal">“Precision in Systems, <em>Clarity in Vision</em>”</p>
+        <p class="reveal">
+          I am an Industrial &amp; Production Engineer with a deep fascination for how data can
+          streamline the physical world. My work centers on the intersection of Machine Learning
+          and Supply Chain Management, where I transform complex datasets into optimized,
+          resilient systems.
+        </p>
+        <p class="reveal">
+          To me, engineering and photography are two sides of the same coin: Observation.
+          Whether I am training a predictive model to reduce supply chain bottlenecks or waiting
+          for the perfect light to capture a landscape, the goal is the same: identifying patterns,
+          finding balance, and achieving technical excellence.
+        </p>
+        <p class="profile__quote reveal">I don't just build systems; I document the efficiency within them.</p>
+
+        <dl class="statrow reveal" aria-label="Key figures">
+          <div><dt class="mono">CGPA</dt><dd>3.87<span class="statrow__sub">/ 4.00</span></dd></div>
+          <div><dt class="mono">Dean's List</dt><dd>2<span class="statrow__sub">× (2022, 2023)</span></dd></div>
+          <div><dt class="mono">Competition podiums</dt><dd>3<span class="statrow__sub">national</span></dd></div>
+          <div><dt class="mono">Photo series</dt><dd>2<span class="statrow__sub">ongoing</span></dd></div>
+        </dl>
+
+        <p class="currently reveal">
+          <span class="currently__k mono">Currently</span>
+          Wrapping up my B.Sc. at BUET and a thesis on supply-chain resilience.
+          Reading about geopolitical risk in logistics; shooting a third photo series on the Dhaka waterfront.
+          <strong>Open to roles in operations, supply chain, and data-driven manufacturing.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHEET 03 — THE TOOLKIT (SKILLS + EDUCATION) ============ -->
+  <section class="sheet" id="sheet-03" aria-labelledby="t-03" data-sheet="03" data-name="Toolkit">
+    <header class="sheet-head reveal">
+      <h2 id="t-03">The Toolkit</h2>
+      <p class="sheet-head__meta mono">Sheet 03 / 09&ensp;·&ensp;Skills&ensp;·&ensp;Academic Foundation</p>
+    </header>
+
+    <div class="bom reveal">
+      <p class="mono bom__title">TABLE 03-A — BILL OF MATERIALS (SKILLS)</p>
+      <table>
+        <thead>
+          <tr><th scope="col" class="mono">Item</th><th scope="col" class="mono">Category</th><th scope="col" class="mono">Skill</th><th scope="col" class="mono">Specification</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">001</td><td>Physical Systems &amp; Design</td><td>Engineering Design</td><td>SolidWorks &amp; CATIA</td></tr>
+          <tr><td class="mono">002</td><td></td><td>Simulation &amp; Analysis</td><td>Ansys (FEA/CFD) for structural and fluid validation, ARENA for system analysis</td></tr>
+          <tr><td class="mono">003</td><td></td><td>Digital Prototyping</td><td>AutoCAD (Layouts)</td></tr>
+          <tr><td class="mono">004</td><td>Data Science &amp; ML</td><td>Predictive Modeling</td><td>XGBoost, TFT and LightGBM for forecasting</td></tr>
+          <tr><td class="mono">005</td><td></td><td>Data Stack</td><td>Python, MATLAB, and C programming</td></tr>
+          <tr><td class="mono">006</td><td></td><td>Advanced Tech</td><td>IoT (Sensor integration), Blockchain</td></tr>
+          <tr><td class="mono">007</td><td>Operational Excellence</td><td>Lean Philosophies</td><td>5S, 3G, Kaizen, 3K, and Poka-Yoke</td></tr>
+          <tr><td class="mono">008</td><td></td><td>Quality &amp; Safety</td><td>Line Balancing, Time Studies, Ergonomics and Safety</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="toolkit-edu reveal">
+      <h3 class="record__h mono">Academic Foundation</h3>
+      <div class="edu-grid">
+        <article class="edu__item">
+          <h4>Bangladesh University of Engineering and Technology (BUET)</h4>
+          <p class="mono edu__meta">B.Sc. in Industrial and Production Engineering&ensp;·&ensp;JAN 2022 – May 2026 (Expected)</p>
+          <ul class="edu__details">
+            <li><strong>CGPA:</strong> 3.87 / 4.00</li>
+            <li><strong>Dean's List:</strong> 2022 and 2023</li>
+            <li><strong>Thesis:</strong> Taming the Bullwhip Under Geopolitical Uncertainty: A Multi-Echelon Simulation of Machine Learning Forecasting and Blockchain-Enabled Information Visibility</li>
+            <li><strong>Key Coursework:</strong> Operations Management, Quality Management, Operations Research, Probability and Statistics, Project Management</li>
+          </ul>
+        </article>
+        <article class="edu__item">
+          <h4>Notre Dame College, Dhaka</h4>
+          <p class="mono edu__meta">Higher Secondary Certificate (HSC)&ensp;·&ensp;2018 – 2020</p>
+          <ul class="edu__details">
+            <li><strong>GPA:</strong> 5.00 / 5.00</li>
+            <li><strong>Award:</strong> Awarded for Perfect Attendance</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHEET 04 — EXPERIENCE ============ -->
+  <section class="sheet" id="sheet-04" aria-labelledby="t-04" data-sheet="04" data-name="Experience">
+    <header class="sheet-head reveal">
+      <h2 id="t-04">Experience</h2>
+      <p class="sheet-head__meta mono">Sheet 04 / 09&ensp;·&ensp;Professional Record</p>
+    </header>
+
+    <article class="xp reveal">
+      <div class="xp__grid">
+        <div>
+          <header class="xp__head">
+            <h3>RANCON Auto Industries Ltd. &amp; RANCON Motorbikes Ltd.</h3>
+            <p class="mono xp__meta">Industrial Attachment&ensp;·&ensp;Gazipur&ensp;·&ensp;November 2025 – December 2025</p>
+          </header>
+          <ul class="xp__list">
+            <li>Optimized production efficiency by assisting in Production Line and QC activities, including time studies and SOP upgrades.</li>
+            <li>Engineered and deployed a Rack ID system to optimize inventory traceability.</li>
+            <li>Improved workplace efficiency and safety by aligning operations with Japanese OEM standards and 5S methodologies.</li>
+            <li>Presented technical findings and process recommendations to the Executive Director and Production Manager.</li>
+          </ul>
+        </div>
+
+        <div class="carousel carousel--media" data-carousel aria-roledescription="carousel" aria-label="Photos from the RANCON industrial attachment">
+          <div class="carousel__track" tabindex="0">
+            <figure class="carousel__slide"><a href="assets/img/experience/rancon-1.jpg" data-lightbox="rancon" data-caption="Industrial Attachment at RANCON"><picture>
+  <source type="image/avif" srcset="assets/img/experience/rancon-1.avif">
+  <source type="image/webp" srcset="assets/img/experience/rancon-1.webp">
+  <img src="assets/img/experience/rancon-1.jpg" alt="Industrial Attachment at RANCON" width="1200" height="1600" loading="lazy">
+</picture></a><figcaption class="mono">Industrial Attachment at RANCON</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/experience/rancon-2.jpg" data-lightbox="rancon" data-caption="Team Meeting at RANCON"><picture>
+  <source type="image/avif" srcset="assets/img/experience/rancon-2.avif">
+  <source type="image/webp" srcset="assets/img/experience/rancon-2.webp">
+  <img src="assets/img/experience/rancon-2.jpg" alt="Team Meeting at RANCON" width="1280" height="960" loading="lazy">
+</picture></a><figcaption class="mono">Team Meeting at RANCON</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/experience/rancon-3.jpg" data-lightbox="rancon" data-caption="Production Line Observation"><picture>
+  <source type="image/avif" srcset="assets/img/experience/rancon-3.avif">
+  <source type="image/webp" srcset="assets/img/experience/rancon-3.webp">
+  <img src="assets/img/experience/rancon-3.jpg" alt="Production Line Observation" width="1280" height="960" loading="lazy">
+</picture></a><figcaption class="mono">Production Line Observation</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/experience/rancon-4.jpg" data-lightbox="rancon" data-caption="Quality Control Systems"><picture>
+  <source type="image/avif" srcset="assets/img/experience/rancon-4.avif">
+  <source type="image/webp" srcset="assets/img/experience/rancon-4.webp">
+  <img src="assets/img/experience/rancon-4.jpg" alt="Quality Control Systems" width="1280" height="960" loading="lazy">
+</picture></a><figcaption class="mono">Quality Control Systems</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/experience/rancon-5.jpg" data-lightbox="rancon" data-caption="Inventory Management Study"><picture>
+  <source type="image/avif" srcset="assets/img/experience/rancon-5.avif">
+  <source type="image/webp" srcset="assets/img/experience/rancon-5.webp">
+  <img src="assets/img/experience/rancon-5.jpg" alt="Inventory Management Study" width="960" height="1280" loading="lazy">
+</picture></a><figcaption class="mono">Inventory Management Study</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/experience/rancon-6.jpg" data-lightbox="rancon" data-caption="Process Optimization Review"><picture>
+  <source type="image/avif" srcset="assets/img/experience/rancon-6.avif">
+  <source type="image/webp" srcset="assets/img/experience/rancon-6.webp">
+  <img src="assets/img/experience/rancon-6.jpg" alt="Process Optimization Review" width="1280" height="960" loading="lazy">
+</picture></a><figcaption class="mono">Process Optimization Review</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/experience/rancon-7.jpg" data-lightbox="rancon" data-caption="Facility Overview"><picture>
+  <source type="image/avif" srcset="assets/img/experience/rancon-7.avif">
+  <source type="image/webp" srcset="assets/img/experience/rancon-7.webp">
+  <img src="assets/img/experience/rancon-7.jpg" alt="Facility Overview" width="1200" height="1600" loading="lazy">
+</picture></a><figcaption class="mono">Facility Overview</figcaption></figure>
+          </div>
+          <div class="carousel__bar">
+            <span class="carousel__count mono" aria-live="polite">1 / 7</span>
+            <div class="carousel__btns">
+              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous photo">←</button>
+              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next photo">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="xp reveal">
+      <div class="xp__grid">
+        <div>
+          <header class="xp__head">
+            <h3>A1 Polymer Limited (Anwar Group of Industries)</h3>
+            <p class="mono xp__meta">Industrial Visit&ensp;·&ensp;Tongi, Gazipur&ensp;·&ensp;March 5, 2026</p>
+          </header>
+          <ul class="xp__list">
+            <li>Analyzed end-to-end production for Pipes, Fittings, Teflon Tape, and Galvanizing operations.</li>
+            <li>Gained firsthand insight into large-scale manufacturing workflows and integrated industrial operations.</li>
+            <li>Engaged with production planning and supply chain teams to understand SKU management in a high-demand market.</li>
+            <li>Observed the practical application of corporate vision and quality commitment in a major industrial concern.</li>
+          </ul>
+        </div>
+
+        <div class="carousel carousel--media" data-carousel aria-roledescription="carousel" aria-label="Photos from the A1 Polymer industrial visit">
+          <div class="carousel__track" tabindex="0">
+            <figure class="carousel__slide"><a href="assets/img/experience/anwar-1.jpg" data-lightbox="anwar" data-caption="Industrial Visit at A1 Polymer"><picture>
+  <source type="image/avif" srcset="assets/img/experience/anwar-1.avif">
+  <source type="image/webp" srcset="assets/img/experience/anwar-1.webp">
+  <img src="assets/img/experience/anwar-1.jpg" alt="Industrial Visit at A1 Polymer" width="1600" height="1067" loading="lazy">
+</picture></a><figcaption class="mono">Industrial Visit at A1 Polymer</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/experience/anwar-2.jpg" data-lightbox="anwar" data-caption="Production Facility Observation"><picture>
+  <source type="image/avif" srcset="assets/img/experience/anwar-2.avif">
+  <source type="image/webp" srcset="assets/img/experience/anwar-2.webp">
+  <img src="assets/img/experience/anwar-2.jpg" alt="Production Facility Observation" width="1600" height="1067" loading="lazy">
+</picture></a><figcaption class="mono">Production Facility Observation</figcaption></figure>
+          </div>
+          <div class="carousel__bar">
+            <span class="carousel__count mono" aria-live="polite">1 / 2</span>
+            <div class="carousel__btns">
+              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous photo">←</button>
+              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next photo">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ SHEET 05 — PROJECTS ============ -->
+  <section class="sheet" id="sheet-05" aria-labelledby="t-05" data-sheet="05" data-name="Projects">
+    <header class="sheet-head reveal">
+      <h2 id="t-05">Projects</h2>
+      <p class="sheet-head__meta mono">Sheet 05 / 09&ensp;·&ensp;Selected Work</p>
+    </header>
+
+    <!-- Case 05-A -->
+    <article class="case reveal" aria-labelledby="case-a">
+      <p class="case__no mono">CASE 05-A&ensp;·&ensp;Industrial Safety for Fertilizer Manufacturing</p>
+      <h3 id="case-a">Smart IoT-Based Ammonia Gas Monitoring System</h3>
+      <ul class="tags mono" aria-label="Technologies">
+        <li>IoT</li><li>Embedded Sensors</li><li>Industrial Safety</li><li>Web Dashboard</li>
+      </ul>
+
+      <div class="case__grid">
+        <div class="case__text">
+          <div class="case__step">
+            <h4 class="mono">Overview</h4>
+            <p>In fertilizer plants, Ammonia is a volatile necessity. I co-developed a low-cost,
+               real-time monitoring system to automate safety responses where manual oversight
+               often fails.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="mono">Stack / Engineering</h4>
+            <p>MQ-137 (Ammonia) via ADS1115 (16-bit ADC) and DHT22 (Temp/Humidity), ESP-01S (Wi-Fi)
+               streaming to web dashboard, threshold-based logic (30 ppm Ammonia / 30°C) triggering
+               Buzzer &amp; Fan.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="mono">Impact</h4>
+            <p>Reduced response time to leaks through automated targeted actuation. Created a
+               centralized, auditable data stream. Modular scalability for rapid retrofitting.</p>
+          </div>
+        </div>
+
+        <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="Smart IoT-Based Ammonia Gas Monitoring System media">
+          <div class="carousel__track" tabindex="0">
+            <figure class="carousel__slide"><a href="assets/img/projects/iot-poster.jpg" data-lightbox="case-a" data-caption="System architecture and results poster."><picture>
+  <source type="image/avif" srcset="assets/img/projects/iot-poster.avif">
+  <source type="image/webp" srcset="assets/img/projects/iot-poster.webp">
+  <img src="assets/img/projects/iot-poster.jpg" alt="Poster of the IoT ammonia monitoring system architecture" width="1186" height="837" loading="lazy">
+</picture></a><figcaption class="mono">FIG. 05-A1 — System poster</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/projects/iot-hardware.jpg" data-lightbox="case-a" data-caption="The assembled sensing hardware."><picture>
+  <source type="image/avif" srcset="assets/img/projects/iot-hardware.avif">
+  <source type="image/webp" srcset="assets/img/projects/iot-hardware.webp">
+  <img src="assets/img/projects/iot-hardware.jpg" alt="Assembled IoT hardware with sensors and microcontroller" width="960" height="1280" loading="lazy">
+</picture></a><figcaption class="mono">FIG. 05-A2 — Hardware assembly</figcaption></figure>
+          </div>
+          <div class="carousel__bar">
+            <span class="carousel__count mono" aria-live="polite">1 / 2</span>
+            <div class="carousel__btns">
+              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous media">←</button>
+              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next media">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 05-B -->
+    <article class="case reveal" aria-labelledby="case-b">
+      <p class="case__no mono">CASE 05-B&ensp;·&ensp;Pedal Powered Water Pump for Rural Sustainability</p>
+      <h3 id="case-b">The HydroPedal</h3>
+      <ul class="tags mono" aria-label="Technologies">
+        <li>SolidWorks</li><li>Ansys FEA</li><li>CFD</li><li>Sustainable Design</li>
+      </ul>
+
+      <div class="case__grid case__grid--flip">
+        <div class="case__text">
+          <div class="case__step">
+            <h4 class="mono">Overview</h4>
+            <p>In many rural agricultural regions, small-scale farmers face a “fuel-cost trap.”
+               We engineered the HydroPedal to decouple irrigation from fossil fuels.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="mono">Stack / Engineering</h4>
+            <p>Complete 3D assembly in SolidWorks, Ansys Static Structural analysis on frame,
+               CFD for impeller housing optimization, Material selection: AISI 1020 Steel.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="mono">Impact</h4>
+            <p>Flow rate 25–30 L/min at 20 ft head. 100% reduction in operational fuel costs.
+               Sustainable alternative for independent farmers.</p>
+          </div>
+        </div>
+
+        <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="The HydroPedal media">
+          <div class="carousel__track" tabindex="0">
+            <figure class="carousel__slide"><a href="assets/img/projects/hydropedal-1.jpg" data-lightbox="case-b" data-caption="HydroPedal — assembled prototype."><picture>
+  <source type="image/avif" srcset="assets/img/projects/hydropedal-1.avif">
+  <source type="image/webp" srcset="assets/img/projects/hydropedal-1.webp">
+  <img src="assets/img/projects/hydropedal-1.jpg" alt="HydroPedal pedal-powered pump prototype" width="1015" height="1023" loading="lazy">
+</picture></a><figcaption class="mono">FIG. 05-B1 — Prototype</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/projects/hydropedal-2.jpg" data-lightbox="case-b" data-caption="Drive and pump detail."><picture>
+  <source type="image/avif" srcset="assets/img/projects/hydropedal-2.avif">
+  <source type="image/webp" srcset="assets/img/projects/hydropedal-2.webp">
+  <img src="assets/img/projects/hydropedal-2.jpg" alt="HydroPedal drivetrain and pump detail" width="800" height="600" loading="lazy">
+</picture></a><figcaption class="mono">FIG. 05-B2 — Drive &amp; pump detail</figcaption></figure>
+          </div>
+          <div class="carousel__bar">
+            <span class="carousel__count mono" aria-live="polite">1 / 2</span>
+            <div class="carousel__btns">
+              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous media">←</button>
+              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next media">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 05-C -->
+    <article class="case reveal" aria-labelledby="case-c">
+      <p class="case__no mono">CASE 05-C&ensp;·&ensp;Full-Scale Mechanical Assembly &amp; Kinematic Study</p>
+      <h3 id="case-c">Radial Drilling Machine SolidWorks Model</h3>
+      <ul class="tags mono" aria-label="Technologies">
+        <li>SolidWorks</li><li>CAD Assembly</li><li>Motion Study</li><li>Kinematics</li>
+      </ul>
+
+      <div class="case__grid">
+        <div class="case__text">
+          <div class="case__step">
+            <h4 class="mono">Overview</h4>
+            <p>Engineered a complete, part-by-part digital reconstruction of an industrial radial
+               drilling machine.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="mono">Stack / Engineering</h4>
+            <p>50+ individual components in SolidWorks, mechanical mates for vertical arm travel
+               and spindle rotation, Motion Study for kinematic validation, PhotoView 360 renders
+               and exploded-view animations.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="mono">Impact</h4>
+            <p>100% assembly transparency, no interference detected in final motion simulation.</p>
+          </div>
+        </div>
+
+        <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="Radial Drilling Machine SolidWorks Model media">
+          <div class="carousel__track" tabindex="0">
+            <figure class="carousel__slide"><a href="assets/img/projects/drill-iso.jpg" data-lightbox="case-c" data-caption="Isometric render — full assembly."><picture>
+  <source type="image/avif" srcset="assets/img/projects/drill-iso.avif">
+  <source type="image/webp" srcset="assets/img/projects/drill-iso.webp">
+  <img src="assets/img/projects/drill-iso.jpg" alt="Isometric render of the radial drilling machine assembly" width="1600" height="747" loading="lazy">
+</picture></a><figcaption class="mono">FIG. 05-C1 — Isometric, full assembly</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/projects/drill-close.jpg" data-lightbox="case-c" data-caption="Spindle head, close-up render."><picture>
+  <source type="image/avif" srcset="assets/img/projects/drill-close.avif">
+  <source type="image/webp" srcset="assets/img/projects/drill-close.webp">
+  <img src="assets/img/projects/drill-close.jpg" alt="Close-up render of the drilling machine spindle head" width="1600" height="747" loading="lazy">
+</picture></a><figcaption class="mono">FIG. 05-C2 — Spindle head, close-up</figcaption></figure>
+            <figure class="carousel__slide yt" data-yt="9CxBPs1eGwk">
+              <button class="yt__btn" type="button" aria-label="Play the motion study video">
+                <img src="https://i.ytimg.com/vi/9CxBPs1eGwk/hqdefault.jpg" alt="Preview frame of the motion study video" width="480" height="360" loading="lazy">
+                <span class="yt__play" aria-hidden="true">▶</span>
+              </button>
+              <figcaption class="mono">FIG. 05-C3 — Motion Study (video)</figcaption>
+            </figure>
+          </div>
+          <div class="carousel__bar">
+            <span class="carousel__count mono" aria-live="polite">1 / 3</span>
+            <div class="carousel__btns">
+              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous media">←</button>
+              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next media">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ SHEET 06 — THESIS ============ -->
+  <section class="sheet" id="sheet-06" aria-labelledby="t-06" data-sheet="06" data-name="Thesis">
+    <header class="sheet-head reveal">
+      <h2 id="t-06">Thesis: “Taming the Bullwhip”</h2>
+      <p class="sheet-head__meta mono">Sheet 06 / 09&ensp;·&ensp;Undergraduate Research&ensp;·&ensp;Dept. of IPE, BUET</p>
+    </header>
+
+    <div class="thesis">
+      <p class="thesis__abstract reveal">
+        <span class="mono thesis__label">Defended June 2026 · Supervised by Prof. Dr. Sultana Parveen · with Sheikh Mahir Abrar</span>
+        Taming the Bullwhip Under Geopolitical Uncertainty: A Multi-Echelon Simulation of
+        <em>Machine Learning Forecasting</em> and <em>Blockchain-Enabled Information Visibility</em>.
+      </p>
+
+      <div class="thesis__cols">
+        <div class="thesis__col reveal">
+          <h3 class="mono">The Experiment</h3>
+          <p>Can ML forecasting and blockchain transparency tame the bullwhip effect when
+             geopolitical shocks destabilize lead times? To find out, we built:</p>
+          <ul>
+            <li><strong>A five-echelon supply chain simulator</strong> running a 5,740-day horizon (trading days, 2000–2021)</li>
+            <li><strong>Six forecasting models:</strong> Traditional, History, ARIMA, XGBoost, LightGBM, and Temporal Fusion Transformer — under rolling walk-forward validation</li>
+            <li><strong>Two disruption scenarios:</strong> gamma-distributed lead times, modulated daily by the Geopolitical Risk Index</li>
+            <li><strong>Three blockchain visibility modes:</strong> none, pipeline, and full — across four configurations and seven seeds, tested with t-tests and Cohen's d</li>
+          </ul>
+        </div>
+        <div class="thesis__col reveal">
+          <h3 class="mono">The Findings</h3>
+          <ul>
+            <li><strong>Disruption dominates:</strong> geopolitical shocks amplified the bullwhip beyond the combined effects of forecasting method and information visibility — mean bullwhip ratio at Actor 2 rose from 4,716 to 7,218.</li>
+            <li><strong>The accuracy–performance paradox:</strong> TFT had the poorest point-forecast accuracy among ML models yet the strongest bullwhip suppression, while XGBoost — the most accurate — performed no better than a naive rolling average.</li>
+            <li><strong>ARIMA broke down structurally</strong> under disruption, turning erratic with physically implausible results.</li>
+            <li><strong>Pipeline visibility ≈ full visibility:</strong> any transparency reduced network inventory, but pipeline-only sharing was statistically equivalent to full transparency.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="thesis__results reveal">
+        <h3 class="mono">What It Means for Practice</h3>
+        <div class="thesis__findings">
+          <p><span class="mono">P-01</span> Build resilience first — inventory buffers and supplier
+             diversification outweigh forecasting upgrades or information systems when disruption looms.</p>
+          <p><span class="mono">P-02</span> When choosing a forecasting model, weight the consistency of its
+             replenishment signals more heavily than its historical point accuracy.</p>
+          <p><span class="mono">P-03</span> For blockchain, pipeline visibility captures the primary benefit
+             without the governance burden of full transparency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHEET 07 — ACHIEVEMENTS ============ -->
+  <section class="sheet" id="sheet-07" aria-labelledby="t-07" data-sheet="07" data-name="Achievements">
+    <header class="sheet-head reveal">
+      <h2 id="t-07">Achievements</h2>
+      <p class="sheet-head__meta mono">Sheet 07 / 09&ensp;·&ensp;Journey of Excellence&ensp;·&ensp;Technical Endorsements</p>
+    </header>
+
+    <div class="awards reveal">
+      <h3 class="record__h mono">Journey of Excellence</h3>
+      <ol class="awards__list">
+        <li>
+          <span class="mono awards__year">2025</span>
+          <div>
+            <h4>IRC WASH Water Hackathon — Finalist</h4>
+            <p><strong>Challenge:</strong> Safe drinking water for coastal Bangladesh facing the “salinity trap.”</p>
+            <p><strong>Concept:</strong> Deg-Bhapka Shuddha Jol — Traditional Distillation adapted for modern
+               crisis. Dual-chamber clay oven, zero electricity, agricultural waste fuel.</p>
+            <p><strong>Impact:</strong> Could serve 300 households (~1,500 people) at $18/month capital cost.
+               Woman-led community management model.</p>
+
+            <div class="carousel carousel--media carousel--awards" data-carousel aria-roledescription="carousel" aria-label="WASH Water Hackathon photos">
+              <div class="carousel__track" tabindex="0">
+                <figure class="carousel__slide"><a href="assets/img/awards/wash-1.jpg" data-lightbox="wash" data-caption="IRC WASH Water Hackathon — Finalist"><picture>
+  <source type="image/avif" srcset="assets/img/awards/wash-1.avif">
+  <source type="image/webp" srcset="assets/img/awards/wash-1.webp">
+  <img src="assets/img/awards/wash-1.jpg" alt="Presenting at the WASH hackathon" width="1086" height="724" loading="lazy">
+</picture></a></figure>
+                <figure class="carousel__slide"><a href="assets/img/awards/wash-2.jpg" data-lightbox="wash" data-caption="IRC WASH Water Hackathon — team session"><picture>
+  <source type="image/avif" srcset="assets/img/awards/wash-2.avif">
+  <source type="image/webp" srcset="assets/img/awards/wash-2.webp">
+  <img src="assets/img/awards/wash-2.jpg" alt="Team session at the WASH hackathon" width="1280" height="939" loading="lazy">
+</picture></a></figure>
+                <figure class="carousel__slide"><a href="assets/img/awards/wash-3.jpg" data-lightbox="wash" data-caption="IRC WASH Water Hackathon — finalist round"><picture>
+  <source type="image/avif" srcset="assets/img/awards/wash-3.avif">
+  <source type="image/webp" srcset="assets/img/awards/wash-3.webp">
+  <img src="assets/img/awards/wash-3.jpg" alt="Finalist round at the WASH hackathon" width="1280" height="853" loading="lazy">
+</picture></a></figure>
+                <figure class="carousel__slide"><a href="assets/img/awards/wash-certificate.jpg" data-lightbox="wash" data-caption="Finalist certificate, IRC WASH Water Hackathon"><picture>
+  <source type="image/avif" srcset="assets/img/awards/wash-certificate.avif">
+  <source type="image/webp" srcset="assets/img/awards/wash-certificate.webp">
+  <img src="assets/img/awards/wash-certificate.jpg" alt="WASH hackathon finalist certificate" width="982" height="693" loading="lazy">
+</picture></a></figure>
+              </div>
+              <div class="carousel__bar">
+                <span class="carousel__count mono" aria-live="polite">1 / 4</span>
+                <div class="carousel__btns">
+                  <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous photo">←</button>
+                  <button class="carousel__btn" type="button" data-dir="1" aria-label="Next photo">→</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="mono awards__year">2022</span>
+          <div>
+            <h4>Bizzmania by BUET EDC — Champion</h4>
+            <p><strong>Challenge:</strong> Democratize education for developing nations.</p>
+            <p><strong>Concept:</strong> HiveMind — “Social Media for Education” platform built on Feynman
+               methodology, peer-to-peer knowledge exchange, resource centralization.</p>
+            <p><strong>Impact:</strong> 1st Place — selected for viability, user-centric design, and potential
+               to reduce academic inequality.</p>
+          </div>
+        </li>
+        <li>
+          <span class="mono awards__year">2022</span>
+          <div>
+            <h4>HULT Prize at BUET (2022) — 1st Runner Up | Team G1</h4>
+            <p><strong>Challenge:</strong> Restarting the World Economy post-pandemic.</p>
+            <p><strong>Concept:</strong> A Startup-Support Ecosystem — centralized platform as catalyst for
+               small-scale businesses, bridging the technical gap, providing PESTEL-based strategic support.</p>
+            <p><strong>Impact:</strong> Ranked 2nd in BUET for demonstrating a viable, scalable model for
+               post-crisis economic recovery.</p>
+          </div>
+        </li>
+      </ol>
+
+      <h3 class="record__h mono awards__certs-h">Technical Endorsements</h3>
+      <ul class="certs">
+        <li>
+          <a href="assets/img/awards/lean-six-sigma.jpg" data-lightbox="certs" data-caption="Lean Six Sigma White Belt — The Council for Six Sigma Certification (C.S.S.C.)">
+            <picture>
+              <source type="image/avif" srcset="assets/img/awards/lean-six-sigma.avif">
+              <source type="image/webp" srcset="assets/img/awards/lean-six-sigma.webp">
+              <img src="assets/img/awards/lean-six-sigma.jpg" alt="Lean Six Sigma White Belt certificate" width="1189" height="840" loading="lazy">
+            </picture>
+          </a>
+          <p><strong>Lean Six Sigma White Belt</strong> — The Council for Six Sigma Certification (C.S.S.C.).
+             DMAIC mastery applied during RANCON industrial attachment.</p>
+        </li>
+        <li>
+          <a href="assets/img/awards/ms-office.jpg" data-lightbox="certs" data-caption="Advanced Applications of MS Office for Engineers — AIPE BUET">
+            <picture>
+              <source type="image/avif" srcset="assets/img/awards/ms-office.avif">
+              <source type="image/webp" srcset="assets/img/awards/ms-office.webp">
+              <img src="assets/img/awards/ms-office.jpg" alt="Advanced Applications of MS Office for Engineers certificate" width="1280" height="928" loading="lazy">
+            </picture>
+          </a>
+          <p><strong>Advanced Applications of MS Office for Engineers</strong> — AIPE BUET. Complex datasets
+             and automated reporting, instrumental in 5,740-day simulation data management.</p>
+        </li>
+        <li>
+          <a href="assets/img/awards/cr-recognition.jpg" data-lightbox="certs" data-caption="Undergraduate Class Representative (CR) Recognition — Dept. of IPE, BUET">
+            <picture>
+              <source type="image/avif" srcset="assets/img/awards/cr-recognition.avif">
+              <source type="image/webp" srcset="assets/img/awards/cr-recognition.webp">
+              <img src="assets/img/awards/cr-recognition.jpg" alt="Class Representative recognition award" width="1600" height="1120" loading="lazy">
+            </picture>
+          </a>
+          <p><strong>Undergraduate Class Representative (CR) Recognition</strong> — Dept. of IPE, BUET.
+             Stakeholder management and peer representation for 120+ students.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SHEET 08 — PHOTOGRAPHY ============ -->
+  <section class="sheet" id="sheet-08" aria-labelledby="t-08" data-sheet="08" data-name="Photography">
+    <header class="sheet-head reveal">
+      <h2 id="t-08">Photography</h2>
+      <p class="sheet-head__meta mono">Sheet 08 / 09&ensp;·&ensp;The Observed World</p>
+    </header>
+
+    <blockquote class="photointro reveal">
+      Engineering and photography are two sides of the same coin: Observation. Whether I am
+      training a predictive model to identify patterns in a supply chain or waiting for the
+      perfect light to capture a landscape, the goal remains the same: identifying structure,
+      finding balance, and achieving technical excellence.
+    </blockquote>
+
+    <div class="series reveal">
+      <header class="series__head">
+        <h3>Series 1: Echoes of the Genba</h3>
+        <p class="mono series__sub">Capturing the soul of the “Actual Place”</p>
+        <p class="series__desc">
+          Influenced by Wabi-Sabi philosophy, exploring the beauty of the transient and weathered.
+          From the cold precision of steel to the organic decay of the streets, documenting the
+          “Genba” — the actual place where life happens. Stripping away colours reveals the true
+          essence of a moment — the intricate dance of light and shadow.
+        </p>
+      </header>
+      <div class="contactsheet" aria-label="Contact sheet — Echoes of the Genba">
+        <p class="contactsheet__edge mono" aria-hidden="true">FILM 01 — ECHOES OF THE GENBA · ISO 400 · B&amp;W · DEV. 2026</p>
+        <div class="contactsheet__grid">
+        <figure class="frame" data-frame="01" data-mark="select"><a href="assets/img/photos/genba-01.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="Light doesn't just illuminate; it defines the weight of the world."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-01.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-01.webp">
+  <img src="assets/img/photos/genba-01.jpg" alt="High-contrast monochrome street scene in raking light" width="1440" height="1800" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-01</span><span class="frame__note">Light doesn't just illuminate; it defines the weight of the world.</span></figcaption></figure>
+        <figure class="frame" data-frame="02"><a href="assets/img/photos/genba-02.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="The ghost of a machine, etched in rust and steel."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-02.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-02.webp">
+  <img src="assets/img/photos/genba-02.jpg" alt="Rusted machinery texture" width="1600" height="1280" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-02</span><span class="frame__note">The ghost of a machine, etched in rust and steel.</span></figcaption></figure>
+        <figure class="frame" data-frame="03"><a href="assets/img/photos/genba-03.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="Framing the urban chaos; shadows caught in a lattice of steel."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-03.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-03.webp">
+  <img src="assets/img/photos/genba-03.jpg" alt="Shadows through a steel lattice over a street" width="1280" height="1600" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-03</span><span class="frame__note">Framing the urban chaos; shadows caught in a lattice of steel.</span></figcaption></figure>
+        <figure class="frame" data-frame="04"><a href="assets/img/photos/genba-04.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="The silent geometry of broken time."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-04.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-04.webp">
+  <img src="assets/img/photos/genba-04.jpg" alt="Weathered architectural detail" width="1280" height="1600" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-04</span><span class="frame__note">The silent geometry of broken time.</span></figcaption></figure>
+        <figure class="frame" data-frame="05" data-mark="maybe"><a href="assets/img/photos/genba-05.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="A symphony of textures; where concrete meets the ephemeral."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-05.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-05.webp">
+  <img src="assets/img/photos/genba-05.jpg" alt="Layered concrete and texture study" width="1280" height="1600" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-05</span><span class="frame__note">A symphony of textures; where concrete meets the ephemeral.</span></figcaption></figure>
+        <figure class="frame" data-frame="06"><a href="assets/img/photos/genba-06.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="The Genba is not just a place; it's a state of observation."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-06.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-06.webp">
+  <img src="assets/img/photos/genba-06.jpg" alt="Quiet street corner in shadow" width="1196" height="1600" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-06</span><span class="frame__note">The Genba is not just a place; it's a state of observation.</span></figcaption></figure>
+        <figure class="frame" data-frame="07"><a href="assets/img/photos/genba-07.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="The street is a living organism, pulsing with forgotten stories."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-07.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-07.webp">
+  <img src="assets/img/photos/genba-07.jpg" alt="Street life in monochrome" width="1280" height="1600" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-07</span><span class="frame__note">The street is a living organism, pulsing with forgotten stories.</span></figcaption></figure>
+        <figure class="frame" data-frame="08" data-mark="select"><a href="assets/img/photos/genba-08.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="Rhythm found in the mundane; an engineer's dream of order."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-08.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-08.webp">
+  <img src="assets/img/photos/genba-08.jpg" alt="Repeating patterns in an everyday scene" width="1280" height="1600" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-08</span><span class="frame__note">Rhythm found in the mundane; an engineer's dream of order.</span></figcaption></figure>
+        <figure class="frame" data-frame="09"><a href="assets/img/photos/genba-09.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="In the world of chances, the result is beautifully uncertain."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-09.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-09.webp">
+  <img src="assets/img/photos/genba-09.jpg" alt="Candid moment with motion blur" width="900" height="1600" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-09</span><span class="frame__note">In the world of chances, the result is beautifully uncertain.</span></figcaption></figure>
+        <figure class="frame" data-frame="10"><a href="assets/img/photos/genba-10.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="Humanity is often found in the things we leave behind."><picture>
+  <source type="image/avif" srcset="assets/img/photos/genba-10.avif">
+  <source type="image/webp" srcset="assets/img/photos/genba-10.webp">
+  <img src="assets/img/photos/genba-10.jpg" alt="Abandoned objects telling a quiet story" width="1600" height="1202" loading="lazy">
+</picture></a><figcaption><span class="frame__no mono">08-10</span><span class="frame__note">Humanity is often found in the things we leave behind.</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="series reveal">
+      <header class="series__head">
+        <h3>Series 2: The Design of Nature</h3>
+        <p class="mono series__sub">Documenting the world's most complex self-sustaining systems</p>
+        <p class="series__desc">
+          A study of the scale and balance found in the natural world. From the sprawling delta
+          of the Bengal to the intricate patterns of forest flora — macro and micro architectures
+          that exist without human intervention.
+        </p>
+      </header>
+      <div class="plates">
+        <figure><a href="assets/img/photos/nature-01.jpg" data-lightbox="nature" data-caption="Power lines tracing the quiet geometry of a submerged world."><picture>
+  <source type="image/avif" srcset="assets/img/photos/nature-01.avif">
+  <source type="image/webp" srcset="assets/img/photos/nature-01.webp">
+  <img src="assets/img/photos/nature-01.jpg" alt="Power lines over a flooded delta landscape" width="1800" height="1013" loading="lazy">
+</picture></a><figcaption><span class="mono">FIG. 08-11</span> Power lines tracing the quiet geometry of a submerged world.</figcaption></figure>
+        <figure><a href="assets/img/photos/nature-02.jpg" data-lightbox="nature" data-caption="A solitary silhouette finding its rhythm in the fading light."><picture>
+  <source type="image/avif" srcset="assets/img/photos/nature-02.avif">
+  <source type="image/webp" srcset="assets/img/photos/nature-02.webp">
+  <img src="assets/img/photos/nature-02.jpg" alt="Solitary silhouette at dusk" width="1280" height="1600" loading="lazy">
+</picture></a><figcaption><span class="mono">FIG. 08-12</span> A solitary silhouette finding its rhythm in the fading light.</figcaption></figure>
+        <figure><a href="assets/img/photos/nature-03.jpg" data-lightbox="nature" data-caption="The delicate, helical design of a system built to climb."><picture>
+  <source type="image/avif" srcset="assets/img/photos/nature-03.avif">
+  <source type="image/webp" srcset="assets/img/photos/nature-03.webp">
+  <img src="assets/img/photos/nature-03.jpg" alt="Helical tendril of a climbing plant" width="1198" height="1600" loading="lazy">
+</picture></a><figcaption><span class="mono">FIG. 08-13</span> The delicate, helical design of a system built to climb.</figcaption></figure>
+        <figure><a href="assets/img/photos/nature-04.jpg" data-lightbox="nature" data-caption="A straight path through the soft, shifting gradients of the delta."><picture>
+  <source type="image/avif" srcset="assets/img/photos/nature-04.avif">
+  <source type="image/webp" srcset="assets/img/photos/nature-04.webp">
+  <img src="assets/img/photos/nature-04.jpg" alt="Straight path through delta wetlands" width="1600" height="900" loading="lazy">
+</picture></a><figcaption><span class="mono">FIG. 08-14</span> A straight path through the soft, shifting gradients of the delta.</figcaption></figure>
+        <figure><a href="assets/img/photos/nature-05.jpg" data-lightbox="nature" data-caption="Atmospheric patterns drifting across an invisible grid."><picture>
+  <source type="image/avif" srcset="assets/img/photos/nature-05.avif">
+  <source type="image/webp" srcset="assets/img/photos/nature-05.webp">
+  <img src="assets/img/photos/nature-05.jpg" alt="Cloud patterns across the sky" width="1280" height="1600" loading="lazy">
+</picture></a><figcaption><span class="mono">FIG. 08-15</span> Atmospheric patterns drifting across an invisible grid.</figcaption></figure>
+        <figure><a href="assets/img/photos/nature-06.jpg" data-lightbox="nature" data-caption="The intricate, recursive beauty of nature's own blueprints."><picture>
+  <source type="image/avif" srcset="assets/img/photos/nature-06.avif">
+  <source type="image/webp" srcset="assets/img/photos/nature-06.webp">
+  <img src="assets/img/photos/nature-06.jpg" alt="Recursive patterns in forest flora" width="1271" height="1600" loading="lazy">
+</picture></a><figcaption><span class="mono">FIG. 08-16</span> The intricate, recursive beauty of nature's own blueprints.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHEET 09 — GET IN TOUCH ============ -->
+  <section class="sheet contact" id="sheet-09" aria-labelledby="t-09" data-sheet="09" data-name="Contact">
+    <header class="sheet-head reveal">
+      <h2 id="t-09">Get in Touch</h2>
+      <p class="sheet-head__meta mono">Sheet 09 / 09&ensp;·&ensp;Final sheet</p>
+    </header>
+
+    <div class="contact__body reveal">
+      <p class="contact__pos mono"><span class="status-dot" aria-hidden="true"></span>Available June 2026 — full-time roles &amp; freelance · Dhaka or remote</p>
+      <p class="contact__h3">Let's build <em>“The Next Iteration”</em></p>
+      <p class="contact__lede">
+        Every system starts with a single data point. Whether it's a supply-chain
+        simulation, a collaboration, or a conversation about the design of the natural
+        world — I'm ready for the next iteration. Email me, or leave your input.
+      </p>
+
+      <a class="contact__mail" href="mailto:mostofahabibfardin08@gmail.com?subject=Inquiry%3A%20The%20Next%20Iteration" data-cursor="EMAIL">
+        mostofahabibfardin08<wbr>@gmail.com
+      </a>
+
+      <div class="contact__actions">
+        <a class="btn btn--solid" href="mailto:mostofahabibfardin08@gmail.com?subject=Inquiry%3A%20The%20Next%20Iteration">Email Me</a>
+        <a class="btn" href="assets/resume.pdf" download="Mostofa-Habib-Fardin-Resume.pdf">Download Resume</a>
+        <a class="btn" href="https://forms.gle/R1SLkx1BzdezrNJ19" target="_blank" rel="noopener noreferrer">The “Iteration Input”</a>
+      </div>
+
+      <ul class="iconrow iconrow--contact" aria-label="Profiles">
+        <li><a class="icon-btn" href="https://www.linkedin.com/in/mostofahabibfardin/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.763z"/></svg>
+        </a></li>
+        <li><a class="icon-btn" href="https://github.com/mhf08" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.372.79 1.102.79 2.222v3.293c0 .319.192.694.805.576 4.765-1.583 8.185-6.074 8.185-11.385 0-6.627-5.373-12-12-12z"/></svg>
+        </a></li>
+        <li><a class="icon-btn" href="https://www.instagram.com/most.of.a_fardin" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__block mono">
+    <span>© <span data-year>2026</span> Mostofa Habib Fardin. Precision &amp; Vision.</span>
+    <span>REV 2026.06</span>
+    <a href="#sheet-01" data-wipe>Sheet 01 ↑</a>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<dialog class="lightbox" aria-label="Image viewer">
+  <button class="lightbox__close mono" type="button" aria-label="Close viewer">ESC / CLOSE ✕</button>
+  <figure>
+    <img alt="" decoding="async">
+    <figcaption><span class="lightbox__counter mono"></span><span class="lightbox__caption"></span></figcaption>
+  </figure>
+  <button class="lightbox__nav lightbox__nav--prev mono" type="button" aria-label="Previous image">←</button>
+  <button class="lightbox__nav lightbox__nav--next mono" type="button" aria-label="Next image">→</button>
+</dialog>
+
+</body>
+</html>

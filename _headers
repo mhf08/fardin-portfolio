@@ -1,0 +1,12 @@
+# Netlify / Cloudflare Pages headers. (Vercel users: port these to vercel.json.)
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Fingerprint-free but immutable: images and fonts never change in place,
+# so cache them hard. Re-running the build writes new filenames if you rename.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
