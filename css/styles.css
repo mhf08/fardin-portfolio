@@ -581,6 +581,14 @@ main { padding-left: var(--ruler-w); }
 .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 3.5rem); }
 
 .edu__item + .edu__item { margin-top: 2rem; }
+.edu__top { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.55rem; }
+.edu__seal {
+  flex-shrink: 0; width: 58px; height: 58px;
+  display: grid; place-items: center; padding: 7px;
+  background: #F3EFE6; border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.edu__seal img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
 .edu__item h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; }
 .edu__meta { color: var(--ink-soft); margin: 0.4rem 0 0.6rem; font-size: 0.66rem; }
 .edu__details { list-style: none; margin: 0; padding: 0; color: var(--ink-soft); font-size: 0.95rem; }

@@ -28,6 +28,7 @@ tools/
   build-html.mjs      (3) wrap every <img> in <picture> with avif/webp sources
   build-srcset.mjs    (4) add the 800w tier + sizes to every <picture> (responsive)
   build-og.mjs        regenerates the social-share card (assets/og.jpg)
+  build-logos.mjs     regenerates institution crests → assets/img/logos/*.png
 DESIGN.md             the design brief (Pass 1 + Pass 2 critique)
 ```
 
