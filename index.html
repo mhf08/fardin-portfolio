@@ -37,8 +37,9 @@
   <!-- Self-hosted fonts: preload the two the hero paints with -->
   <link rel="preload" href="assets/fonts/fraunces-normal-400_650.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-normal-400_600.woff2" as="font" type="font/woff2" crossorigin>
-  <!-- Preload the LCP hero image (AVIF for modern browsers) -->
-  <link rel="preload" href="assets/img/hero.avif" as="image" type="image/avif" fetchpriority="high">
+  <!-- Preload the LCP hero image (AVIF, responsive — mirrors the hero <picture> so phones don't double-fetch) -->
+  <link rel="preload" as="image" type="image/avif" fetchpriority="high"
+        imagesrcset="assets/img/hero-800.avif 800w, assets/img/hero.avif 1408w" imagesizes="100vw">
   <noscript>
     <style>.reveal{opacity:1!important;transform:none!important}.sheet-head::after{transform:scaleX(1)!important}.anim{opacity:1!important;transform:none!important}</style>
   </noscript>
@@ -160,8 +161,8 @@
   <section class="sheet hero" id="sheet-01" aria-labelledby="hero-title" data-sheet="01" data-name="Title">
     <div class="hero__bg" aria-hidden="true">
       <picture>
-        <source type="image/avif" srcset="assets/img/hero.avif">
-        <source type="image/webp" srcset="assets/img/hero.webp">
+        <source type="image/avif" srcset="assets/img/hero-800.avif 800w, assets/img/hero.avif 1408w" sizes="100vw">
+        <source type="image/webp" srcset="assets/img/hero-800.webp 800w, assets/img/hero.webp 1408w" sizes="100vw">
         <img src="assets/img/hero.jpg" alt="" width="1408" height="768" fetchpriority="high">
       </picture>
       <div class="hero__scrim"></div>
@@ -187,7 +188,7 @@
 
       <div class="hero__cta anim" style="--d:5">
         <a class="btn btn--solid" href="#sheet-05" data-wipe>View Projects</a>
-        <a class="btn" href="assets/resume.pdf" download="Mostofa-Habib-Fardin-Resume.pdf">Download Resume</a>
+        <a class="btn" href="assets/resume.pdf" download="Mostofa-Habib-Fardin-Resume.pdf" data-cursor="PDF">Download Resume</a>
         <ul class="iconrow" aria-label="Profiles">
           <li><a class="icon-btn" href="https://www.linkedin.com/in/mostofahabibfardin/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.763z"/></svg>
@@ -358,38 +359,38 @@
         <div class="carousel carousel--media" data-carousel aria-roledescription="carousel" aria-label="Photos from the RANCON industrial attachment">
           <div class="carousel__track" tabindex="0">
             <figure class="carousel__slide"><a href="assets/img/experience/rancon-1.jpg" data-lightbox="rancon" data-caption="Industrial Attachment at RANCON"><picture>
-  <source type="image/avif" srcset="assets/img/experience/rancon-1.avif">
-  <source type="image/webp" srcset="assets/img/experience/rancon-1.webp">
+  <source type="image/avif" srcset="assets/img/experience/rancon-1-800.avif 800w, assets/img/experience/rancon-1.avif 1200w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/experience/rancon-1-800.webp 800w, assets/img/experience/rancon-1.webp 1200w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/experience/rancon-1.jpg" alt="Industrial Attachment at RANCON" width="1200" height="1600" loading="lazy">
 </picture></a><figcaption class="mono">Industrial Attachment at RANCON</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/experience/rancon-2.jpg" data-lightbox="rancon" data-caption="Team Meeting at RANCON"><picture>
-  <source type="image/avif" srcset="assets/img/experience/rancon-2.avif">
-  <source type="image/webp" srcset="assets/img/experience/rancon-2.webp">
+  <source type="image/avif" srcset="assets/img/experience/rancon-2-800.avif 800w, assets/img/experience/rancon-2.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/experience/rancon-2-800.webp 800w, assets/img/experience/rancon-2.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/experience/rancon-2.jpg" alt="Team Meeting at RANCON" width="1280" height="960" loading="lazy">
 </picture></a><figcaption class="mono">Team Meeting at RANCON</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/experience/rancon-3.jpg" data-lightbox="rancon" data-caption="Production Line Observation"><picture>
-  <source type="image/avif" srcset="assets/img/experience/rancon-3.avif">
-  <source type="image/webp" srcset="assets/img/experience/rancon-3.webp">
+  <source type="image/avif" srcset="assets/img/experience/rancon-3-800.avif 800w, assets/img/experience/rancon-3.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/experience/rancon-3-800.webp 800w, assets/img/experience/rancon-3.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/experience/rancon-3.jpg" alt="Production Line Observation" width="1280" height="960" loading="lazy">
 </picture></a><figcaption class="mono">Production Line Observation</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/experience/rancon-4.jpg" data-lightbox="rancon" data-caption="Quality Control Systems"><picture>
-  <source type="image/avif" srcset="assets/img/experience/rancon-4.avif">
-  <source type="image/webp" srcset="assets/img/experience/rancon-4.webp">
+  <source type="image/avif" srcset="assets/img/experience/rancon-4-800.avif 800w, assets/img/experience/rancon-4.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/experience/rancon-4-800.webp 800w, assets/img/experience/rancon-4.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/experience/rancon-4.jpg" alt="Quality Control Systems" width="1280" height="960" loading="lazy">
 </picture></a><figcaption class="mono">Quality Control Systems</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/experience/rancon-5.jpg" data-lightbox="rancon" data-caption="Inventory Management Study"><picture>
-  <source type="image/avif" srcset="assets/img/experience/rancon-5.avif">
-  <source type="image/webp" srcset="assets/img/experience/rancon-5.webp">
+  <source type="image/avif" srcset="assets/img/experience/rancon-5-800.avif 800w, assets/img/experience/rancon-5.avif 960w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/experience/rancon-5-800.webp 800w, assets/img/experience/rancon-5.webp 960w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/experience/rancon-5.jpg" alt="Inventory Management Study" width="960" height="1280" loading="lazy">
 </picture></a><figcaption class="mono">Inventory Management Study</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/experience/rancon-6.jpg" data-lightbox="rancon" data-caption="Process Optimization Review"><picture>
-  <source type="image/avif" srcset="assets/img/experience/rancon-6.avif">
-  <source type="image/webp" srcset="assets/img/experience/rancon-6.webp">
+  <source type="image/avif" srcset="assets/img/experience/rancon-6-800.avif 800w, assets/img/experience/rancon-6.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/experience/rancon-6-800.webp 800w, assets/img/experience/rancon-6.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/experience/rancon-6.jpg" alt="Process Optimization Review" width="1280" height="960" loading="lazy">
 </picture></a><figcaption class="mono">Process Optimization Review</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/experience/rancon-7.jpg" data-lightbox="rancon" data-caption="Facility Overview"><picture>
-  <source type="image/avif" srcset="assets/img/experience/rancon-7.avif">
-  <source type="image/webp" srcset="assets/img/experience/rancon-7.webp">
+  <source type="image/avif" srcset="assets/img/experience/rancon-7-800.avif 800w, assets/img/experience/rancon-7.avif 1200w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/experience/rancon-7-800.webp 800w, assets/img/experience/rancon-7.webp 1200w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/experience/rancon-7.jpg" alt="Facility Overview" width="1200" height="1600" loading="lazy">
 </picture></a><figcaption class="mono">Facility Overview</figcaption></figure>
           </div>
@@ -422,13 +423,13 @@
         <div class="carousel carousel--media" data-carousel aria-roledescription="carousel" aria-label="Photos from the A1 Polymer industrial visit">
           <div class="carousel__track" tabindex="0">
             <figure class="carousel__slide"><a href="assets/img/experience/anwar-1.jpg" data-lightbox="anwar" data-caption="Industrial Visit at A1 Polymer"><picture>
-  <source type="image/avif" srcset="assets/img/experience/anwar-1.avif">
-  <source type="image/webp" srcset="assets/img/experience/anwar-1.webp">
+  <source type="image/avif" srcset="assets/img/experience/anwar-1-800.avif 800w, assets/img/experience/anwar-1.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/experience/anwar-1-800.webp 800w, assets/img/experience/anwar-1.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/experience/anwar-1.jpg" alt="Industrial Visit at A1 Polymer" width="1600" height="1067" loading="lazy">
 </picture></a><figcaption class="mono">Industrial Visit at A1 Polymer</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/experience/anwar-2.jpg" data-lightbox="anwar" data-caption="Production Facility Observation"><picture>
-  <source type="image/avif" srcset="assets/img/experience/anwar-2.avif">
-  <source type="image/webp" srcset="assets/img/experience/anwar-2.webp">
+  <source type="image/avif" srcset="assets/img/experience/anwar-2-800.avif 800w, assets/img/experience/anwar-2.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/experience/anwar-2-800.webp 800w, assets/img/experience/anwar-2.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/experience/anwar-2.jpg" alt="Production Facility Observation" width="1600" height="1067" loading="lazy">
 </picture></a><figcaption class="mono">Production Facility Observation</figcaption></figure>
           </div>
@@ -483,13 +484,13 @@
         <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="Smart IoT-Based Ammonia Gas Monitoring System media">
           <div class="carousel__track" tabindex="0">
             <figure class="carousel__slide"><a href="assets/img/projects/iot-poster.jpg" data-lightbox="case-a" data-caption="System architecture and results poster."><picture>
-  <source type="image/avif" srcset="assets/img/projects/iot-poster.avif">
-  <source type="image/webp" srcset="assets/img/projects/iot-poster.webp">
+  <source type="image/avif" srcset="assets/img/projects/iot-poster-800.avif 800w, assets/img/projects/iot-poster.avif 1186w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/iot-poster-800.webp 800w, assets/img/projects/iot-poster.webp 1186w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/projects/iot-poster.jpg" alt="Poster of the IoT ammonia monitoring system architecture" width="1186" height="837" loading="lazy">
 </picture></a><figcaption class="mono">FIG. 05-A1 — System poster</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/projects/iot-hardware.jpg" data-lightbox="case-a" data-caption="The assembled sensing hardware."><picture>
-  <source type="image/avif" srcset="assets/img/projects/iot-hardware.avif">
-  <source type="image/webp" srcset="assets/img/projects/iot-hardware.webp">
+  <source type="image/avif" srcset="assets/img/projects/iot-hardware-800.avif 800w, assets/img/projects/iot-hardware.avif 960w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/iot-hardware-800.webp 800w, assets/img/projects/iot-hardware.webp 960w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/projects/iot-hardware.jpg" alt="Assembled IoT hardware with sensors and microcontroller" width="960" height="1280" loading="lazy">
 </picture></a><figcaption class="mono">FIG. 05-A2 — Hardware assembly</figcaption></figure>
           </div>
@@ -534,8 +535,8 @@
         <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="The HydroPedal media">
           <div class="carousel__track" tabindex="0">
             <figure class="carousel__slide"><a href="assets/img/projects/hydropedal-1.jpg" data-lightbox="case-b" data-caption="HydroPedal — assembled prototype."><picture>
-  <source type="image/avif" srcset="assets/img/projects/hydropedal-1.avif">
-  <source type="image/webp" srcset="assets/img/projects/hydropedal-1.webp">
+  <source type="image/avif" srcset="assets/img/projects/hydropedal-1-800.avif 800w, assets/img/projects/hydropedal-1.avif 1015w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/hydropedal-1-800.webp 800w, assets/img/projects/hydropedal-1.webp 1015w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/projects/hydropedal-1.jpg" alt="HydroPedal pedal-powered pump prototype" width="1015" height="1023" loading="lazy">
 </picture></a><figcaption class="mono">FIG. 05-B1 — Prototype</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/projects/hydropedal-2.jpg" data-lightbox="case-b" data-caption="Drive and pump detail."><picture>
@@ -585,17 +586,17 @@
         <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="Radial Drilling Machine SolidWorks Model media">
           <div class="carousel__track" tabindex="0">
             <figure class="carousel__slide"><a href="assets/img/projects/drill-iso.jpg" data-lightbox="case-c" data-caption="Isometric render — full assembly."><picture>
-  <source type="image/avif" srcset="assets/img/projects/drill-iso.avif">
-  <source type="image/webp" srcset="assets/img/projects/drill-iso.webp">
+  <source type="image/avif" srcset="assets/img/projects/drill-iso-800.avif 800w, assets/img/projects/drill-iso.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/drill-iso-800.webp 800w, assets/img/projects/drill-iso.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/projects/drill-iso.jpg" alt="Isometric render of the radial drilling machine assembly" width="1600" height="747" loading="lazy">
 </picture></a><figcaption class="mono">FIG. 05-C1 — Isometric, full assembly</figcaption></figure>
             <figure class="carousel__slide"><a href="assets/img/projects/drill-close.jpg" data-lightbox="case-c" data-caption="Spindle head, close-up render."><picture>
-  <source type="image/avif" srcset="assets/img/projects/drill-close.avif">
-  <source type="image/webp" srcset="assets/img/projects/drill-close.webp">
+  <source type="image/avif" srcset="assets/img/projects/drill-close-800.avif 800w, assets/img/projects/drill-close.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/drill-close-800.webp 800w, assets/img/projects/drill-close.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/projects/drill-close.jpg" alt="Close-up render of the drilling machine spindle head" width="1600" height="747" loading="lazy">
 </picture></a><figcaption class="mono">FIG. 05-C2 — Spindle head, close-up</figcaption></figure>
             <figure class="carousel__slide yt" data-yt="9CxBPs1eGwk">
-              <button class="yt__btn" type="button" aria-label="Play the motion study video">
+              <button class="yt__btn" type="button" aria-label="Play the motion study video" data-cursor="PLAY">
                 <img src="https://i.ytimg.com/vi/9CxBPs1eGwk/hqdefault.jpg" alt="Preview frame of the motion study video" width="480" height="360" loading="lazy">
                 <span class="yt__play" aria-hidden="true">▶</span>
               </button>
@@ -688,23 +689,23 @@
             <div class="carousel carousel--media carousel--awards" data-carousel aria-roledescription="carousel" aria-label="WASH Water Hackathon photos">
               <div class="carousel__track" tabindex="0">
                 <figure class="carousel__slide"><a href="assets/img/awards/wash-1.jpg" data-lightbox="wash" data-caption="IRC WASH Water Hackathon — Finalist"><picture>
-  <source type="image/avif" srcset="assets/img/awards/wash-1.avif">
-  <source type="image/webp" srcset="assets/img/awards/wash-1.webp">
+  <source type="image/avif" srcset="assets/img/awards/wash-1-800.avif 800w, assets/img/awards/wash-1.avif 1086w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/awards/wash-1-800.webp 800w, assets/img/awards/wash-1.webp 1086w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/awards/wash-1.jpg" alt="Presenting at the WASH hackathon" width="1086" height="724" loading="lazy">
 </picture></a></figure>
                 <figure class="carousel__slide"><a href="assets/img/awards/wash-2.jpg" data-lightbox="wash" data-caption="IRC WASH Water Hackathon — team session"><picture>
-  <source type="image/avif" srcset="assets/img/awards/wash-2.avif">
-  <source type="image/webp" srcset="assets/img/awards/wash-2.webp">
+  <source type="image/avif" srcset="assets/img/awards/wash-2-800.avif 800w, assets/img/awards/wash-2.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/awards/wash-2-800.webp 800w, assets/img/awards/wash-2.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/awards/wash-2.jpg" alt="Team session at the WASH hackathon" width="1280" height="939" loading="lazy">
 </picture></a></figure>
                 <figure class="carousel__slide"><a href="assets/img/awards/wash-3.jpg" data-lightbox="wash" data-caption="IRC WASH Water Hackathon — finalist round"><picture>
-  <source type="image/avif" srcset="assets/img/awards/wash-3.avif">
-  <source type="image/webp" srcset="assets/img/awards/wash-3.webp">
+  <source type="image/avif" srcset="assets/img/awards/wash-3-800.avif 800w, assets/img/awards/wash-3.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/awards/wash-3-800.webp 800w, assets/img/awards/wash-3.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/awards/wash-3.jpg" alt="Finalist round at the WASH hackathon" width="1280" height="853" loading="lazy">
 </picture></a></figure>
                 <figure class="carousel__slide"><a href="assets/img/awards/wash-certificate.jpg" data-lightbox="wash" data-caption="Finalist certificate, IRC WASH Water Hackathon"><picture>
-  <source type="image/avif" srcset="assets/img/awards/wash-certificate.avif">
-  <source type="image/webp" srcset="assets/img/awards/wash-certificate.webp">
+  <source type="image/avif" srcset="assets/img/awards/wash-certificate-800.avif 800w, assets/img/awards/wash-certificate.avif 982w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/awards/wash-certificate-800.webp 800w, assets/img/awards/wash-certificate.webp 982w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/awards/wash-certificate.jpg" alt="WASH hackathon finalist certificate" width="982" height="693" loading="lazy">
 </picture></a></figure>
               </div>
@@ -747,8 +748,8 @@
         <li>
           <a href="assets/img/awards/lean-six-sigma.jpg" data-lightbox="certs" data-caption="Lean Six Sigma White Belt — The Council for Six Sigma Certification (C.S.S.C.)">
             <picture>
-              <source type="image/avif" srcset="assets/img/awards/lean-six-sigma.avif">
-              <source type="image/webp" srcset="assets/img/awards/lean-six-sigma.webp">
+              <source type="image/avif" srcset="assets/img/awards/lean-six-sigma-800.avif 800w, assets/img/awards/lean-six-sigma.avif 1189w" sizes="(max-width: 880px) 92vw, 48vw">
+              <source type="image/webp" srcset="assets/img/awards/lean-six-sigma-800.webp 800w, assets/img/awards/lean-six-sigma.webp 1189w" sizes="(max-width: 880px) 92vw, 48vw">
               <img src="assets/img/awards/lean-six-sigma.jpg" alt="Lean Six Sigma White Belt certificate" width="1189" height="840" loading="lazy">
             </picture>
           </a>
@@ -758,8 +759,8 @@
         <li>
           <a href="assets/img/awards/ms-office.jpg" data-lightbox="certs" data-caption="Advanced Applications of MS Office for Engineers — AIPE BUET">
             <picture>
-              <source type="image/avif" srcset="assets/img/awards/ms-office.avif">
-              <source type="image/webp" srcset="assets/img/awards/ms-office.webp">
+              <source type="image/avif" srcset="assets/img/awards/ms-office-800.avif 800w, assets/img/awards/ms-office.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+              <source type="image/webp" srcset="assets/img/awards/ms-office-800.webp 800w, assets/img/awards/ms-office.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
               <img src="assets/img/awards/ms-office.jpg" alt="Advanced Applications of MS Office for Engineers certificate" width="1280" height="928" loading="lazy">
             </picture>
           </a>
@@ -769,8 +770,8 @@
         <li>
           <a href="assets/img/awards/cr-recognition.jpg" data-lightbox="certs" data-caption="Undergraduate Class Representative (CR) Recognition — Dept. of IPE, BUET">
             <picture>
-              <source type="image/avif" srcset="assets/img/awards/cr-recognition.avif">
-              <source type="image/webp" srcset="assets/img/awards/cr-recognition.webp">
+              <source type="image/avif" srcset="assets/img/awards/cr-recognition-800.avif 800w, assets/img/awards/cr-recognition.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+              <source type="image/webp" srcset="assets/img/awards/cr-recognition-800.webp 800w, assets/img/awards/cr-recognition.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
               <img src="assets/img/awards/cr-recognition.jpg" alt="Class Representative recognition award" width="1600" height="1120" loading="lazy">
             </picture>
           </a>
@@ -810,43 +811,43 @@
         <p class="contactsheet__edge mono" aria-hidden="true">FILM 01 — ECHOES OF THE GENBA · ISO 400 · B&amp;W · DEV. 2026</p>
         <div class="contactsheet__grid">
         <figure class="frame" data-frame="01" data-mark="select"><a href="assets/img/photos/genba-01.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="Light doesn't just illuminate; it defines the weight of the world."><picture>
-  <source type="image/avif" srcset="assets/img/photos/genba-01.avif">
-  <source type="image/webp" srcset="assets/img/photos/genba-01.webp">
+  <source type="image/avif" srcset="assets/img/photos/genba-01-800.avif 800w, assets/img/photos/genba-01.avif 1440w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/genba-01-800.webp 800w, assets/img/photos/genba-01.webp 1440w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/genba-01.jpg" alt="High-contrast monochrome street scene in raking light" width="1440" height="1800" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-01</span><span class="frame__note">Light doesn't just illuminate; it defines the weight of the world.</span></figcaption></figure>
         <figure class="frame" data-frame="02"><a href="assets/img/photos/genba-02.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="The ghost of a machine, etched in rust and steel."><picture>
-  <source type="image/avif" srcset="assets/img/photos/genba-02.avif">
-  <source type="image/webp" srcset="assets/img/photos/genba-02.webp">
+  <source type="image/avif" srcset="assets/img/photos/genba-02-800.avif 800w, assets/img/photos/genba-02.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/genba-02-800.webp 800w, assets/img/photos/genba-02.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/genba-02.jpg" alt="Rusted machinery texture" width="1600" height="1280" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-02</span><span class="frame__note">The ghost of a machine, etched in rust and steel.</span></figcaption></figure>
         <figure class="frame" data-frame="03"><a href="assets/img/photos/genba-03.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="Framing the urban chaos; shadows caught in a lattice of steel."><picture>
-  <source type="image/avif" srcset="assets/img/photos/genba-03.avif">
-  <source type="image/webp" srcset="assets/img/photos/genba-03.webp">
+  <source type="image/avif" srcset="assets/img/photos/genba-03-800.avif 800w, assets/img/photos/genba-03.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/genba-03-800.webp 800w, assets/img/photos/genba-03.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/genba-03.jpg" alt="Shadows through a steel lattice over a street" width="1280" height="1600" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-03</span><span class="frame__note">Framing the urban chaos; shadows caught in a lattice of steel.</span></figcaption></figure>
         <figure class="frame" data-frame="04"><a href="assets/img/photos/genba-04.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="The silent geometry of broken time."><picture>
-  <source type="image/avif" srcset="assets/img/photos/genba-04.avif">
-  <source type="image/webp" srcset="assets/img/photos/genba-04.webp">
+  <source type="image/avif" srcset="assets/img/photos/genba-04-800.avif 800w, assets/img/photos/genba-04.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/genba-04-800.webp 800w, assets/img/photos/genba-04.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/genba-04.jpg" alt="Weathered architectural detail" width="1280" height="1600" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-04</span><span class="frame__note">The silent geometry of broken time.</span></figcaption></figure>
         <figure class="frame" data-frame="05" data-mark="maybe"><a href="assets/img/photos/genba-05.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="A symphony of textures; where concrete meets the ephemeral."><picture>
-  <source type="image/avif" srcset="assets/img/photos/genba-05.avif">
-  <source type="image/webp" srcset="assets/img/photos/genba-05.webp">
+  <source type="image/avif" srcset="assets/img/photos/genba-05-800.avif 800w, assets/img/photos/genba-05.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/genba-05-800.webp 800w, assets/img/photos/genba-05.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/genba-05.jpg" alt="Layered concrete and texture study" width="1280" height="1600" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-05</span><span class="frame__note">A symphony of textures; where concrete meets the ephemeral.</span></figcaption></figure>
         <figure class="frame" data-frame="06"><a href="assets/img/photos/genba-06.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="The Genba is not just a place; it's a state of observation."><picture>
-  <source type="image/avif" srcset="assets/img/photos/genba-06.avif">
-  <source type="image/webp" srcset="assets/img/photos/genba-06.webp">
+  <source type="image/avif" srcset="assets/img/photos/genba-06-800.avif 800w, assets/img/photos/genba-06.avif 1196w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/genba-06-800.webp 800w, assets/img/photos/genba-06.webp 1196w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/genba-06.jpg" alt="Quiet street corner in shadow" width="1196" height="1600" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-06</span><span class="frame__note">The Genba is not just a place; it's a state of observation.</span></figcaption></figure>
         <figure class="frame" data-frame="07"><a href="assets/img/photos/genba-07.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="The street is a living organism, pulsing with forgotten stories."><picture>
-  <source type="image/avif" srcset="assets/img/photos/genba-07.avif">
-  <source type="image/webp" srcset="assets/img/photos/genba-07.webp">
+  <source type="image/avif" srcset="assets/img/photos/genba-07-800.avif 800w, assets/img/photos/genba-07.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/genba-07-800.webp 800w, assets/img/photos/genba-07.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/genba-07.jpg" alt="Street life in monochrome" width="1280" height="1600" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-07</span><span class="frame__note">The street is a living organism, pulsing with forgotten stories.</span></figcaption></figure>
         <figure class="frame" data-frame="08" data-mark="select"><a href="assets/img/photos/genba-08.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="Rhythm found in the mundane; an engineer's dream of order."><picture>
-  <source type="image/avif" srcset="assets/img/photos/genba-08.avif">
-  <source type="image/webp" srcset="assets/img/photos/genba-08.webp">
+  <source type="image/avif" srcset="assets/img/photos/genba-08-800.avif 800w, assets/img/photos/genba-08.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/genba-08-800.webp 800w, assets/img/photos/genba-08.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/genba-08.jpg" alt="Repeating patterns in an everyday scene" width="1280" height="1600" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-08</span><span class="frame__note">Rhythm found in the mundane; an engineer's dream of order.</span></figcaption></figure>
         <figure class="frame" data-frame="09"><a href="assets/img/photos/genba-09.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="In the world of chances, the result is beautifully uncertain."><picture>
@@ -855,8 +856,8 @@
   <img src="assets/img/photos/genba-09.jpg" alt="Candid moment with motion blur" width="900" height="1600" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-09</span><span class="frame__note">In the world of chances, the result is beautifully uncertain.</span></figcaption></figure>
         <figure class="frame" data-frame="10"><a href="assets/img/photos/genba-10.jpg" data-lightbox="genba" data-cursor="VIEW" data-caption="Humanity is often found in the things we leave behind."><picture>
-  <source type="image/avif" srcset="assets/img/photos/genba-10.avif">
-  <source type="image/webp" srcset="assets/img/photos/genba-10.webp">
+  <source type="image/avif" srcset="assets/img/photos/genba-10-800.avif 800w, assets/img/photos/genba-10.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/genba-10-800.webp 800w, assets/img/photos/genba-10.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/genba-10.jpg" alt="Abandoned objects telling a quiet story" width="1600" height="1202" loading="lazy">
 </picture></a><figcaption><span class="frame__no mono">08-10</span><span class="frame__note">Humanity is often found in the things we leave behind.</span></figcaption></figure>
         </div>
@@ -875,33 +876,33 @@
       </header>
       <div class="exhibit">
         <figure class="plate plate--wide" data-plate="I"><a href="assets/img/photos/nature-01.jpg" data-lightbox="nature" data-cursor="VIEW" data-caption="Power lines tracing the quiet geometry of a submerged world."><span class="plate__mat"><picture>
-  <source type="image/avif" srcset="assets/img/photos/nature-01.avif">
-  <source type="image/webp" srcset="assets/img/photos/nature-01.webp">
+  <source type="image/avif" srcset="assets/img/photos/nature-01-800.avif 800w, assets/img/photos/nature-01.avif 1800w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/nature-01-800.webp 800w, assets/img/photos/nature-01.webp 1800w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/nature-01.jpg" alt="Power lines over a flooded delta landscape" width="1800" height="1013" loading="lazy">
 </picture></span></a><figcaption class="plate__label"><span class="plate__no mono">Plate I</span><span class="plate__title">Power lines tracing the quiet geometry of a submerged world.</span><span class="plate__datum mono">The Design of Nature · Bengal Delta</span></figcaption></figure>
         <figure class="plate" data-plate="II"><a href="assets/img/photos/nature-02.jpg" data-lightbox="nature" data-cursor="VIEW" data-caption="A solitary silhouette finding its rhythm in the fading light."><span class="plate__mat"><picture>
-  <source type="image/avif" srcset="assets/img/photos/nature-02.avif">
-  <source type="image/webp" srcset="assets/img/photos/nature-02.webp">
+  <source type="image/avif" srcset="assets/img/photos/nature-02-800.avif 800w, assets/img/photos/nature-02.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/nature-02-800.webp 800w, assets/img/photos/nature-02.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/nature-02.jpg" alt="Solitary silhouette at dusk" width="1280" height="1600" loading="lazy">
 </picture></span></a><figcaption class="plate__label"><span class="plate__no mono">Plate II</span><span class="plate__title">A solitary silhouette finding its rhythm in the fading light.</span><span class="plate__datum mono">The Design of Nature · Dusk</span></figcaption></figure>
         <figure class="plate" data-plate="III"><a href="assets/img/photos/nature-03.jpg" data-lightbox="nature" data-cursor="VIEW" data-caption="The delicate, helical design of a system built to climb."><span class="plate__mat"><picture>
-  <source type="image/avif" srcset="assets/img/photos/nature-03.avif">
-  <source type="image/webp" srcset="assets/img/photos/nature-03.webp">
+  <source type="image/avif" srcset="assets/img/photos/nature-03-800.avif 800w, assets/img/photos/nature-03.avif 1198w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/nature-03-800.webp 800w, assets/img/photos/nature-03.webp 1198w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/nature-03.jpg" alt="Helical tendril of a climbing plant" width="1198" height="1600" loading="lazy">
 </picture></span></a><figcaption class="plate__label"><span class="plate__no mono">Plate III</span><span class="plate__title">The delicate, helical design of a system built to climb.</span><span class="plate__datum mono">The Design of Nature · Flora</span></figcaption></figure>
         <figure class="plate plate--wide" data-plate="IV"><a href="assets/img/photos/nature-04.jpg" data-lightbox="nature" data-cursor="VIEW" data-caption="A straight path through the soft, shifting gradients of the delta."><span class="plate__mat"><picture>
-  <source type="image/avif" srcset="assets/img/photos/nature-04.avif">
-  <source type="image/webp" srcset="assets/img/photos/nature-04.webp">
+  <source type="image/avif" srcset="assets/img/photos/nature-04-800.avif 800w, assets/img/photos/nature-04.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/nature-04-800.webp 800w, assets/img/photos/nature-04.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/nature-04.jpg" alt="Straight path through delta wetlands" width="1600" height="900" loading="lazy">
 </picture></span></a><figcaption class="plate__label"><span class="plate__no mono">Plate IV</span><span class="plate__title">A straight path through the soft, shifting gradients of the delta.</span><span class="plate__datum mono">The Design of Nature · Wetland</span></figcaption></figure>
         <figure class="plate" data-plate="V"><a href="assets/img/photos/nature-05.jpg" data-lightbox="nature" data-cursor="VIEW" data-caption="Atmospheric patterns drifting across an invisible grid."><span class="plate__mat"><picture>
-  <source type="image/avif" srcset="assets/img/photos/nature-05.avif">
-  <source type="image/webp" srcset="assets/img/photos/nature-05.webp">
+  <source type="image/avif" srcset="assets/img/photos/nature-05-800.avif 800w, assets/img/photos/nature-05.avif 1280w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/nature-05-800.webp 800w, assets/img/photos/nature-05.webp 1280w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/nature-05.jpg" alt="Cloud patterns across the sky" width="1280" height="1600" loading="lazy">
 </picture></span></a><figcaption class="plate__label"><span class="plate__no mono">Plate V</span><span class="plate__title">Atmospheric patterns drifting across an invisible grid.</span><span class="plate__datum mono">The Design of Nature · Sky</span></figcaption></figure>
         <figure class="plate" data-plate="VI"><a href="assets/img/photos/nature-06.jpg" data-lightbox="nature" data-cursor="VIEW" data-caption="The intricate, recursive beauty of nature's own blueprints."><span class="plate__mat"><picture>
-  <source type="image/avif" srcset="assets/img/photos/nature-06.avif">
-  <source type="image/webp" srcset="assets/img/photos/nature-06.webp">
+  <source type="image/avif" srcset="assets/img/photos/nature-06-800.avif 800w, assets/img/photos/nature-06.avif 1271w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/photos/nature-06-800.webp 800w, assets/img/photos/nature-06.webp 1271w" sizes="(max-width: 880px) 92vw, 48vw">
   <img src="assets/img/photos/nature-06.jpg" alt="Recursive patterns in forest flora" width="1271" height="1600" loading="lazy">
 </picture></span></a><figcaption class="plate__label"><span class="plate__no mono">Plate VI</span><span class="plate__title">The intricate, recursive beauty of nature's own blueprints.</span><span class="plate__datum mono">The Design of Nature · Detail</span></figcaption></figure>
       </div>
@@ -930,7 +931,7 @@
 
       <div class="contact__actions">
         <a class="btn btn--solid" href="mailto:mostofahabibfardin08@gmail.com?subject=Inquiry%3A%20The%20Next%20Iteration">Email Me</a>
-        <a class="btn" href="assets/resume.pdf" download="Mostofa-Habib-Fardin-Resume.pdf">Download Resume</a>
+        <a class="btn" href="assets/resume.pdf" download="Mostofa-Habib-Fardin-Resume.pdf" data-cursor="PDF">Download Resume</a>
         <a class="btn" href="https://forms.gle/R1SLkx1BzdezrNJ19" target="_blank" rel="noopener noreferrer">The “Iteration Input”</a>
       </div>
 

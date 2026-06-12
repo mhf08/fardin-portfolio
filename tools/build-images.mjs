@@ -34,24 +34,33 @@ function walk(dir) {
 }
 
 const files = walk(ROOT);
-let done = 0, savedJpg = 0, sumAvif = 0, sumWebp = 0;
+let done = 0, tiers = 0, savedJpg = 0, sumAvif = 0, sumWebp = 0;
 
 await Promise.all(files.map(async (src) => {
-  const avif = src.replace(/\.jpg$/i, ".avif");
-  const webp = src.replace(/\.jpg$/i, ".webp");
+  // skip already-generated tier files on re-runs
+  if (/-800\.jpg$/i.test(src)) return;
+  const base = src.replace(/\.jpg$/i, "");
   const input = sharp(src);
 
-  await input.clone().avif({ quality: 52, effort: 6 }).toFile(avif);
-  await input.clone().webp({ quality: 78, effort: 5 }).toFile(webp);
+  await input.clone().avif({ quality: 52, effort: 6 }).toFile(base + ".avif");
+  await input.clone().webp({ quality: 78, effort: 5 }).toFile(base + ".webp");
+
+  // 800px-wide tier for small viewports (only where it actually saves)
+  const meta = await input.metadata();
+  if (meta.width > 900) {
+    await input.clone().resize({ width: 800 }).avif({ quality: 52, effort: 6 }).toFile(base + "-800.avif");
+    await input.clone().resize({ width: 800 }).webp({ quality: 78, effort: 5 }).toFile(base + "-800.webp");
+    tiers++;
+  }
 
   savedJpg += statSync(src).size;
-  sumAvif += statSync(avif).size;
-  sumWebp += statSync(webp).size;
+  sumAvif += statSync(base + ".avif").size;
+  sumWebp += statSync(base + ".webp").size;
   done++;
 }));
 
 const mb = (n) => (n / 1048576).toFixed(2) + " MB";
-console.log(`Encoded ${done} images.`);
+console.log(`Encoded ${done} images (${tiers} with an 800px tier).`);
 console.log(`  JPEG total : ${mb(savedJpg)}`);
 console.log(`  WebP total : ${mb(sumWebp)}`);
 console.log(`  AVIF total : ${mb(sumAvif)}`);

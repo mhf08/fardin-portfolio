@@ -770,6 +770,7 @@ main { padding-left: var(--ruler-w); }
     pointer-events: none; color: var(--brass);
     transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
     will-change: transform;
+    transition: opacity 0.25s ease; /* opacity only — transform must stay 1:1 */
   }
   .cursor__mark { display: block; transition: transform 0.18s var(--ease-out), opacity 0.2s ease; opacity: 0.9; }
   .cursor.hot .cursor__mark { transform: scale(1.35) rotate(45deg); color: var(--brass-bright); }

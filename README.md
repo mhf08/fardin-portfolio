@@ -21,8 +21,10 @@ assets/
   resume.pdf, og.jpg
 tools/
   build-assets.ps1    (1) compress source images from the old site → assets/img/*.jpg
-  build-images.mjs    (2) emit .avif + .webp next to every assets/img/*.jpg
+  build-images.mjs    (2) emit .avif/.webp + an 800px tier next to every assets/img/*.jpg
   build-html.mjs      (3) wrap every <img> in <picture> with avif/webp sources
+  build-srcset.mjs    (4) add the 800w tier + sizes to every <picture> (responsive)
+  build-og.mjs        regenerates the social-share card (assets/og.jpg)
 DESIGN.md             the design brief (Pass 1 + Pass 2 critique)
 ```
 
@@ -38,9 +40,13 @@ npx -y serve -l 4173 .
 ```powershell
 # from the repo root
 powershell -ExecutionPolicy Bypass -File tools/build-assets.ps1   # source JPEGs (uses old site as source)
-node tools/build-images.mjs                                       # AVIF + WebP variants
+node tools/build-images.mjs                                       # AVIF/WebP + 800px tiers
 node tools/build-html.mjs                                         # wrap new <img> in <picture> (idempotent)
+node tools/build-srcset.mjs                                       # add responsive srcset (idempotent)
 ```
+
+The lightbox upgrades its full-size fetches to AVIF/WebP automatically (with a JPEG
+fallback), so no markup changes are needed there.
 
 `build-images.mjs` and `build-html.mjs` need Node + `sharp`. Sharp is resolved from
 this folder or, failing that, the old React site's `node_modules`.

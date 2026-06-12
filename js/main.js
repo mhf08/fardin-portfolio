@@ -174,6 +174,7 @@
     var prev = root.querySelector('.carousel__btn[data-dir="-1"]');
     var next = root.querySelector('.carousel__btn[data-dir="1"]');
     if (!slides.length) return;
+    track.setAttribute("data-cursor", "DRAG");
 
     function currentIndex() {
       var best = 0, bestDist = Infinity;
@@ -226,7 +227,29 @@
   var galleries = {};
   var current = { group: null, index: 0 };
 
+  // Serve full-size images in the best format the browser decodes.
+  // Anchors point at .jpg; we swap the extension once support is probed.
+  var lbExt = ".jpg";
+  function probeFormat(uri) {
+    return new Promise(function (resolve) {
+      var im = new Image();
+      im.onload = function () { resolve(im.width > 0); };
+      im.onerror = function () { resolve(false); };
+      im.src = uri;
+    });
+  }
+  probeFormat("data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=")
+    .then(function (avifOk) {
+      if (avifOk) { lbExt = ".avif"; return; }
+      return probeFormat("data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA")
+        .then(function (webpOk) { if (webpOk) lbExt = ".webp"; });
+    });
+
+  function fullSrc(a) { return a.getAttribute("href").replace(/\.jpg$/i, lbExt); }
+
+  // Every lightbox anchor earns the cursor's VIEW label
   document.querySelectorAll("[data-lightbox]").forEach(function (a) {
+    if (!a.hasAttribute("data-cursor")) a.setAttribute("data-cursor", "VIEW");
     var group = a.dataset.lightbox;
     (galleries[group] = galleries[group] || []).push(a);
     a.addEventListener("click", function (ev) {
@@ -248,16 +271,45 @@
   function paintBox() {
     var items = galleries[current.group];
     var a = items[current.index];
-    boxImg.src = a.getAttribute("href");
+    boxImg.src = fullSrc(a);
     boxImg.alt = a.querySelector("img") ? a.querySelector("img").alt : "";
     boxCaption.textContent = a.dataset.caption || "";
     boxCounter.textContent = (current.index + 1) + " / " + items.length;
+    preloadNeighbors();
+  }
+  function preloadNeighbors() {
+    var items = galleries[current.group];
+    if (!items || items.length < 2) return;
+    [1, -1].forEach(function (d) {
+      var a = items[(current.index + d + items.length) % items.length];
+      new Image().src = fullSrc(a);
+    });
   }
   function step(delta) {
     var items = galleries[current.group];
     current.index = (current.index + delta + items.length) % items.length;
     paintBox();
   }
+
+  // If a derived .avif/.webp is ever missing, fall back to the original JPEG
+  boxImg.addEventListener("error", function () {
+    if (current.group == null || /\.jpg$/i.test(boxImg.src)) return;
+    boxImg.src = galleries[current.group][current.index].getAttribute("href");
+  });
+
+  // Touch: swipe horizontally to flip prints
+  var swipeX = null, swipeY = null;
+  box.addEventListener("touchstart", function (ev) {
+    var t = ev.changedTouches[0];
+    swipeX = t.clientX; swipeY = t.clientY;
+  }, { passive: true });
+  box.addEventListener("touchend", function (ev) {
+    if (swipeX === null) return;
+    var t = ev.changedTouches[0];
+    var dx = t.clientX - swipeX, dy = t.clientY - swipeY;
+    swipeX = swipeY = null;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
+  }, { passive: true });
 
   box.querySelector(".lightbox__close").addEventListener("click", function () { box.close(); });
   box.querySelector(".lightbox__nav--prev").addEventListener("click", function () { step(-1); });
@@ -300,14 +352,13 @@
   if (cursorEl && matchMedia("(pointer: fine)").matches && !reduceMotion) {
     document.body.classList.add("cursor-on");
     var labelEl = cursorEl.querySelector(".cursor__label");
-    var cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy;
-    function renderCursor() {
-      cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
-      cursorEl.style.transform = "translate3d(" + cx + "px," + cy + "px,0) translate(-50%,-50%)";
-      requestAnimationFrame(renderCursor);
-    }
-    addEventListener("mousemove", function (e) { tx = e.clientX; ty = e.clientY; }, { passive: true });
-    renderCursor();
+
+    // The OS cursor is hidden, so this mark IS the pointer — it must track 1:1.
+    // Any smoothing here reads as input latency, not style.
+    addEventListener("mousemove", function (e) {
+      cursorEl.style.transform =
+        "translate3d(" + e.clientX + "px," + e.clientY + "px,0) translate(-50%,-50%)";
+    }, { passive: true });
 
     var INTERACTIVE = "a, button, [data-cursor], summary, input, textarea";
     addEventListener("mouseover", function (e) {
@@ -318,7 +369,10 @@
       if (lbl) { labelEl.textContent = lbl; cursorEl.classList.add("labelled"); }
     });
     addEventListener("mouseout", function (e) {
-      if (e.target.closest(INTERACTIVE)) cursorEl.classList.remove("hot", "labelled");
+      if (!e.target.closest(INTERACTIVE)) return;
+      // Ignore moves between nested children of the same interactive element
+      var still = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(INTERACTIVE);
+      if (!still) cursorEl.classList.remove("hot", "labelled");
     });
     document.addEventListener("mouseleave", function () { cursorEl.style.opacity = "0"; });
     document.addEventListener("mouseenter", function () { cursorEl.style.opacity = ""; });
