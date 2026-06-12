@@ -11,7 +11,7 @@ index.html            the whole site (9 numbered "sheets") — the deploy artifa
 sitemap.xml           single-URL sitemap
 robots.txt            allow-all + sitemap pointer
 llms.txt              summary for AI assistants that index/cite the site
-_headers              CSP + security + caching headers (Netlify / Cloudflare Pages)
+vercel.json           CSP + security + caching headers (Vercel)
 css/styles.css        design system + all styles + @font-face
 js/theme-init.js      pre-paint theme pick (external so CSP needs no unsafe-inline)
 js/main.js            ruler, scroll-spy, carousels, transitions, lightbox, cursor, HUD
@@ -52,12 +52,30 @@ fallback), so no markup changes are needed there.
 `build-images.mjs` and `build-html.mjs` need Node + `sharp`. Sharp is resolved from
 this folder or, failing that, the old React site's `node_modules`.
 
-## Deploy
+## Deploy (Vercel)
 
-Drag the `fardin-portfolio` folder into **Netlify Drop** or **Cloudflare Pages**
-(both honor `_headers` and auto-use `404.html`). No build command, no publish
-sub-directory — the folder *is* the site. Vercel works too; port `_headers` to
-`vercel.json`.
+No build command, no output directory — the folder *is* the site. Either:
+
+```powershell
+# from this folder — first run links the project, then:
+npx vercel --prod
+```
+
+…or push the folder to a GitHub repo and import it at vercel.com/new
+(framework preset: **Other**; leave build command and output directory empty).
+
+`vercel.json` carries the security headers (CSP, HSTS, etc.) and the immutable
+caching for `/assets/*`. Vercel serves `404.html` automatically for missing paths.
+
+CSP rationale (JSON can't hold comments):
+- `script-src` has no `unsafe-inline` — all JS is external (`js/theme-init.js`, `js/main.js`);
+  `plausible.io` is pre-allowed so enabling analytics needs no header change.
+- `style-src 'unsafe-inline'` is required by the `style="--d:n"` stagger attributes — low risk.
+- `img-src data:` is required by the AVIF/WebP support probes in `js/main.js`.
+- `frame-src youtube-nocookie.com` + `img-src i.ytimg.com` serve the motion-study embed.
+
+After the first deploy, open the site once with DevTools — any CSP violation
+shows in the console and is a one-line allowlist fix in `vercel.json`.
 
 ### One thing to do before/after deploy
 
