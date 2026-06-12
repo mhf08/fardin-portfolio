@@ -331,7 +331,6 @@ main { padding-left: var(--ruler-w); }
 .btn--solid { background: var(--ink); color: var(--paper); }
 .btn--solid::before { background: var(--brass); }
 .btn--solid:hover { color: #fff; border-color: var(--brass); }
-.btn__tag { font-size: 0.6rem; color: inherit; opacity: 0.65; }
 
 /* social icon buttons */
 .iconrow { display: flex; gap: 0.75rem; list-style: none; margin: 0; padding: 0; }
@@ -575,7 +574,6 @@ main { padding-left: var(--ruler-w); }
 .bom tbody tr { transition: background-color 0.2s ease; }
 .bom tbody tr:hover { background: color-mix(in srgb, var(--brass-bright) 7%, transparent); }
 
-.record { display: grid; grid-template-columns: 2fr 3fr; gap: clamp(2.5rem, 5vw, 4.5rem); margin-top: clamp(3rem, 7vh, 4.5rem); }
 .record__h { color: var(--brass); border-bottom: 1px solid var(--line); padding-bottom: 0.6rem; margin-bottom: 1.5rem; }
 
 /* Education block on the Toolkit sheet */
@@ -620,20 +618,6 @@ main { padding-left: var(--ruler-w); }
 .series__head h3 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 600; }
 .series__sub { color: var(--brass); margin: 0.6rem 0 1rem; }
 .series__desc { color: var(--ink-soft); }
-
-.plates { columns: 3; column-gap: 1.5rem; }
-.plates figure { margin: 0 0 1.5rem; break-inside: avoid; }
-.plates a { display: block; overflow: hidden; border: 1px solid var(--line); }
-.plates img {
-  width: 100%; filter: grayscale(0.3);
-  transition: transform 0.6s var(--ease-out), filter 0.6s ease;
-}
-.plates a:hover img { transform: scale(1.025); filter: grayscale(0); }
-.plates figcaption {
-  font-size: 0.8rem; color: var(--ink-soft); line-height: 1.5;
-  margin-top: 0.6rem; padding-right: 0.5rem;
-}
-.plates figcaption .mono { color: var(--brass); font-size: 0.6rem; margin-right: 0.6rem; }
 
 /* ---------- Sheet 08: Get in Touch ---------- */
 .contact { border-bottom: 0; }
@@ -1015,9 +999,7 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   .case__grid--flip .case__text { order: 1; }
   .case__grid--flip .carousel { order: 2; }
   .thesis__cols { grid-template-columns: 1fr; }
-  .record { grid-template-columns: 1fr; }
   .edu-grid { grid-template-columns: 1fr; }
-  .plates { columns: 2; }
   .contactsheet__grid { grid-template-columns: repeat(3, 1fr); }
   .exhibit { grid-template-columns: 1fr; }
   .titleblock { grid-template-columns: 1fr 1fr; }
@@ -1029,7 +1011,6 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
 }
 
 @media (max-width: 520px) {
-  .plates { columns: 1; }
   .contactsheet__grid { grid-template-columns: repeat(2, 1fr); }
   .certs { grid-template-columns: 1fr; }
   .awards__list > li { grid-template-columns: 1fr; gap: 0.4rem; }

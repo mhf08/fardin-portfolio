@@ -10,11 +10,12 @@ index.html            the whole site (9 numbered "sheets") — the deploy artifa
 404.html              error page
 sitemap.xml           single-URL sitemap
 robots.txt            allow-all + sitemap pointer
-_headers              caching + security headers (Netlify / Cloudflare Pages)
+llms.txt              summary for AI assistants that index/cite the site
+_headers              CSP + security + caching headers (Netlify / Cloudflare Pages)
 css/styles.css        design system + all styles + @font-face
-js/main.js            theme, ruler, scroll-spy, carousels, wipe transitions, lightbox
+js/theme-init.js      pre-paint theme pick (external so CSP needs no unsafe-inline)
+js/main.js            ruler, scroll-spy, carousels, transitions, lightbox, cursor, HUD
 favicon-v2.png        original favicon
-favicon.svg           registration-mark favicon (fallback)
 assets/
   fonts/              self-hosted woff2 (Fraunces, Inter, IBM Plex Mono — latin subset)
   img/                images as .jpg + .avif + .webp siblings (see pipeline below)
