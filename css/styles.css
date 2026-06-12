@@ -891,6 +891,49 @@ html[data-theme="dark"] .frame[data-mark="maybe"]::before,
 html[data-theme="dark"] .frame[data-mark="select"]::after { color: #FF5A3C; border-color: #FF5A3C; }
 html[data-theme="dark"] .frame[data-mark="select"]::after { color: #FF5A3C; }
 
+/* ---------- Photography: framed exhibition plates (Series 2) ---------- */
+.exhibit {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.75rem, 4vw, 3.25rem); align-items: start;
+}
+.plate { margin: 0; }
+.plate--wide { grid-column: 1 / -1; }
+.plate > a { display: block; }
+.plate__mat {
+  display: block; position: relative;
+  background: var(--paper-raised);
+  padding: clamp(12px, 2.2vw, 26px);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s ease;
+}
+.plate__mat img { display: block; width: 100%; border: 1px solid var(--line); }
+.plate > a:hover .plate__mat,
+.plate > a:focus-visible .plate__mat {
+  transform: translateY(-5px);
+  box-shadow: 0 34px 64px -28px rgba(31, 34, 28, 0.5);
+}
+/* registration crop-ticks at opposite corners of the mat */
+.plate__mat::before, .plate__mat::after {
+  content: ""; position: absolute; width: 14px; height: 14px;
+  color: var(--brass); pointer-events: none; opacity: 0.7;
+}
+.plate__mat::before { top: 6px; left: 6px; border-top: 1px solid currentColor; border-left: 1px solid currentColor; }
+.plate__mat::after { bottom: 6px; right: 6px; border-bottom: 1px solid currentColor; border-right: 1px solid currentColor; }
+.plate__label { display: grid; gap: 0.4rem; margin-top: 1.1rem; }
+.plate__no { color: var(--brass); }
+.plate__title {
+  font-family: var(--font-display); font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem); line-height: 1.35;
+  color: var(--ink); max-width: 48ch;
+}
+.plate__datum { color: var(--ink-soft); font-size: 0.58rem; }
+html[data-theme="dark"] .plate__mat { box-shadow: 0 20px 50px -24px rgba(0, 0, 0, 0.7); }
+html[data-theme="dark"] .plate > a:hover .plate__mat,
+html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
+  box-shadow: 0 34px 64px -26px rgba(0, 0, 0, 0.85);
+}
+
 /* ---------- Lightbox "develop" on open ---------- */
 .lightbox img.developing { animation: develop 0.7s ease forwards; }
 @keyframes develop {
@@ -975,6 +1018,7 @@ html[data-theme="dark"] .frame[data-mark="select"]::after { color: #FF5A3C; }
   .edu-grid { grid-template-columns: 1fr; }
   .plates { columns: 2; }
   .contactsheet__grid { grid-template-columns: repeat(3, 1fr); }
+  .exhibit { grid-template-columns: 1fr; }
   .titleblock { grid-template-columns: 1fr 1fr; }
   .titleblock__cell { border-bottom: 1px solid var(--line); }
   .titleblock__cell:nth-child(even) { border-right: 0; }
