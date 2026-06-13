@@ -465,9 +465,18 @@ main { padding-left: var(--ruler-w); }
 }
 .xp:hover { border-color: var(--brass); box-shadow: var(--shadow); }
 .xp:hover::before { transform: scaleY(1); }
+.xp--current::before { transform: scaleY(1); } /* the active role keeps its brass bar lit */
+.xp--current { border-color: color-mix(in srgb, var(--brass) 45%, var(--line)); }
 .xp + .xp { margin-top: 2rem; }
 .xp__grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: clamp(1.75rem, 4vw, 3rem); align-items: start; }
 .xp__head h3 { font-family: var(--font-display); font-size: clamp(1.35rem, 2.4vw, 1.8rem); font-weight: 600; }
+.xp__now {
+  display: inline-flex; align-items: center; gap: 0.45em;
+  font-size: 0.56rem; color: var(--brass); vertical-align: 0.35em;
+  border: 1px solid var(--brass); border-radius: 999px; padding: 0.2em 0.65em;
+  margin-left: 0.6rem;
+}
+.xp__now-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brass-bright); animation: dot-pulse 2.4s ease-out infinite; }
 .xp__meta { color: var(--brass); margin-top: 0.5rem; }
 .xp__list { margin: 1.5rem 0 0; padding: 0; list-style: none; color: var(--ink-soft); max-width: 70ch; }
 .xp__list li { padding-left: 1.4rem; position: relative; }
