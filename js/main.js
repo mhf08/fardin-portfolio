@@ -34,6 +34,13 @@
     }
   }
 
+  /* ---------- Smooth scroll (Lenis) ---------- */
+  var lenis = null;
+  if (window.Lenis && !reduceMotion) {
+    lenis = new window.Lenis({ lerp: 0.09, wheelMultiplier: 1, smoothWheel: true });
+    (function loop(t) { lenis.raf(t); requestAnimationFrame(loop); })();
+  }
+
   /* ---------- Theme toggle ---------- */
   var root = document.documentElement;
   var toggle = document.querySelector(".theme-toggle");
@@ -84,13 +91,11 @@
   var hudSheet = hud && hud.querySelector(".hud__sheet");
   var hudName = hud && hud.querySelector(".hud__name");
   var sheetTotal = sheets.length < 10 ? "0" + sheets.length : String(sheets.length);
-  var currentSheetNum = 1;
 
   var spy = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
       var el = entry.target;
-      currentSheetNum = parseInt(el.dataset.sheet, 10) || currentSheetNum;
       readoutNo.textContent = el.dataset.sheet;
       readoutLabel.textContent = el.dataset.name;
       if (hudSheet) hudSheet.textContent = el.dataset.sheet + " / " + sheetTotal;
@@ -113,6 +118,28 @@
     });
   }, { rootMargin: "0px 0px -8% 0px" });
   document.querySelectorAll(".reveal").forEach(function (el) { revealer.observe(el); });
+
+  /* ---------- Count-ups: measurements resolving ---------- */
+  var counterObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      counterObs.unobserve(e.target);
+      var el = e.target;
+      var target = parseFloat(el.dataset.count);
+      var dec = parseInt(el.dataset.decimals || "0", 10);
+      if (reduceMotion || isNaN(target)) { el.textContent = target.toFixed(dec); return; }
+      var dur = 1100, start = null;
+      (function tick(t) {
+        if (!start) start = t;
+        var p = Math.min(1, (t - start) / dur);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (target * eased).toFixed(dec);
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target.toFixed(dec);
+      })(performance.now());
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll("[data-count]").forEach(function (c) { counterObs.observe(c); });
 
   /* ---------- Mobile menu ---------- */
   var menuBtn = document.querySelector(".menu-btn");
@@ -141,24 +168,15 @@
       closeMenu();
 
       function jump() {
-        target.scrollIntoView({ behavior: "instant", block: "start" });
+        if (lenis) lenis.scrollTo(target, { immediate: true }); // Lenis honors scroll-margin-top
+        else target.scrollIntoView({ behavior: "instant", block: "start" });
         history.replaceState(null, "", href);
       }
 
-      if (reduceMotion) { jump(); return; }
+      if (reduceMotion || wipeBusy) { jump(); return; }
 
-      // Preferred: native View Transitions — a drafting-paper page turn.
-      if (document.startViewTransition) {
-        var tNum = parseInt((href.match(/\d+/) || ["99"])[0], 10);
-        root.dataset.vt = tNum >= currentSheetNum ? "fwd" : "back";
-        var vt = document.startViewTransition(jump);
-        vt.finished.then(function () { delete root.dataset.vt; },
-                         function () { delete root.dataset.vt; });
-        return;
-      }
-
-      // Fallback: the brass/ink sheet-wipe.
-      if (wipeBusy) { jump(); return; }
+      // The signature bold transition: brass + ink panels sweep across the
+      // viewport like turning a drafting sheet; the jump happens under cover.
       wipeBusy = true;
       wipe.classList.add("run");
       setTimeout(jump, 430);

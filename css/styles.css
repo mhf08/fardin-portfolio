@@ -54,6 +54,10 @@ html[data-theme="dark"] {
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
+/* Lenis drives scrolling when active — let it own the smoothing */
+html.lenis { scroll-behavior: auto; height: auto; }
+html.lenis body { height: auto; }
+.lenis.lenis-stopped { overflow: clip; }
 
 body {
   margin: 0;
@@ -260,6 +264,23 @@ main { padding-left: var(--ruler-w); }
   max-width: 18ch;
 }
 .hero__title em { font-style: italic; font-weight: 480; color: var(--brass); }
+
+/* Kinetic hero name: each word rises from a clip mask while its variable-font
+   weight settles from light to bold — the name being inked in. */
+.kin { display: inline-block; overflow: clip; overflow-clip-margin: 0.16em; vertical-align: top; }
+.kin__i {
+  display: inline-block;
+  /* No base transform: the hidden start lives in the 0% keyframe + fill:both,
+     so if the animation never runs the word still shows (fail-visible). */
+  animation: kin-rise 1s var(--ease-out) both;
+  animation-delay: calc(var(--d, 0) * 0.13s + 0.25s);
+}
+.kin__i--accent { font-style: italic; color: var(--brass); }
+@keyframes kin-rise {
+  0%   { transform: translateY(108%); font-variation-settings: "opsz" 18, "wght" 350; }
+  55%  { font-variation-settings: "opsz" 96, "wght" 650; }
+  100% { transform: translateY(0);    font-variation-settings: "opsz" 144, "wght" 600; }
+}
 .hero__role {
   font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 500;
   margin-top: clamp(1.25rem, 3vh, 1.75rem);
@@ -423,6 +444,7 @@ main { padding-left: var(--ruler-w); }
 /* ---------- Sheet 02: About ---------- */
 .profile { display: grid; grid-template-columns: minmax(260px, 380px) 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
 .profile__fig { margin: 0; }
+.figframe { display: block; } /* wraps the portrait; parallax adds overflow:hidden where supported */
 .profile__fig img { border: 1px solid var(--line); }
 .profile__fig figcaption { color: var(--ink-soft); margin-top: 0.7rem; font-size: 0.62rem; }
 .profile__pull {
@@ -440,7 +462,7 @@ main { padding-left: var(--ruler-w); }
 }
 
 .statrow {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
   margin-top: 2.5rem; border-top: 1px solid var(--line); padding-top: 1.5rem;
 }
 .statrow dt { color: var(--ink-soft); font-size: 0.6rem; margin-bottom: 0.35rem; }
@@ -719,8 +741,57 @@ main { padding-left: var(--ruler-w); }
 }
 
 /* ---------- Reveal on scroll ---------- */
+/* Baseline: IntersectionObserver toggles .in (fallback for browsers without
+   scroll-driven animation, e.g. older Safari). */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s var(--ease-out); }
 .reveal.in { opacity: 1; transform: none; }
+
+/* Upgrade: where supported, scrub the reveal to scroll position (off main
+   thread). The animation + fill:both governs opacity/transform, overriding the
+   .in transition above, so the two never fight. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-scrub linear both;
+      animation-timeline: view();
+      animation-range: entry 2% entry 60%;
+    }
+    /* gentle Z-depth: the portrait drifts as it passes (scaled so it never gaps) */
+    .figframe { display: block; overflow: hidden; }
+    .figframe img {
+      scale: 1.12;
+      animation: figure-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}
+@keyframes reveal-scrub {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes figure-parallax {
+  from { translate: 0 -5.5%; }
+  to   { translate: 0 5.5%; }
+}
+
+/* Section titles draw their weight on as they enter (variable-font scrub).
+   Settles to wght 600 = the static weight, so there is no snap afterward.
+   The meta is pinned right by justify-between, so the changing advance width
+   only eats the gap — no jitter. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sheet-head h2 {
+      animation: title-weight linear both;
+      animation-timeline: view();
+      animation-range: entry 8% entry 64%;
+    }
+  }
+}
+@keyframes title-weight {
+  from { font-variation-settings: "opsz" 22, "wght" 400; }
+  to   { font-variation-settings: "opsz" 144, "wght" 600; }
+}
 
 /* ============================================================
    Craft layer — concept as behaviour
@@ -957,20 +1028,40 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
 .contact__pos { color: var(--ink-soft); margin-bottom: 1.25rem; }
 .contact__pos .status-dot { margin-right: 0.6em; }
 
-/* ---------- View Transitions: drafting-paper page turn ---------- */
+/* ---------- Living-drawing layer (Tier 3) ---------- */
+/* BOM skills table plots in row by row when the table reveals */
 @media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root), ::view-transition-new(root) {
-    animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  html[data-vt="fwd"]::view-transition-old(root) { animation-name: turn-out-up; }
-  html[data-vt="fwd"]::view-transition-new(root) { animation-name: turn-in-up; }
-  html[data-vt="back"]::view-transition-old(root) { animation-name: turn-out-down; }
-  html[data-vt="back"]::view-transition-new(root) { animation-name: turn-in-down; }
+  .bom tbody tr { opacity: 0; transform: translateX(-14px); transition: opacity 0.5s ease, transform 0.55s var(--ease-out); }
+  .bom.in tbody tr { opacity: 1; transform: none; }
+  .bom.in tbody tr:nth-child(1) { transition-delay: 0.10s; }
+  .bom.in tbody tr:nth-child(2) { transition-delay: 0.17s; }
+  .bom.in tbody tr:nth-child(3) { transition-delay: 0.24s; }
+  .bom.in tbody tr:nth-child(4) { transition-delay: 0.31s; }
+  .bom.in tbody tr:nth-child(5) { transition-delay: 0.38s; }
+  .bom.in tbody tr:nth-child(6) { transition-delay: 0.45s; }
+  .bom.in tbody tr:nth-child(7) { transition-delay: 0.52s; }
+  .bom.in tbody tr:nth-child(8) { transition-delay: 0.59s; }
 }
-@keyframes turn-out-up   { to { transform: translateY(-4%); opacity: 0; } }
-@keyframes turn-in-up    { from { transform: translateY(6%); opacity: 0; } }
-@keyframes turn-out-down { to { transform: translateY(4%); opacity: 0; } }
-@keyframes turn-in-down  { from { transform: translateY(-6%); opacity: 0; } }
+
+/* Self-drawing dimension line down the left of the portrait (scale annotation) */
+.profile__fig { position: relative; }
+@media (prefers-reduced-motion: no-preference) {
+  .profile__fig::before {
+    content: ""; position: absolute; left: -15px; top: 3px; width: 1px;
+    height: calc(100% - 2.3rem);
+    background: var(--brass); transform: scaleY(0); transform-origin: top;
+    transition: transform 1s var(--ease-out) 0.25s;
+  }
+  .profile__fig.in::before { transform: scaleY(1); }
+  .profile__fig::after {
+    content: "1:1"; position: absolute; left: -15px; top: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.16em;
+    color: var(--brass); background: var(--paper); padding: 0.1rem 0.3rem;
+    opacity: 0; transition: opacity 0.5s ease 0.95s;
+  }
+  .profile__fig.in::after { opacity: 1; }
+}
 
 /* ---------- Mobile menu & responsive ---------- */
 @media (max-width: 1100px) {
@@ -1011,6 +1102,7 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
 
   .profile { grid-template-columns: 1fr; }
   .profile__fig { max-width: 380px; }
+  .profile__fig::before, .profile__fig::after { display: none; } /* dimension line: desktop only */
   .xp__grid { grid-template-columns: 1fr; }
   .case__grid { grid-template-columns: 1fr; }
   .case__grid--flip .case__text { order: 1; }
@@ -1023,7 +1115,7 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   .titleblock__cell { border-bottom: 1px solid var(--line); }
   .titleblock__cell:nth-child(even) { border-right: 0; }
   .titleblock__cell--status { grid-column: 1 / -1; border-bottom: 0; }
-  .statrow { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; }
+  .statrow { grid-template-columns: repeat(3, 1fr); gap: 1.25rem 0.75rem; }
   .hero__scroll { display: none; }
 }
 
@@ -1048,6 +1140,7 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   }
   .reveal, .reveal .case__step { opacity: 1; transform: none; }
   .anim { opacity: 1; transform: none; animation: none; }
+  .kin__i { animation: none; transform: none; }
   .sheet-head::after { transform: scaleX(1); }
   .hero__bg img { animation: none; }
   .hero__scrollline span { animation: none; }

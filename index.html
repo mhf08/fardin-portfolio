@@ -42,6 +42,7 @@
   </noscript>
 
   <link rel="stylesheet" href="css/styles.css">
+  <script src="js/lib/lenis.min.js" defer></script>
   <script src="js/main.js" defer></script>
 
   <!-- Structured data: identity for search + AI assistants (ProfilePage → Person) -->
@@ -189,8 +190,10 @@
     <div class="hero__inner">
       <p class="hero__eyebrow mono anim" style="--d:0">Machine Learning&ensp;·&ensp;Supply Chain Management&ensp;·&ensp;Quality Control</p>
 
-      <h1 class="hero__title anim" style="--d:1" id="hero-title">
-        Mostofa Habib <em>Fardin</em>
+      <h1 class="hero__title" id="hero-title">
+        <span class="kin"><span class="kin__i" style="--d:0">Mostofa</span></span>
+        <span class="kin"><span class="kin__i" style="--d:1">Habib</span></span>
+        <span class="kin"><span class="kin__i kin__i--accent" style="--d:2">Fardin</span></span>
       </h1>
 
       <p class="hero__role anim" style="--d:2">Industrial and Production Engineer</p>
@@ -260,11 +263,13 @@
 
     <div class="profile">
       <figure class="profile__fig reveal">
-        <picture>
-          <source type="image/avif" srcset="assets/img/portrait.avif">
-          <source type="image/webp" srcset="assets/img/portrait.webp">
-          <img src="assets/img/portrait.jpg" alt="Mostofa Habib Fardin" width="600" height="800" loading="lazy">
-        </picture>
+        <span class="figframe">
+          <picture>
+            <source type="image/avif" srcset="assets/img/portrait.avif">
+            <source type="image/webp" srcset="assets/img/portrait.webp">
+            <img src="assets/img/portrait.jpg" alt="Mostofa Habib Fardin" width="600" height="800" loading="lazy">
+          </picture>
+        </span>
         <figcaption class="mono">FIG. 02-A — Mostofa Habib Fardin</figcaption>
       </figure>
 
@@ -285,10 +290,9 @@
         <p class="profile__quote reveal">I don't just build systems; I document the efficiency within them.</p>
 
         <dl class="statrow reveal" aria-label="Key figures">
-          <div><dt class="mono">CGPA</dt><dd>3.87<span class="statrow__sub">/ 4.00</span></dd></div>
-          <div><dt class="mono">Dean's List</dt><dd>2<span class="statrow__sub">× (2022, 2023)</span></dd></div>
-          <div><dt class="mono">Competition podiums</dt><dd>3<span class="statrow__sub">national</span></dd></div>
-          <div><dt class="mono">Photo series</dt><dd>2<span class="statrow__sub">ongoing</span></dd></div>
+          <div><dt class="mono">CGPA</dt><dd><span data-count="3.87" data-decimals="2">3.87</span><span class="statrow__sub">/ 4.00</span></dd></div>
+          <div><dt class="mono">Dean's List</dt><dd><span data-count="2">2</span><span class="statrow__sub">× (2022, 2023)</span></dd></div>
+          <div><dt class="mono">Photo series</dt><dd><span data-count="2">2</span><span class="statrow__sub">ongoing</span></dd></div>
         </dl>
 
         <p class="currently reveal">
