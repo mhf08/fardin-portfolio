@@ -270,16 +270,14 @@ main { padding-left: var(--ruler-w); }
 .kin { display: inline-block; overflow: clip; overflow-clip-margin: 0.16em; vertical-align: top; }
 .kin__i {
   display: inline-block;
-  /* No base transform: the hidden start lives in the 0% keyframe + fill:both,
-     so if the animation never runs the word still shows (fail-visible). */
-  animation: kin-rise 1s var(--ease-out) both;
-  animation-delay: calc(var(--d, 0) * 0.13s + 0.25s);
+  /* Hidden start lives in the from keyframe + fill:both; without animation the word shows (fail-visible). */
+  animation: kin-rise 0.65s var(--ease-out) both;
+  animation-delay: calc(var(--d, 0) * 0.14s + 0.25s);
 }
 .kin__i--accent { font-style: italic; color: var(--brass); }
 @keyframes kin-rise {
-  0%   { transform: translateY(108%); font-variation-settings: "opsz" 18, "wght" 350; }
-  55%  { font-variation-settings: "opsz" 96, "wght" 650; }
-  100% { transform: translateY(0);    font-variation-settings: "opsz" 144, "wght" 600; }
+  from { transform: translateY(108%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
 }
 .hero__role {
   font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 500;
