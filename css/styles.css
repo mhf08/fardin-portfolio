@@ -198,7 +198,7 @@ html[data-theme="dark"] .theme-toggle__txt--night { display: inline; }
 main { padding-left: var(--ruler-w); }
 
 .sheet {
-  max-width: 1200px;
+  max-width: 1400px;
   margin-inline: auto;
   padding: clamp(4rem, 10vh, 7.5rem) clamp(1.25rem, 4vw, 3rem);
   border-bottom: 1px solid var(--line-soft);
@@ -232,9 +232,10 @@ main { padding-left: var(--ruler-w); }
   min-height: calc(100svh - var(--head-h));
   display: flex; flex-direction: column; justify-content: center;
   padding-top: calc(var(--head-h) + clamp(2rem, 6vh, 4rem));
-  padding-bottom: 5rem;
+  padding-bottom: clamp(6rem, 16vh, 11rem);
   position: relative;
   overflow: hidden;
+  border-bottom: none;
 }
 .hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .hero__bg img {
@@ -249,10 +250,20 @@ main { padding-left: var(--ruler-w); }
 }
 .hero__scrim {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg,
-    color-mix(in srgb, var(--paper) 55%, transparent) 0%,
-    color-mix(in srgb, var(--paper) 65%, transparent) 50%,
-    var(--paper) 100%);
+  background:
+    /* horizontal: heavy left (text stays crisp), image breathes on the right */
+    linear-gradient(105deg,
+      color-mix(in srgb, var(--paper) 90%, transparent)  0%,
+      color-mix(in srgb, var(--paper) 52%, transparent) 40%,
+      color-mix(in srgb, var(--paper) 14%, transparent) 100%
+    ),
+    /* vertical: image fades to paper well before the section edge */
+    linear-gradient(180deg,
+      transparent                                         0%,
+      transparent                                        46%,
+      color-mix(in srgb, var(--paper) 68%, transparent) 72%,
+      var(--paper)                                       83%
+    );
 }
 .hero__inner { position: relative; z-index: 1; }
 
@@ -682,7 +693,7 @@ main { padding-left: var(--ruler-w); }
 /* ---------- Footer ---------- */
 .site-foot { padding-left: var(--ruler-w); border-top: 2px solid var(--ink); }
 .site-foot__block {
-  max-width: 1200px; margin-inline: auto;
+  max-width: 1400px; margin-inline: auto;
   display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; justify-content: space-between;
   padding: 1.5rem clamp(1.25rem, 4vw, 3rem);
   color: var(--ink-soft); font-size: 0.64rem;
