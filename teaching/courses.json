@@ -1,6 +1,6 @@
 {
   "updated": "2026-07-09",
-  "note": "This file drives the Course Materials page. To add a slide deck: upload the PDF into teaching/files/<course>/, then add one entry to that course's \"materials\" list below. See teaching/HOW-TO-ADD-MATERIALS.md for step-by-step instructions.",
+  "note": "This file drives the Course Materials page. To add a slide deck: upload the PDF into teaching/files/<course>/, then add one entry to that course's \"materials\" list below. The page's 'Updated' date is derived automatically from the newest material date, so you do NOT need to touch the 'updated' field above (it's only a fallback shown when nothing has a date yet). See teaching/HOW-TO-ADD-MATERIALS.md.",
   "courses": [
     {
       "code": "IPE 331",

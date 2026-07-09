@@ -62,7 +62,10 @@ After that, the steps below are all you ever do.
    - **title** — what students see (anything you like)
    - **file** — `files/<course-folder>/<your-file-name>.pdf` (must match Step 1 exactly)
    - **type** — a short tag, e.g. `Slides`, `Handout`, `Notes`, `Assignment` (or delete this part)
-   - **date** — `YYYY-MM-DD`, e.g. `2026-07-15` (or delete this part)
+   - **date** — `YYYY-MM-DD`, e.g. `2026-07-15`. **Use the date you're posting it.** The
+     "Updated ..." line at the bottom of the page updates itself to the newest date across all
+     your materials, so as long as you give each new item today's date, the page always shows
+     when you last posted something. You never edit that stamp by hand.
 
 4. Click **Commit changes**.
 

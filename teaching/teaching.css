@@ -23,6 +23,10 @@
 .tbar__back:hover { color: var(--brass); }
 
 .tpage__head { margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+.tpage__eyebrow {
+  color: var(--brass); font-size: 0.72rem; letter-spacing: 0.22em;
+  margin-bottom: 0.9rem;
+}
 .tpage__head h1 {
   font-family: var(--font-display); font-weight: 600;
   font-size: clamp(2rem, 6vw, 3.25rem); line-height: 1.1;

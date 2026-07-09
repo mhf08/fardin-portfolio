@@ -40,6 +40,22 @@
     );
   }
 
+  // The "Updated" stamp is derived automatically: the most recent material date
+  // across all courses. Add a dated item and the stamp moves on its own — no need
+  // to hand-edit anything. Falls back to the "updated" field in courses.json only
+  // when nothing has a date yet.
+  function latestDate(courses) {
+    var newest = null;
+    courses.forEach(function (c) {
+      (c.materials || []).forEach(function (m) {
+        if (!m.date) return;
+        var t = new Date(m.date);
+        if (!isNaN(t) && (newest === null || t > newest)) newest = t;
+      });
+    });
+    return newest;
+  }
+
   function courseCard(c) {
     var mats = Array.isArray(c.materials) ? c.materials : [];
     var body = mats.length
@@ -65,7 +81,10 @@
     .then(function (data) {
       var courses = (data && data.courses) || [];
       mount.innerHTML = courses.map(courseCard).join("");
-      if (stamp && data.updated) stamp.textContent = "Updated " + fmtDate(data.updated);
+      if (stamp) {
+        var when = latestDate(courses) || (data.updated ? new Date(data.updated) : null);
+        stamp.textContent = when && !isNaN(when) ? "Updated " + fmtDate(when) : "";
+      }
     })
     .catch(function (err) {
       mount.innerHTML =
