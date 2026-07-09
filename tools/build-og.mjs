@@ -38,7 +38,7 @@ const svg = `
 
   <!-- eyebrow -->
   <text x="80" y="178" font-family="Consolas, monospace" font-size="22" letter-spacing="6"
-        fill="${brass}">MACHINE LEARNING &#183; SUPPLY CHAIN &#183; QUALITY CONTROL</text>
+        fill="${brass}">RESEARCH &#183; TEACHING &#183; INDUSTRIAL &amp; PRODUCTION ENGINEERING</text>
 
   <!-- name -->
   <text x="76" y="290" font-family="Georgia, serif" font-size="88" font-weight="bold"
@@ -46,7 +46,7 @@ const svg = `
 
   <!-- role -->
   <text x="80" y="352" font-family="Georgia, serif" font-size="34" font-style="italic"
-        fill="${brass}">Industrial &amp; Production Engineer &#8212; Visual Storyteller</text>
+        fill="${brass}">Lecturer &amp; Researcher, BUET</text>
 
   <!-- title block -->
   <line x1="34" y1="468" x2="1166" y2="468" stroke="${ink}" stroke-width="2"/>
@@ -61,11 +61,11 @@ const svg = `
   <text x="460" y="556" font-family="Georgia, serif" font-size="27" fill="${ink}">01 of 09</text>
 
   <text x="680" y="514" font-family="Consolas, monospace" font-size="17" letter-spacing="4" fill="${soft}">REV</text>
-  <text x="680" y="556" font-family="Georgia, serif" font-size="27" fill="${ink}">2026.06</text>
+  <text x="680" y="556" font-family="Georgia, serif" font-size="27" fill="${ink}">2026.07</text>
 
   <text x="880" y="514" font-family="Consolas, monospace" font-size="17" letter-spacing="4" fill="${soft}">STATUS</text>
   <circle cx="891" cy="548" r="7" fill="${bright}"/>
-  <text x="908" y="556" font-family="Georgia, serif" font-size="25" fill="${ink}">Open to work</text>
+  <text x="908" y="556" font-family="Georgia, serif" font-size="25" fill="${ink}">Open to research</text>
 </svg>`;
 
 await sharp(Buffer.from(svg)).jpeg({ quality: 88 }).toFile("assets/og.jpg");

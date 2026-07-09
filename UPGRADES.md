@@ -1,0 +1,97 @@
+# Upgrade Path — living document
+
+> Working file for site upgrades. Claude: consult this at the start of any site task,
+> mark items done as they land, add new findings to the backlog. Bigger session detail
+> lives in HANDOFF.md; this file is the what-and-why, not the how.
+
+Positioning (agreed 2026-07-09): **academia leads, photography is a supporting personal
+layer.** Voice rules: no em dashes, no AI-sounding writing in any copy.
+
+## Done
+
+- [x] Hero rewrite: academia-led eyebrow/role/value line, softened photography tagline,
+      "Read the Thesis" as primary CTA (2026-07-09)
+- [x] Career update sitewide: Adjunct → full-time Lecturer, Jul 8 2026 (2026-07-09)
+- [x] Contact lede names academic collaborators; photography secondary (2026-07-09)
+- [x] Toolkit BOM: Teaching & Communication category, items 009–011 (2026-07-09)
+- [x] Courses taught as pill list with real codes (IPE 331/332/204/432); mobile
+      pill-wrap CSS fix (2026-07-09)
+- [x] Thesis label: "Manuscript in preparation" (2026-07-09)
+- [x] Sheet reorder: Thesis 05, Projects 06, all labels/nav/CTAs renumbered (2026-07-09)
+- [x] Photography artist statement rewritten (no longer duplicates About); fixed
+      smart-quote class-attribute bug on Genba series desc (2026-07-09)
+
+## Next up (from the 2026-07-09 full review)
+
+- [x] **Fix hero tagline grammar**: "and chases" → "and chase" (2026-07-09)
+- [x] **Rewrite About paragraph 1 + 2**: para 1 now opens "now teaching in the same
+      department that trained me," research-first framing; para 2 rewritten so it no
+      longer duplicates the hero's "structure that doesn't announce itself" line
+      (2026-07-09)
+- [x] **REV bump**: loader, HUD, title block, About sheet meta, footer → 2026.07;
+      JSON-LD dateModified → 2026-07-09. Also updated page title / og:title /
+      twitter:title to "Mostofa Habib Fardin · Lecturer & Researcher, BUET" (old ones
+      said "Industrial Engineer & Visual Storyteller") (2026-07-09)
+- [x] **Em-dash sweep**: all prose, headings, meta lines, lightbox captions, and
+      llms.txt swept. Em dashes kept ONLY in numbered drafting callouts (FIG. / TABLE /
+      FILM edge / loader Rev line) where they are period-correct engineering-drawing
+      typography; 10 visible survivors, all accounted for (2026-07-09)
+- [x] **About statrow**: added "Courses taught: 4 (this term)" stat; grid back to
+      4 cols desktop / 2×2 mobile (2026-07-09)
+
+## New backlog items (found during 2026-07-09 sweep)
+
+- [ ] **Regenerate og.jpg** (tools/build-og.mjs): the share image still reads
+      "Industrial & Production Engineer — Visual Storyteller"; og:image:alt kept
+      matching the image for now. Regenerate with the lecturer title, then update alt
+
+## Done (2026-07-09, second batch)
+
+- [x] **og.jpg regenerated** via build-og.mjs: eyebrow → RESEARCH · TEACHING · IPE,
+      role → "Lecturer & Researcher, BUET", status → "Open to research", REV → 2026.07.
+      og:image:alt updated to match. og/twitter descriptions rewritten academia-first
+- [x] **Research Interests block** added to end of Thesis sheet (prose + 5 tag pills:
+      Supply Chain Resilience, ML Demand Forecasting, Multi-Echelon Simulation,
+      Information Systems in Operations, Quality & Process Control). New CSS
+      .thesis__interests (border-top divider, matches .thesis__results treatment)
+- [x] **Contact button renamed** "The 'Iteration Input'" → "Leave Feedback"
+- [x] **MS Office certificate dropped**; .certs grid 3→2 cols so the two survivors
+      (Lean Six Sigma, CR Recognition) fill the row cleanly
+
+## Blocked on user input
+
+- [ ] **Resume swap** (ON HOLD): user is updating resume.pdf and will hand it over. On
+      arrival, drop into assets/resume.pdf (no other propagation needed — meta/OG/llms/
+      JSON-LD/REV already done)
+- [ ] **Thesis PDF artifact**: "Read the full thesis" link or abstract download on the
+      Thesis sheet — needs the file from user (research-interests line now DONE separately)
+- [ ] **Hero background image**: IN PROGRESS — user will generate via ChatGPT/Gemini
+      from the prompt provided 2026-07-09. Target: assets/img/hero.jpg (1408×768, ~1.83:1),
+      then run the asset pipeline (build-images/html/srcset) to regenerate avif/webp/800
+      tiers. Composition: subject weighted RIGHT, calm negative space LEFT (text overlay),
+      warm muted drafting-paper tones
+
+## Orphaned assets to clean up
+
+- [ ] assets/img/awards/ms-office*.{jpg,avif,webp} (+ 800 tiers) now unreferenced after
+      dropping the cert — safe to delete on next asset pass
+
+## The big one
+
+- [ ] **B1 — Interactive bullwhip simulator on the Thesis sheet.** The single upgrade
+      that would put the site in top-0.1% territory; turns the thesis from a summary
+      into a demonstration. (Deferred earlier as "later development.")
+
+## Backlog (earlier deferred items)
+
+- [ ] B2 — scroll-scrubbed exploded view of the radial drill (Projects)
+- [ ] B3 — one real artifact per case study + pulled-out headline metrics
+- [ ] Photography: possible third series later (user will advise)
+
+## User-side (before/at deploy)
+
+- [ ] Register domain → find-replace `mostofahabibfardin.com` in index.html,
+      sitemap.xml, robots.txt, llms.txt
+- [ ] `npx vercel --prod`, then check DevTools once for CSP violations (untestable
+      locally)
+- [ ] Uncomment Plausible script after signup

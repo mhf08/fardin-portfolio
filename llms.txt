@@ -1,4 +1,4 @@
-# Mostofa Habib Fardin — Portfolio ("The Drawing Set")
+# Mostofa Habib Fardin · Portfolio ("The Drawing Set")
 
 > Personal portfolio of Mostofa Habib Fardin, an Industrial and Production Engineer
 > (B.Sc., Bangladesh University of Engineering and Technology, graduated Jun 2026) now
@@ -13,13 +13,13 @@ Achievements, Photography, Contact.
 
 - Role: Industrial and Production Engineer, currently Lecturer at the Department of Industrial and Production Engineering, BUET (Jun 2026–present; adjunct Jun 19–Jul 7, full-time from Jul 8, 2026). Open to academic collaborations and research partnerships.
 - Education: B.Sc. IPE, BUET (graduated Jun 2026, CGPA 3.88/4.00, Dean's List 2022 & 2023); HSC, Notre Dame College Dhaka (GPA 5.00/5.00)
-- Thesis (defended June 2026): "Taming the Bullwhip Under Geopolitical Uncertainty: A Multi-Echelon Simulation of Machine Learning Forecasting and Blockchain-Enabled Information Visibility" — five-echelon simulator, 5,740-day horizon, six forecasting models, supervised by Prof. Dr. Sultana Parveen
+- Thesis (defended June 2026, manuscript in preparation): "Taming the Bullwhip Under Geopolitical Uncertainty: A Multi-Echelon Simulation of Machine Learning Forecasting and Blockchain-Enabled Information Visibility". Five-echelon simulator, 5,740-day horizon, six forecasting models, supervised by Prof. Dr. Sultana Parveen
 - Key thesis findings: geopolitical disruption dominates the bullwhip effect (ratio 4,716 → 7,218); forecast-signal consistency beats point accuracy (TFT vs XGBoost paradox); pipeline blockchain visibility ≈ full visibility
 - Experience: Lecturer at IPE, BUET (Jun 2026–present, full-time from Jul 8, 2026); Nextern Intern, Product / Consumer Mobility Business at Grameenphone Ltd (Jun 2026); industrial attachment at RANCON Auto Industries & RANCON Motorbikes (time studies, SOP upgrades, Rack ID inventory traceability, 5S); industrial visit at A1 Polymer (Anwar Group)
 - Projects: IoT ammonia gas monitoring for fertilizer plants; the HydroPedal pedal-powered irrigation pump (25–30 L/min @ 20 ft head, zero fuel); 50+ part SolidWorks radial drilling machine with validated kinematics
 - Skills: SolidWorks, CATIA, AutoCAD, Ansys (FEA/CFD), ARENA, Python, MATLAB, C, XGBoost, LightGBM, Temporal Fusion Transformers, IoT, blockchain modeling, 5S/Kaizen/Poka-Yoke, line balancing, time studies
 - Recognition: IRC WASH Water Hackathon finalist (2025), Bizzmania champion (2022), HULT Prize at BUET 1st runner-up (2022); Lean Six Sigma White Belt
-- Photography: two ongoing series — "Echoes of the Genba" (monochrome street/industrial) and "The Design of Nature"
+- Photography: two ongoing series, "Echoes of the Genba" (monochrome street/industrial) and "The Design of Nature"
 
 ## Contact
 
