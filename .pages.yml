@@ -1,0 +1,61 @@
+# Pages CMS configuration (pagescms.org)
+# Gives a form-based admin UI for the Course Materials page, so slides can be
+# added by filling a form + dragging in the PDF — no editing courses.json by hand.
+#
+# To use: deploy the site, push this repo to GitHub, then sign in at
+# app.pagescms.org with GitHub and open this repo. See teaching/ADMIN-SETUP.md.
+
+# Where uploaded PDFs are stored, and the public path written into the data.
+media:
+  input: teaching/files          # files are committed here in the repo
+  output: /teaching/files        # ...and referenced by this URL path on the site
+  extensions: [pdf, pptx, ppt, docx, png, jpg, jpeg]
+
+content:
+  - name: courses
+    label: Courses & Materials
+    path: teaching/courses.json
+    type: file
+    fields:
+      - name: updated
+        label: Fallback date (leave as-is; the page auto-dates itself)
+        type: date
+      - name: note
+        label: Internal note
+        type: string
+      - name: courses
+        label: Courses
+        type: object
+        list: true
+        fields:
+          - name: code
+            label: Course code (e.g. IPE 331)
+            type: string
+          - name: title
+            label: Course title
+            type: string
+          - name: term
+            label: Term
+            type: string
+          - name: description
+            label: One-line description
+            type: text
+          - name: materials
+            label: Materials (slides, handouts)
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title (what students see)
+                type: string
+              - name: file
+                label: PDF file
+                type: file
+              - name: type
+                label: Type
+                type: select
+                options:
+                  values: [Slides, Handout, Notes, Assignment, Reading]
+              - name: date
+                label: Date posted
+                type: date

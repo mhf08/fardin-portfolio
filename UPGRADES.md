@@ -90,9 +90,10 @@ layer.** Voice rules: no em dashes, no AI-sounding writing in any copy.
       slash — a relative-path version broke the JSON fetch at `/teaching` no-slash; fixed).
 - [ ] **PREREQUISITE for auto-update:** GitHub repo must be connected to Vercel (Settings → Git)
       so the user's browser commits auto-deploy. Confirm this is on when the site is deployed.
-- [ ] **Optional future:** auto-generate the materials list from folder contents (Vercel build
-      step or GitHub Action) so the user only uploads the PDF and skips editing courses.json.
-      Deferred — current 2-step (upload + one JSON line) is fully self-service already.
+- [~] **Form-based admin (Pages CMS)** — user chose a no-code form UI over editing JSON.
+      `.pages.yml` config + teaching/ADMIN-SETUP.md written. BLOCKED on prerequisites: commit+push
+      + deploy the site, then user authorizes Pages CMS at app.pagescms.org. Config syntax to be
+      verified on first connect (can't test a Git CMS locally).
 - [ ] **Check BUET policy** on hosting course materials on a personal site before publicizing.
 
 ## The big one
