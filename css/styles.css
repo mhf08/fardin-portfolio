@@ -1137,6 +1137,7 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   .contact__actions .btn { width: 100%; justify-content: center; }
   .bom { overflow-x: auto; }
   .bom table { min-width: 640px; }
+  .tags li { white-space: normal; max-width: 100%; }
 }
 
 /* ---------- Reduced motion ---------- */
