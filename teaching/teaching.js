@@ -19,12 +19,20 @@
     return t.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
   }
 
+  // Materials can be listed relative (e.g. "files/ipe331/x.pdf"); resolve against
+  // /teaching/ so links work whether the page URL has a trailing slash or not.
+  function resolveFile(f) {
+    f = String(f || "");
+    if (/^https?:\/\//i.test(f) || f.charAt(0) === "/") return f;
+    return "/teaching/" + f.replace(/^\.?\//, "");
+  }
+
   function materialRow(m) {
     var type = m.type ? '<span class="mat__type mono">' + esc(m.type) + "</span>" : "";
     var date = m.date ? '<span class="mat__date mono">' + fmtDate(m.date) + "</span>" : "";
     return (
       '<li class="mat">' +
-      '<a class="mat__link" href="' + esc(m.file) + '" download>' +
+      '<a class="mat__link" href="' + esc(resolveFile(m.file)) + '" download>' +
       '<span class="mat__title">' + esc(m.title) + "</span>" +
       type + date +
       '<span class="mat__dl mono" aria-hidden="true">Download &darr;</span>' +
@@ -49,7 +57,7 @@
     );
   }
 
-  fetch("courses.json", { cache: "no-cache" })
+  fetch("/teaching/courses.json", { cache: "no-cache" })
     .then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();

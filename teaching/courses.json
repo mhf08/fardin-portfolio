@@ -7,16 +7,13 @@
       "title": "Production Processes",
       "term": "2026",
       "description": "Lecture course on core manufacturing and production processes.",
-      "materials": [
-        { "title": "Lecture 01 — Introduction to Production Systems", "file": "files/ipe331/lecture-01.pdf", "type": "Slides", "date": "2026-07-08" },
-        { "title": "Handout — Casting Processes", "file": "files/ipe331/handout-casting.pdf", "type": "Handout", "date": "2026-07-09" }
-      ]
+      "materials": []
     },
     {
       "code": "IPE 332",
-      "title": "Production Processes",
+      "title": "Production Processes (Sessional)",
       "term": "2026",
-      "description": "Continuation of the production processes lecture sequence.",
+      "description": "Hands-on production processes laboratory sessions.",
       "materials": []
     },
     {

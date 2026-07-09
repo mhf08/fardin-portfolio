@@ -78,6 +78,23 @@ layer.** Voice rules: no em dashes, no AI-sounding writing in any copy.
 - [ ] assets/img/awards/ms-office*.{jpg,avif,webp} (+ 800 tiers) now unreferenced after
       dropping the cert — safe to delete on next asset pass
 
+## Teaching / course-materials hub (built 2026-07-09)
+
+- [x] **`/teaching/` page** — standalone, branded (reuses tokens/fonts via /css/styles.css +
+      /teaching/teaching.css), data-driven from `/teaching/courses.json`, rendered by
+      `/teaching/teaching.js` (vanilla, no build). Four courses seeded (IPE 331/332/204/432),
+      materials empty. Files live on-domain under `/teaching/files/<course>/`. Discreet links
+      added to the main site: footer + Experience card ("Course materials for my students ↗").
+      Self-service guide at `teaching/HOW-TO-ADD-MATERIALS.md` (browser-only GitHub workflow,
+      deploy-excluded so it stays private). All paths root-absolute (works with/without trailing
+      slash — a relative-path version broke the JSON fetch at `/teaching` no-slash; fixed).
+- [ ] **PREREQUISITE for auto-update:** GitHub repo must be connected to Vercel (Settings → Git)
+      so the user's browser commits auto-deploy. Confirm this is on when the site is deployed.
+- [ ] **Optional future:** auto-generate the materials list from folder contents (Vercel build
+      step or GitHub Action) so the user only uploads the PDF and skips editing courses.json.
+      Deferred — current 2-step (upload + one JSON line) is fully self-service already.
+- [ ] **Check BUET policy** on hosting course materials on a personal site before publicizing.
+
 ## The big one
 
 - [ ] **B1 — Interactive bullwhip simulator on the Thesis sheet.** The single upgrade

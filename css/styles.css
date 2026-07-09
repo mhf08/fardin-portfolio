@@ -515,6 +515,9 @@ main { padding-left: var(--ruler-w); }
 .xp__list li::before {
   content: "—"; position: absolute; left: 0; color: var(--brass-bright);
 }
+.xp__link { margin-top: 1.5rem; font-size: 0.72rem; }
+.xp__link a { color: var(--brass); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
+.xp__link a:hover { border-color: var(--brass); }
 
 /* ---------- Sheet 04: Projects ---------- */
 .case + .case { margin-top: clamp(4rem, 10vh, 6.5rem); padding-top: clamp(3rem, 7vh, 5rem); border-top: 1px solid var(--line-soft); }
