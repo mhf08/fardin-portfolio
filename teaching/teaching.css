@@ -1,0 +1,76 @@
+/* Course Materials page — reuses tokens/fonts from ../css/styles.css.
+   Utilitarian layout, deliberately simpler than the portfolio scroller. */
+
+.tpage {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 2.5rem) 5rem;
+}
+
+/* top bar: back to portfolio */
+.tbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+.tbar__logo {
+  font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.1em;
+  color: var(--ink); text-decoration: none; font-size: 0.95rem;
+}
+.tbar__logo b { color: var(--brass); }
+.tbar__back { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft); text-decoration: none; }
+.tbar__back:hover { color: var(--brass); }
+
+.tpage__head { margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+.tpage__head h1 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2rem, 6vw, 3.25rem); line-height: 1.1;
+}
+.tpage__sub { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.12em; margin-top: 0.9rem; }
+.tpage__lede { color: var(--ink-soft); max-width: 60ch; margin-top: 1.25rem; }
+
+/* course blocks */
+.course { padding: clamp(1.5rem, 4vh, 2.25rem) 0; border-top: 1px solid var(--line-soft); }
+.course:first-of-type { border-top: 0; }
+.course__title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.3rem, 3vw, 1.75rem); line-height: 1.2;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem;
+}
+.course__code {
+  font-size: 0.7rem; color: var(--brass); letter-spacing: 0.1em;
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.25rem 0.65rem;
+  align-self: center;
+}
+.course__meta { color: var(--ink-soft); font-size: 0.78rem; margin-top: 0.7rem; }
+
+/* materials list */
+.mats { list-style: none; margin: 1.4rem 0 0; padding: 0; }
+.mat + .mat { margin-top: 0.5rem; }
+.mat__link {
+  display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+  padding: 0.85rem 1rem; border: 1px solid var(--line);
+  color: var(--ink); text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.mat__link:hover { border-color: var(--brass); background: var(--paper-raised); color: var(--ink); }
+.mat__title { font-weight: 500; flex: 1 1 55%; min-width: 12ch; }
+.mat__type, .mat__date { font-size: 0.66rem; color: var(--ink-soft); letter-spacing: 0.08em; }
+.mat__type { border: 1px solid var(--line-soft); border-radius: 3px; padding: 0.15rem 0.45rem; }
+.mat__dl { font-size: 0.66rem; color: var(--brass); margin-left: auto; letter-spacing: 0.08em; white-space: nowrap; }
+
+.mats__empty { color: var(--ink-soft); font-size: 0.78rem; margin-top: 1.2rem; opacity: 0.85; }
+
+.tfoot {
+  margin-top: clamp(3rem, 8vh, 5rem); padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
+  font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-soft);
+}
+.tfoot a { color: var(--ink-soft); text-decoration: none; }
+.tfoot a:hover { color: var(--brass); }
+
+@media (max-width: 520px) {
+  .mat__dl { margin-left: 0; }
+}

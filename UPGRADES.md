@@ -65,11 +65,13 @@ layer.** Voice rules: no em dashes, no AI-sounding writing in any copy.
       JSON-LD/REV already done)
 - [ ] **Thesis PDF artifact**: "Read the full thesis" link or abstract download on the
       Thesis sheet — needs the file from user (research-interests line now DONE separately)
-- [ ] **Hero background image**: IN PROGRESS — user will generate via ChatGPT/Gemini
-      from the prompt provided 2026-07-09. Target: assets/img/hero.jpg (1408×768, ~1.83:1),
-      then run the asset pipeline (build-images/html/srcset) to regenerate avif/webp/800
-      tiers. Composition: subject weighted RIGHT, calm negative space LEFT (text overlay),
-      warm muted drafting-paper tones
+- [x] **Hero background image** DONE (2026-07-09): user generated a warm drafting-desk
+      scene (blueprints + drafting compass + scale ruler + mechanical pencil, a vintage
+      film camera, and 2–3 B&W prints nodding to the Genba series) — mixes academia +
+      photography exactly as intended. Source 1672×941 PNG → center-cropped to 1408×768,
+      re-encoded to hero.jpg/avif/webp + 800 tiers via a one-off scratchpad script
+      matching build-images settings (avif q52/e6, webp q78/e5). Verified legible in both
+      themes; old hero backed up to scratchpad/hero_backup
 
 ## Orphaned assets to clean up
 

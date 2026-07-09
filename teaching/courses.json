@@ -1,0 +1,37 @@
+{
+  "updated": "2026-07-09",
+  "note": "This file drives the Course Materials page. To add a slide deck: upload the PDF into teaching/files/<course>/, then add one entry to that course's \"materials\" list below. See teaching/HOW-TO-ADD-MATERIALS.md for step-by-step instructions.",
+  "courses": [
+    {
+      "code": "IPE 331",
+      "title": "Production Processes",
+      "term": "2026",
+      "description": "Lecture course on core manufacturing and production processes.",
+      "materials": [
+        { "title": "Lecture 01 — Introduction to Production Systems", "file": "files/ipe331/lecture-01.pdf", "type": "Slides", "date": "2026-07-08" },
+        { "title": "Handout — Casting Processes", "file": "files/ipe331/handout-casting.pdf", "type": "Handout", "date": "2026-07-09" }
+      ]
+    },
+    {
+      "code": "IPE 332",
+      "title": "Production Processes",
+      "term": "2026",
+      "description": "Continuation of the production processes lecture sequence.",
+      "materials": []
+    },
+    {
+      "code": "IPE 204",
+      "title": "Engineering Graphics & Introduction to CAD (Sessional)",
+      "term": "2026",
+      "description": "Technical drawing fundamentals and introductory CAD in SolidWorks.",
+      "materials": []
+    },
+    {
+      "code": "IPE 432",
+      "title": "Machine Tools (Sessional)",
+      "term": "2026",
+      "description": "Hands-on machine tools laboratory sessions.",
+      "materials": []
+    }
+  ]
+}
