@@ -108,10 +108,24 @@ layer.** Voice rules: no em dashes, no AI-sounding writing in any copy.
 - [ ] B3 — one real artifact per case study + pulled-out headline metrics
 - [ ] Photography: possible third series later (user will advise)
 
-## User-side (before/at deploy)
+## Deploy status
 
-- [ ] Register domain → find-replace `mostofahabibfardin.com` in index.html,
-      sitemap.xml, robots.txt, llms.txt
-- [ ] `npx vercel --prod`, then check DevTools once for CSP violations (untestable
-      locally)
-- [ ] Uncomment Plausible script after signup
+- [x] **DEPLOYED 2026-07-09** — live at https://mostofahabibfardin.vercel.app/ , repo pushed.
+- [x] Domain repointed placeholder `mostofahabibfardin.com` → `mostofahabibfardin.vercel.app`
+      across index.html (canonical/og/twitter/JSON-LD/plausible), sitemap.xml (+ added
+      /teaching/ URL, bumped lastmod), robots.txt, and the teaching guides. NOTE: user is on the
+      vercel.app subdomain for now; if a custom domain is attached later, swap the domain back
+      across those files (README documents the find-replace).
+- [ ] **These edits need to be committed + pushed** to go live (auto-deploys if Vercel↔GitHub
+      Git integration is on — user to confirm Settings → Git).
+- [ ] **Verify on the live deploy** (was untestable locally): open the site + /teaching/ with
+      DevTools, check for CSP violations; confirm og.jpg preview resolves. (WebFetch/preview were
+      down at edit time due to a temporary model-classifier outage.)
+- [ ] Connect **Pages CMS** (app.pagescms.org) for the form-based admin — see teaching/ADMIN-SETUP.md.
+- [ ] Uncomment Plausible script after signup (data-domain now set to vercel.app).
+
+## Backlog — custom domain (if/when registered)
+
+- [ ] Attach custom domain in Vercel → Settings → Domains, then swap
+      `mostofahabibfardin.vercel.app` → the real domain across index.html, sitemap.xml,
+      robots.txt, teaching guides, and Plausible data-domain.

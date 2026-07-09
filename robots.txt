@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mostofahabibfardin.com/sitemap.xml
+Sitemap: https://mostofahabibfardin.vercel.app/sitemap.xml

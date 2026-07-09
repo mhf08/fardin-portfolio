@@ -1,7 +1,7 @@
 # How to add course materials (no coding, no Claude needed)
 
 This is your step-by-step for posting slides and handouts to
-`mostofahabibfardin.com/teaching/`. Everything below is done from your web browser.
+`mostofahabibfardin.vercel.app/teaching/`. Everything below is done from your web browser.
 You never touch the command line and you never need to ask me.
 
 ---
@@ -69,7 +69,7 @@ After that, the steps below are all you ever do.
 
 4. Click **Commit changes**.
 
-That's it. Give it a minute, then refresh `mostofahabibfardin.com/teaching/`.
+That's it. Give it a minute, then refresh `mostofahabibfardin.vercel.app/teaching/`.
 
 ---
 
@@ -165,6 +165,6 @@ its own. Nothing else on the site is affected.
 | Upload a PDF | `teaching/files/<course>/` → Add file → Upload files |
 | List it | `teaching/courses.json` → add one `{ ... }` line |
 | Course folders | ipe331, ipe332, ipe204, ipe432 |
-| Live page | mostofahabibfardin.com/teaching/ |
+| Live page | mostofahabibfardin.vercel.app/teaching/ |
 | File name rule | lowercase, hyphens, no spaces, ends in `.pdf` |
 | Comma rule | comma after every entry except the last |

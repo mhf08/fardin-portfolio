@@ -4,9 +4,12 @@ This gives you a dashboard where you add slides by filling a form and dragging i
 PDF — no editing `courses.json` by hand. It uses **Pages CMS** (pagescms.org), a free
 tool that connects to your GitHub repo.
 
-> **Important — do these first, in order.** The admin panel can only work once the site
-> is (1) pushed to GitHub and (2) deployed live. Until then there's nothing for it to
-> connect to. See the "Prerequisites" section at the bottom.
+> The site is live at **https://mostofahabibfardin.vercel.app/** and pushed to GitHub, so
+> the prerequisites are met — you can set up the admin panel now.
+>
+> One thing to confirm: your Vercel project must be **connected to the GitHub repo** (Vercel
+> → Settings → Git) so that changes the admin panel commits get published automatically. If
+> you imported the repo when deploying, this is already on.
 
 ---
 
@@ -34,26 +37,11 @@ That's it. Bookmark your Pages CMS dashboard — that's your admin panel from no
 4. Click **Save**.
 
 Pages CMS commits the file and the entry for you. Your site rebuilds and the new item
-appears at `mostofahabibfardin.com/teaching/` in about a minute. The "Updated" date on the
-page moves itself to match — you never touch it.
+appears at `mostofahabibfardin.vercel.app/teaching/` in about a minute. The "Updated" date on
+the page moves itself to match — you never touch it.
 
 **Adding a new course:** in the same dashboard, expand **Courses**, click **Add**, and fill
 in the code, title, term, and description. Then add materials to it as above.
-
----
-
-## Prerequisites (why it isn't live yet)
-
-The admin panel connects to your **deployed** site and your **GitHub** repo. Right now:
-
-1. **The latest work isn't pushed to GitHub yet.** Everything built recently (the teaching
-   page, this config) is sitting on your machine, uncommitted. It needs to be committed and
-   pushed to `mhf08/fardin-portfolio`.
-2. **The site isn't deployed.** There's no live `mostofahabibfardin.com` yet. It needs to be
-   deployed on Vercel, with the GitHub repo connected so changes publish automatically.
-
-Once those two are done, follow the setup steps above and you're running. Ask Claude for the
-deploy guide if you want a step-by-step for those two prerequisites.
 
 ---
 
