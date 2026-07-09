@@ -95,6 +95,44 @@ Newest at the top or bottom is up to you — they show in the order you list the
 
 ---
 
+## Adding a whole new course
+
+You are not limited to the four courses that are there now. To add another one (say you
+start teaching `IPE 451` next term):
+
+1. **Pick a short folder name** for it, lowercase, no spaces — usually the code without the
+   space, e.g. `ipe451`.
+2. **Make the folder by uploading its first PDF into it.** On GitHub, go to
+   `teaching/files/`, click **Add file → Upload files**, and in the filename box type the
+   folder and file together, like `ipe451/lecture-01.pdf`, then drag your PDF onto it and
+   commit. (Typing `foldername/filename` is how GitHub creates a new folder.)
+3. **Add the course to `courses.json`.** Copy one of the existing course blocks and paste it
+   into the `"courses": [ ... ]` list, then change the values:
+
+   ```json
+   {
+     "code": "IPE 451",
+     "title": "Manufacturing Systems (Sessional)",
+     "term": "2026",
+     "description": "Short one-line description of the course.",
+     "materials": [
+       { "title": "Lecture 01 — Overview", "file": "files/ipe451/lecture-01.pdf", "type": "Slides", "date": "2026-08-01" }
+     ]
+   }
+   ```
+
+   Courses show up in the order you list them here, so put it wherever you want it to appear.
+
+**Same comma rule, one level up:** every course block needs a comma after it *except the
+last one* in the list. If you paste a new course in the middle, make sure the block before
+it ends with a comma and the last block still has none.
+
+**To remove a course** (e.g. you're done teaching it): delete its whole `{ ... }` block from
+`courses.json`. You can leave its folder of PDFs alone or delete it — either way it stops
+showing on the page.
+
+---
+
 ## Handy variations
 
 - **Post a deck with no type/date:** just leave those out —
