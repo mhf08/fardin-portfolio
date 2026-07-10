@@ -656,7 +656,7 @@ main { padding-left: var(--ruler-w); }
 .carousel--awards { margin-top: 1.25rem; max-width: 460px; }
 
 .awards__certs-h { margin-top: 3rem; }
-.certs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.certs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 .certs img { border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; width: 100%; transition: transform 0.3s var(--ease-out); }
 .certs a:hover img { transform: translateY(-3px); }
 .certs p { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.7rem; line-height: 1.55; }

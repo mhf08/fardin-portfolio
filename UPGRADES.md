@@ -60,9 +60,11 @@ layer.** Voice rules: no em dashes, no AI-sounding writing in any copy.
 
 ## Blocked on user input
 
-- [ ] **Resume swap** (ON HOLD): user is updating resume.pdf and will hand it over. On
-      arrival, drop into assets/resume.pdf (no other propagation needed — meta/OG/llms/
-      JSON-LD/REV already done)
+- [x] **Resume swap** DONE (2026-07-10): user compiled the updated LaTeX resume (Lecturer title,
+      academic-experience section, corrected GP dates, research framing, expanded awards) and
+      handed over MHF_Resume.pdf. Copied to assets/resume.pdf (valid PDF, %PDF-1.5, 137KB); old
+      228KB version backed up to scratchpad/resume-OLD-backup.pdf. Both "Download Resume" links
+      (hero + contact) already point at assets/resume.pdf, so no HTML change needed.
 - [ ] **Thesis PDF artifact**: "Read the full thesis" link or abstract download on the
       Thesis sheet — needs the file from user (research-interests line now DONE separately)
 - [x] **Hero background image** DONE (2026-07-09): user generated a warm drafting-desk
@@ -75,8 +77,7 @@ layer.** Voice rules: no em dashes, no AI-sounding writing in any copy.
 
 ## Orphaned assets to clean up
 
-- [ ] assets/img/awards/ms-office*.{jpg,avif,webp} (+ 800 tiers) now unreferenced after
-      dropping the cert — safe to delete on next asset pass
+- (resolved) ms-office cert was re-added 2026-07-10 at user's request — assets no longer orphaned.
 
 ## Teaching / course-materials hub (built 2026-07-09)
 
