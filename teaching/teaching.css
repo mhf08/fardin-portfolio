@@ -34,9 +34,30 @@
 .tpage__sub { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.12em; margin-top: 0.9rem; }
 .tpage__lede { color: var(--ink-soft); max-width: 60ch; margin-top: 1.25rem; }
 
-/* course blocks */
+/* expand/collapse-all toolbar */
+.courses__tools {
+  display: flex; gap: 0.5rem; justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+.courses__tool {
+  font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.08em;
+  color: var(--ink-soft); background: none; border: 1px solid var(--line);
+  border-radius: 3px; padding: 0.3rem 0.6rem; cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.courses__tool:hover { border-color: var(--brass); color: var(--brass); }
+
+/* course blocks — collapsible via <details> */
 .course { padding: clamp(1.5rem, 4vh, 2.25rem) 0; border-top: 1px solid var(--line-soft); }
 .course:first-of-type { border-top: 0; }
+
+/* summary is the clickable header row; strip the native disclosure marker */
+.course__head {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+}
+.course__head::-webkit-details-marker { display: none; }
+.course__headmain { min-width: 0; }
 .course__title {
   font-family: var(--font-display); font-weight: 600;
   font-size: clamp(1.3rem, 3vw, 1.75rem); line-height: 1.2;
@@ -47,9 +68,24 @@
   border: 1px solid var(--line); border-radius: 999px; padding: 0.25rem 0.65rem;
   align-self: center;
 }
+.course__count {
+  font-size: 0.62rem; color: var(--ink-soft); letter-spacing: 0.08em;
+  align-self: center;
+}
+.course__count--empty { opacity: 0.6; }
 .course__meta { color: var(--ink-soft); font-size: 0.78rem; margin-top: 0.7rem; }
 
+/* disclosure chevron, rotates when open */
+.course__chev {
+  flex: none; width: 0.62rem; height: 0.62rem; margin-top: 0.55rem;
+  border-right: 2px solid var(--ink-soft); border-bottom: 2px solid var(--ink-soft);
+  transform: rotate(45deg); transition: transform 0.2s ease;
+}
+.course[open] .course__chev { transform: rotate(-135deg); }
+.course__head:hover .course__chev { border-color: var(--brass); }
+
 /* materials list */
+.course__body { padding-top: 0.2rem; }
 .mats { list-style: none; margin: 1.4rem 0 0; padding: 0; }
 .mat + .mat { margin-top: 0.5rem; }
 .mat__link {

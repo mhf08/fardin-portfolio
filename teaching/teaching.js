@@ -62,14 +62,22 @@
       ? '<ul class="mats">' + mats.map(materialRow).join("") + "</ul>"
       : '<p class="mats__empty mono">No materials posted yet.</p>';
     var term = c.term ? '<span>&ensp;&middot;&ensp;' + esc(c.term) + "</span>" : "";
+    var count = mats.length
+      ? '<span class="course__count mono">' + mats.length + (mats.length === 1 ? " item" : " items") + "</span>"
+      : '<span class="course__count course__count--empty mono">empty</span>';
+    // Native <details> gives us the collapse for free — no inline script, keyboard
+    // and screen-reader accessible. Collapsed by default so a long list stays scannable.
     return (
-      '<article class="course">' +
-      '<header class="course__head">' +
-      '<h2 class="course__title"><span class="course__code mono">' + esc(c.code) + "</span>" + esc(c.title) + "</h2>" +
-      '<p class="course__meta mono">' + esc(c.description || "") + term + "</p>" +
-      "</header>" +
-      body +
-      "</article>"
+      '<details class="course">' +
+      '<summary class="course__head">' +
+      '<span class="course__headmain">' +
+      '<span class="course__title"><span class="course__code mono">' + esc(c.code) + "</span>" + esc(c.title) + count + "</span>" +
+      '<span class="course__meta mono">' + esc(c.description || "") + term + "</span>" +
+      "</span>" +
+      '<span class="course__chev" aria-hidden="true"></span>' +
+      "</summary>" +
+      '<div class="course__body">' + body + "</div>" +
+      "</details>"
     );
   }
 
@@ -80,7 +88,24 @@
     })
     .then(function (data) {
       var courses = (data && data.courses) || [];
-      mount.innerHTML = courses.map(courseCard).join("");
+      // Toolbar to expand/collapse every course at once — only worth showing when
+      // there's more than one course to manage.
+      var toolbar = courses.length > 1
+        ? '<div class="courses__tools">' +
+          '<button type="button" class="courses__tool mono" data-action="expand">Expand all</button>' +
+          '<button type="button" class="courses__tool mono" data-action="collapse">Collapse all</button>' +
+          "</div>"
+        : "";
+      mount.innerHTML = toolbar + courses.map(courseCard).join("");
+
+      var details = mount.querySelectorAll("details.course");
+      mount.querySelectorAll(".courses__tool").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var open = btn.getAttribute("data-action") === "expand";
+          details.forEach(function (d) { d.open = open; });
+        });
+      });
+
       if (stamp) {
         var when = latestDate(courses) || (data.updated ? new Date(data.updated) : null);
         stamp.textContent = when && !isNaN(when) ? "Updated " + fmtDate(when) : "";
