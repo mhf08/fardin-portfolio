@@ -6,29 +6,33 @@
       "code": "IPE 331",
       "title": "Production Processes",
       "term": "2026",
-      "description": "Lecture course on core manufacturing and production processes.",
-      "materials": []
+      "description": "Lecture course on core manufacturing and production processes."
     },
     {
       "code": "IPE 332",
-      "title": "Production Processes (Sessional)",
+      "title": "Production Processes Sessional",
       "term": "2026",
-      "description": "Hands-on production processes laboratory sessions.",
-      "materials": []
+      "description": "Experiment handouts.",
+      "materials": [
+        {
+          "title": "Experiment 1: Study of Chips and Cutting Zone Temperature in Turning  Medium Carbon Steel by Uncoated Carbide Insert",
+          "file": "/teaching/files/Exp 1 Handout.pdf",
+          "type": "Handout",
+          "date": "2026-07-10"
+        }
+      ]
     },
     {
       "code": "IPE 204",
-      "title": "Engineering Graphics & Introduction to CAD (Sessional)",
+      "title": "Engineering Graphics & Introduction to CAD Sessional",
       "term": "2026",
-      "description": "Technical drawing fundamentals and introductory CAD in SolidWorks.",
-      "materials": []
+      "description": "Technical drawing fundamentals and introductory CAD in SolidWorks."
     },
     {
       "code": "IPE 432",
-      "title": "Machine Tools (Sessional)",
+      "title": "Machine Tools Sessional",
       "term": "2026",
-      "description": "Hands-on machine tools laboratory sessions.",
-      "materials": []
+      "description": "Hands-on machine tools laboratory sessions."
     }
   ]
 }
