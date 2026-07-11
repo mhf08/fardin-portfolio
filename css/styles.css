@@ -1143,7 +1143,6 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   .certs { grid-template-columns: 1fr; }
   .awards__list > li { grid-template-columns: 1fr; gap: 0.4rem; }
   .hero__cta .btn { width: 100%; justify-content: center; }
-  .hero__cta .iconrow { width: 100%; justify-content: center; padding-top: 0.5rem; }
   .contact__actions .btn { width: 100%; justify-content: center; }
   .bom { overflow-x: auto; }
   .bom table { min-width: 640px; }
