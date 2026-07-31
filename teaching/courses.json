@@ -6,7 +6,6 @@
       "code": "IPE 331",
       "title": "Production Processes",
       "term": "2026",
-<<<<<<< HEAD
       "description": "Lecture course on core manufacturing and production processes.",
       "materials": [
         {
@@ -16,12 +15,6 @@
           "date": "2026-07-31"
         }
       ]
-=======
-      "description": "Lecture course on core manufacturing and production processes."
-      "materials": [
-  { "title": "Forging Lecture 1", "file": "files/ipe331/IPE 331 Forging Lecture 1.pptx", "type": "Slides", "date": "2026-07-31" }
-],
->>>>>>> 8a36c129f5d8a9e87c823b5feb3e8468e33d8d82
     },
     {
       "code": "IPE 332",
