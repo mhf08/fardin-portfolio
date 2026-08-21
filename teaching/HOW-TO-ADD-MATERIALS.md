@@ -4,15 +4,24 @@ This is your step-by-step for posting slides and handouts to
 `mostofahabibfardin.vercel.app/teaching/`. Everything below is done from your web browser.
 You never touch the command line and you never need to ask me.
 
+> **Two ways to do this — pick based on file size:**
+> - **Small files (roughly under 4 MB)** — use the **Pages CMS admin panel** instead
+>   (`ADMIN-SETUP.md`). It's a form: fill it in, drag the file, done. Easier than this guide.
+> - **Anything bigger (most slide decks, especially `.pptx`)** — the CMS's upload form has
+>   a hard ~4.5 MB cap and will fail. Use **this guide** — GitHub's own web upload has no
+>   size limit.
+>
+> Both methods edit the exact same files, so you can freely mix them file-by-file.
+
 ---
 
 ## How it works (the 10-second version)
 
 Your Course Materials page reads one file, **`teaching/courses.json`**, and shows whatever
-is listed in it. To post a new slide deck you do two things:
+is listed in it. To post a new file you do two things:
 
-1. **Upload the PDF** into the right course folder.
-2. **Add one line** to `courses.json` pointing at that PDF.
+1. **Upload the file** (PDF, PPTX, or similar) into the right course folder.
+2. **Add one line** to `courses.json` pointing at that file.
 
 Save both, wait about a minute, and the page updates itself.
 
@@ -35,7 +44,7 @@ After that, the steps below are all you ever do.
 
 ## Adding a slide deck (every time)
 
-### Step 1 — Upload the PDF
+### Step 1 — Upload the file
 
 1. Go to your repository: **github.com/mhf08/fardin-portfolio**
 2. Open the folder for the course. The four folders are:
@@ -44,8 +53,10 @@ After that, the steps below are all you ever do.
    - `teaching/files/ipe204/` — IPE 204 Engineering Graphics & CAD
    - `teaching/files/ipe432/` — IPE 432 Machine Tools
 3. Click **Add file → Upload files**.
-4. Drag your PDF in. **Give it a simple name with no spaces**, e.g. `lecture-03.pdf`
-   or `handout-welding.pdf` (use hyphens, not spaces).
+4. Drag your file in — PDF, PPTX, DOCX, whatever the material actually is. **The name can
+   have spaces and capital letters, that's fine** (e.g. `IPE 331 Forging.pptx` works exactly
+   as well as `lecture-03.pdf`) — the only rule is that the **file** value you type into
+   `courses.json` in Step 2 must match this name character-for-character, including spaces.
 5. Click **Commit changes** (the green button).
 
 ### Step 2 — List it on the page
@@ -56,11 +67,12 @@ After that, the steps below are all you ever do.
    Add one entry inside the square brackets. Copy this template and change the four values:
 
    ```json
-   { "title": "Lecture 03 — Welding Processes", "file": "files/ipe331/lecture-03.pdf", "type": "Slides", "date": "2026-07-15" }
+   { "title": "Lecture 03 — Welding Processes", "file": "files/ipe331/IPE 331 Welding Lecture 3.pptx", "type": "Slides", "date": "2026-07-15" }
    ```
 
    - **title** — what students see (anything you like)
-   - **file** — `files/<course-folder>/<your-file-name>.pdf` (must match Step 1 exactly)
+   - **file** — `files/<course-folder>/<your-file-name-exactly-as-uploaded>` (spaces are
+     fine; the extension just has to match the real file — `.pdf`, `.pptx`, whatever it is)
    - **type** — a short tag, e.g. `Slides`, `Handout`, `Notes`, `Assignment` (or delete this part)
    - **date** — `YYYY-MM-DD`, e.g. `2026-07-15`. **Use the date you're posting it.** The
      "Updated ..." line at the bottom of the page updates itself to the newest date across all
@@ -141,11 +153,16 @@ showing on the page.
 - **Post a deck with no type/date:** just leave those out —
   `{ "title": "Course Outline", "file": "files/ipe204/outline.pdf" }`
 - **Remove a deck from the page:** delete its line from `courses.json` (you can leave the
-  PDF in the folder or delete it too).
+  file in the folder or delete it too).
 - **Change a course description:** edit the `"description"` text for that course.
-- **PowerPoint instead of PDF?** You can, but PDFs open in the browser and never break
-  formatting. If you upload a `.pptx`, students download it to open — still fine, just point
-  the `"file"` at the `.pptx` name.
+- **PDF vs. PowerPoint?** Either works. PDFs open straight in the browser and never break
+  formatting; `.pptx` files just download for students to open in PowerPoint — both are
+  totally fine, just point `"file"` at whichever one you actually uploaded.
+- **Replacing an old version of a deck with a corrected one:** upload the new file (can be
+  a new name, e.g. add "v2" or the real date), update — don't just overwrite — the existing
+  `courses.json` entry's `"file"` and `"date"` to point at the new one, then delete the old
+  file from the folder so it doesn't sit around unused. (If you forget to delete it, it's
+  harmless — it's just never linked from the page — but it's tidy to clean up.)
 
 ---
 
@@ -162,9 +179,12 @@ its own. Nothing else on the site is affected.
 
 | Task | Where |
 | --- | --- |
-| Upload a PDF | `teaching/files/<course>/` → Add file → Upload files |
+| Small file (under ~4 MB) | Pages CMS admin panel — see `ADMIN-SETUP.md` |
+| Large file (over ~4 MB, most slide decks) | This guide — GitHub web upload, no size limit |
+| Upload a file | `teaching/files/<course>/` → Add file → Upload files |
 | List it | `teaching/courses.json` → add one `{ ... }` line |
 | Course folders | ipe331, ipe332, ipe204, ipe432 |
 | Live page | mostofahabibfardin.vercel.app/teaching/ |
-| File name rule | lowercase, hyphens, no spaces, ends in `.pdf` |
+| File name rule | any name works, spaces/capitals fine — just match `"file"` exactly |
+| File types | PDF, PPTX, DOCX, etc. — whatever the material actually is |
 | Comma rule | comma after every entry except the last |
