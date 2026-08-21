@@ -481,7 +481,7 @@ main { padding-left: var(--ruler-w); }
 }
 .statrow__sub { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink-soft); margin-left: 0.4em; letter-spacing: 0.08em; }
 
-/* ---------- Sheet 03: Experience ---------- */
+/* ---------- Sheet 04: Experience ---------- */
 .xp {
   border: 1px solid var(--line); background: var(--paper-raised);
   padding: clamp(1.5rem, 3.5vw, 2.75rem);
@@ -519,7 +519,7 @@ main { padding-left: var(--ruler-w); }
 .xp__link a { color: var(--brass); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
 .xp__link a:hover { border-color: var(--brass); }
 
-/* ---------- Sheet 04: Projects ---------- */
+/* ---------- Sheet 06: Projects ---------- */
 .case + .case { margin-top: clamp(4rem, 10vh, 6.5rem); padding-top: clamp(3rem, 7vh, 5rem); border-top: 1px solid var(--line-soft); }
 .case__no { color: var(--brass); margin-bottom: 0.9rem; }
 .case h3 {
@@ -608,7 +608,7 @@ main { padding-left: var(--ruler-w); }
 .thesis__findings p + p { margin-top: 1rem; }
 .thesis__findings .mono { color: var(--brass); margin-right: 0.9rem; }
 
-/* ---------- Sheet 06: Toolkit & Record ---------- */
+/* ---------- Sheet 03: Toolkit ---------- */
 .bom__title { color: var(--ink-soft); margin-bottom: 1rem; }
 .bom table { width: 100%; border-collapse: collapse; border: 1px solid var(--ink); background: var(--paper-raised); }
 .bom th {
@@ -645,6 +645,7 @@ main { padding-left: var(--ruler-w); }
 .edu__details li + li { margin-top: 0.5rem; }
 .edu__details strong { color: var(--ink); font-weight: 600; }
 
+/* ---------- Sheet 07: Achievements ---------- */
 .awards__list { list-style: none; margin: 0; padding: 0; }
 .awards__list > li { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; }
 .awards__list > li + li { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--line-soft); }
@@ -662,7 +663,7 @@ main { padding-left: var(--ruler-w); }
 .certs p { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.7rem; line-height: 1.55; }
 .certs strong { color: var(--ink); font-weight: 600; }
 
-/* ---------- Sheet 07: Photography ---------- */
+/* ---------- Sheet 08: Photography ---------- */
 .photointro {
   font-family: var(--font-display); font-style: italic;
   font-size: clamp(1.15rem, 2.2vw, 1.6rem); line-height: 1.55;
@@ -677,7 +678,7 @@ main { padding-left: var(--ruler-w); }
 .series__sub { color: var(--brass); margin: 0.6rem 0 1rem; }
 .series__desc { color: var(--ink-soft); }
 
-/* ---------- Sheet 08: Get in Touch ---------- */
+/* ---------- Sheet 09: Contact ---------- */
 .contact { border-bottom: 0; }
 .contact__h3 {
   font-family: var(--font-display); font-size: clamp(1.6rem, 3.4vw, 2.6rem);
@@ -981,7 +982,6 @@ html[data-theme="dark"] .frame:hover img { filter: grayscale(0.85) contrast(1.2)
 html[data-theme="dark"] .frame[data-mark="select"]::before,
 html[data-theme="dark"] .frame[data-mark="maybe"]::before,
 html[data-theme="dark"] .frame[data-mark="select"]::after { color: #FF5A3C; border-color: #FF5A3C; }
-html[data-theme="dark"] .frame[data-mark="select"]::after { color: #FF5A3C; }
 
 /* ---------- Photography: framed exhibition plates (Series 2) ---------- */
 .exhibit {
