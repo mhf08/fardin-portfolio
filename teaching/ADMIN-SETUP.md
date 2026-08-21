@@ -1,8 +1,14 @@
 # Setting up the admin panel (form-based uploads, no code)
 
 This gives you a dashboard where you add slides by filling a form and dragging in the
-PDF — no editing `courses.json` by hand. It uses **Pages CMS** (pagescms.org), a free
+file — no editing `courses.json` by hand. It uses **Pages CMS** (pagescms.org), a free
 tool that connects to your GitHub repo.
+
+> **Size limit — read this first:** Pages CMS's upload form runs through a backend that
+> hard-caps uploads at about **4.5 MB**. Lecture slide decks (especially `.pptx` with
+> embedded images) routinely exceed that. If your file is bigger than ~4 MB, don't fight
+> the form — use the manual GitHub upload method instead (`HOW-TO-ADD-MATERIALS.md`),
+> which has no size limit. Use the CMS for anything smaller (handouts, short PDFs).
 
 > The site is live at **https://mostofahabibfardin.vercel.app/** and pushed to GitHub, so
 > the prerequisites are met — you can set up the admin panel now.
@@ -31,7 +37,9 @@ That's it. Bookmark your Pages CMS dashboard — that's your admin panel from no
 2. Find the course, expand its **Materials** list, and click **Add**.
 3. Fill the form:
    - **Title** — what students see.
-   - **PDF file** — click to upload; drag your PDF straight in.
+   - **File** — click to upload (PDF, PPTX, DOCX, and a few image types all work);
+     drag it straight in. **If it's over ~4 MB, stop and use the manual method below instead** —
+     the form will fail silently or error out past the CMS's size cap.
    - **Type** — pick from the dropdown (Slides, Handout, etc.).
    - **Date posted** — pick today's date.
 4. Click **Save**.
@@ -45,8 +53,9 @@ in the code, title, term, and description. Then add materials to it as above.
 
 ---
 
-## If you ever prefer the manual way
+## If you ever prefer the manual way (or your file is too big for the CMS)
 
-The by-hand method still works exactly as before (upload a PDF + add one line to
-`courses.json`) — see `HOW-TO-ADD-MATERIALS.md`. The admin panel and the manual method edit
-the same files, so you can mix them freely.
+The by-hand method still works exactly as before (upload a file + add one line to
+`courses.json`) — see `HOW-TO-ADD-MATERIALS.md`. It has no size limit, unlike this CMS. The
+admin panel and the manual method edit the same files, so you can mix them freely — use
+whichever is easier for a given file.

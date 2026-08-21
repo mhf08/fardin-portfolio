@@ -1,6 +1,12 @@
 # Pages CMS configuration (pagescms.org)
 # Gives a form-based admin UI for the Course Materials page, so slides can be
-# added by filling a form + dragging in the PDF — no editing courses.json by hand.
+# added by filling a form + dragging in the file — no editing courses.json by hand.
+#
+# KNOWN LIMIT: the CMS's upload form runs through a Vercel-hosted backend, which
+# hard-caps request bodies at ~4.5MB. Slide decks (esp. .pptx) often exceed that —
+# for anything bigger, upload directly via the GitHub web UI instead (no size limit),
+# then hand-edit courses.json. See teaching/HOW-TO-ADD-MATERIALS.md (manual, any size)
+# vs teaching/ADMIN-SETUP.md (this CMS, small files only).
 #
 # To use: deploy the site, push this repo to GitHub, then sign in at
 # app.pagescms.org with GitHub and open this repo. See teaching/ADMIN-SETUP.md.
@@ -49,7 +55,7 @@ content:
                 label: Title (what students see)
                 type: string
               - name: file
-                label: PDF file
+                label: File (PDF, PPTX, etc. — under ~4MB, see note above)
                 type: file
               - name: type
                 label: Type
