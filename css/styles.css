@@ -379,7 +379,7 @@ main { padding-left: var(--ruler-w); }
 .titleblock {
   position: relative; overflow: hidden;
   display: grid;
-  grid-template-columns: 1.4fr 1.8fr 0.8fr 0.8fr 1.6fr;
+  grid-template-columns: 1.4fr 1.8fr 0.8fr 1.6fr;
   border: 1px solid var(--ink);
   margin-top: clamp(3rem, 8vh, 5rem);
   background: color-mix(in srgb, var(--paper-raised) 82%, transparent);
