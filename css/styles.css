@@ -241,6 +241,8 @@ main { padding-left: var(--ruler-w); }
   display: flex; flex-direction: column; justify-content: center;
   padding-top: calc(var(--head-h) + clamp(2rem, 6vh, 4rem));
   padding-bottom: clamp(6rem, 16vh, 11rem);
+  max-width: none;          /* the photograph runs edge to edge... */
+  padding-inline: 0;        /* ...the text below keeps the column */
   position: relative;
   overflow: hidden;
   border-bottom: none;
@@ -273,7 +275,12 @@ main { padding-left: var(--ruler-w); }
       var(--paper)                                       83%
     );
 }
-.hero__inner { position: relative; z-index: 1; }
+.hero__inner {
+  position: relative; z-index: 1;
+  width: 100%;              /* .hero is a flex column, so stretch before capping */
+  max-width: 1400px; margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
 
 .hero__eyebrow { color: var(--brass); margin-bottom: clamp(1.5rem, 4vh, 2.5rem); }
 .hero__title {
