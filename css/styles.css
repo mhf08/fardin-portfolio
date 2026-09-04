@@ -692,13 +692,16 @@ main { padding-left: var(--ruler-w); }
   font-size: clamp(1.5rem, 4.6vw, 3.6rem);
   letter-spacing: -0.01em; line-height: 1.15;
   color: var(--ink); text-decoration: none;
-  margin: clamp(1.5rem, 4vh, 2.5rem) 0;
+  margin: clamp(1.5rem, 4vh, 2.5rem) 0 0.85rem;
   overflow-wrap: anywhere;
   background-image: linear-gradient(var(--brass-bright), var(--brass-bright));
   background-size: 0% 2px; background-position: left bottom; background-repeat: no-repeat;
   transition: color 0.25s ease, background-size 0.5s var(--ease-out);
 }
 .contact__mail:hover { color: var(--brass); background-size: 100% 2px; }
+.contact__alt { color: var(--ink-soft); font-size: 0.74rem; line-height: 2; margin: 0 0 clamp(1.5rem, 4vh, 2.5rem); }
+.contact__alt a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line); transition: color 0.2s ease, border-color 0.2s ease; }
+.contact__alt a:hover { color: var(--brass); border-color: var(--brass); }
 .contact__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 
 /* ---------- Footer ---------- */

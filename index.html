@@ -66,7 +66,7 @@
         "@id": "https://mostofahabibfardin.vercel.app/#profilepage",
         "url": "https://mostofahabibfardin.vercel.app/",
         "isPartOf": { "@id": "https://mostofahabibfardin.vercel.app/#website" },
-        "dateModified": "2026-08-21",
+        "dateModified": "2026-09-04",
         "mainEntity": { "@id": "https://mostofahabibfardin.vercel.app/#person" }
       },
       {
@@ -76,8 +76,8 @@
         "url": "https://mostofahabibfardin.vercel.app/",
         "image": "https://mostofahabibfardin.vercel.app/assets/img/portrait.jpg",
         "jobTitle": "Lecturer",
-        "worksFor": { "@type": "Organization", "name": "Bangladesh University of Engineering and Technology (BUET)", "description": "Lecturer, Department of Industrial and Production Engineering" },
-        "email": "mailto:mostofahabibfardin08@gmail.com",
+        "worksFor": { "@type": "Organization", "name": "Bangladesh University of Engineering and Technology (BUET)", "description": "Lecturer, Department of Industrial and Production Engineering", "url": "https://ipe.buet.ac.bd/" },
+        "email": "mailto:fardin@ipe.buet.ac.bd",
         "description": "Industrial and Production Engineer specializing in machine-learning demand forecasting, supply-chain optimization, and quality control. Photographer.",
         "alumniOf": [
           { "@type": "CollegeOrUniversity", "name": "Bangladesh University of Engineering and Technology" },
@@ -86,6 +86,7 @@
         "knowsAbout": ["Supply Chain Management", "Machine Learning", "Demand Forecasting", "Quality Control", "Lean Manufacturing", "SolidWorks", "Ansys", "Blockchain"],
         "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "Bangladesh" },
         "sameAs": [
+          "https://ipe.buet.ac.bd/faculty/mostofa-habib-fardin",
           "https://www.linkedin.com/in/mostofahabibfardin/",
           "https://www.researchgate.net/profile/Mostofa-Fardin",
           "https://github.com/mhf08",
@@ -315,10 +316,10 @@
           <tr><td class="mono">005</td><td></td><td>Data Stack</td><td>Python, MATLAB, and C programming</td></tr>
           <tr><td class="mono">006</td><td></td><td>Advanced Tech</td><td>IoT (Sensor integration), Blockchain</td></tr>
           <tr><td class="mono">007</td><td>Operational Excellence</td><td>Lean Philosophies</td><td>5S, 3G, Kaizen, 3K, and Poka-Yoke</td></tr>
-          <tr><td class="mono">008</td><td></td><td>Quality &amp; Safety</td><td>Line Balancing, Time Studies, Ergonomics and Safety</td></tr>
+          <tr><td class="mono">008</td><td></td><td>Quality &amp; Safety</td><td>Line Balancing, Time Studies, Six Sigma (White Belt), Ergonomics and Safety</td></tr>
           <tr><td class="mono">009</td><td>Teaching &amp; Communication</td><td>Curriculum Design</td><td>Course and lab session planning for undergraduate engineering courses</td></tr>
           <tr><td class="mono">010</td><td></td><td>Mentorship</td><td>Lab supervision and project guidance for undergraduate students</td></tr>
-          <tr><td class="mono">011</td><td></td><td>Technical Communication</td><td>Lecturing, thesis writing, and technical documentation</td></tr>
+          <tr><td class="mono">011</td><td></td><td>Technical Communication</td><td>Lecturing, thesis writing, and technical documentation in LaTeX</td></tr>
         </tbody>
       </table>
     </div>
@@ -373,7 +374,7 @@
         <li>Returned as faculty shortly after graduating, drawing on thesis research and a stint at Grameenphone to inform what goes in the classroom.</li>
         <li>Converted from adjunct to full-time lecturer on Jul 8, 2026 after the faculty interview.</li>
       </ul>
-      <p class="xp__link mono"><a href="/teaching/">Course materials for my students ↗</a></p>
+      <p class="xp__link mono"><a href="/teaching/">Course materials for my students ↗</a><span aria-hidden="true">&ensp;·&ensp;</span><a href="https://ipe.buet.ac.bd/faculty/mostofa-habib-fardin" target="_blank" rel="noopener noreferrer">Department faculty profile ↗</a></p>
     </article>
 
     <article class="xp reveal">
@@ -383,7 +384,7 @@
       </header>
       <ul class="xp__list">
         <li>Part of the Nextern 2026 cohort in the Product Division of Consumer Mobility Business, Grameenphone's core B2C segment.</li>
-        <li>Got a close look at how product operations and demand tracking work at the scale of a national telco.</li>
+        <li>Supported regulatory reporting by collecting, sorting, and consolidating data from several internal teams into a single set for senior review.</li>
       </ul>
     </article>
 
@@ -511,7 +512,7 @@
              geopolitical shocks destabilize lead times? To find out, we built:</p>
           <ul>
             <li><strong>A five-echelon supply chain simulator</strong> running a 5,740-day horizon (trading days, 2000–2021)</li>
-            <li><strong>Six forecasting models:</strong> Traditional, History, ARIMA, XGBoost, LightGBM, and Temporal Fusion Transformer, all under rolling walk-forward validation</li>
+            <li><strong>Six forecasting models:</strong> Traditional, History, ARIMA, XGBoost, LightGBM, and Temporal Fusion Transformer, all under rolling walk-forward validation and benchmarked across 1,000+ simulation runs</li>
             <li><strong>Two disruption scenarios:</strong> gamma-distributed lead times, modulated daily by the Geopolitical Risk Index</li>
             <li><strong>Three blockchain visibility modes:</strong> none, pipeline, and full, run across four configurations and seven seeds and tested with t-tests and Cohen's d</li>
           </ul>
@@ -521,7 +522,7 @@
           <ul>
             <li><strong>Disruption dominates:</strong> geopolitical shocks amplified the bullwhip beyond the combined effects of forecasting method and information visibility; the mean bullwhip ratio at Actor 2 rose from 4,716 to 7,218.</li>
             <li><strong>The accuracy–performance paradox:</strong> TFT had the poorest point-forecast accuracy among ML models yet the strongest bullwhip suppression, while XGBoost, the most accurate, performed no better than a naive rolling average.</li>
-            <li><strong>ARIMA broke down structurally</strong> under disruption, turning erratic with physically implausible results.</li>
+            <li><strong>ARIMA broke down structurally</strong> under disruption: its coefficient of variation ran past 70% and the solver overflowed twice, a failure mode I have not found documented in the supply chain simulation literature.</li>
             <li><strong>Pipeline visibility ≈ full visibility:</strong> any transparency reduced network inventory, but pipeline-only sharing was statistically equivalent to full transparency.</li>
           </ul>
         </div>
@@ -628,7 +629,8 @@
           </div>
           <div class="case__step">
             <h4 class="mono">Stack / Engineering</h4>
-            <p>Complete 3D assembly in SolidWorks, Ansys Static Structural analysis on frame,
+            <p>Complete 3D assembly in SolidWorks, chain-sprocket drive modelled and gear ratio
+               tuned for local manufacturability, Ansys Static Structural analysis on frame,
                CFD for impeller housing optimization, Material selection: AISI 1020 Steel.</p>
           </div>
           <div class="case__step">
@@ -772,6 +774,16 @@
                 </div>
               </div>
             </div>
+          </div>
+        </li>
+        <li>
+          <span class="mono awards__year">2025</span>
+          <div>
+            <h4>ISCEA Global Supply Chain Case Competition · Scholarship Award</h4>
+            <p><strong>Challenge:</strong> A global supply chain case competition run by the
+               International Supply Chain Education Alliance.</p>
+            <p><strong>Outcome:</strong> Awarded a 60% scholarship. Of everything on this list,
+               the competition sitting closest to what I research now.</p>
           </div>
         </li>
         <li>
@@ -975,12 +987,16 @@
         chains or manufacturing, I want to hear from you. Photography inquiries are welcome too.
       </p>
 
-      <a class="contact__mail" href="mailto:mostofahabibfardin08@gmail.com?subject=Inquiry%3A%20The%20Next%20Iteration" data-cursor="EMAIL">
-        mostofahabibfardin08<wbr>@gmail.com
+      <a class="contact__mail" href="mailto:fardin@ipe.buet.ac.bd?subject=Inquiry%3A%20The%20Next%20Iteration" data-cursor="EMAIL">
+        fardin<wbr>@ipe.buet.ac.bd
       </a>
+      <p class="contact__alt mono">
+        Department of IPE, BUET&ensp;·&ensp;<a href="https://ipe.buet.ac.bd/faculty/mostofa-habib-fardin" target="_blank" rel="noopener noreferrer">faculty profile ↗</a><br>
+        Personal and photography&ensp;·&ensp;<a href="mailto:mostofahabibfardin08@gmail.com?subject=Inquiry%3A%20The%20Next%20Iteration">mostofahabibfardin08<wbr>@gmail.com</a>
+      </p>
 
       <div class="contact__actions">
-        <a class="btn btn--solid" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=mostofahabibfardin08@gmail.com&amp;su=Inquiry%3A%20The%20Next%20Iteration" target="_blank" rel="noopener noreferrer">Email Me</a>
+        <a class="btn btn--solid" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=fardin@ipe.buet.ac.bd&amp;su=Inquiry%3A%20The%20Next%20Iteration" target="_blank" rel="noopener noreferrer">Email Me</a>
         <a class="btn" href="Mostofa-Habib-Fardin-Resume.pdf" download="Mostofa-Habib-Fardin-Resume.pdf" data-cursor="PDF">Download Resume</a>
         <a class="btn" href="https://forms.gle/R1SLkx1BzdezrNJ19" target="_blank" rel="noopener noreferrer">Leave Feedback</a>
       </div>
