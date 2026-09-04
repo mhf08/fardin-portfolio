@@ -21,7 +21,7 @@
   --line:         rgba(31, 34, 28, 0.22);
   --line-soft:    rgba(31, 34, 28, 0.10);
   --shadow:       0 18px 50px -18px rgba(31, 34, 28, 0.25);
-  --hero-img-opacity: 0.38;
+  --hero-img-opacity: 0.44;
   --focus:        #9C6B1E; /* ≥3:1 focus ring on paper */
 
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -45,7 +45,7 @@ html[data-theme="dark"] {
   --line:         rgba(236, 230, 216, 0.22);
   --line-soft:    rgba(236, 230, 216, 0.09);
   --shadow:       0 18px 50px -18px rgba(0, 0, 0, 0.6);
-  --hero-img-opacity: 0.18;
+  --hero-img-opacity: 0.32;
   --focus:        #E7BC63; /* brightened ring on ink */
   color-scheme: dark;
 }
@@ -261,9 +261,9 @@ main { padding-left: var(--ruler-w); }
   background:
     /* horizontal: heavy left (text stays crisp), image breathes on the right */
     linear-gradient(105deg,
-      color-mix(in srgb, var(--paper) 90%, transparent)  0%,
-      color-mix(in srgb, var(--paper) 52%, transparent) 40%,
-      color-mix(in srgb, var(--paper) 14%, transparent) 100%
+      color-mix(in srgb, var(--paper) 94%, transparent)  0%,
+      color-mix(in srgb, var(--paper) 62%, transparent) 40%,
+      color-mix(in srgb, var(--paper) 12%, transparent) 100%
     ),
     /* vertical: image fades to paper well before the section edge */
     linear-gradient(180deg,
@@ -831,6 +831,55 @@ main { padding-left: var(--ruler-w); }
   to   { font-variation-settings: "opsz" 144, "wght" 600; }
 }
 
+/* ---------- Full-bleed plates ---------- */
+/* Direct children of <main>, so they span its whole content box while the
+   sheets stay capped at 1400px. That contrast is the point. */
+.bleed {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: clamp(300px, 68vh, 680px);
+  overflow: hidden;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--paper-raised);
+}
+.bleed img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bleed__cap {
+  position: absolute; left: clamp(1.25rem, 4vw, 3rem); right: clamp(1.25rem, 4vw, 3rem);
+  bottom: clamp(1rem, 3vh, 1.75rem);
+  color: #ECE6D8; font-size: 0.68rem;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.9);
+}
+/* The caption sits on the photograph in both themes, so it is lit from a
+   fixed dark wash rather than a theme token. */
+.bleed::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 45%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.62), transparent);
+  pointer-events: none;
+}
+
+/* ---------- Thesis headline figures ---------- */
+.figures {
+  list-style: none; margin: clamp(2rem, 5vh, 3.25rem) 0 clamp(2.5rem, 6vh, 4rem); padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 3rem);
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding-block: clamp(1.75rem, 4vh, 2.75rem);
+}
+.figures li { display: grid; gap: 0.7rem; align-content: start; }
+.figures__n {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2.6rem, 7vw, 5.25rem); line-height: 0.9;
+  letter-spacing: -0.02em; color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.figures__plus { color: var(--brass); }
+.figures__k { color: var(--ink-soft); font-size: 0.66rem; line-height: 1.7; }
+
+/* ---------- Sheet density ---------- */
+/* Not every sheet carries the same weight, so they no longer get the same room. */
+.sheet--feature { padding-block: clamp(6rem, 15vh, 11rem); }
+.sheet--compact { padding-block: clamp(2.75rem, 7vh, 5rem); }
+
 /* ============================================================
    Craft layer — concept as behaviour
    ============================================================ */
@@ -1114,6 +1163,8 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   .contact__actions .btn { width: 100%; justify-content: center; }
   .bom { overflow-x: auto; }
   .bom table { min-width: 560px; }
+  .figures { grid-template-columns: 1fr; gap: 1.75rem; }
+  .bleed { height: clamp(240px, 44vh, 380px); }
   .tags li { white-space: normal; max-width: 100%; }
 }
 
