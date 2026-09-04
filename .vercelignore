@@ -1,3 +1,4 @@
 # Internal files — never deploy
 tools
 *.md
+theme-sample.html
