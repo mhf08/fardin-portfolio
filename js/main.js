@@ -5,35 +5,6 @@
 
   var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Loader: print in once per session ---------- */
-  var loader = document.getElementById("loader");
-  if (loader) {
-    var seen = false;
-    try { seen = sessionStorage.getItem("mhf-seen"); } catch (e) { /* private mode */ }
-    if (reduceMotion || seen) {
-      loader.remove();
-    } else {
-      try { sessionStorage.setItem("mhf-seen", "1"); } catch (e) {}
-      var loaderStart = performance.now();
-      var dismiss = function () {
-        if (!loader) return;
-        loader.classList.add("done");
-        setTimeout(function () { if (loader) { loader.remove(); loader = null; } }, 650);
-      };
-      var finish = function () {
-        setTimeout(dismiss, Math.max(0, 1800 - (performance.now() - loaderStart)));
-      };
-      if (document.readyState === "complete") finish();
-      else addEventListener("load", finish, { once: true });
-      // Let an impatient visitor skip after the print settles
-      setTimeout(function () {
-        ["click", "keydown", "wheel", "touchstart"].forEach(function (ev) {
-          addEventListener(ev, dismiss, { once: true, passive: true });
-        });
-      }, 750);
-    }
-  }
-
   /* ---------- Smooth scroll (Lenis) ---------- */
   var lenis = null;
   if (window.Lenis && !reduceMotion) {
@@ -192,7 +163,7 @@
     var prev = root.querySelector('.carousel__btn[data-dir="-1"]');
     var next = root.querySelector('.carousel__btn[data-dir="1"]');
     if (!slides.length) return;
-    track.setAttribute("data-cursor", "DRAG");
+    track.setAttribute("data-hot", "");
 
     function currentIndex() {
       var best = 0, bestDist = Infinity;
@@ -265,9 +236,7 @@
 
   function fullSrc(a) { return a.getAttribute("href").replace(/\.jpg$/i, lbExt); }
 
-  // Every lightbox anchor earns the cursor's VIEW label
   document.querySelectorAll("[data-lightbox]").forEach(function (a) {
-    if (!a.hasAttribute("data-cursor")) a.setAttribute("data-cursor", "VIEW");
     var group = a.dataset.lightbox;
     (galleries[group] = galleries[group] || []).push(a);
     a.addEventListener("click", function (ev) {
@@ -369,7 +338,6 @@
   var cursorEl = document.querySelector(".cursor");
   if (cursorEl && matchMedia("(pointer: fine)").matches && !reduceMotion) {
     document.body.classList.add("cursor-on");
-    var labelEl = cursorEl.querySelector(".cursor__label");
 
     // The OS cursor is hidden, so this mark IS the pointer — it must track 1:1.
     // Any smoothing here reads as input latency, not style.
@@ -378,19 +346,17 @@
         "translate3d(" + e.clientX + "px," + e.clientY + "px,0) translate(-50%,-50%)";
     }, { passive: true });
 
-    var INTERACTIVE = "a, button, [data-cursor], summary, input, textarea";
+    var INTERACTIVE = "a, button, [data-hot], summary, input, textarea";
     addEventListener("mouseover", function (e) {
       var t = e.target.closest(INTERACTIVE);
       if (!t) return;
       cursorEl.classList.add("hot");
-      var lbl = t.getAttribute("data-cursor");
-      if (lbl) { labelEl.textContent = lbl; cursorEl.classList.add("labelled"); }
     });
     addEventListener("mouseout", function (e) {
       if (!e.target.closest(INTERACTIVE)) return;
       // Ignore moves between nested children of the same interactive element
       var still = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(INTERACTIVE);
-      if (!still) cursorEl.classList.remove("hot", "labelled");
+      if (!still) cursorEl.classList.remove("hot");
     });
     document.addEventListener("mouseleave", function () { cursorEl.style.opacity = "0"; });
     document.addEventListener("mouseenter", function () { cursorEl.style.opacity = ""; });

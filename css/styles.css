@@ -820,46 +820,11 @@ main { padding-left: var(--ruler-w); }
    Craft layer — concept as behaviour
    ============================================================ */
 
-/* ---------- Loader: the title block prints in ---------- */
-.loader {
-  position: fixed; inset: 0; z-index: 400;
-  display: grid; place-content: center;
-  background: var(--paper);
-  transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-.loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
-.loader__block {
-  position: relative; padding: clamp(1.5rem, 5vw, 2.75rem) clamp(2rem, 7vw, 4rem);
-  text-align: center;
-}
-.loader__edge { position: absolute; background: var(--ink); }
-.loader__edge--t, .loader__edge--b { left: 0; right: 0; height: 1.5px; transform: scaleX(0); }
-.loader__edge--l, .loader__edge--r { top: 0; bottom: 0; width: 1.5px; transform: scaleY(0); }
-.loader__edge--t { top: 0; transform-origin: left; animation: draw-x 0.45s var(--ease-out) 0.1s forwards; }
-.loader__edge--r { right: 0; transform-origin: top; animation: draw-y 0.45s var(--ease-out) 0.45s forwards; }
-.loader__edge--b { bottom: 0; transform-origin: right; animation: draw-x 0.45s var(--ease-out) 0.8s forwards; }
-.loader__edge--l { left: 0; transform-origin: bottom; animation: draw-y 0.45s var(--ease-out) 1.15s forwards; }
-@keyframes draw-x { to { transform: scaleX(1); } }
-@keyframes draw-y { to { transform: scaleY(1); } }
-.loader__label { color: var(--brass); opacity: 0; animation: fade-in 0.5s ease 0.9s forwards; }
-.loader__name {
-  font-family: var(--font-display); font-weight: 600;
-  font-size: clamp(1.5rem, 4vw, 2.4rem); margin: 0.5rem 0 0.6rem;
-  opacity: 0; animation: fade-in 0.6s ease 1.15s forwards;
-}
-.loader__rev { color: var(--ink-soft); opacity: 0; animation: fade-in 0.5s ease 1.45s forwards; }
-.loader__dot {
-  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--brass-bright); margin-right: 0.6em; vertical-align: middle;
-  animation: dot-pulse 1.2s ease-out infinite;
-}
-@keyframes fade-in { to { opacity: 1; } }
-
 /* ---------- Bespoke registration-mark cursor ---------- */
 .cursor { display: none; }
 @media (pointer: fine) {
   body.cursor-on { cursor: none; }
-  body.cursor-on a, body.cursor-on button, body.cursor-on [data-cursor] { cursor: none; }
+  body.cursor-on a, body.cursor-on button, body.cursor-on [data-hot] { cursor: none; }
   .cursor {
     position: fixed; top: 0; left: 0; z-index: 350; display: block;
     pointer-events: none; color: var(--brass);
@@ -869,13 +834,6 @@ main { padding-left: var(--ruler-w); }
   }
   .cursor__mark { display: block; transition: transform 0.18s var(--ease-out), opacity 0.2s ease; opacity: 0.9; }
   .cursor.hot .cursor__mark { transform: scale(1.35) rotate(45deg); color: var(--brass-bright); }
-  .cursor__label {
-    position: absolute; left: 50%; top: calc(50% + 26px); transform: translateX(-50%);
-    white-space: nowrap; font-size: 0.55rem; color: var(--brass-bright);
-    background: var(--ink); padding: 0.2rem 0.5rem; opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-  .cursor.labelled .cursor__label { opacity: 1; }
 }
 
 /* ---------- Living title-block HUD ---------- */
@@ -1168,8 +1126,6 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   .hero__scrollline span { animation: none; }
   .wipe { display: none; }
   .carousel__track { scroll-behavior: auto; }
-  .loader { display: none; }
-  .loader__dot { animation: none; }
   .cursor { display: none !important; }
   body.cursor-on, body.cursor-on a, body.cursor-on button { cursor: auto !important; }
   .lightbox img.developing { animation: none; }
