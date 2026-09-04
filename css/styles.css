@@ -97,6 +97,14 @@ picture { display: contents; }
   font-weight: 500;
 }
 
+/* Small uppercase headings. Deliberately NOT .mono — mono is reserved for
+   annotation (item numbers, FIG. callouts, sheet metadata), not for headings. */
+.label {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
 .skip-link {
   position: fixed; top: -100px; left: 1rem; z-index: 300;
   background: var(--ink); color: var(--paper);
@@ -427,6 +435,7 @@ main { padding-left: var(--ruler-w); }
 }
 .carousel__slide a:hover img { filter: brightness(1.05); }
 .carousel__slide figcaption { font-size: 0.62rem; color: var(--ink-soft); margin-top: 0.6rem; }
+.carousel__slide figcaption:not(.mono) { font-size: 0.74rem; letter-spacing: 0.005em; }
 
 /* mixed-orientation photo sets get a fixed frame */
 .carousel--media .carousel__slide img,
@@ -542,7 +551,7 @@ main { padding-left: var(--ruler-w); }
 .case__grid--flip .carousel { order: 1; }
 
 .case__step + .case__step { margin-top: 1.75rem; }
-.case__step h4 { color: var(--brass); font-size: 0.66rem; margin-bottom: 0.5rem; }
+.case__step h4 { color: var(--brass); font-size: 0.7rem; margin-bottom: 0.5rem; }
 .case__step p { color: var(--ink-soft); }
 .case__step strong { color: var(--ink); font-weight: 600; }
 
@@ -616,15 +625,21 @@ main { padding-left: var(--ruler-w); }
   padding: 0.8rem 1.1rem; border-bottom: 2px solid var(--ink);
 }
 .bom td { padding: 0.8rem 1.1rem; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
-.bom tbody tr:last-child td { border-bottom: 0; }
+.bom tbody:last-of-type tr:last-child td { border-bottom: 0; }
 .bom td.mono { color: var(--brass); font-size: 0.68rem; }
 .bom td:nth-child(2) { font-weight: 550; white-space: nowrap; }
-.bom td:nth-child(3) { font-weight: 500; white-space: nowrap; }
-.bom td:nth-child(4) { color: var(--ink-soft); }
+.bom td:nth-child(3) { color: var(--ink-soft); }
+.bom__group th {
+  text-align: left; padding: 1.1rem 1.1rem 0.55rem;
+  color: var(--brass); font-size: 0.68rem; font-weight: 500;
+  border-bottom: 1px solid var(--line-soft);
+  background: color-mix(in srgb, var(--brass-bright) 5%, transparent);
+}
+.bom tbody:first-of-type .bom__group th { padding-top: 0.85rem; }
 .bom tbody tr { transition: background-color 0.2s ease; }
-.bom tbody tr:hover { background: color-mix(in srgb, var(--brass-bright) 7%, transparent); }
+.bom tbody tr:not(.bom__group):hover { background: color-mix(in srgb, var(--brass-bright) 7%, transparent); }
 
-.record__h { color: var(--brass); border-bottom: 1px solid var(--line); padding-bottom: 0.6rem; margin-bottom: 1.5rem; }
+.record__h { color: var(--brass); font-size: 0.78rem; border-bottom: 1px solid var(--line); padding-bottom: 0.6rem; margin-bottom: 1.5rem; }
 
 /* Education block on the Toolkit sheet */
 .toolkit-edu { margin-top: clamp(3rem, 7vh, 4.5rem); }
@@ -675,7 +690,7 @@ main { padding-left: var(--ruler-w); }
 .series + .series { margin-top: clamp(4rem, 9vh, 6rem); }
 .series__head { max-width: 62ch; margin-bottom: clamp(2rem, 5vh, 3rem); }
 .series__head h3 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 600; }
-.series__sub { color: var(--brass); margin: 0.6rem 0 1rem; }
+.series__sub { color: var(--brass); font-size: 0.9rem; margin: 0.6rem 0 1rem; }
 .series__desc { color: var(--ink-soft); }
 
 /* ---------- Sheet 09: Contact ---------- */
@@ -1012,15 +1027,7 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
 /* BOM skills table plots in row by row when the table reveals */
 @media (prefers-reduced-motion: no-preference) {
   .bom tbody tr { opacity: 0; transform: translateX(-14px); transition: opacity 0.5s ease, transform 0.55s var(--ease-out); }
-  .bom.in tbody tr { opacity: 1; transform: none; }
-  .bom.in tbody tr:nth-child(1) { transition-delay: 0.10s; }
-  .bom.in tbody tr:nth-child(2) { transition-delay: 0.17s; }
-  .bom.in tbody tr:nth-child(3) { transition-delay: 0.24s; }
-  .bom.in tbody tr:nth-child(4) { transition-delay: 0.31s; }
-  .bom.in tbody tr:nth-child(5) { transition-delay: 0.38s; }
-  .bom.in tbody tr:nth-child(6) { transition-delay: 0.45s; }
-  .bom.in tbody tr:nth-child(7) { transition-delay: 0.52s; }
-  .bom.in tbody tr:nth-child(8) { transition-delay: 0.59s; }
+  .bom.in tbody tr { opacity: 1; transform: none; transition-delay: calc(0.1s + var(--d, 0) * 0.05s); }
 }
 
 /* Self-drawing dimension line down the left of the portrait (scale annotation) */
@@ -1106,7 +1113,7 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   .hero__cta .btn { width: 100%; justify-content: center; }
   .contact__actions .btn { width: 100%; justify-content: center; }
   .bom { overflow-x: auto; }
-  .bom table { min-width: 640px; }
+  .bom table { min-width: 560px; }
   .tags li { white-space: normal; max-width: 100%; }
 }
 
