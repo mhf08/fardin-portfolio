@@ -724,6 +724,12 @@ main { padding-left: var(--ruler-w); }
 .contact__alt { color: var(--ink-soft); font-size: 0.74rem; line-height: 2; margin: 0 0 clamp(1.5rem, 4vh, 2.5rem); }
 .contact__alt a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line); transition: color 0.2s ease, border-color 0.2s ease; }
 .contact__alt a:hover { color: var(--brass); border-color: var(--brass); }
+.contact__copied {
+  min-height: 1.2em; margin: 0 0 clamp(1rem, 3vh, 1.5rem);
+  color: var(--brass); font-size: 0.7rem;
+  opacity: 0; transition: opacity 0.2s ease;
+}
+.contact__copied.on { opacity: 1; }
 .contact__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 
 /* ---------- Footer ---------- */
