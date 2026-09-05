@@ -1,3 +1,10 @@
+> **HISTORICAL 2026-09-05.** This is the original "Drawing Set" brief the site was
+> built from. It still describes the live site accurately, but the user has decided the
+> drawing-set metaphor is too narrow for their field, and the replacement direction
+> ("warm editorial, quietly systematic") is specified in `THEME-BRIEF.md`. Read this for
+> why the current design is the way it is, not for where it is going.
+> One factual drift: the site has nine sheets now, not the eight described below.
+
 # Design Brief — mostofahabibfardin.com
 
 ## Pass 1 — Design plan
