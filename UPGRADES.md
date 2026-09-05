@@ -1,3 +1,8 @@
+> **SUPERSEDED 2026-09-05 — do not add to this file.**
+> Forward planning now lives in `ROADMAP.md`, the session log in `HANDOFF.md`, and the
+> reskin decision in `THEME-BRIEF.md`. This file is kept only as a record of the
+> 2026-07 academia-pivot work, all of which shipped. Nothing here is still pending.
+
 # Upgrade Path — living document
 
 > Working file for site upgrades. Claude: consult this at the start of any site task,

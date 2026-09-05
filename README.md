@@ -6,22 +6,30 @@ and a little JS. Two optional Node scripts regenerate the image and markup asset
 ## Files
 
 ```
-index.html            the whole site (9 numbered "sheets") — the deploy artifact
+index.html            the whole site (9 sections) — the deploy artifact
 404.html              error page
 sitemap.xml           single-URL sitemap
 robots.txt            allow-all + sitemap pointer
 llms.txt              summary for AI assistants that index/cite the site
 vercel.json           CSP + security + caching headers (Vercel)
 .vercelignore         keeps tools/ and *.md out of the deploy
-HANDOFF.md            living session state for AI continuity (never deployed)
+HANDOFF.md            running log of what happened, for AI continuity (local only)
+ROADMAP.md            the forward plan: phases, open decisions (local only)
+THEME-BRIEF.md        the reskin decision and its questionnaire (local only)
+theme-sample.html     standalone mockup of the proposed theme (never deployed)
 css/styles.css        design system + all styles + @font-face
 js/theme-init.js      pre-paint theme pick (external so CSP needs no unsafe-inline)
-js/main.js            ruler, scroll-spy, carousels, transitions, lightbox, cursor, HUD
-favicon-v2.png        original favicon
+js/main.js            ruler, scroll-spy, carousels, transitions, lightbox, cursor,
+                      HUD, copy-to-clipboard on the contact addresses
+favicon-v2.png        favicon (256x256)
 assets/
   fonts/              self-hosted woff2 (Fraunces, Inter, IBM Plex Mono — latin subset)
   img/                images as .jpg + .avif + .webp siblings (see pipeline below)
-  resume.pdf, og.jpg
+  og.jpg              social-share card
+Mostofa-Habib-Fardin-Resume.pdf
+                      at the repo root ON PURPOSE — inside /assets/ it would inherit
+                      vercel.json's 1-year immutable cache and a swapped résumé
+                      could serve stale for months
 tools/
   build-assets.ps1    (1) compress source images from the old site → assets/img/*.jpg
   build-images.mjs    (2) emit .avif/.webp + an 800px tier next to every assets/img/*.jpg
@@ -29,7 +37,8 @@ tools/
   build-srcset.mjs    (4) add the 800w tier + sizes to every <picture> (responsive)
   build-og.mjs        regenerates the social-share card (assets/og.jpg)
   build-logos.mjs     regenerates institution crests → assets/img/logos/*.png
-DESIGN.md             the design brief (Pass 1 + Pass 2 critique)
+DESIGN.md             the ORIGINAL design brief (historical — see THEME-BRIEF.md)
+UPGRADES.md           superseded by ROADMAP.md, kept as history
 ```
 
 ## Run locally
@@ -52,8 +61,16 @@ node tools/build-srcset.mjs                                       # add responsi
 The lightbox upgrades its full-size fetches to AVIF/WebP automatically (with a JPEG
 fallback), so no markup changes are needed there.
 
-`build-images.mjs` and `build-html.mjs` need Node + `sharp`. Sharp is resolved from
-this folder or, failing that, the old React site's `node_modules`.
+### The Node pipeline is currently broken
+
+`build-images.mjs` and `build-html.mjs` need `sharp`, which they resolve from this
+folder or from the old React site's `node_modules`. **That folder no longer exists**
+(only `D:\Website Content\Portfolio Site.zip` remains), so both scripts, and
+`build-assets.ps1`, fail as of 2026-09-04.
+
+Working alternative until it is fixed: the system Python's Pillow has both AVIF and
+WebP enabled, and has been used for every image added since. Either `npm i sharp`
+here, unzip the old site, or port the two scripts to Pillow.
 
 ## Deploy (Vercel)
 
