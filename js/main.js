@@ -377,6 +377,60 @@
     }, { passive: true });
   }
 
+  /* ---------- Email addresses: copy, don't rely on mailto ----------
+     Plenty of visitors have no desktop mail client, and on Windows a mailto
+     handler mis-registered to a browser just opens that browser's start page.
+     Copying always works. The href stays a real mailto so the link keeps its
+     semantics, its right-click menu, and its behaviour where a client exists. */
+  var copiedEl = document.querySelector(".contact__copied");
+  var copyTimer;
+
+  function say(msg) {
+    if (!copiedEl) return;
+    copiedEl.textContent = msg;
+    copiedEl.classList.add("on");
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(function () { copiedEl.classList.remove("on"); }, 3000);
+  }
+  // Older/blocked clipboard API: a hidden textarea + execCommand still works and,
+  // unlike navigator.clipboard, needs no permission. Never fall back to the
+  // mailto itself — that is the broken path this whole block exists to avoid.
+  function legacyCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;top:0;left:-9999px;opacity:0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  document.querySelectorAll('.contact a[href^="mailto:"]').forEach(function (a) {
+    a.addEventListener("click", function (ev) {
+      var addr = a.getAttribute("href").replace(/^mailto:/, "").split("?")[0];
+      ev.preventDefault();
+
+      // Feedback is set synchronously, always. Copying can fail quietly in ways
+      // we cannot detect in time: execCommand returns false when the document
+      // isn't focused, and navigator.clipboard.writeText can sit unresolved in
+      // the same situation. Showing the address first means the reader can
+      // always select it by hand; a successful copy just upgrades the message.
+      if (legacyCopy(addr)) {
+        say(addr + " copied to clipboard");
+      } else {
+        say(addr);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(addr).then(function () {
+            say(addr + " copied to clipboard");
+          }, function () { /* leave the address on screen */ });
+        }
+      }
+    });
+  });
+
   /* ---------- Footer year ---------- */
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
