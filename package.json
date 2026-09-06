@@ -1,0 +1,16 @@
+{
+  "name": "fardin-portfolio-tools",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Build-time image tooling only. The site itself is static and has no runtime dependencies.",
+  "scripts": {
+    "images": "node tools/build-images.mjs",
+    "html": "node tools/build-html.mjs",
+    "srcset": "node tools/build-srcset.mjs",
+    "og": "node tools/build-og.mjs",
+    "logos": "node tools/build-logos.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
+  }
+}

@@ -2,3 +2,6 @@
 tools
 *.md
 theme-sample.html
+node_modules
+package.json
+package-lock.json
