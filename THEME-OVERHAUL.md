@@ -224,7 +224,9 @@ your field, and it should be felt rather than announced.
 - **The contact-sheet gallery** with its grease-pencil marks. Photographic, not
   drafting. The most distinctive thing on the site.
 - **Night/day shift.**
-- **The nine sections.** Structure is fine; only the drafting costume goes.
+
+Note: the *section structure* is a separate question and it is **not** fine.
+See Part D.
 - **Everything shipped in September**: the thesis figures band, the raised hero
   opacity, the density system, the mono-as-annotation discipline.
 
@@ -279,6 +281,118 @@ palette. Update both.
 
 ---
 
+## Part D — The section structure
+
+### The problem, measured
+
+Word counts are healthy and evenly spread (145–375 per section), so nothing is
+starved or bloated. The problem is not size, it is **what the sections are**.
+
+| Section | Words | Images |
+|---------|------:|-------:|
+| Title | 75 | 1 |
+| About | 145 | 1 |
+| Toolkit | 214 | 2 |
+| Experience | 302 | 9 |
+| Thesis | 375 | 0 |
+| Projects | 293 | 7 |
+| Achievements | 239 | 7 |
+| Photography | 304 | 16 |
+| Contact | 72 | 1 |
+
+An academic reader arrives looking for five things: **research, teaching,
+publications, background, contact.** Here is what the site actually offers:
+
+- **There is no Teaching section.** You are a Lecturer and teaching is your job.
+  It currently exists as four course pills and four bullets inside *Experience*,
+  sharing a section with Grameenphone, RANCON and a factory visit, plus a small
+  text link to `/teaching/`. This is the single biggest structural flaw.
+- **There is no Research section.** There is *Thesis*, which is one output, with
+  a "Research Interests" block bolted onto the end. Research is an ongoing
+  agenda; a thesis is an item in it.
+- **There is no Publications heading.** Already logged as ROADMAP 01-B. Its
+  absence reads as "none" rather than "in preparation".
+- **Education is hidden inside "Toolkit"**, underneath a bill-of-materials table.
+  Your degree and CGPA are top-level facts for this audience and they are three
+  scrolls down inside a section named after tools.
+- **"Achievements" gets equal billing with the thesis.** It is a 2022 student
+  competition record plus three certificates. Equal weight actively hurts: it
+  invites the comparison and the thesis loses it.
+
+The current shape is an **industry portfolio**: About, Skills, Experience,
+Projects, Achievements. That is the correct shape for a job application to a
+manufacturing firm. It is the wrong shape for a PhD application.
+
+### The minimum that must change
+
+Two sections have to exist as first-class sections. Everything else in this part
+is optional.
+
+1. **Research** — absorbing the thesis, the interests, and a publications block.
+2. **Teaching** — split out of Experience.
+
+If you do nothing else structural, do these two.
+
+### Recommended: the faculty regroup, nine sections to seven
+
+| # | Section | Built from |
+|---|---------|-----------|
+| 01 | **Title** | unchanged |
+| 02 | **About** | current About + education moved out of Toolkit + a compact recognition strip absorbing Achievements |
+| 03 | **Research** | current Thesis, promoted and expanded, plus Publications & Output, plus Research Interests |
+| 04 | **Teaching** | **new**, split out of Experience: courses, assessment, supervision, industrial visits, link to materials |
+| 05 | **Practice** | current Projects merged with the industry half of Experience (Grameenphone, RANCON, A1 Polymer) |
+| 06 | **Photography** | unchanged |
+| 07 | **Contact** | unchanged |
+
+Dissolved: **Toolkit** (education to About, skills to a compact block in
+Practice or About) and **Achievements** (demoted into About's recognition strip).
+
+**Order matters as much as grouping.** Research currently sits fifth. Put it
+second, immediately after About, so the thing the audience came for is the first
+substantial thing they meet.
+
+### What this costs you, honestly
+
+The **bill-of-materials table** is the casualty worth thinking about. It is
+genuinely distinctive and you have said you like the site's personality. Two
+ways to keep it:
+
+- Fold it into **Practice** as a compact skills block, keeping the table but
+  losing the standalone section.
+- Keep it as a short eighth section after Practice, accepting eight rather than
+  seven.
+
+Either is defensible. What is not defensible is education staying buried under
+it.
+
+### Effort
+
+Mostly moving existing blocks, not writing new markup. Nav labels, `data-sheet`
+and `data-name` attributes, the scroll-spy and `sitemap.xml` all follow
+mechanically. The genuinely new writing is the Publications block and a short
+Teaching intro.
+
+**About one day**, on top of the 2.5 in the Part A–C plan. Do it *after* the
+chrome strip in stage 3, since removing the sheet numbering makes the sections
+easy to reorder without renumbering anything.
+
+### Revised sequence
+
+| # | Stage | Effort |
+|---|-------|--------|
+| 1 | Tokenise the strays | 1 hour |
+| 2 | Swap the palette | half day |
+| 3 | Strip the chrome | half day |
+| 4 | **Restructure the sections** (Part D) | 1 day |
+| 5 | Language pass | 2 hours |
+| 6 | Thesis/Research feature treatment | half day |
+
+Stage 4 slots between the chrome strip and the language pass, because renaming
+sections and rewriting the drafting vocabulary are the same edit.
+
+---
+
 ## Work plan
 
 Sequenced so each stage is independently shippable and independently revertable.
@@ -294,6 +408,9 @@ Sequenced so each stage is independently shippable and independently revertable.
 Stages 1 and 2 give you most of the visible change. Stage 3 is what stops it
 looking institutional. **Do not ship 2 without 3** — a crimson palette on
 drafting chrome is the worst of both worlds, and worse than what you have now.
+
+**This table predates Part D. Use the revised sequence at the end of Part D
+instead**, which inserts the restructure as stage 4.
 
 ---
 
