@@ -819,140 +819,102 @@ main { padding-left: var(--ruler-w); }
    Craft layer — concept as behaviour
    ============================================================ */
 
-/* ---------- Photography: darkroom contact sheet (Series 1) ---------- */
-.contactsheet {
+/* ============================================================
+   Photography — one component, two series.
+
+   Shared: the frame, the hover, and the caption block (index, title,
+   optional datum) so a reader learns one pattern and it holds.
+   Series-specific: density, crop and colour, because that IS the
+   difference between a contact sheet and a set of exhibition plates.
+   ============================================================ */
+
+/* ---- the shared frame ---- */
+.frame, .plate { margin: 0; }
+.frame > a, .plate > a {
+  display: block; position: relative; overflow: hidden;
   border: 1px solid var(--line);
   background: var(--paper-raised);
-  padding: 0.4rem clamp(0.75rem, 2vw, 1.5rem) clamp(1rem, 2.5vw, 1.75rem);
+}
+.frame img, .plate img {
+  display: block; width: 100%;
+  transition: transform 0.6s var(--ease-out), filter 0.6s ease;
+}
+.frame > a:hover img, .frame > a:focus-visible img,
+.plate > a:hover img, .plate > a:focus-visible img { transform: scale(1.03); }
+
+/* ---- the shared caption ---- */
+.frame figcaption, .plate__label {
+  display: grid; gap: 0.35rem; margin-top: 0.85rem;
+}
+.frame__no, .plate__no {
+  font-size: 0.56rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-soft); transition: color 0.3s ease;
+}
+.frame:hover .frame__no, .plate:hover .plate__no { color: var(--brass); }
+.frame__note, .plate__title {
+  font-family: var(--font-display); font-style: italic;
+  font-size: clamp(0.92rem, 1.25vw, 1.12rem); line-height: 1.45;
+  color: var(--ink); max-width: 46ch;
+}
+.plate__datum { color: var(--ink-soft); font-size: 0.56rem; letter-spacing: 0.1em; }
+
+/* ---- Series 1: the contact sheet ----
+   Dense, square, monochrome, still presented on a sheet with a film edge.
+   The grid drops from five to four so the captions have room to sit. */
+.contactsheet {
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+  padding: 0.4rem clamp(0.75rem, 2vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
   position: relative;
-  transition: background-color 0.45s ease;
 }
 .contactsheet__edge {
   display: flex; align-items: center; gap: 0.5rem;
-  color: var(--ink-soft); font-size: 0.58rem; margin: 0 0 0.6rem;
-  padding: 0.5rem 0; border-bottom: 1px dashed var(--line);
+  color: var(--ink-soft); font-size: 0.56rem; letter-spacing: 0.14em;
+  margin: 0 0 1rem; padding: 0.5rem 0; border-bottom: 1px dashed var(--line);
 }
 .contactsheet__edge::before {
   content: ""; flex: 1; height: 7px; align-self: center;
-  /* sprocket-hole film edge */
-  background-image: repeating-linear-gradient(90deg,
-    transparent 0 6px, var(--line-soft) 6px 12px);
+  background-image: repeating-linear-gradient(90deg, transparent 0 6px, var(--line-soft) 6px 12px);
   margin-right: 0.5rem;
 }
 .contactsheet__grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2.2vw, 1.8rem);
 }
-.frame { position: relative; margin: 0; }
-.frame > a {
-  display: block; position: relative; overflow: hidden;
-  border: 1px solid var(--line); background: #000;
+.frame img { aspect-ratio: 1 / 1; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.frame > a:hover img, .frame > a:focus-visible img {
+  filter: grayscale(1) contrast(1.12) brightness(1.06); transform: scale(1.03);
 }
-.frame img {
-  width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
-  transition: transform 0.5s var(--ease-out), filter 0.5s ease;
-}
-.frame > a::after {
-  content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
-  pointer-events: none;
-}
-.frame:hover img { transform: scale(1.05); filter: grayscale(1) contrast(1.15) brightness(1.08); }
-.frame__no {
-  position: absolute; top: 0.3rem; left: 0.4rem; z-index: 3;
-  font-size: 0.5rem; color: var(--ink); mix-blend-mode: difference;
-  letter-spacing: 0.1em;
-}
-.frame figcaption { position: static; }
-.frame__note {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
-  padding: 1.4rem 0.5rem 0.45rem; font-size: 0.6rem; line-height: 1.35; color: #EDE7E4;
-  background: linear-gradient(to top, rgba(0,0,0,0.82), transparent);
-  opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s var(--ease-out);
-}
-.frame:hover .frame__note, .frame:focus-within .frame__note { opacity: 1; transform: none; }
 
-/* Grease-pencil editing marks (chinagraph), drawn over the frame */
-.frame[data-mark]::before {
+/* the grease-pencil marks are the sheet's signature — kept */
+.frame[data-mark]::after {
   content: ""; position: absolute; z-index: 4; pointer-events: none;
+  border: 1.5px solid var(--brass-bright); opacity: 0.85;
 }
-.frame[data-mark="select"]::before {
-  inset: 8% 6%;
-  border: 2.5px solid var(--brass-bright);
-  border-radius: 49% 51% 52% 48% / 48% 50% 50% 52%;
-  transform: rotate(-4deg);
-  opacity: 0.85;
-  mix-blend-mode: screen;
-}
-.frame[data-mark="maybe"]::before {
-  content: "?"; right: 8%; top: 6%;
-  font-family: var(--font-display); font-style: italic; font-weight: 600;
-  font-size: 1.6rem; line-height: 1; color: var(--brass-bright);
-  text-shadow: 0 0 3px rgba(0,0,0,0.4); transform: rotate(8deg); opacity: 0.9;
-}
-/* chinagraph "SELECT" stamp on keepers */
 .frame[data-mark="select"]::after {
-  content: "✓ SELECT"; position: absolute; z-index: 5; left: 6%; bottom: 8%;
-  font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.12em;
-  color: var(--brass-bright); border: 1px solid var(--brass-bright);
-  padding: 0.15rem 0.35rem; transform: rotate(-6deg); pointer-events: none;
-  mix-blend-mode: screen;
+  inset: -5px -5px auto auto; width: 26px; height: 26px; border-radius: 50%;
+  top: -6px; right: -6px;
+}
+.frame[data-mark="maybe"]::after {
+  inset: auto -4px -4px auto; width: 18px; height: 18px; border-radius: 0;
+  border-width: 0 1.5px 1.5px 0;
 }
 
-/* Night Shift = a real darkroom for the contact sheet */
-html[data-theme="dark"] .contactsheet {
-  background: #0c0d0a;
-  border-color: rgba(217,84,68,0.28);
-  box-shadow: inset 0 0 60px rgba(0,0,0,0.6);
-}
-html[data-theme="dark"] .contactsheet__edge { color: #C8543E; border-bottom-color: rgba(217,84,68,0.3); }
-html[data-theme="dark"] .contactsheet__edge::before { background-image: repeating-linear-gradient(90deg, transparent 0 6px, rgba(217,84,68,0.22) 6px 12px); }
-html[data-theme="dark"] .frame > a { border-color: rgba(217,84,68,0.25); }
-html[data-theme="dark"] .frame:hover img { filter: grayscale(0.85) contrast(1.2) brightness(1.12); }
-html[data-theme="dark"] .frame[data-mark="select"]::before,
-html[data-theme="dark"] .frame[data-mark="maybe"]::before,
-html[data-theme="dark"] .frame[data-mark="select"]::after { color: #FF5A3C; border-color: #FF5A3C; }
-
-/* ---------- Photography: framed exhibition plates (Series 2) ---------- */
+/* ---- Series 2: the plates ----
+   Generous, natural aspect, colour. Same frame and caption as the sheet;
+   only the density and the crop differ. */
 .exhibit {
   display: grid; grid-template-columns: repeat(2, 1fr);
   gap: clamp(1.75rem, 4vw, 3.25rem); align-items: start;
 }
-.plate { margin: 0; }
 .plate--wide { grid-column: 1 / -1; }
-.plate > a { display: block; }
-.plate__mat {
-  display: block; position: relative;
-  background: var(--paper-raised);
-  padding: clamp(12px, 2.2vw, 26px);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
-  transition: transform 0.5s var(--ease-out), box-shadow 0.5s ease;
+.plate__mat { display: block; }   /* the mat and its drop shadow are gone */
+
+@media (max-width: 880px) {
+  .exhibit { grid-template-columns: 1fr; }
 }
-.plate__mat img { display: block; width: 100%; border: 1px solid var(--line); }
-.plate > a:hover .plate__mat,
-.plate > a:focus-visible .plate__mat {
-  transform: translateY(-5px);
-  box-shadow: 0 34px 64px -28px rgba(0, 0, 0, 0.45);
-}
-/* registration crop-ticks at opposite corners of the mat */
-.plate__mat::before, .plate__mat::after {
-  content: ""; position: absolute; width: 14px; height: 14px;
-  color: var(--brass); pointer-events: none; opacity: 0.7;
-}
-.plate__mat::before { top: 6px; left: 6px; border-top: 1px solid currentColor; border-left: 1px solid currentColor; }
-.plate__mat::after { bottom: 6px; right: 6px; border-bottom: 1px solid currentColor; border-right: 1px solid currentColor; }
-.plate__label { display: grid; gap: 0.4rem; margin-top: 1.1rem; }
-.plate__no { color: var(--brass); }
-.plate__title {
-  font-family: var(--font-display); font-style: italic;
-  font-size: clamp(1.05rem, 1.6vw, 1.3rem); line-height: 1.35;
-  color: var(--ink); max-width: 48ch;
-}
-.plate__datum { color: var(--ink-soft); font-size: 0.58rem; }
-html[data-theme="dark"] .plate__mat { box-shadow: 0 20px 50px -24px rgba(0, 0, 0, 0.7); }
-html[data-theme="dark"] .plate > a:hover .plate__mat,
-html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
-  box-shadow: 0 34px 64px -26px rgba(0, 0, 0, 0.85);
+@media (max-width: 520px) {
+  .contactsheet__grid { grid-template-columns: 1fr; }
 }
 
 /* ---------- Lightbox "develop" on open ---------- */
@@ -1048,14 +1010,12 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   .case__grid--flip .carousel { order: 2; }
   .thesis__cols { grid-template-columns: 1fr; }
   .edu-grid { grid-template-columns: 1fr; }
-  .contactsheet__grid { grid-template-columns: repeat(3, 1fr); }
   .exhibit { grid-template-columns: 1fr; }
   .statrow { grid-template-columns: repeat(2, 1fr); gap: 1.25rem 0.75rem; }
   .hero__scroll { display: none; }
 }
 
 @media (max-width: 520px) {
-  .contactsheet__grid { grid-template-columns: repeat(2, 1fr); }
   .certs { grid-template-columns: 1fr; }
   .awards__list > li { grid-template-columns: 1fr; gap: 0.4rem; }
   .hero__cta .btn { width: 100%; justify-content: center; }
@@ -1082,7 +1042,6 @@ html[data-theme="dark"] .plate > a:focus-visible .plate__mat {
   .hero__scrollline span { animation: none; }
   .carousel__track { scroll-behavior: auto; }
   .lightbox img.developing { animation: none; }
-  .frame__note { transition: none; }
 }
 
 
