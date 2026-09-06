@@ -5,11 +5,10 @@
 # KNOWN LIMIT: the CMS's upload form runs through a Vercel-hosted backend, which
 # hard-caps request bodies at ~4.5MB. Slide decks (esp. .pptx) often exceed that —
 # for anything bigger, upload directly via the GitHub web UI instead (no size limit),
-# then hand-edit courses.json. See teaching/HOW-TO-ADD-MATERIALS.md (manual, any size)
-# vs teaching/ADMIN-SETUP.md (this CMS, small files only).
+# then hand-edit courses.json. See teaching/README.md, which covers both methods.
 #
 # To use: deploy the site, push this repo to GitHub, then sign in at
-# app.pagescms.org with GitHub and open this repo. See teaching/ADMIN-SETUP.md.
+# app.pagescms.org with GitHub and open this repo. See teaching/README.md.
 
 # Where uploaded PDFs are stored, and the public path written into the data.
 media:

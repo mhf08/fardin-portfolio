@@ -1,10 +1,6 @@
 # Internal files — never deploy
 tools
 *.md
-theme-sample.html
 node_modules
 package.json
 package-lock.json
-theme-buet-preview.html
-css/theme-buet-preview.css
-overhaul-preview.html

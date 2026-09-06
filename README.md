@@ -1,45 +1,59 @@
-# Mostofa Habib Fardin — Portfolio ("The Drawing Set")
+# Mostofa Habib Fardin — Portfolio
 
-A zero-dependency static portfolio. No framework, no runtime build — just HTML, CSS,
-and a little JS. Two optional Node scripts regenerate the image and markup assets.
+A static portfolio with no framework and no build step: the folder *is* the site.
+The only dependency is `sharp`, used by the offline image scripts in `tools/`.
+Nothing about the deployed site needs Node.
 
 ## Files
 
 ```
-index.html            the whole site (9 sections) — the deploy artifact
+index.html            the whole site (9 named sections) — the deploy artifact
 404.html              error page
-sitemap.xml           single-URL sitemap
+sitemap.xml           two-URL sitemap
 robots.txt            allow-all + sitemap pointer
-llms.txt              summary for AI assistants that index/cite the site
-vercel.json           CSP + security + caching headers (Vercel)
-.vercelignore         keeps tools/ and *.md out of the deploy
-HANDOFF.md            running log of what happened, for AI continuity (local only)
-ROADMAP.md            the forward plan: phases, open decisions (local only)
-THEME-BRIEF.md        the reskin decision and its questionnaire (local only)
-theme-sample.html     standalone mockup of the proposed theme (never deployed)
-css/styles.css        design system + all styles + @font-face
-js/theme-init.js      pre-paint theme pick (external so CSP needs no unsafe-inline)
-js/main.js            ruler, scroll-spy, carousels, transitions, lightbox, cursor,
-                      HUD, copy-to-clipboard on the contact addresses
-favicon-v2.png        favicon (256x256)
-assets/
-  fonts/              self-hosted woff2 (Fraunces, Inter, IBM Plex Mono — latin subset)
-  img/                images as .jpg + .avif + .webp siblings (see pipeline below)
-  og.jpg              social-share card
+llms.txt              summary for AI assistants that index or cite the site
+vercel.json           CSP, security and caching headers
+.vercelignore         keeps tools/, *.md and node_modules out of the deploy
+.pages.yml            Pages CMS config for the Course Materials admin panel
+favicon-v3.png        gear + camera aperture mark, BUET crimson
+
+css/styles.css        tokens, layout, components, interaction layer, @font-face
+js/theme-init.js      pre-paint theme pick (external, so the CSP needs no unsafe-inline)
+js/main.js            spine, scroll-spy, carousels, lightbox, copy-to-clipboard,
+                      theme toggle, interaction layer
+js/lib/lenis.min.js   smooth scrolling
+
+assets/fonts/         self-hosted woff2 (Fraunces, Inter, IBM Plex Mono, latin subset)
+assets/img/           every image as .jpg + .avif + .webp, most with an 800px tier
+assets/og.jpg         social share card
+
 Mostofa-Habib-Fardin-Resume.pdf
                       at the repo root ON PURPOSE — inside /assets/ it would inherit
-                      vercel.json's 1-year immutable cache and a swapped résumé
+                      vercel.json's 1-year immutable cache, so a swapped résumé
                       could serve stale for months
+
+teaching/             the Course Materials sub-page
+  index.html, teaching.css, teaching.js
+  courses.json        the data the page renders
+  files/<course>/     the actual slides and handouts
+  README.md           how to post materials (both methods)
+
 tools/
-  build-assets.ps1    (1) compress source images from the old site → assets/img/*.jpg
-  build-images.mjs    (2) emit .avif/.webp + an 800px tier next to every assets/img/*.jpg
-  build-html.mjs      (3) wrap every <img> in <picture> with avif/webp sources
-  build-srcset.mjs    (4) add the 800w tier + sizes to every <picture> (responsive)
-  build-og.mjs        regenerates the social-share card (assets/og.jpg)
-  build-logos.mjs     regenerates institution crests → assets/img/logos/*.png
-DESIGN.md             the ORIGINAL design brief (historical — see THEME-BRIEF.md)
-UPGRADES.md           superseded by ROADMAP.md, kept as history
+  build-images.mjs    emit .avif/.webp + an 800px tier beside every assets/img/*.jpg
+  build-html.mjs      wrap every <img> in <picture> with avif/webp sources
+  build-srcset.mjs    add the 800w tier + sizes to every <picture>
+  build-og.mjs        regenerate assets/og.jpg
+
+DESIGN.md             the design system: palette, contrast, accent rules, do-nots
+HANDOFF.md            running log of what happened, for AI continuity (local only)
+ROADMAP.md            the forward plan (local only)
 ```
+
+Deleted in the 2026-09-06 cleanup, recoverable from git history: three stale
+theme previews, `UPGRADES.md` (superseded by ROADMAP), `THEME-OVERHAUL.md` and
+`THEME-BRIEF.md` (both folded into DESIGN.md), the two teaching guides (merged
+into `teaching/README.md`), and `build-logos.mjs` / `build-assets.ps1` (one-time
+migration tools whose source folder no longer exists).
 
 ## Run locally
 
@@ -51,40 +65,24 @@ npx -y serve -l 4173 .
 ## Asset pipeline (only re-run when images change)
 
 ```powershell
-# from the repo root
-powershell -ExecutionPolicy Bypass -File tools/build-assets.ps1   # source JPEGs (uses old site as source)
-node tools/build-images.mjs                                       # AVIF/WebP + 800px tiers
-node tools/build-html.mjs                                         # wrap new <img> in <picture> (idempotent)
-node tools/build-srcset.mjs                                       # add responsive srcset (idempotent)
+npm install          # once, pulls sharp
+npm run images       # AVIF/WebP + 800px tiers
+npm run html         # wrap new <img> in <picture>   (idempotent)
+npm run srcset       # add responsive srcset          (idempotent)
+npm run og           # regenerate the social card
 ```
 
 The lightbox upgrades its full-size fetches to AVIF/WebP automatically (with a JPEG
 fallback), so no markup changes are needed there.
 
-### Tooling state (verified 2026-09-06)
+### Note on the image scripts
 
-`sharp` is now a devDependency here. Run `npm install` once after cloning, then:
+`build-images.mjs` re-encodes **every** JPEG on each run, rewriting ~78 files.
+That is fine, but run it when images actually change and commit the result on
+its own so the diff stays readable.
 
-| Script | npm alias | State |
-|--------|-----------|-------|
-| `build-images.mjs` | `npm run images` | works |
-| `build-og.mjs` | `npm run og` | works |
-| `build-html.mjs` | `npm run html` | works, idempotent |
-| `build-srcset.mjs` | `npm run srcset` | works, idempotent |
-| `build-logos.mjs` | `npm run logos` | **cannot run** |
-| `build-assets.ps1` | — | **cannot run** |
-
-The last two are not a `sharp` problem. Both read source files from
-`D:\Website Content\Portfolio Site\Site-Rebuild\...`, the old React site, which
-has been deleted; only `Portfolio Site.zip` remains. They were one-time migration
-tools and their inputs are gone. Unzip that archive if you ever need them.
-
-**`build-images.mjs` re-encodes every JPEG on every run**, it does not skip files
-that already have siblings. That is fine but it rewrites ~78 files, so run it when
-images actually change and commit the result on its own.
-
-`node_modules/` is gitignored and in `.vercelignore`, along with `package.json` and
-the lockfile. Nothing about the deployed site depends on Node.
+`node_modules/` is gitignored and excluded from the deploy along with
+`package.json` and the lockfile.
 
 ## Deploy (Vercel)
 
