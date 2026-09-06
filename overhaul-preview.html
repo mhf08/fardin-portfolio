@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>[OVERHAUL PREVIEW] Mostofa Habib Fardin</title>
+<style>
+/* ============================================================
+   OVERHAUL PREVIEW — partial. Hero → About → Research → Teaching.
+   Shows three changes at once:
+     1. the BUET palette with accent discipline applied
+     2. the drawing chrome removed (no ruler, HUD, title block,
+        wipe or registration cursor) and replaced by one spine
+     3. the Part D section structure, with Research second
+   Everything below the Teaching section is deliberately absent.
+   ============================================================ */
+
+@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 400 650; font-display: swap; src: url("assets/fonts/fraunces-normal-400_650.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-style: italic; font-weight: 400 650; font-display: swap; src: url("assets/fonts/fraunces-italic-400_650.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400 600; font-display: swap; src: url("assets/fonts/inter-normal-400_600.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("assets/fonts/ibmplexmono-normal-400.woff2") format("woff2"); }
+
+:root {
+  --paper: #F7F4F1; --paper-raised: #FFFCFA;
+  --ink: #1C1A1B; --ink-soft: #5E5658;
+  --accent: #A10F26; --accent-bright: #BF1430;
+  --line: rgba(28,26,27,0.22); --line-soft: rgba(28,26,27,0.10);
+  --hero-img-opacity: 0.44;
+  --f-display: "Fraunces", Georgia, serif;
+  --f-body: "Inter", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  --paper: #171516; --paper-raised: #201D1F;
+  --ink: #EDE7E4; --ink-soft: #A2999B;
+  --accent: #DD4B5E; --accent-bright: #EF6274;
+  --line: rgba(237,231,228,0.22); --line-soft: rgba(237,231,228,0.09);
+  --hero-img-opacity: 0.32;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--f-body); font-size: 16px; line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  transition: background .4s ease, color .4s ease;
+}
+h1, h2, h3 { font-family: var(--f-display); font-weight: 600; margin: 0; text-wrap: balance; }
+p { margin: 0 0 1.1em; }
+a { color: inherit; }
+
+/* --- the spine: replaces ruler + HUD + title block. no accent on it. --- */
+.spine { position: fixed; left: 0; top: 0; bottom: 0; width: 3px; z-index: 40; background: var(--line-soft); }
+.spine__fill { position: absolute; top: 0; left: 0; width: 100%; height: 8%; background: var(--ink-soft); opacity: .55; transition: height .1s linear; }
+
+/* --- header: words only, no sheet numbers --- */
+.bar {
+  position: fixed; inset: 0 0 auto 0; z-index: 50; height: 60px;
+  display: flex; align-items: center; gap: 2rem; padding: 0 clamp(1.5rem,4vw,3rem);
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-soft);
+  font-size: .8rem;
+}
+.bar__name { font-family: var(--f-display); font-weight: 600; font-size: .95rem; }
+.bar nav { display: flex; gap: 1.5rem; margin-left: auto; }
+.bar nav a { color: var(--ink-soft); text-decoration: none; transition: color .2s ease; }
+.bar nav a:hover { color: var(--accent); }          /* accent: allowed on link hover */
+.bar nav a.on { color: var(--ink); }
+.toggle { font-family: var(--f-mono); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  background: none; border: 1px solid var(--line); color: var(--ink-soft); padding: .45rem .8rem; cursor: pointer; }
+.toggle:hover { color: var(--ink); }
+
+.wrap { max-width: 1400px; margin-inline: auto; padding-inline: clamp(1.25rem,4vw,3rem); }
+.section { padding-block: clamp(4rem,10vh,7.5rem); border-top: 1px solid var(--line-soft); }
+.section--feature { padding-block: clamp(6rem,15vh,11rem); }
+.section__head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.section h2 { font-size: clamp(2rem,4vw,3.2rem); letter-spacing: -.02em; }
+.section__meta { font-family: var(--f-mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* accent: allowed on .label section headings */
+.label { font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: .9rem; }
+
+/* --- hero --- */
+.hero { position: relative; min-height: calc(100svh - 60px); display: flex; flex-direction: column; justify-content: center;
+  padding-top: calc(60px + clamp(2rem,6vh,4rem)); padding-bottom: clamp(4rem,10vh,7rem); overflow: hidden; }
+.hero__bg { position: absolute; inset: 0; }
+.hero__bg img { width: 100%; height: 100%; object-fit: cover; opacity: var(--hero-img-opacity); }
+.hero__scrim { position: absolute; inset: 0; background:
+  linear-gradient(100deg, color-mix(in srgb, var(--paper) 94%, transparent) 0%,
+                          color-mix(in srgb, var(--paper) 62%, transparent) 40%,
+                          color-mix(in srgb, var(--paper) 12%, transparent) 100%),
+  linear-gradient(to top, var(--paper) 3%, transparent 40%); }
+.hero__inner { position: relative; z-index: 1; width: 100%; }
+.eyebrow { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+.hero h1 { font-size: clamp(2.8rem,7vw,6.2rem); line-height: .95; letter-spacing: -.03em; }
+.hero h1 em { font-style: italic; font-weight: 500; color: var(--accent); }  /* accent: the surname */
+.hero__role { font-weight: 600; font-size: 1.1rem; margin: 1.4rem 0 1rem; }
+.hero__lede { color: var(--ink-soft); max-width: 52ch; font-size: 1.08rem; }
+.cta { display: flex; gap: .9rem; flex-wrap: wrap; margin-top: 2.4rem; font-size: .88rem; }
+.btn { padding: .85rem 1.5rem; border: 1px solid var(--line); text-decoration: none; transition: all .25s var(--ease); }
+.btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+.btn--solid { background: var(--ink); border-color: var(--ink); color: var(--paper); font-weight: 600; }
+
+/* --- generic content --- */
+.cols2 { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(2rem,5vw,4.5rem); }
+.cols2--even { grid-template-columns: 1fr 1fr; }
+.lede { font-size: 1.12rem; max-width: 62ch; }
+.muted { color: var(--ink-soft); }
+.facts { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; font-size: .92rem; }
+.facts b { font-weight: 600; }
+.facts .k { font-family: var(--f-mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); display: block; }
+.rule { border: 0; border-top: 1px solid var(--line-soft); margin: 2.5rem 0; }
+
+/* recognition strip — Achievements demoted into About */
+.recog { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; font-size: .82rem; color: var(--ink-soft); margin: 0; padding: 0; list-style: none; }
+.recog li::before { content: "·"; margin-right: .6rem; color: var(--ink-soft); }
+.recog li:first-child::before { content: none; }
+
+/* --- research figures --- */
+.figs { list-style: none; margin: 0 0 3rem; padding: 2.2rem 0; display: grid; grid-template-columns: repeat(3,1fr);
+  gap: clamp(1.5rem,4vw,3rem); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.figs b { display: block; font-family: var(--f-display); font-weight: 600; font-size: clamp(2.4rem,6vw,4.6rem);
+  line-height: .9; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.figs .plus { color: var(--accent); }               /* accent: the plus, nothing else here */
+.figs span.k { display: block; margin-top: .8rem; font-size: .7rem; line-height: 1.6; color: var(--ink-soft); }
+.findings { margin: 0; padding-left: 1.1rem; }
+.findings li { margin-bottom: .9rem; color: var(--ink-soft); }
+.findings b { color: var(--ink); font-weight: 600; }
+.cite { font-family: var(--f-mono); font-size: .68rem; letter-spacing: .02em; color: var(--ink-soft); }
+.pull { border-left: 2px solid var(--line); padding-left: 1.5rem; font-family: var(--f-display); font-size: 1.35rem; line-height: 1.45; margin: 0 0 2rem; }
+
+/* publications — the block that does not exist today */
+.pubs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.4rem; }
+.pubs li { display: grid; gap: .35rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--line-soft); }
+.pubs li:last-child { border-bottom: 0; }
+.pubs .t { font-weight: 600; }
+.pubs .m { font-size: .8rem; color: var(--ink-soft); }
+.status { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: .5em; vertical-align: middle; }
+
+/* tags */
+.tags { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.2rem 0 0; padding: 0; }
+.tags li { font-family: var(--f-mono); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-soft); border: 1px solid var(--line); padding: .35rem .7rem; }
+
+/* teaching */
+.courses { list-style: none; margin: 0 0 2rem; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line-soft); }
+.courses li { display: grid; grid-template-columns: 7rem 1fr; gap: 1.5rem; padding: .9rem 0; border-bottom: 1px solid var(--line-soft); align-items: baseline; }
+.courses .code { font-family: var(--f-mono); font-size: .72rem; color: var(--ink-soft); letter-spacing: .06em; }
+.duties { margin: 0; padding-left: 1.1rem; color: var(--ink-soft); }
+.duties li { margin-bottom: .7rem; }
+.morelink { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+.morelink a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+.morelink a:hover { border-color: var(--accent); }
+
+.endnote { padding: 4rem 0 6rem; border-top: 1px solid var(--line-soft); color: var(--ink-soft); font-size: .88rem; }
+.endnote code { font-family: var(--f-mono); font-size: .82em; }
+
+@media (max-width: 900px) {
+  .cols2, .cols2--even, .figs { grid-template-columns: 1fr; }
+  .bar nav { display: none; }
+  .courses li { grid-template-columns: 1fr; gap: .2rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="spine"><div class="spine__fill"></div></div>
+
+<header class="bar">
+  <span class="bar__name">Mostofa Habib Fardin</span>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#research" class="on">Research</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#practice">Practice</a>
+    <a href="#photography">Photography</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="toggle" id="t">Day</button>
+</header>
+
+<!-- 01 TITLE -->
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <picture>
+      <source type="image/avif" srcset="assets/img/hero-hall-800.avif 800w, assets/img/hero-hall.avif 1408w" sizes="100vw">
+      <img src="assets/img/hero-hall.jpg" alt="" width="1408" height="768">
+    </picture>
+    <div class="hero__scrim"></div>
+  </div>
+  <div class="wrap hero__inner">
+    <p class="eyebrow">Research · Teaching · Industrial &amp; Production Engineering</p>
+    <h1>Mostofa Habib <em>Fardin</em></h1>
+    <p class="hero__role">Lecturer &amp; Researcher, BUET</p>
+    <p class="hero__lede">Most of what I study is structure that doesn't announce itself, in supply
+      chains and in classrooms alike. I spent four years building models of the first. Now I teach
+      the second.</p>
+    <div class="cta">
+      <a class="btn btn--solid" href="#research">Read the research</a>
+      <a class="btn" href="#teaching">Teaching</a>
+      <a class="btn" href="Mostofa-Habib-Fardin-Resume.pdf">Download CV</a>
+    </div>
+  </div>
+</section>
+
+<!-- 02 ABOUT — now carries education and a demoted recognition strip -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>About</h2>
+      <p class="section__meta">Background · Education</p>
+    </div>
+    <div class="cols2">
+      <div>
+        <p class="lede">I'm an Industrial &amp; Production Engineer, now teaching in the same
+          department that trained me. My research sits where machine learning meets the supply
+          chain: demand forecasting, variance reduction, quality control. Data that points to
+          something you can actually act on.</p>
+        <p class="muted">The camera does the same job off the clock. A street corner hides its logic
+          the same way a supply chain does. You just have to stand still long enough to catch it.</p>
+      </div>
+      <div>
+        <p class="label">Education</p>
+        <ul class="facts">
+          <li><span class="k">2022 – 2026</span><b>B.Sc. in Industrial and Production Engineering</b><br>
+            <span class="muted">BUET · CGPA 3.88 / 4.00 · Dean's List 2022, 2023</span></li>
+          <li style="margin-top:.6rem"><span class="k">2018 – 2020</span><b>Higher Secondary Certificate</b><br>
+            <span class="muted">Notre Dame College, Dhaka · GPA 5.00 / 5.00</span></li>
+        </ul>
+        <hr class="rule">
+        <p class="label">Recognition</p>
+        <ul class="recog">
+          <li>IRC WASH Water Hackathon finalist, 2025</li>
+          <li>ISCEA Global Supply Chain scholarship, 2025</li>
+          <li>Bizzmania champion, 2022</li>
+          <li>HULT Prize at BUET 1st runner-up, 2022</li>
+          <li>Lean Six Sigma White Belt</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 RESEARCH — promoted from fifth to second, absorbs thesis + publications + interests -->
+<section class="section section--feature" id="research">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Research</h2>
+      <p class="section__meta">Supply chains under uncertainty · Dept. of IPE, BUET</p>
+    </div>
+
+    <p class="pull">How do manufacturing and supply-chain systems behave under uncertainty, and
+      where do data-driven methods actually move the needle versus where structural resilience
+      does the real work?</p>
+
+    <ul class="tags">
+      <li>Supply Chain Resilience</li><li>ML Demand Forecasting</li><li>Multi-Echelon Simulation</li>
+      <li>Information Systems in Operations</li><li>Quality &amp; Process Control</li>
+    </ul>
+
+    <hr class="rule">
+
+    <p class="label">Doctoral-track work · Undergraduate thesis</p>
+    <h3 style="font-size:clamp(1.4rem,2.6vw,2.1rem);line-height:1.25;max-width:24ch">Taming the Bullwhip Under Geopolitical Uncertainty</h3>
+    <p class="cite" style="margin-top:.8rem">Defended June 2026 · Supervised by Prof. Dr. Sultana Parveen · with Sheikh Mahir Abrar</p>
+
+    <ul class="figs">
+      <li><b>7,218</b><span class="k">Mean bullwhip ratio at Actor 2 under geopolitical disruption, up from 4,716</span></li>
+      <li><b>5,740</b><span class="k">Simulation days modelled, trading days 2000–2021</span></li>
+      <li><b>1,000<span class="plus">+</span></b><span class="k">Simulation runs across six forecasting models</span></li>
+    </ul>
+
+    <div class="cols2--even cols2">
+      <div>
+        <p class="label">Findings</p>
+        <ul class="findings">
+          <li><b>Disruption dominates</b> forecasting method and information visibility combined.</li>
+          <li><b>The accuracy paradox:</b> the least accurate ML model suppressed the bullwhip best, while the most accurate performed no better than a naive rolling average.</li>
+          <li><b>ARIMA broke down structurally,</b> a failure mode I have not found documented in the literature.</li>
+          <li><b>Pipeline visibility ≈ full visibility,</b> so firms need not share everything to get the benefit.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">Publications &amp; output</p>
+        <ul class="pubs">
+          <li>
+            <span class="t">Taming the Bullwhip Under Geopolitical Uncertainty: A Multi-Echelon Simulation of Machine Learning Forecasting and Blockchain-Enabled Information Visibility</span>
+            <span class="m"><span class="status"></span>Manuscript in preparation · with S. M. Abrar and S. Parveen</span>
+          </li>
+          <li>
+            <span class="t">Smart IoT-Based System for Monitoring Ammonia Concentration and Ambient Conditions in a Fertilizer Factory</span>
+            <span class="m">Poster, August 2025 · 4 co-authors · available on ResearchGate</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 TEACHING — does not exist as a section today -->
+<section class="section" id="teaching">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Teaching</h2>
+      <p class="section__meta">Dept. of IPE, BUET · Lecturer since Jun 2026</p>
+    </div>
+    <div class="cols2">
+      <div>
+        <p class="label">Courses</p>
+        <ul class="courses">
+          <li><span class="code">IPE 331</span><span>Production Processes</span></li>
+          <li><span class="code">IPE 332</span><span>Production Processes Sessional</span></li>
+          <li><span class="code">IPE 204</span><span>Engineering Graphics &amp; Introduction to CAD Sessional</span></li>
+          <li><span class="code">IPE 432</span><span>Machine Tools Sessional</span></li>
+        </ul>
+        <p class="morelink"><a href="/teaching/">Course materials for my students ↗</a></p>
+      </div>
+      <div>
+        <p class="label">Beyond the lectures</p>
+        <ul class="duties">
+          <li>Course and lab-session planning, and technical instruction in SolidWorks.</li>
+          <li>Setting examination questions and evaluating answer scripts.</li>
+          <li>Accompanying student groups on industrial visits, coordinating with the plant officials hosting them.</li>
+          <li>Lab supervision and project guidance.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap endnote">
+  <p><b>Preview ends here.</b> Practice, Photography and Contact are not built. This page exists to
+  show three things together: the BUET palette with the accent discipline applied, the drawing
+  chrome removed and replaced by the left spine, and the Part D section order with Research second
+  and Teaching as a section of its own.</p>
+  <p>Count the red. It appears on the surname, the eyebrow, the section labels, the thesis
+  <code>+</code>, the status dot and link hover. Nowhere else. The spine, the header and every
+  number are neutral.</p>
+</div>
+
+<script>
+document.getElementById('t').addEventListener('click', function () {
+  var r = document.documentElement, dark = r.getAttribute('data-theme') !== 'light';
+  r.setAttribute('data-theme', dark ? 'light' : 'dark');
+  this.textContent = dark ? 'Night' : 'Day';
+});
+addEventListener('scroll', function () {
+  var p = scrollY / Math.max(1, document.body.scrollHeight - innerHeight);
+  document.querySelector('.spine__fill').style.height = Math.max(6, p * 100) + '%';
+}, { passive: true });
+</script>
+</body>
+</html>
