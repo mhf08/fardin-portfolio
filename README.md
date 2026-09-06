@@ -61,16 +61,25 @@ node tools/build-srcset.mjs                                       # add responsi
 The lightbox upgrades its full-size fetches to AVIF/WebP automatically (with a JPEG
 fallback), so no markup changes are needed there.
 
-### The Node pipeline is currently broken
+### Half the pipeline no longer runs (verified 2026-09-06)
 
-`build-images.mjs` and `build-html.mjs` need `sharp`, which they resolve from this
-folder or from the old React site's `node_modules`. **That folder no longer exists**
-(only `D:\Website Content\Portfolio Site.zip` remains), so both scripts, and
-`build-assets.ps1`, fail as of 2026-09-04.
+| Script | State | Why |
+|--------|-------|-----|
+| `build-images.mjs` | **fails** | prints `sharp not found` |
+| `build-og.mjs` | **fails** | prints `sharp not found` |
+| `build-logos.mjs` | **fails** | prints `sharp not found` |
+| `build-assets.ps1` | **cannot run** | no sharp needed (uses System.Drawing), but its `$SRC` folder is gone |
+| `build-html.mjs` | works | pure HTML rewriting, no sharp; idempotent |
+| `build-srcset.mjs` | works | same |
 
-Working alternative until it is fixed: the system Python's Pillow has both AVIF and
-WebP enabled, and has been used for every image added since. Either `npm i sharp`
-here, unzip the old site, or port the two scripts to Pillow.
+The three failures resolve `sharp` from this folder or from the old React site's
+`node_modules`, and **that folder no longer exists** — only
+`D:\Website Content\Portfolio Site.zip` remains. `build-assets.ps1` reads its
+source images from the same deleted path.
+
+Nothing is blocked in practice: the system Python's Pillow has AVIF and WebP
+enabled and has produced every image added since. To restore the Node path,
+`npm i sharp` here, or unzip the old site, or port the three scripts to Pillow.
 
 ## Deploy (Vercel)
 
