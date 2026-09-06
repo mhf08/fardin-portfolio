@@ -165,6 +165,83 @@ a { color: inherit; }
   .courses li { grid-template-columns: 1fr; gap: .2rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ============================================================
+   INTERACTION LAYER — content-agnostic.
+   Nothing here knows what the page is about, so it keeps working
+   as sections are added, rewritten or removed.
+   ============================================================ */
+
+/* 1. Theme change as a circular reveal from the toggle itself.
+      View Transitions API; browsers without it just swap. */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 9999; }
+
+/* 2. Load orchestration. Not a loader — nothing blocks, the page
+      simply arrives in order instead of all at once. */
+body.is-loading .bar,
+body.is-loading .hero__inner > * { opacity: 0; }
+.bar { transition: opacity .6s var(--ease), transform .6s var(--ease); }
+body.is-loading .bar { transform: translateY(-100%); }
+.hero__inner > * { transition: opacity .8s var(--ease), transform .9s var(--ease); }
+body.is-loading .hero__inner > * { transform: translateY(18px); }
+body:not(.is-loading) .hero__inner > * { transition-delay: calc(var(--i, 0) * 90ms + 120ms); }
+
+/* 3. Headings wipe up from their own baseline instead of fading. */
+.reveal-mask { clip-path: inset(0 0 110% 0); transform: translateY(12px); }
+.reveal-mask.in { clip-path: inset(0 0 -20% 0); transform: none;
+  transition: clip-path .9s var(--ease), transform .9s var(--ease); }
+
+/* 4. Body blocks rise, staggered within their own section. */
+.reveal-up { opacity: 0; transform: translateY(16px); }
+.reveal-up.in { opacity: 1; transform: none;
+  transition: opacity .7s ease, transform .8s var(--ease);
+  transition-delay: calc(var(--i, 0) * 70ms); }
+
+/* 5. Photographs settle rather than appear. */
+.reveal-img { overflow: hidden; }
+.reveal-img img { transform: scale(1.07); transition: transform 1.4s var(--ease); }
+.reveal-img.in img { transform: scale(1); }
+
+/* 6. Buttons lean toward the cursor. Small enough to read as physical
+      rather than as a gimmick. Transform is set inline by JS. */
+.btn { will-change: transform; transition: background .25s ease, border-color .25s ease, transform .35s var(--ease); }
+.btn.is-magnetic { transition: transform .08s linear, border-color .25s ease; }
+
+/* 7. Links draw their underline instead of switching it on. */
+.morelink a {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat;
+  transition: background-size .45s var(--ease); border-bottom: 0;
+}
+.morelink a:hover { background-size: 100% 1px; }
+
+/* 8. The spine gains section markers and names the one you are in.
+      Does what the ruler and HUD did, without the costume. */
+.spine__marks { position: absolute; inset: 0; }
+.spine__mark {
+  position: absolute; left: 0; width: 3px; height: 2px;
+  background: var(--ink-soft); opacity: .35; transition: all .4s var(--ease);
+}
+.spine__mark.on { height: 22px; opacity: 1; background: var(--accent); }
+.spine__label {
+  position: fixed; left: 15px; z-index: 41;
+  font-family: var(--f-mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-soft); white-space: nowrap;
+  transform-origin: left center; transform: rotate(90deg);
+  opacity: 0; transition: opacity .4s ease, top .5s var(--ease);
+  pointer-events: none;
+}
+.spine__label.on { opacity: .75; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-mask, .reveal-up, .reveal-img img {
+    clip-path: none !important; transform: none !important; opacity: 1 !important;
+  }
+  body.is-loading .bar, body.is-loading .hero__inner > * { opacity: 1; transform: none; }
+}
 </style>
 </head>
 <body>
@@ -344,15 +421,122 @@ a { color: inherit; }
 </div>
 
 <script>
-document.getElementById('t').addEventListener('click', function () {
-  var r = document.documentElement, dark = r.getAttribute('data-theme') !== 'light';
-  r.setAttribute('data-theme', dark ? 'light' : 'dark');
-  this.textContent = dark ? 'Night' : 'Day';
-});
-addEventListener('scroll', function () {
-  var p = scrollY / Math.max(1, document.body.scrollHeight - innerHeight);
-  document.querySelector('.spine__fill').style.height = Math.max(6, p * 100) + '%';
-}, { passive: true });
+(function () {
+  "use strict";
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- load orchestration ---- */
+  document.body.classList.add("is-loading");
+  [].forEach.call(document.querySelectorAll(".hero__inner > *"), function (el, i) {
+    el.style.setProperty("--i", i);
+  });
+  var lift = function () { document.body.classList.remove("is-loading"); };
+  addEventListener("load", function () { requestAnimationFrame(lift); });
+  setTimeout(lift, 1800);
+
+  /* ---- scroll reveals, assigned by role rather than by hand ---- */
+  document.querySelectorAll("h2, .hero h1").forEach(function (el) { el.classList.add("reveal-mask"); });
+  document.querySelectorAll(
+    ".section .label, .section .lede, .section .muted, .section .facts, .section .recog," +
+    ".section .pull, .section .tags, .figs li, .findings li, .pubs li, .courses li, .duties li," +
+    ".section .cite, .section .morelink, .section h3"
+  ).forEach(function (el) { el.classList.add("reveal-up"); });
+  document.querySelectorAll("picture").forEach(function (el) {
+    if (!el.closest(".hero")) el.classList.add("reveal-img");
+  });
+  document.querySelectorAll(".section").forEach(function (sec) {
+    sec.querySelectorAll(".reveal-up").forEach(function (el, i) { el.style.setProperty("--i", i % 8); });
+  });
+
+  var targets = document.querySelectorAll(".reveal-mask, .reveal-up, .reveal-img");
+  if (reduce) {
+    targets.forEach(function (el) { el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.1 });
+    targets.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---- magnetic buttons ---- */
+  if (!reduce && matchMedia("(pointer: fine)").matches) {
+    document.querySelectorAll(".btn").forEach(function (btn) {
+      btn.addEventListener("mousemove", function (e) {
+        var r = btn.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+        var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        btn.classList.add("is-magnetic");
+        btn.style.transform = "translate(" + (dx * 10).toFixed(1) + "px," + (dy * 6).toFixed(1) + "px)";
+      });
+      btn.addEventListener("mouseleave", function () {
+        btn.classList.remove("is-magnetic");
+        btn.style.transform = "";
+      });
+    });
+  }
+
+  /* ---- spine markers + active section name ---- */
+  var spine = document.querySelector(".spine");
+  var fill = document.querySelector(".spine__fill");
+  var marks = document.createElement("div");
+  marks.className = "spine__marks";
+  spine.appendChild(marks);
+  var label = document.createElement("span");
+  label.className = "spine__label";
+  document.body.appendChild(label);
+
+  var secs = [].slice.call(document.querySelectorAll(".hero, section[id]"));
+  var nodes = secs.map(function () {
+    var m = document.createElement("i");
+    m.className = "spine__mark";
+    marks.appendChild(m);
+    return m;
+  });
+  function place() {
+    var h = document.body.scrollHeight;
+    secs.forEach(function (s, i) { nodes[i].style.top = ((s.offsetTop / h) * 100).toFixed(2) + "%"; });
+  }
+  function nameOf(s) {
+    var h = s.querySelector("h2");
+    return h ? h.textContent.trim() : "Title";
+  }
+  function onScroll() {
+    var p = scrollY / Math.max(1, document.body.scrollHeight - innerHeight);
+    fill.style.height = Math.max(6, p * 100) + "%";
+    var active = 0;
+    secs.forEach(function (s, i) { if (scrollY >= s.offsetTop - innerHeight * 0.35) active = i; });
+    nodes.forEach(function (n, i) { n.classList.toggle("on", i === active); });
+    label.textContent = nameOf(secs[active]);
+    label.style.top = Math.round(nodes[active].getBoundingClientRect().top) + "px";
+    label.classList.add("on");
+  }
+  place(); onScroll();
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", function () { place(); onScroll(); });
+
+  /* ---- theme toggle as a circular reveal ---- */
+  var btn = document.getElementById("t");
+  btn.addEventListener("click", function (e) {
+    var swap = function () {
+      var r = document.documentElement, dark = r.getAttribute("data-theme") !== "light";
+      r.setAttribute("data-theme", dark ? "light" : "dark");
+      btn.textContent = dark ? "Night" : "Day";
+    };
+    if (reduce || !document.startViewTransition) { swap(); return; }
+    var x = e.clientX, y = e.clientY;
+    var far = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    document.startViewTransition(swap).ready.then(function () {
+      document.documentElement.animate(
+        { clipPath: ["circle(0px at " + x + "px " + y + "px)",
+                     "circle(" + far + "px at " + x + "px " + y + "px)"] },
+        { duration: 640, easing: "cubic-bezier(.22,1,.36,1)",
+          pseudoElement: "::view-transition-new(root)" }
+      );
+    });
+  });
+})();
 </script>
 </body>
 </html>
