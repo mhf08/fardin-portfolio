@@ -1,0 +1,66 @@
+/* ============================================================
+   BUET palette — PREVIEW ONLY
+   Loaded after styles.css by theme-buet-preview.html.
+   Overrides tokens and nothing else: every layout rule, font,
+   component and animation is untouched, so this shows the real
+   site wearing a different colour scheme.
+
+   Source of the brand colour: sampled from ipe.buet.ac.bd,
+   which uses rgb(191,20,48) = #BF1430 as its dominant accent
+   with rgb(161,15,38) = #A10F26 as the darker variant.
+   ============================================================ */
+
+:root {
+  /* Paper keeps a trace of warmth so the site does not turn clinical.
+     BUET's own site is pure white; that would flatten the personality. */
+  --paper:        #F7F4F1;
+  --paper-raised: #FFFCFA;
+  --ink:          #1C1A1B;
+  --ink-soft:     #5E5658;
+
+  /* Crimson replaces brass. The darker BUET variant carries text and
+     hairlines on paper; the full brand red is the highlight. */
+  --brass:        #A10F26;
+  --brass-bright: #BF1430;
+
+  --line:         rgba(28, 26, 27, 0.22);
+  --line-soft:    rgba(28, 26, 27, 0.10);
+  --shadow:       0 18px 50px -18px rgba(28, 26, 27, 0.26);
+  --focus:        #A10F26;
+}
+
+html[data-theme="dark"] {
+  /* Neutral-warm charcoal rather than the current olive black.
+     Olive under crimson reads muddy. */
+  --paper:        #171516;
+  --paper-raised: #201D1F;
+  --ink:          #EDE7E4;
+  --ink-soft:     #A2999B;
+
+  /* #BF1430 is far too dark to sit on this ground, so the hue is kept
+     and the lightness raised until it clears 3:1 for hairlines and
+     small text. Same red, legible. */
+  --brass:        #DD4B5E;
+  --brass-bright: #EF6274;
+
+  --line:         rgba(237, 231, 228, 0.22);
+  --line-soft:    rgba(237, 231, 228, 0.09);
+  --shadow:       0 18px 50px -18px rgba(0, 0, 0, 0.6);
+  --focus:        #EF6274;
+}
+
+/* ------------------------------------------------------------
+   Knock-on fixes the token swap alone does not cover.
+
+   Two rules tint a surface with a 5-7% mix of the accent. That was
+   tuned for warm gold, where a faint wash reads as paper. A faint
+   wash of crimson reads as PINK, which is the one thing an
+   institutional red must not do. Both go neutral instead: the band
+   still separates the groups, it just stops being rosy.
+   ------------------------------------------------------------ */
+.bom__group th {
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+.bom tbody tr:not(.bom__group):hover {
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+}
