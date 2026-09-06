@@ -131,6 +131,10 @@ picture { display: contents; }
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft);
 }
 
+/* Stable name-based anchors for cross-page links. They sit inside their
+   section, so they need the same header offset .sheet gets. */
+#contact { display: block; scroll-margin-top: calc(var(--head-h) + 12px); }
+
 /* ---------- Reading spine (replaces the ruler and the HUD) ---------- */
 .spine { position: fixed; left: 0; top: 0; bottom: 0; width: 3px; z-index: 40; background: var(--line-soft); }
 .spine__fill { position: absolute; top: 0; left: 0; width: 100%; height: 6%;
