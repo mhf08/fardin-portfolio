@@ -186,8 +186,8 @@ picture { display: contents; }
 .site-head__tools { display: flex; align-items: center; gap: 0.75rem; }
 
 .theme-toggle {
-  position: relative; border: 1px solid var(--line); background: none;
-  color: var(--ink-soft); cursor: pointer; padding: 0.45rem 0.8rem;
+  position: relative; border: 1px solid var(--line); border-radius: 999px; background: none;
+  color: var(--ink-soft); cursor: pointer; padding: 0.45rem 0.95rem;
   font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.16em;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
@@ -352,14 +352,18 @@ main { padding-left: var(--ruler-w); }
 }
 
 /* ---------- Buttons ---------- */
+/* Pills, to rhyme with the circular icon buttons in the contact row.
+   The resting border is --line rather than full --ink so a row of three
+   buttons reads as one quiet group instead of three heavy boxes. */
 .btn {
   position: relative; z-index: 0; overflow: hidden;
   display: inline-flex; align-items: center; gap: 0.6rem;
-  padding: 0.85rem 1.5rem;
-  border: 1px solid var(--ink);
-  font-family: var(--font-body); font-size: 0.95rem; font-weight: 500;
+  padding: 0.9rem 1.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-body); font-size: 0.92rem; font-weight: 500;
   color: var(--ink); text-decoration: none; background: none; cursor: pointer;
-  transition: color 0.3s var(--ease-out), border-color 0.3s;
+  transition: color 0.3s var(--ease-out), border-color 0.3s ease;
 }
 .btn::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
@@ -367,11 +371,12 @@ main { padding-left: var(--ruler-w); }
   transform: translateX(-101%);
   transition: transform 0.35s var(--ease-out);
 }
-.btn:hover { color: var(--paper); }
-.btn:hover::before { transform: none; }
-.btn--solid { background: var(--ink); color: var(--paper); }
+.btn:hover, .btn:focus-visible { color: var(--paper); border-color: var(--ink); }
+.btn:hover::before, .btn:focus-visible::before { transform: none; }
+.btn--solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .btn--solid::before { background: var(--brass); }
-.btn--solid:hover { color: #fff; border-color: var(--brass); }
+/* the sweep behind this is crimson in both themes, so the label is white in both */
+.btn--solid:hover, .btn--solid:focus-visible { color: #fff; border-color: var(--brass); }
 
 /* social icon buttons */
 .iconrow { display: flex; gap: 0.75rem; list-style: none; margin: 0; padding: 0; }
@@ -430,7 +435,7 @@ main { padding-left: var(--ruler-w); }
 .carousel__count { color: var(--ink-soft); }
 .carousel__btns { display: flex; gap: 0.5rem; }
 .carousel__btn {
-  width: 42px; height: 42px; border: 1px solid var(--line); background: none;
+  width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; background: none;
   color: var(--ink); font-family: var(--font-mono); font-size: 1rem; cursor: pointer;
   transition: background-color 0.25s var(--ease-out), color 0.25s, border-color 0.25s, opacity 0.25s;
 }

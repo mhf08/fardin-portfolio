@@ -1,6 +1,6 @@
 {
   "updated": "2026-07-09",
-  "note": "This file drives the Course Materials page. To add a slide deck: upload the file (PDF, PPTX, etc.) into teaching/files/<course>/, then add one entry to that course's \"materials\" list below. Small files (under ~4MB): use the Pages CMS admin panel (teaching/ADMIN-SETUP.md). Larger files: upload via github.com web UI directly, no size limit (teaching/HOW-TO-ADD-MATERIALS.md) -- the CMS's upload form caps out around 4.5MB. The page's 'Updated' date is derived automatically from the newest material date, so you do NOT need to touch the 'updated' field above (it's only a fallback shown when nothing has a date yet).",
+  "note": "This file drives the Course Materials page. To add a slide deck: upload the file (PDF, PPTX, etc.) into teaching/files/<course>/, then add one entry to that course's \"materials\" list below. Small files (under ~4MB): use the Pages CMS admin panel. Larger files: upload via the github.com web UI, no size limit -- the CMS upload form caps out around 4.5MB. Both methods are documented in teaching/README.md. The page's 'Updated' date is derived automatically from the newest material date, so you do NOT need to touch the 'updated' field above (it's only a fallback shown when nothing has a date yet).",
   "courses": [
     {
       "code": "IPE 331",
