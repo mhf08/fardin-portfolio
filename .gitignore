@@ -2,3 +2,6 @@
 HANDOFF.md
 ROADMAP.md
 THEME-BRIEF.md
+
+# Node deps for tools/ — never committed, never deployed
+node_modules/

@@ -61,25 +61,30 @@ node tools/build-srcset.mjs                                       # add responsi
 The lightbox upgrades its full-size fetches to AVIF/WebP automatically (with a JPEG
 fallback), so no markup changes are needed there.
 
-### Half the pipeline no longer runs (verified 2026-09-06)
+### Tooling state (verified 2026-09-06)
 
-| Script | State | Why |
-|--------|-------|-----|
-| `build-images.mjs` | **fails** | prints `sharp not found` |
-| `build-og.mjs` | **fails** | prints `sharp not found` |
-| `build-logos.mjs` | **fails** | prints `sharp not found` |
-| `build-assets.ps1` | **cannot run** | no sharp needed (uses System.Drawing), but its `$SRC` folder is gone |
-| `build-html.mjs` | works | pure HTML rewriting, no sharp; idempotent |
-| `build-srcset.mjs` | works | same |
+`sharp` is now a devDependency here. Run `npm install` once after cloning, then:
 
-The three failures resolve `sharp` from this folder or from the old React site's
-`node_modules`, and **that folder no longer exists** — only
-`D:\Website Content\Portfolio Site.zip` remains. `build-assets.ps1` reads its
-source images from the same deleted path.
+| Script | npm alias | State |
+|--------|-----------|-------|
+| `build-images.mjs` | `npm run images` | works |
+| `build-og.mjs` | `npm run og` | works |
+| `build-html.mjs` | `npm run html` | works, idempotent |
+| `build-srcset.mjs` | `npm run srcset` | works, idempotent |
+| `build-logos.mjs` | `npm run logos` | **cannot run** |
+| `build-assets.ps1` | — | **cannot run** |
 
-Nothing is blocked in practice: the system Python's Pillow has AVIF and WebP
-enabled and has produced every image added since. To restore the Node path,
-`npm i sharp` here, or unzip the old site, or port the three scripts to Pillow.
+The last two are not a `sharp` problem. Both read source files from
+`D:\Website Content\Portfolio Site\Site-Rebuild\...`, the old React site, which
+has been deleted; only `Portfolio Site.zip` remains. They were one-time migration
+tools and their inputs are gone. Unzip that archive if you ever need them.
+
+**`build-images.mjs` re-encodes every JPEG on every run**, it does not skip files
+that already have siblings. That is fine but it rewrites ~78 files, so run it when
+images actually change and commit the result on its own.
+
+`node_modules/` is gitignored and in `.vercelignore`, along with `package.json` and
+the lockfile. Nothing about the deployed site depends on Node.
 
 ## Deploy (Vercel)
 
