@@ -52,7 +52,10 @@
        Enable in the Vercel dashboard → Analytics tab; this script is a no-op until then. -->
   <script defer src="/_vercel/insights/script.js"></script>
 
-  <!-- Structured data: identity for search + AI assistants (ProfilePage → Person) -->
+  <!-- Structured data: identity for search + AI assistants (ProfilePage → Person).
+       dateModified/datePublished MUST be full ISO 8601 with a timezone offset.
+       A date-only value ("2026-09-06") is what Search Console flagged on
+       2026-09-06 as "Invalid datetime value for dateModified". +06:00 = Dhaka. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -69,7 +72,8 @@
         "@id": "https://mostofahabibfardin.vercel.app/#profilepage",
         "url": "https://mostofahabibfardin.vercel.app/",
         "isPartOf": { "@id": "https://mostofahabibfardin.vercel.app/#website" },
-        "dateModified": "2026-09-06",
+        "datePublished": "2026-07-09T09:00:00+06:00",
+        "dateModified": "2026-09-06T18:30:00+06:00",
         "mainEntity": { "@id": "https://mostofahabibfardin.vercel.app/#person" }
       },
       {
