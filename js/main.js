@@ -21,56 +21,84 @@
     toggle.setAttribute("aria-pressed", String(dark));
     toggle.setAttribute("aria-label", dark ? "Switch to day mode" : "Switch to night mode");
   }
-  toggle.addEventListener("click", function () {
-    var next = root.dataset.theme === "dark" ? "light" : "dark";
-    root.dataset.theme = next;
-    try { localStorage.setItem("theme", next); } catch (e) { /* private mode */ }
-    syncToggle();
+  toggle.addEventListener("click", function (ev) {
+    var swap = function () {
+      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("mhf-theme", next); } catch (e) {}
+      syncToggle();
+    };
+    // Circular reveal from the button itself where the browser supports it.
+    if (reduceMotion || !document.startViewTransition) { swap(); return; }
+    var x = ev.clientX, y = ev.clientY;
+    var far = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    document.startViewTransition(swap).ready.then(function () {
+      document.documentElement.animate(
+        { clipPath: ["circle(0px at " + x + "px " + y + "px)",
+                     "circle(" + far + "px at " + x + "px " + y + "px)"] },
+        { duration: 620, easing: "cubic-bezier(.22,1,.36,1)",
+          pseudoElement: "::view-transition-new(root)" }
+      );
+    });
   });
   syncToggle();
 
-  /* ---------- Ruler: ticks + scroll progress + sheet readout ---------- */
-  var ruler = document.querySelector(".ruler");
-  var ticksBox = ruler.querySelector(".ruler__ticks");
-  var progress = ruler.querySelector(".ruler__progress");
-  var readoutNo = ruler.querySelector(".ruler__sheet");
-  var readoutLabel = ruler.querySelector(".ruler__label");
+  /* ---------- Reading spine: progress, section marks, active label ----------
+     Does what the ruler and the HUD used to do. Builds itself from whatever
+     sections exist, so adding or removing one needs no change here. */
+  var spine = document.querySelector(".spine");
+  var spineFill = spine && spine.querySelector(".spine__fill");
+  var sheetsForSpine = Array.prototype.slice.call(document.querySelectorAll(".sheet"));
+  var marks = [], spineLabel = null;
 
-  for (var i = 0; i <= 60; i++) {
-    var tick = document.createElement("span");
-    tick.style.top = (i / 60 * 100) + "%";
-    if (i % 5 === 0) tick.className = "major";
-    ticksBox.appendChild(tick);
+  if (spine && sheetsForSpine.length) {
+    var marksBox = document.createElement("div");
+    marksBox.className = "spine__marks";
+    spine.appendChild(marksBox);
+    spineLabel = document.createElement("span");
+    spineLabel.className = "spine__label";
+    document.body.appendChild(spineLabel);
+    marks = sheetsForSpine.map(function () {
+      var m = document.createElement("i");
+      m.className = "spine__mark";
+      marksBox.appendChild(m);
+      return m;
+    });
   }
 
-  var progressTicking = false;
-  function paintProgress() {
-    var doc = document.documentElement;
-    var max = doc.scrollHeight - innerHeight;
-    progress.style.height = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
-    progressTicking = false;
+  var spineTicking = false;
+  function paintSpine() {
+    spineTicking = false;
+    if (!spine) return;
+    var max = document.documentElement.scrollHeight - innerHeight;
+    spineFill.style.height = (max > 0 ? Math.max(6, (scrollY / max) * 100) : 6) + "%";
+    var h = document.documentElement.scrollHeight;
+    var active = 0;
+    sheetsForSpine.forEach(function (sec, i) {
+      marks[i].style.top = ((sec.offsetTop / h) * 100).toFixed(2) + "%";
+      if (scrollY >= sec.offsetTop - innerHeight * 0.35) active = i;
+    });
+    marks.forEach(function (m, i) { m.classList.toggle("on", i === active); });
+    spineLabel.textContent = sheetsForSpine[active].dataset.name || "";
+    spineLabel.style.top = Math.round(marks[active].getBoundingClientRect().top) + "px";
+    spineLabel.classList.add("on");
   }
-  addEventListener("scroll", function () {
-    if (!progressTicking) { progressTicking = true; requestAnimationFrame(paintProgress); }
-  }, { passive: true });
-  paintProgress();
+  if (spine) {
+    addEventListener("scroll", function () {
+      if (!spineTicking) { spineTicking = true; requestAnimationFrame(paintSpine); }
+    }, { passive: true });
+    addEventListener("resize", paintSpine);
+    paintSpine();
+  }
 
-  /* ---------- Scroll spy: nav highlight + ruler + HUD readout ---------- */
+  /* ---------- Scroll spy: nav highlight ---------- */
   var sheets = Array.prototype.slice.call(document.querySelectorAll(".sheet"));
   var navLinks = document.querySelectorAll("[data-spy]");
-  var hud = document.querySelector(".hud");
-  var hudSheet = hud && hud.querySelector(".hud__sheet");
-  var hudName = hud && hud.querySelector(".hud__name");
-  var sheetTotal = sheets.length < 10 ? "0" + sheets.length : String(sheets.length);
 
   var spy = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
       var el = entry.target;
-      readoutNo.textContent = el.dataset.sheet;
-      readoutLabel.textContent = el.dataset.name;
-      if (hudSheet) hudSheet.textContent = el.dataset.sheet + " / " + sheetTotal;
-      if (hudName) hudName.textContent = el.dataset.name;
       navLinks.forEach(function (a) {
         if (a.dataset.spy === el.id) a.setAttribute("aria-current", "true");
         else a.removeAttribute("aria-current");
@@ -126,32 +154,16 @@
     menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
   });
 
-  /* ---------- Sheet-wipe page transitions ---------- */
-  var wipe = document.querySelector(".wipe");
-  var wipeBusy = false;
-
+  /* ---------- Anchor jumps (the sheet-wipe transition is gone) ---------- */
   document.querySelectorAll("[data-wipe]").forEach(function (link) {
     link.addEventListener("click", function (ev) {
-      var href = link.getAttribute("href");
-      var target = document.querySelector(href);
-      if (!target) return; // fall through to default anchor behavior
+      var target = document.querySelector(link.getAttribute("href"));
+      if (!target) return;
       ev.preventDefault();
       closeMenu();
-
-      function jump() {
-        if (lenis) lenis.scrollTo(target, { immediate: true }); // Lenis honors scroll-margin-top
-        else target.scrollIntoView({ behavior: "instant", block: "start" });
-        history.replaceState(null, "", href);
-      }
-
-      if (reduceMotion || wipeBusy) { jump(); return; }
-
-      // The signature bold transition: brass + ink panels sweep across the
-      // viewport like turning a drafting sheet; the jump happens under cover.
-      wipeBusy = true;
-      wipe.classList.add("run");
-      setTimeout(jump, 430);
-      setTimeout(function () { wipe.classList.remove("run"); wipeBusy = false; }, 950);
+      if (lenis) lenis.scrollTo(target);
+      else target.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth", block: "start" });
+      history.replaceState(null, "", link.getAttribute("href"));
     });
   });
 
@@ -334,49 +346,6 @@
     });
   });
 
-  /* ---------- Bespoke registration-mark cursor ---------- */
-  var cursorEl = document.querySelector(".cursor");
-  if (cursorEl && matchMedia("(pointer: fine)").matches && !reduceMotion) {
-    document.body.classList.add("cursor-on");
-
-    // The OS cursor is hidden, so this mark IS the pointer — it must track 1:1.
-    // Any smoothing here reads as input latency, not style.
-    addEventListener("mousemove", function (e) {
-      cursorEl.style.transform =
-        "translate3d(" + e.clientX + "px," + e.clientY + "px,0) translate(-50%,-50%)";
-    }, { passive: true });
-
-    var INTERACTIVE = "a, button, [data-hot], summary, input, textarea";
-    addEventListener("mouseover", function (e) {
-      var t = e.target.closest(INTERACTIVE);
-      if (!t) return;
-      cursorEl.classList.add("hot");
-    });
-    addEventListener("mouseout", function (e) {
-      if (!e.target.closest(INTERACTIVE)) return;
-      // Ignore moves between nested children of the same interactive element
-      var still = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(INTERACTIVE);
-      if (!still) cursorEl.classList.remove("hot");
-    });
-    document.addEventListener("mouseleave", function () { cursorEl.style.opacity = "0"; });
-    document.addEventListener("mouseenter", function () { cursorEl.style.opacity = ""; });
-  }
-
-  /* ---------- HUD: live drafting coordinates ---------- */
-  if (hud && matchMedia("(pointer: fine)").matches) {
-    var hudX = hud.querySelector(".hud__x");
-    var hudY = hud.querySelector(".hud__y");
-    var mx = 0, my = 0, hudTick = false;
-    function pad4(n) { n = String(Math.max(0, Math.round(n))); return "0000".slice(n.length) + n; }
-    addEventListener("mousemove", function (e) {
-      mx = e.clientX; my = e.clientY;
-      if (!hudTick) {
-        hudTick = true;
-        requestAnimationFrame(function () { hudX.textContent = pad4(mx); hudY.textContent = pad4(my); hudTick = false; });
-      }
-    }, { passive: true });
-  }
-
   /* ---------- Email addresses: copy, don't rely on mailto ----------
      Plenty of visitors have no desktop mail client, and on Windows a mailto
      handler mis-registered to a browser just opens that browser's start page.
@@ -430,6 +399,40 @@
       }
     });
   });
+
+  /* ---------- Interaction layer ----------
+     Everything here is assigned by ROLE, never by hand-tagging markup, so it
+     keeps working as sections are added, rewritten or removed. */
+
+  // load orchestration: the page arrives in order rather than all at once
+  document.body.classList.add("is-loading");
+  document.querySelectorAll(".hero__inner > *").forEach(function (el, i) {
+    el.style.setProperty("--i", i);
+  });
+  var lift = function () { document.body.classList.remove("is-loading"); };
+  addEventListener("load", function () { requestAnimationFrame(lift); });
+  setTimeout(lift, 1800); // safety: never leave the page invisible
+
+  // Heading masks are driven purely by CSS off the site's existing .reveal/.in
+  // observer. A second observer proved unreliable here, and <picture> is
+  // display:contents so it has no box to observe at all.
+
+  // buttons lean toward the cursor
+  if (!reduceMotion && matchMedia("(pointer: fine)").matches) {
+      document.querySelectorAll(".btn").forEach(function (btn) {
+        btn.addEventListener("mousemove", function (e) {
+          var r = btn.getBoundingClientRect();
+          var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+          var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+          btn.classList.add("is-magnetic");
+          btn.style.transform = "translate(" + (dx * 9).toFixed(1) + "px," + (dy * 5).toFixed(1) + "px)";
+        });
+        btn.addEventListener("mouseleave", function () {
+          btn.classList.remove("is-magnetic");
+          btn.style.transform = "";
+        });
+      });
+  }
 
   /* ---------- Footer year ---------- */
   var year = document.querySelector("[data-year]");

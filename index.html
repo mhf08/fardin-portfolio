@@ -10,8 +10,8 @@
        shared .vercel.app host, so DNS verification is not available to us. -->
   <meta name="google-site-verification" content="XWkREqNmBdemtMGhpztfgGUjp9QaH_JhrFW9aBnNSGc">
   <meta name="keywords" content="Mostofa Habib Fardin, Industrial Engineer, BUET, Supply Chain, Machine Learning, Quality Control, Portfolio">
-  <meta name="theme-color" content="#F3EFE6" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#181A16" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F7F4F1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171516" media="(prefers-color-scheme: dark)">
 
   <!-- Canonical + social. Live domain: mostofahabibfardin.vercel.app (swap all occurrences if a custom domain is attached later) -->
   <link rel="canonical" href="https://mostofahabibfardin.vercel.app/">
@@ -69,7 +69,7 @@
         "@id": "https://mostofahabibfardin.vercel.app/#profilepage",
         "url": "https://mostofahabibfardin.vercel.app/",
         "isPartOf": { "@id": "https://mostofahabibfardin.vercel.app/#website" },
-        "dateModified": "2026-09-05",
+        "dateModified": "2026-09-06",
         "mainEntity": { "@id": "https://mostofahabibfardin.vercel.app/#person" }
       },
       {
@@ -109,52 +109,25 @@
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Sheet-wipe transition overlay -->
-<div class="wipe" aria-hidden="true">
-  <div class="wipe__panel wipe__panel--brass"></div>
-  <div class="wipe__panel wipe__panel--ink"></div>
-</div>
-
-<!-- Bespoke registration-mark cursor (desktop, fine pointer only) -->
-<div class="cursor" aria-hidden="true">
-  <svg class="cursor__mark" viewBox="0 0 44 44" width="44" height="44">
-    <circle cx="22" cy="22" r="10" fill="none" stroke="currentColor" stroke-width="1"/>
-    <line x1="22" y1="0" x2="22" y2="14" stroke="currentColor" stroke-width="1"/>
-    <line x1="22" y1="30" x2="22" y2="44" stroke="currentColor" stroke-width="1"/>
-    <line x1="0" y1="22" x2="14" y2="22" stroke="currentColor" stroke-width="1"/>
-    <line x1="30" y1="22" x2="44" y2="22" stroke="currentColor" stroke-width="1"/>
-  </svg>
-</div>
-
-<!-- Left-edge ruler (desktop) -->
-<div class="ruler" aria-hidden="true">
-  <div class="ruler__ticks"></div>
-  <div class="ruler__progress"></div>
-  <div class="ruler__readout"><span class="ruler__sheet">01</span><span class="ruler__label">Title</span></div>
-</div>
-
-<!-- Living title-block HUD: current sheet + drafting coordinates -->
-<aside class="hud mono" aria-hidden="true">
-  <span class="hud__row"><span class="hud__k">Sheet</span><b class="hud__sheet">01 / 09</b><span class="hud__name">Title</span></span>
-  <span class="hud__row"><span class="hud__k">X</span><b class="hud__x">0000</b><span class="hud__k">Y</span><b class="hud__y">0000</b></span>
-  <span class="hud__row"><span class="hud__k">Rev</span><b>2026.09</b></span>
-</aside>
+<!-- Reading spine (replaces the drafting ruler) -->
+<div class="spine" aria-hidden="true"><span class="spine__fill"></span></div>
 
 <header class="site-head">
   <a class="site-head__mark" href="#sheet-01" data-wipe>
     <span class="site-head__mono">MHF</span><span class="site-head__dot">.</span>
   </a>
 
-  <nav class="site-nav" id="site-nav" aria-label="Sheets">
+  <nav class="site-nav" id="site-nav" aria-label="Sections">
     <ul>
-      <li><a href="#sheet-02" data-wipe data-spy="sheet-02"><span class="n">02</span>About</a></li>
-      <li><a href="#sheet-03" data-wipe data-spy="sheet-03"><span class="n">03</span>Toolkit</a></li>
-      <li><a href="#sheet-04" data-wipe data-spy="sheet-04"><span class="n">04</span>Experience</a></li>
-      <li><a href="#sheet-05" data-wipe data-spy="sheet-05"><span class="n">05</span>Thesis</a></li>
-      <li><a href="#sheet-06" data-wipe data-spy="sheet-06"><span class="n">06</span>Projects</a></li>
-      <li><a href="#sheet-07" data-wipe data-spy="sheet-07"><span class="n">07</span>Achievements</a></li>
-      <li><a href="#sheet-08" data-wipe data-spy="sheet-08"><span class="n">08</span>Photography</a></li>
-      <li><a href="#sheet-09" data-wipe data-spy="sheet-09" class="site-nav__cta"><span class="n">09</span>Contact</a></li>
+      <li><a href="#sheet-02" data-wipe data-spy="sheet-02">About</a></li>
+      <li><a href="#sheet-03" data-wipe data-spy="sheet-03">Research</a></li>
+      <li><a href="#sheet-04" data-wipe data-spy="sheet-04">Teaching</a></li>
+      <li><a href="#sheet-05" data-wipe data-spy="sheet-05">Projects</a></li>
+      <li><a href="#sheet-06" data-wipe data-spy="sheet-06">Industry</a></li>
+      <li><a href="#sheet-07" data-wipe data-spy="sheet-07">Skills</a></li>
+      <li><a href="#sheet-08" data-wipe data-spy="sheet-08">Recognition</a></li>
+      <li><a href="#sheet-09" data-wipe data-spy="sheet-09">Photography</a></li>
+      <li><a href="#sheet-10" data-wipe data-spy="sheet-10" class="site-nav__cta">Contact</a></li>
     </ul>
   </nav>
 
@@ -164,14 +137,12 @@
       <span class="theme-toggle__txt theme-toggle__txt--night">DAY&nbsp;SHIFT</span>
     </button>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-      <span></span><span></span>
     </button>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- ============ SHEET 01 — TITLE ============ -->
   <section class="sheet hero" id="sheet-01" aria-labelledby="hero-title" data-sheet="01" data-name="Title">
     <div class="hero__bg" aria-hidden="true">
       <picture>
@@ -203,43 +174,22 @@
       </p>
 
       <div class="hero__cta anim" style="--d:5">
-        <a class="btn btn--solid" href="#sheet-05" data-wipe>Read the Thesis</a>
-        <a class="btn" href="#sheet-06" data-wipe>View Projects</a>
+        <a class="btn btn--solid" href="#sheet-03" data-wipe>Read the research</a>
+        <a class="btn" href="#sheet-05" data-wipe>Projects</a>
         <a class="btn" href="Mostofa-Habib-Fardin-Resume.pdf" download="Mostofa-Habib-Fardin-Resume.pdf">Download Resume</a>
       </div>
-
-      <!-- Signature element: the title block -->
-      <dl class="titleblock anim" style="--d:6" aria-label="Drawing title block">
-        <div class="titleblock__cell">
-          <dt>Drawn by</dt>
-          <dd>Mostofa Habib Fardin</dd>
-        </div>
-        <div class="titleblock__cell">
-          <dt>Discipline</dt>
-          <dd>Industrial &amp; Production Engineering, BUET</dd>
-        </div>
-        <div class="titleblock__cell">
-          <dt>Sheet</dt>
-          <dd>01 of 09</dd>
-        </div>
-        <div class="titleblock__cell titleblock__cell--status">
-          <dt>Status</dt>
-          <dd><span class="status-dot" aria-hidden="true"></span>Open to academic collaborations</dd>
-        </div>
-      </dl>
     </div>
 
     <a class="hero__scroll mono" href="#sheet-02" data-wipe>
       Explore
-      <span class="hero__scrollline" aria-hidden="true"><span></span></span>
+      <span class="hero__scrollline" aria-hidden="true"></span>
     </a>
   </section>
 
-  <!-- ============ SHEET 02 — ABOUT ME ============ -->
   <section class="sheet" id="sheet-02" aria-labelledby="t-02" data-sheet="02" data-name="About">
     <header class="sheet-head reveal">
-      <h2 id="t-02">About Me</h2>
-      <p class="sheet-head__meta mono">Rev 2026.09&ensp;·&ensp;Scale 1:1</p>
+      <h2 id="t-02">About</h2>
+      <p class="sheet-head__meta mono">Background&ensp;·&ensp;Education</p>
     </header>
 
     <div class="profile">
@@ -251,7 +201,7 @@
             <img src="assets/img/portrait.jpg" alt="Mostofa Habib Fardin" width="600" height="800" loading="lazy">
           </picture>
         </span>
-        <figcaption class="mono">FIG. 02-A — Mostofa Habib Fardin</figcaption>
+        <figcaption class="mono">Mostofa Habib Fardin</figcaption>
       </figure>
 
       <div class="profile__body">
@@ -281,47 +231,6 @@
           <strong>Open to academic collaborations and research partnerships.</strong>
         </p>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ SHEET 03 — THE TOOLKIT (SKILLS + EDUCATION) ============ -->
-  <section class="sheet sheet--compact" id="sheet-03" aria-labelledby="t-03" data-sheet="03" data-name="Toolkit">
-    <header class="sheet-head reveal">
-      <h2 id="t-03">The Toolkit</h2>
-      <p class="sheet-head__meta mono">Skills&ensp;·&ensp;Academic Foundation</p>
-    </header>
-
-    <div class="bom reveal">
-      <p class="mono bom__title">TABLE 03-A — BILL OF MATERIALS (SKILLS)</p>
-      <table>
-        <thead>
-          <tr><th scope="col" class="mono">Item</th><th scope="col" class="mono">Skill</th><th scope="col" class="mono">Specification</th></tr>
-        </thead>
-        <tbody>
-          <tr class="bom__group" style="--d:0"><th scope="rowgroup" colspan="3" class="mono">Physical Systems &amp; Design</th></tr>
-          <tr style="--d:1"><td class="mono">001</td><td>Engineering Design</td><td>SolidWorks &amp; CATIA</td></tr>
-          <tr style="--d:2"><td class="mono">002</td><td>Simulation &amp; Analysis</td><td>Ansys (FEA/CFD) for structural and fluid validation, ARENA for system analysis</td></tr>
-          <tr style="--d:3"><td class="mono">003</td><td>Digital Prototyping</td><td>AutoCAD (Layouts)</td></tr>
-        </tbody>
-        <tbody>
-          <tr class="bom__group" style="--d:4"><th scope="rowgroup" colspan="3" class="mono">Data Science &amp; ML</th></tr>
-          <tr style="--d:5"><td class="mono">004</td><td>Predictive Modeling</td><td>XGBoost, TFT and LightGBM for forecasting</td></tr>
-          <tr style="--d:6"><td class="mono">005</td><td>Data Stack</td><td>Python, MATLAB, and C programming</td></tr>
-          <tr style="--d:7"><td class="mono">006</td><td>Advanced Tech</td><td>IoT (Sensor integration), Blockchain</td></tr>
-        </tbody>
-        <tbody>
-          <tr class="bom__group" style="--d:8"><th scope="rowgroup" colspan="3" class="mono">Operational Excellence</th></tr>
-          <tr style="--d:9"><td class="mono">007</td><td>Lean Philosophies</td><td>5S, 3G, Kaizen, 3K, and Poka-Yoke</td></tr>
-          <tr style="--d:10"><td class="mono">008</td><td>Quality &amp; Safety</td><td>Line Balancing, Time Studies, Six Sigma (White Belt), Ergonomics and Safety</td></tr>
-        </tbody>
-        <tbody>
-          <tr class="bom__group" style="--d:11"><th scope="rowgroup" colspan="3" class="mono">Teaching &amp; Communication</th></tr>
-          <tr style="--d:12"><td class="mono">009</td><td>Curriculum Design</td><td>Course and lab session planning for undergraduate engineering courses</td></tr>
-          <tr style="--d:13"><td class="mono">010</td><td>Mentorship</td><td>Lab supervision, project guidance, and accompanying students on industrial visits</td></tr>
-          <tr style="--d:14"><td class="mono">011</td><td>Technical Communication</td><td>Lecturing, thesis writing, and technical documentation in LaTeX</td></tr>
-          <tr style="--d:15"><td class="mono">012</td><td>Assessment</td><td>Examination question setting and answer script evaluation</td></tr>
-        </tbody>
-      </table>
     </div>
 
     <div class="toolkit-edu reveal">
@@ -353,13 +262,89 @@
         </article>
       </div>
     </div>
+
   </section>
 
-  <!-- ============ SHEET 04 — EXPERIENCE ============ -->
-  <section class="sheet" id="sheet-04" aria-labelledby="t-04" data-sheet="04" data-name="Experience">
+  <section class="sheet sheet--feature" id="sheet-03" aria-labelledby="t-03" data-sheet="03" data-name="Research">
     <header class="sheet-head reveal">
-      <h2 id="t-04">Experience</h2>
-      <p class="sheet-head__meta mono">Professional Record</p>
+      <h2 id="t-03">Research</h2>
+      <p class="sheet-head__meta mono">Supply chains under uncertainty&ensp;·&ensp;Dept. of IPE, BUET</p>
+    </header>
+
+    <div class="thesis">
+      <p class="thesis__abstract reveal">
+        <span class="mono thesis__label">Defended June 2026 · Supervised by Prof. Dr. Sultana Parveen · with Sheikh Mahir Abrar · Manuscript in preparation</span>
+        Taming the Bullwhip Under Geopolitical Uncertainty: A Multi-Echelon Simulation of
+        <em>Machine Learning Forecasting</em> and <em>Blockchain-Enabled Information Visibility</em>.
+      </p>
+
+      <ul class="figures">
+        <li>
+          <b class="figures__n">7,218</b>
+          <span class="figures__k mono">Mean bullwhip ratio at Actor 2 under geopolitical disruption, up from 4,716</span>
+        </li>
+        <li>
+          <b class="figures__n">5,740</b>
+          <span class="figures__k mono">Simulation days modelled, trading days 2000–2021</span>
+        </li>
+        <li>
+          <b class="figures__n">1,000<span class="figures__plus">+</span></b>
+          <span class="figures__k mono">Simulation runs across six forecasting models</span>
+        </li>
+      </ul>
+
+      <div class="thesis__cols">
+        <div class="thesis__col reveal">
+          <h3 class="label">The Experiment</h3>
+          <p>Can ML forecasting and blockchain transparency tame the bullwhip effect when
+             geopolitical shocks destabilize lead times? To find out, we built:</p>
+          <ul>
+            <li><strong>A five-echelon supply chain simulator</strong> running a 5,740-day horizon (trading days, 2000–2021)</li>
+            <li><strong>Six forecasting models:</strong> Traditional, History, ARIMA, XGBoost, LightGBM, and Temporal Fusion Transformer, all under rolling walk-forward validation and benchmarked across 1,000+ simulation runs</li>
+            <li><strong>Two disruption scenarios:</strong> gamma-distributed lead times, modulated daily by the Geopolitical Risk Index</li>
+            <li><strong>Three blockchain visibility modes:</strong> none, pipeline, and full, run across four configurations and seven seeds and tested with t-tests and Cohen's d</li>
+          </ul>
+        </div>
+        <div class="thesis__col reveal">
+          <h3 class="label">The Findings</h3>
+          <ul>
+            <li><strong>Disruption dominates:</strong> geopolitical shocks amplified the bullwhip beyond the combined effects of forecasting method and information visibility; the mean bullwhip ratio at Actor 2 rose from 4,716 to 7,218.</li>
+            <li><strong>The accuracy–performance paradox:</strong> TFT had the poorest point-forecast accuracy among ML models yet the strongest bullwhip suppression, while XGBoost, the most accurate, performed no better than a naive rolling average.</li>
+            <li><strong>ARIMA broke down structurally</strong> under disruption: its coefficient of variation ran past 70% and the solver overflowed twice, a failure mode I have not found documented in the supply chain simulation literature.</li>
+            <li><strong>Pipeline visibility ≈ full visibility:</strong> any transparency reduced network inventory, but pipeline-only sharing was statistically equivalent to full transparency.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="thesis__results reveal">
+        <h3 class="label">What It Means for Practice</h3>
+        <div class="thesis__findings">
+          <p><span class="mono">P-01</span> Build resilience first: inventory buffers and supplier
+             diversification outweigh forecasting upgrades or information systems when disruption looms.</p>
+          <p><span class="mono">P-02</span> When choosing a forecasting model, weight the consistency of its
+             replenishment signals more heavily than its historical point accuracy.</p>
+          <p><span class="mono">P-03</span> For blockchain, pipeline visibility captures the primary benefit
+             without the governance burden of full transparency.</p>
+        </div>
+      </div>
+
+      <div class="thesis__interests reveal">
+        <h3 class="label">Wider agenda</h3>
+        <p>The thesis is one thread in a wider agenda. Broadly, I work on how manufacturing and
+           supply-chain systems behave under uncertainty, and where data-driven methods actually
+           move the needle versus where structural resilience does the real work.</p>
+        <ul class="tags mono" aria-label="Research interests">
+          <li>Supply Chain Resilience</li><li>ML Demand Forecasting</li><li>Multi-Echelon Simulation</li><li>Information Systems in Operations</li><li>Quality &amp; Process Control</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="sheet" id="sheet-04" aria-labelledby="t-04" data-sheet="04" data-name="Teaching">
+    <header class="sheet-head reveal">
+      <h2 id="t-04">Teaching</h2>
+      <p class="sheet-head__meta mono">Dept. of IPE, BUET&ensp;·&ensp;Lecturer since Jun 2026</p>
     </header>
 
     <article class="xp xp--current reveal">
@@ -378,6 +363,183 @@
       </ul>
       <p class="xp__link mono"><a href="/teaching/">Course materials for my students ↗</a><span aria-hidden="true">&ensp;·&ensp;</span><a href="https://ipe.buet.ac.bd/faculty/mostofa-habib-fardin" target="_blank" rel="noopener noreferrer">Department faculty profile ↗</a></p>
     </article>
+
+  </section>
+
+  <section class="sheet" id="sheet-05" aria-labelledby="t-05" data-sheet="05" data-name="Projects">
+    <header class="sheet-head reveal">
+      <h2 id="t-05">Projects</h2>
+      <p class="sheet-head__meta mono">Selected engineering work</p>
+    </header>
+
+    <article class="case reveal" aria-labelledby="case-a">
+      <p class="case__no mono">Industrial Safety for Fertilizer Manufacturing</p>
+      <h3 id="case-a">Smart IoT-Based Ammonia Gas Monitoring System</h3>
+      <ul class="tags mono" aria-label="Technologies">
+        <li>IoT</li><li>Embedded Sensors</li><li>Industrial Safety</li><li>Web Dashboard</li>
+      </ul>
+
+      <div class="case__grid">
+        <div class="case__text">
+          <div class="case__step">
+            <h4 class="label">Overview</h4>
+            <p>In fertilizer plants, Ammonia is a volatile necessity. I co-developed a low-cost,
+               real-time monitoring system to automate safety responses where manual oversight
+               often fails.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="label">Stack / Engineering</h4>
+            <p>MQ-137 (Ammonia) via ADS1115 (16-bit ADC) and DHT22 (Temp/Humidity), ESP-01S (Wi-Fi)
+               streaming to web dashboard, threshold-based logic (30 ppm Ammonia / 30°C) triggering
+               Buzzer &amp; Fan.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="label">Impact</h4>
+            <p>Actuation is automatic, so nothing waits on someone noticing. Every reading is
+               logged, which turns a spot check into a record. Modular enough to retrofit
+               onto a line already running.</p>
+          </div>
+        </div>
+
+        <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="Smart IoT-Based Ammonia Gas Monitoring System media">
+          <div class="carousel__track" tabindex="0">
+            <figure class="carousel__slide"><a href="assets/img/projects/iot-poster.jpg" data-lightbox="case-a" data-caption="System architecture and results poster."><picture>
+  <source type="image/avif" srcset="assets/img/projects/iot-poster-800.avif 800w, assets/img/projects/iot-poster.avif 1186w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/iot-poster-800.webp 800w, assets/img/projects/iot-poster.webp 1186w" sizes="(max-width: 880px) 92vw, 48vw">
+  <img src="assets/img/projects/iot-poster.jpg" alt="Poster of the IoT ammonia monitoring system architecture" width="1186" height="837" loading="lazy">
+</picture></a><figcaption class="mono">System poster</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/projects/iot-hardware.jpg" data-lightbox="case-a" data-caption="The assembled sensing hardware."><picture>
+  <source type="image/avif" srcset="assets/img/projects/iot-hardware-800.avif 800w, assets/img/projects/iot-hardware.avif 960w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/iot-hardware-800.webp 800w, assets/img/projects/iot-hardware.webp 960w" sizes="(max-width: 880px) 92vw, 48vw">
+  <img src="assets/img/projects/iot-hardware.jpg" alt="Assembled IoT hardware with sensors and microcontroller" width="960" height="1280" loading="lazy">
+</picture></a><figcaption class="mono">Hardware assembly</figcaption></figure>
+          </div>
+          <div class="carousel__bar">
+            <span class="carousel__count mono" aria-live="polite">1 / 2</span>
+            <div class="carousel__btns">
+              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous media">←</button>
+              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next media">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case reveal" aria-labelledby="case-b">
+      <p class="case__no mono">Pedal Powered Water Pump for Rural Sustainability</p>
+      <h3 id="case-b">The HydroPedal</h3>
+      <ul class="tags mono" aria-label="Technologies">
+        <li>SolidWorks</li><li>Ansys FEA</li><li>CFD</li><li>Sustainable Design</li>
+      </ul>
+
+      <div class="case__grid case__grid--flip">
+        <div class="case__text">
+          <div class="case__step">
+            <h4 class="label">Overview</h4>
+            <p>In many rural agricultural regions, small-scale farmers face a “fuel-cost trap.”
+               We engineered the HydroPedal to decouple irrigation from fossil fuels.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="label">Stack / Engineering</h4>
+            <p>Complete 3D assembly in SolidWorks, chain-sprocket drive modelled and gear ratio
+               tuned for local manufacturability, Ansys Static Structural analysis on frame,
+               CFD for impeller housing optimization, Material selection: AISI 1020 Steel.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="label">Impact</h4>
+            <p>25–30 L/min at 20 ft of head, on no fuel and no electricity. Built from parts a
+               local workshop can source and repair.</p>
+          </div>
+        </div>
+
+        <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="The HydroPedal media">
+          <div class="carousel__track" tabindex="0">
+            <figure class="carousel__slide"><a href="assets/img/projects/hydropedal-1.jpg" data-lightbox="case-b" data-caption="HydroPedal, assembled prototype."><picture>
+  <source type="image/avif" srcset="assets/img/projects/hydropedal-1-800.avif 800w, assets/img/projects/hydropedal-1.avif 1015w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/hydropedal-1-800.webp 800w, assets/img/projects/hydropedal-1.webp 1015w" sizes="(max-width: 880px) 92vw, 48vw">
+  <img src="assets/img/projects/hydropedal-1.jpg" alt="HydroPedal pedal-powered pump prototype" width="1015" height="1023" loading="lazy">
+</picture></a><figcaption class="mono">Prototype</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/projects/hydropedal-2.jpg" data-lightbox="case-b" data-caption="Drive and pump detail."><picture>
+  <source type="image/avif" srcset="assets/img/projects/hydropedal-2.avif">
+  <source type="image/webp" srcset="assets/img/projects/hydropedal-2.webp">
+  <img src="assets/img/projects/hydropedal-2.jpg" alt="HydroPedal drivetrain and pump detail" width="800" height="600" loading="lazy">
+</picture></a><figcaption class="mono">Drive &amp; pump detail</figcaption></figure>
+          </div>
+          <div class="carousel__bar">
+            <span class="carousel__count mono" aria-live="polite">1 / 2</span>
+            <div class="carousel__btns">
+              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous media">←</button>
+              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next media">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case reveal" aria-labelledby="case-c">
+      <p class="case__no mono">Full-Scale Mechanical Assembly &amp; Kinematic Study</p>
+      <h3 id="case-c">Radial Drilling Machine SolidWorks Model</h3>
+      <ul class="tags mono" aria-label="Technologies">
+        <li>SolidWorks</li><li>CAD Assembly</li><li>Motion Study</li><li>Kinematics</li>
+      </ul>
+
+      <div class="case__grid">
+        <div class="case__text">
+          <div class="case__step">
+            <h4 class="label">Overview</h4>
+            <p>Engineered a complete, part-by-part digital reconstruction of an industrial radial
+               drilling machine.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="label">Stack / Engineering</h4>
+            <p>50+ individual components in SolidWorks, mechanical mates for vertical arm travel
+               and spindle rotation, Motion Study for kinematic validation, PhotoView 360 renders
+               and exploded-view animations.</p>
+          </div>
+          <div class="case__step">
+            <h4 class="label">Impact</h4>
+            <p>Full arm travel and spindle rotation simulated with no interference detected.</p>
+          </div>
+        </div>
+
+        <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="Radial Drilling Machine SolidWorks Model media">
+          <div class="carousel__track" tabindex="0">
+            <figure class="carousel__slide"><a href="assets/img/projects/drill-iso.jpg" data-lightbox="case-c" data-caption="Isometric render, full assembly."><picture>
+  <source type="image/avif" srcset="assets/img/projects/drill-iso-800.avif 800w, assets/img/projects/drill-iso.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/drill-iso-800.webp 800w, assets/img/projects/drill-iso.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <img src="assets/img/projects/drill-iso.jpg" alt="Isometric render of the radial drilling machine assembly" width="1600" height="747" loading="lazy">
+</picture></a><figcaption class="mono">Isometric, full assembly</figcaption></figure>
+            <figure class="carousel__slide"><a href="assets/img/projects/drill-close.jpg" data-lightbox="case-c" data-caption="Spindle head, close-up render."><picture>
+  <source type="image/avif" srcset="assets/img/projects/drill-close-800.avif 800w, assets/img/projects/drill-close.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <source type="image/webp" srcset="assets/img/projects/drill-close-800.webp 800w, assets/img/projects/drill-close.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
+  <img src="assets/img/projects/drill-close.jpg" alt="Close-up render of the drilling machine spindle head" width="1600" height="747" loading="lazy">
+</picture></a><figcaption class="mono">Spindle head, close-up</figcaption></figure>
+            <figure class="carousel__slide yt" data-yt="9CxBPs1eGwk">
+              <button class="yt__btn" type="button" aria-label="Play the motion study video">
+                <img src="https://i.ytimg.com/vi/9CxBPs1eGwk/hqdefault.jpg" alt="Preview frame of the motion study video" width="480" height="360" loading="lazy">
+                <span class="yt__play" aria-hidden="true">▶</span>
+              </button>
+              <figcaption class="mono">Motion Study (video)</figcaption>
+            </figure>
+          </div>
+          <div class="carousel__bar">
+            <span class="carousel__count mono" aria-live="polite">1 / 3</span>
+            <div class="carousel__btns">
+              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous media">←</button>
+              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next media">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="sheet" id="sheet-06" aria-labelledby="t-06" data-sheet="06" data-name="Industry">
+    <header class="sheet-head reveal">
+      <h2 id="t-06">Industry Experience</h2>
+      <p class="sheet-head__meta mono">Internship&ensp;·&ensp;Attachment&ensp;·&ensp;Plant visits</p>
+    </header>
 
     <article class="xp reveal">
       <header class="xp__head">
@@ -491,267 +653,58 @@
         </div>
       </div>
     </article>
+
   </section>
 
-
-  <!-- ============ SHEET 05 — THESIS ============ -->
-  <section class="sheet sheet--feature" id="sheet-05" aria-labelledby="t-05" data-sheet="05" data-name="Thesis">
+  <section class="sheet" id="sheet-07" aria-labelledby="t-07" data-sheet="07" data-name="Skills">
     <header class="sheet-head reveal">
-      <h2 id="t-05">Thesis: “Taming the Bullwhip”</h2>
-      <p class="sheet-head__meta mono">Undergraduate Research&ensp;·&ensp;Dept. of IPE, BUET</p>
+      <h2 id="t-07">Skills</h2>
+      <p class="sheet-head__meta mono">Capabilities&ensp;·&ensp;Tools &amp; methods</p>
     </header>
 
-    <div class="thesis">
-      <p class="thesis__abstract reveal">
-        <span class="mono thesis__label">Defended June 2026 · Supervised by Prof. Dr. Sultana Parveen · with Sheikh Mahir Abrar · Manuscript in preparation</span>
-        Taming the Bullwhip Under Geopolitical Uncertainty: A Multi-Echelon Simulation of
-        <em>Machine Learning Forecasting</em> and <em>Blockchain-Enabled Information Visibility</em>.
-      </p>
-
-      <ul class="figures">
-        <li>
-          <b class="figures__n">7,218</b>
-          <span class="figures__k mono">Mean bullwhip ratio at Actor 2 under geopolitical disruption, up from 4,716</span>
-        </li>
-        <li>
-          <b class="figures__n">5,740</b>
-          <span class="figures__k mono">Simulation days modelled, trading days 2000–2021</span>
-        </li>
-        <li>
-          <b class="figures__n">1,000<span class="figures__plus">+</span></b>
-          <span class="figures__k mono">Simulation runs across six forecasting models</span>
-        </li>
-      </ul>
-
-      <div class="thesis__cols">
-        <div class="thesis__col reveal">
-          <h3 class="label">The Experiment</h3>
-          <p>Can ML forecasting and blockchain transparency tame the bullwhip effect when
-             geopolitical shocks destabilize lead times? To find out, we built:</p>
-          <ul>
-            <li><strong>A five-echelon supply chain simulator</strong> running a 5,740-day horizon (trading days, 2000–2021)</li>
-            <li><strong>Six forecasting models:</strong> Traditional, History, ARIMA, XGBoost, LightGBM, and Temporal Fusion Transformer, all under rolling walk-forward validation and benchmarked across 1,000+ simulation runs</li>
-            <li><strong>Two disruption scenarios:</strong> gamma-distributed lead times, modulated daily by the Geopolitical Risk Index</li>
-            <li><strong>Three blockchain visibility modes:</strong> none, pipeline, and full, run across four configurations and seven seeds and tested with t-tests and Cohen's d</li>
-          </ul>
-        </div>
-        <div class="thesis__col reveal">
-          <h3 class="label">The Findings</h3>
-          <ul>
-            <li><strong>Disruption dominates:</strong> geopolitical shocks amplified the bullwhip beyond the combined effects of forecasting method and information visibility; the mean bullwhip ratio at Actor 2 rose from 4,716 to 7,218.</li>
-            <li><strong>The accuracy–performance paradox:</strong> TFT had the poorest point-forecast accuracy among ML models yet the strongest bullwhip suppression, while XGBoost, the most accurate, performed no better than a naive rolling average.</li>
-            <li><strong>ARIMA broke down structurally</strong> under disruption: its coefficient of variation ran past 70% and the solver overflowed twice, a failure mode I have not found documented in the supply chain simulation literature.</li>
-            <li><strong>Pipeline visibility ≈ full visibility:</strong> any transparency reduced network inventory, but pipeline-only sharing was statistically equivalent to full transparency.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="thesis__results reveal">
-        <h3 class="label">What It Means for Practice</h3>
-        <div class="thesis__findings">
-          <p><span class="mono">P-01</span> Build resilience first: inventory buffers and supplier
-             diversification outweigh forecasting upgrades or information systems when disruption looms.</p>
-          <p><span class="mono">P-02</span> When choosing a forecasting model, weight the consistency of its
-             replenishment signals more heavily than its historical point accuracy.</p>
-          <p><span class="mono">P-03</span> For blockchain, pipeline visibility captures the primary benefit
-             without the governance burden of full transparency.</p>
-        </div>
-      </div>
-
-      <div class="thesis__interests reveal">
-        <h3 class="label">Research Interests</h3>
-        <p>The thesis is one thread in a wider agenda. Broadly, I work on how manufacturing and
-           supply-chain systems behave under uncertainty, and where data-driven methods actually
-           move the needle versus where structural resilience does the real work.</p>
-        <ul class="tags mono" aria-label="Research interests">
-          <li>Supply Chain Resilience</li><li>ML Demand Forecasting</li><li>Multi-Echelon Simulation</li><li>Information Systems in Operations</li><li>Quality &amp; Process Control</li>
-        </ul>
-      </div>
+    <div class="bom reveal">
+      <p class="mono bom__title">Capabilities</p>
+      <table>
+        <thead>
+          <tr><th scope="col" class="mono">Item</th><th scope="col" class="mono">Skill</th><th scope="col" class="mono">Specification</th></tr>
+        </thead>
+        <tbody>
+          <tr class="bom__group" style="--d:0"><th scope="rowgroup" colspan="3" class="mono">Physical Systems &amp; Design</th></tr>
+          <tr style="--d:1"><td class="mono">001</td><td>Engineering Design</td><td>SolidWorks &amp; CATIA</td></tr>
+          <tr style="--d:2"><td class="mono">002</td><td>Simulation &amp; Analysis</td><td>Ansys (FEA/CFD) for structural and fluid validation, ARENA for system analysis</td></tr>
+          <tr style="--d:3"><td class="mono">003</td><td>Digital Prototyping</td><td>AutoCAD (Layouts)</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="bom__group" style="--d:4"><th scope="rowgroup" colspan="3" class="mono">Data Science &amp; ML</th></tr>
+          <tr style="--d:5"><td class="mono">004</td><td>Predictive Modeling</td><td>XGBoost, TFT and LightGBM for forecasting</td></tr>
+          <tr style="--d:6"><td class="mono">005</td><td>Data Stack</td><td>Python, MATLAB, and C programming</td></tr>
+          <tr style="--d:7"><td class="mono">006</td><td>Advanced Tech</td><td>IoT (Sensor integration), Blockchain</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="bom__group" style="--d:8"><th scope="rowgroup" colspan="3" class="mono">Operational Excellence</th></tr>
+          <tr style="--d:9"><td class="mono">007</td><td>Lean Philosophies</td><td>5S, 3G, Kaizen, 3K, and Poka-Yoke</td></tr>
+          <tr style="--d:10"><td class="mono">008</td><td>Quality &amp; Safety</td><td>Line Balancing, Time Studies, Six Sigma (White Belt), Ergonomics and Safety</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="bom__group" style="--d:11"><th scope="rowgroup" colspan="3" class="mono">Teaching &amp; Communication</th></tr>
+          <tr style="--d:12"><td class="mono">009</td><td>Curriculum Design</td><td>Course and lab session planning for undergraduate engineering courses</td></tr>
+          <tr style="--d:13"><td class="mono">010</td><td>Mentorship</td><td>Lab supervision, project guidance, and accompanying students on industrial visits</td></tr>
+          <tr style="--d:14"><td class="mono">011</td><td>Technical Communication</td><td>Lecturing, thesis writing, and technical documentation in LaTeX</td></tr>
+          <tr style="--d:15"><td class="mono">012</td><td>Assessment</td><td>Examination question setting and answer script evaluation</td></tr>
+        </tbody>
+      </table>
     </div>
+
   </section>
 
-  <!-- ============ SHEET 06 — PROJECTS ============ -->
-  <section class="sheet" id="sheet-06" aria-labelledby="t-06" data-sheet="06" data-name="Projects">
+  <section class="sheet" id="sheet-08" aria-labelledby="t-08" data-sheet="08" data-name="Recognition">
     <header class="sheet-head reveal">
-      <h2 id="t-06">Projects</h2>
-      <p class="sheet-head__meta mono">Selected Work</p>
-    </header>
-
-    <!-- Case 06-A -->
-    <article class="case reveal" aria-labelledby="case-a">
-      <p class="case__no mono">CASE 06-A&ensp;·&ensp;Industrial Safety for Fertilizer Manufacturing</p>
-      <h3 id="case-a">Smart IoT-Based Ammonia Gas Monitoring System</h3>
-      <ul class="tags mono" aria-label="Technologies">
-        <li>IoT</li><li>Embedded Sensors</li><li>Industrial Safety</li><li>Web Dashboard</li>
-      </ul>
-
-      <div class="case__grid">
-        <div class="case__text">
-          <div class="case__step">
-            <h4 class="label">Overview</h4>
-            <p>In fertilizer plants, Ammonia is a volatile necessity. I co-developed a low-cost,
-               real-time monitoring system to automate safety responses where manual oversight
-               often fails.</p>
-          </div>
-          <div class="case__step">
-            <h4 class="label">Stack / Engineering</h4>
-            <p>MQ-137 (Ammonia) via ADS1115 (16-bit ADC) and DHT22 (Temp/Humidity), ESP-01S (Wi-Fi)
-               streaming to web dashboard, threshold-based logic (30 ppm Ammonia / 30°C) triggering
-               Buzzer &amp; Fan.</p>
-          </div>
-          <div class="case__step">
-            <h4 class="label">Impact</h4>
-            <p>Actuation is automatic, so nothing waits on someone noticing. Every reading is
-               logged, which turns a spot check into a record. Modular enough to retrofit
-               onto a line already running.</p>
-          </div>
-        </div>
-
-        <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="Smart IoT-Based Ammonia Gas Monitoring System media">
-          <div class="carousel__track" tabindex="0">
-            <figure class="carousel__slide"><a href="assets/img/projects/iot-poster.jpg" data-lightbox="case-a" data-caption="System architecture and results poster."><picture>
-  <source type="image/avif" srcset="assets/img/projects/iot-poster-800.avif 800w, assets/img/projects/iot-poster.avif 1186w" sizes="(max-width: 880px) 92vw, 48vw">
-  <source type="image/webp" srcset="assets/img/projects/iot-poster-800.webp 800w, assets/img/projects/iot-poster.webp 1186w" sizes="(max-width: 880px) 92vw, 48vw">
-  <img src="assets/img/projects/iot-poster.jpg" alt="Poster of the IoT ammonia monitoring system architecture" width="1186" height="837" loading="lazy">
-</picture></a><figcaption class="mono">FIG. 06-A1 — System poster</figcaption></figure>
-            <figure class="carousel__slide"><a href="assets/img/projects/iot-hardware.jpg" data-lightbox="case-a" data-caption="The assembled sensing hardware."><picture>
-  <source type="image/avif" srcset="assets/img/projects/iot-hardware-800.avif 800w, assets/img/projects/iot-hardware.avif 960w" sizes="(max-width: 880px) 92vw, 48vw">
-  <source type="image/webp" srcset="assets/img/projects/iot-hardware-800.webp 800w, assets/img/projects/iot-hardware.webp 960w" sizes="(max-width: 880px) 92vw, 48vw">
-  <img src="assets/img/projects/iot-hardware.jpg" alt="Assembled IoT hardware with sensors and microcontroller" width="960" height="1280" loading="lazy">
-</picture></a><figcaption class="mono">FIG. 06-A2 — Hardware assembly</figcaption></figure>
-          </div>
-          <div class="carousel__bar">
-            <span class="carousel__count mono" aria-live="polite">1 / 2</span>
-            <div class="carousel__btns">
-              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous media">←</button>
-              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next media">→</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- Case 06-B -->
-    <article class="case reveal" aria-labelledby="case-b">
-      <p class="case__no mono">CASE 06-B&ensp;·&ensp;Pedal Powered Water Pump for Rural Sustainability</p>
-      <h3 id="case-b">The HydroPedal</h3>
-      <ul class="tags mono" aria-label="Technologies">
-        <li>SolidWorks</li><li>Ansys FEA</li><li>CFD</li><li>Sustainable Design</li>
-      </ul>
-
-      <div class="case__grid case__grid--flip">
-        <div class="case__text">
-          <div class="case__step">
-            <h4 class="label">Overview</h4>
-            <p>In many rural agricultural regions, small-scale farmers face a “fuel-cost trap.”
-               We engineered the HydroPedal to decouple irrigation from fossil fuels.</p>
-          </div>
-          <div class="case__step">
-            <h4 class="label">Stack / Engineering</h4>
-            <p>Complete 3D assembly in SolidWorks, chain-sprocket drive modelled and gear ratio
-               tuned for local manufacturability, Ansys Static Structural analysis on frame,
-               CFD for impeller housing optimization, Material selection: AISI 1020 Steel.</p>
-          </div>
-          <div class="case__step">
-            <h4 class="label">Impact</h4>
-            <p>25–30 L/min at 20 ft of head, on no fuel and no electricity. Built from parts a
-               local workshop can source and repair.</p>
-          </div>
-        </div>
-
-        <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="The HydroPedal media">
-          <div class="carousel__track" tabindex="0">
-            <figure class="carousel__slide"><a href="assets/img/projects/hydropedal-1.jpg" data-lightbox="case-b" data-caption="HydroPedal, assembled prototype."><picture>
-  <source type="image/avif" srcset="assets/img/projects/hydropedal-1-800.avif 800w, assets/img/projects/hydropedal-1.avif 1015w" sizes="(max-width: 880px) 92vw, 48vw">
-  <source type="image/webp" srcset="assets/img/projects/hydropedal-1-800.webp 800w, assets/img/projects/hydropedal-1.webp 1015w" sizes="(max-width: 880px) 92vw, 48vw">
-  <img src="assets/img/projects/hydropedal-1.jpg" alt="HydroPedal pedal-powered pump prototype" width="1015" height="1023" loading="lazy">
-</picture></a><figcaption class="mono">FIG. 06-B1 — Prototype</figcaption></figure>
-            <figure class="carousel__slide"><a href="assets/img/projects/hydropedal-2.jpg" data-lightbox="case-b" data-caption="Drive and pump detail."><picture>
-  <source type="image/avif" srcset="assets/img/projects/hydropedal-2.avif">
-  <source type="image/webp" srcset="assets/img/projects/hydropedal-2.webp">
-  <img src="assets/img/projects/hydropedal-2.jpg" alt="HydroPedal drivetrain and pump detail" width="800" height="600" loading="lazy">
-</picture></a><figcaption class="mono">FIG. 06-B2 — Drive &amp; pump detail</figcaption></figure>
-          </div>
-          <div class="carousel__bar">
-            <span class="carousel__count mono" aria-live="polite">1 / 2</span>
-            <div class="carousel__btns">
-              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous media">←</button>
-              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next media">→</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- Case 06-C -->
-    <article class="case reveal" aria-labelledby="case-c">
-      <p class="case__no mono">CASE 06-C&ensp;·&ensp;Full-Scale Mechanical Assembly &amp; Kinematic Study</p>
-      <h3 id="case-c">Radial Drilling Machine SolidWorks Model</h3>
-      <ul class="tags mono" aria-label="Technologies">
-        <li>SolidWorks</li><li>CAD Assembly</li><li>Motion Study</li><li>Kinematics</li>
-      </ul>
-
-      <div class="case__grid">
-        <div class="case__text">
-          <div class="case__step">
-            <h4 class="label">Overview</h4>
-            <p>Engineered a complete, part-by-part digital reconstruction of an industrial radial
-               drilling machine.</p>
-          </div>
-          <div class="case__step">
-            <h4 class="label">Stack / Engineering</h4>
-            <p>50+ individual components in SolidWorks, mechanical mates for vertical arm travel
-               and spindle rotation, Motion Study for kinematic validation, PhotoView 360 renders
-               and exploded-view animations.</p>
-          </div>
-          <div class="case__step">
-            <h4 class="label">Impact</h4>
-            <p>Full arm travel and spindle rotation simulated with no interference detected.</p>
-          </div>
-        </div>
-
-        <div class="carousel carousel--case" data-carousel aria-roledescription="carousel" aria-label="Radial Drilling Machine SolidWorks Model media">
-          <div class="carousel__track" tabindex="0">
-            <figure class="carousel__slide"><a href="assets/img/projects/drill-iso.jpg" data-lightbox="case-c" data-caption="Isometric render, full assembly."><picture>
-  <source type="image/avif" srcset="assets/img/projects/drill-iso-800.avif 800w, assets/img/projects/drill-iso.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
-  <source type="image/webp" srcset="assets/img/projects/drill-iso-800.webp 800w, assets/img/projects/drill-iso.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
-  <img src="assets/img/projects/drill-iso.jpg" alt="Isometric render of the radial drilling machine assembly" width="1600" height="747" loading="lazy">
-</picture></a><figcaption class="mono">FIG. 06-C1 — Isometric, full assembly</figcaption></figure>
-            <figure class="carousel__slide"><a href="assets/img/projects/drill-close.jpg" data-lightbox="case-c" data-caption="Spindle head, close-up render."><picture>
-  <source type="image/avif" srcset="assets/img/projects/drill-close-800.avif 800w, assets/img/projects/drill-close.avif 1600w" sizes="(max-width: 880px) 92vw, 48vw">
-  <source type="image/webp" srcset="assets/img/projects/drill-close-800.webp 800w, assets/img/projects/drill-close.webp 1600w" sizes="(max-width: 880px) 92vw, 48vw">
-  <img src="assets/img/projects/drill-close.jpg" alt="Close-up render of the drilling machine spindle head" width="1600" height="747" loading="lazy">
-</picture></a><figcaption class="mono">FIG. 06-C2 — Spindle head, close-up</figcaption></figure>
-            <figure class="carousel__slide yt" data-yt="9CxBPs1eGwk">
-              <button class="yt__btn" type="button" aria-label="Play the motion study video">
-                <img src="https://i.ytimg.com/vi/9CxBPs1eGwk/hqdefault.jpg" alt="Preview frame of the motion study video" width="480" height="360" loading="lazy">
-                <span class="yt__play" aria-hidden="true">▶</span>
-              </button>
-              <figcaption class="mono">FIG. 06-C3 — Motion Study (video)</figcaption>
-            </figure>
-          </div>
-          <div class="carousel__bar">
-            <span class="carousel__count mono" aria-live="polite">1 / 3</span>
-            <div class="carousel__btns">
-              <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous media">←</button>
-              <button class="carousel__btn" type="button" data-dir="1" aria-label="Next media">→</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-  </section>
-
-
-  <!-- ============ SHEET 07 — ACHIEVEMENTS ============ -->
-  <section class="sheet sheet--compact" id="sheet-07" aria-labelledby="t-07" data-sheet="07" data-name="Achievements">
-    <header class="sheet-head reveal">
-      <h2 id="t-07">Achievements</h2>
-      <p class="sheet-head__meta mono">Competition Record&ensp;·&ensp;Certifications</p>
+      <h2 id="t-08">Recognition</h2>
+      <p class="sheet-head__meta mono">Competition record&ensp;·&ensp;Certifications</p>
     </header>
 
     <div class="awards reveal">
-      <h3 class="record__h label">Competition Record</h3>
+      <h3 class="record__h label">Competitions</h3>
       <ol class="awards__list">
         <li>
           <span class="mono awards__year">2025</span>
@@ -865,12 +818,12 @@
         </li>
       </ul>
     </div>
+
   </section>
 
-  <!-- ============ SHEET 08 — PHOTOGRAPHY ============ -->
-  <section class="sheet sheet--feature" id="sheet-08" aria-labelledby="t-08" data-sheet="08" data-name="Photography">
+  <section class="sheet sheet--feature" id="sheet-09" aria-labelledby="t-09" data-sheet="09" data-name="Photography">
     <header class="sheet-head reveal">
-      <h2 id="t-08">Photography</h2>
+      <h2 id="t-09">Photography</h2>
       <p class="sheet-head__meta mono">The Observed World</p>
     </header>
 
@@ -988,12 +941,12 @@
 </picture></span></a><figcaption class="plate__label"><span class="plate__no mono">Plate VI</span><span class="plate__title">Recursion, drawn by nobody.</span><span class="plate__datum mono">The Design of Nature · Detail</span></figcaption></figure>
       </div>
     </div>
+
   </section>
 
-  <!-- ============ SHEET 09 — GET IN TOUCH ============ -->
-  <section class="sheet contact" id="sheet-09" aria-labelledby="t-09" data-sheet="09" data-name="Contact">
+  <section class="sheet" id="sheet-10" aria-labelledby="t-10" data-sheet="10" data-name="Contact">
     <header class="sheet-head reveal">
-      <h2 id="t-09">Get in Touch</h2>
+      <h2 id="t-10">Get in Touch</h2>
       <p class="sheet-head__meta mono">Collaboration &amp; Contact</p>
     </header>
 
@@ -1035,15 +988,17 @@
         </a></li>
       </ul>
     </div>
+
   </section>
+
 </main>
 
 <footer class="site-foot">
   <div class="site-foot__block mono">
     <span>© <span data-year>2026</span> Mostofa Habib Fardin</span>
     <a href="/teaching/">Course Materials ↗</a>
-    <span>REV 2026.09</span>
-    <a href="#sheet-01" data-wipe>Sheet 01 ↑</a>
+    
+    <a href="#sheet-01" data-wipe>Back to top ↑</a>
   </div>
 </footer>
 

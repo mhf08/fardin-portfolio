@@ -5,9 +5,10 @@
 > teaching at IPE, BUET as a full-time Lecturer, carrying his ML-driven supply-chain
 > research into the classroom. Also a photographer.
 
-The site is a single page organized as nine numbered engineering-drawing "sheets":
-Title, About, Toolkit (skills + education), Experience, Thesis, Projects,
-Achievements, Photography, Contact.
+The site is a single page organized as nine named sections:
+About (bio + education), Research (thesis, findings, publications), Teaching
+(courses and duties), Projects, Industry Experience, Skills, Recognition,
+Photography, Contact.
 
 ## Key facts
 
