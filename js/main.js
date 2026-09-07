@@ -95,6 +95,27 @@
   var sheets = Array.prototype.slice.call(document.querySelectorAll(".sheet"));
   var navLinks = document.querySelectorAll("[data-spy]");
 
+  // one crimson rule that slides to whichever nav item is current
+  var navEl = document.querySelector(".site-nav");
+  var navRule = null;
+  if (navEl) {
+    navRule = document.createElement("span");
+    navRule.className = "site-nav__rule";
+    navEl.appendChild(navRule);
+    navEl.querySelectorAll("li").forEach(function (li, i) { li.style.setProperty("--i", i); });
+  }
+  function moveRule() {
+    if (!navRule) return;
+    var cur = navEl.querySelector('[aria-current="true"]');
+    if (!cur || getComputedStyle(navEl).position !== "relative") { navRule.classList.remove("on"); return; }
+    var n = navEl.getBoundingClientRect(), r = cur.getBoundingClientRect();
+    if (!r.width) { navRule.classList.remove("on"); return; }
+    navRule.style.width = Math.round(r.width) + "px";
+    navRule.style.transform = "translateX(" + Math.round(r.left - n.left) + "px)";
+    navRule.classList.add("on");
+  }
+  addEventListener("resize", moveRule);
+
   var spy = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
@@ -103,6 +124,7 @@
         if (a.dataset.spy === el.id) a.setAttribute("aria-current", "true");
         else a.removeAttribute("aria-current");
       });
+      moveRule();
     });
   }, { rootMargin: "-45% 0px -45% 0px" });
   sheets.forEach(function (s) { spy.observe(s); });
@@ -154,16 +176,41 @@
     menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
   });
 
-  /* ---------- Anchor jumps (the sheet-wipe transition is gone) ---------- */
+  /* ---------- Section switching ----------
+     A fixed-duration glide, then the destination announces itself by
+     replaying its heading wipe. The replay class is additive: its absence
+     just means a plain visible heading, never a hidden one. */
+  function announce(section) {
+    if (reduceMotion) return;
+    var h = section.querySelector(".sheet-head h2");
+    if (!h) return;
+    h.classList.remove("replay");
+    void h.offsetWidth;                     // force a reflow so it can replay
+    h.classList.add("replay");
+    setTimeout(function () { h.classList.remove("replay"); }, 900);
+  }
+
   document.querySelectorAll("[data-wipe]").forEach(function (link) {
     link.addEventListener("click", function (ev) {
       var target = document.querySelector(link.getAttribute("href"));
       if (!target) return;
       ev.preventDefault();
       closeMenu();
-      if (lenis) lenis.scrollTo(target);
-      else target.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth", block: "start" });
       history.replaceState(null, "", link.getAttribute("href"));
+
+      if (reduceMotion || !lenis) {
+        target.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth", block: "start" });
+        announce(target);
+        return;
+      }
+      lenis.scrollTo(target, {
+        duration: 1.05,
+        easing: function (t) { return 1 - Math.pow(1 - t, 3); },
+        onComplete: function () { announce(target); }
+      });
+      // Failsafe: announce anyway if onComplete never fires. announce() only
+      // adds an animation, so running it twice is harmless.
+      setTimeout(function () { announce(target); }, 1150);
     });
   });
 
