@@ -32,6 +32,19 @@ export function notify({ course, kind, who, text, url }) {
   const from = process.env.NOTIFY_FROM || "Course board <onboarding@resend.dev>";
   const subject = `${course}: new ${kind}${who ? " from " + who : ""}`;
   const preview = text.length > 600 ? text.slice(0, 600) + "..." : text;
+  const esc = (v) =>
+    String(v).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  /* A text-only body is scored slightly more harshly by spam filters, and on a
+     phone the board link is only tappable as a real anchor. Sending both parts
+     costs nothing and fixes both. The student's words are escaped: they are
+     untrusted input and this is now markup. */
+  const html =
+    `<div style="font:15px/1.55 -apple-system,Segoe UI,sans-serif;color:#1C1A1B">` +
+    (who ? `<p style="margin:0 0 12px;color:#5E5658">${esc(who)}</p>` : "") +
+    `<p style="margin:0 0 20px;white-space:pre-wrap">${esc(preview)}</p>` +
+    `<p style="margin:0"><a href="${esc(url)}" style="color:#A10F26">Open the ${esc(course)} board</a></p>` +
+    `</div>`;
 
   fetch(ENDPOINT, {
     method: "POST",
@@ -40,7 +53,8 @@ export function notify({ course, kind, who, text, url }) {
       from,
       to: [to],
       subject,
-      text: `${preview}\n\n---\nOpen the board: ${url}`,
+      text: `${who ? who + "\n\n" : ""}${preview}\n\n---\nOpen the board: ${url}`,
+      html,
     }),
   })
     .then(async (r) => {
