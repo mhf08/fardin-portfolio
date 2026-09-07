@@ -225,6 +225,29 @@
     return m;
   }
 
+  /* Instructor-only footer line. Answers "will I be told when someone posts?"
+     without a trip to the Vercel dashboard. Booleans only: the server never
+     sends the key or the address. */
+  function mailStatus(mail) {
+    var el = document.getElementById("mail-status");
+    if (!el) return;
+    if (!mail) {
+      el.textContent = "";
+      return;
+    }
+    if (mail.key && mail.to) {
+      el.textContent = "Email alerts on. You are not emailed about your own posts.";
+      el.className = "board__mail";
+      return;
+    }
+    var missing = [];
+    if (!mail.key) missing.push("RESEND_API_KEY");
+    if (!mail.to) missing.push("NOTIFY_EMAIL");
+    el.textContent = "Email alerts off: " + missing.join(" and ") +
+      " not set in Vercel. Add, then redeploy.";
+    el.className = "board__mail board__mail--off";
+  }
+
   function problem(message) {
     boardEl.innerHTML =
       '<p class="board__note board__note--bad">' + esc(message) +
@@ -247,6 +270,7 @@
         adminBtn.textContent = state.admin
           ? "Signed in as instructor, sign out"
           : "Instructor sign in";
+        mailStatus(data.mail);
       })
       .catch(function (err) {
         problem(niceError(err));

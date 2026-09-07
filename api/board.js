@@ -83,6 +83,15 @@ async function list(req, res, me, admin) {
   json(res, 200, {
     ok: true,
     admin,
+    // Whether alerts are wired up, as booleans only — never the key, never the
+    // address. Shown to Fardin in the footer so "am I being notified?" is
+    // answerable by looking at the page instead of reading deployment logs.
+    mail: admin
+      ? {
+          key: Boolean(process.env.RESEND_API_KEY),
+          to: Boolean(process.env.NOTIFY_EMAIL),
+        }
+      : undefined,
     limits: LIMITS,
     questions: questions.map((q) => ({
       ...shape(q, me, votedSet, admin),
