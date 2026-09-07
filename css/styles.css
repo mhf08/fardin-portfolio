@@ -34,6 +34,14 @@
   --head-h: 64px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
+  /* Motion system. Four steps, one curve. --t-view is the full-view moment:
+     changing section or changing theme. It is deliberately long enough to
+     read as an event rather than a flicker. */
+  --t-fast: 240ms;   /* hovers and small state changes   */
+  --t-mid:  520ms;   /* component reveals, panels, rules  */
+  --t-slow: 900ms;   /* headings, section content         */
+  --t-view: 1150ms;  /* section change, theme change      */
+
   color-scheme: light;
 }
 
@@ -71,7 +79,7 @@ body {
   font-size: 1.0625rem;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.45s ease, color 0.45s ease;
+  transition: background-color var(--t-mid) ease, color var(--t-mid) ease;
 }
 
 img { display: block; max-width: 100%; height: auto; }
@@ -113,7 +121,7 @@ picture { display: contents; }
   position: fixed; top: -100px; left: 1rem; z-index: 300;
   background: var(--ink); color: var(--paper);
   padding: 0.6rem 1rem; font-family: var(--font-mono); font-size: 0.8rem;
-  transition: top 0.2s ease;
+  transition: top var(--t-fast) ease;
 }
 .skip-link:focus { top: 1rem; color: var(--paper); }
 
@@ -144,8 +152,8 @@ picture { display: contents; }
 .wipe__panel { position: absolute; inset: 0; transform: translateY(-102%); will-change: transform; }
 .wipe__panel--accent { background: var(--brass-bright); }
 .wipe__panel--ink { background: var(--ink); }
-.wipe.run .wipe__panel { animation: wipe-sweep 0.9s var(--ease-out) forwards; }
-.wipe.run .wipe__panel--ink { animation-delay: 0.07s; }
+.wipe.run .wipe__panel { animation: wipe-sweep var(--t-view) var(--ease-out) forwards; }
+.wipe.run .wipe__panel--ink { animation-delay: 90ms; }
 @keyframes wipe-sweep {
   0%   { transform: translateY(-102%); }
   42%  { transform: translateY(0); }
@@ -159,13 +167,13 @@ picture { display: contents; }
   background: var(--ink-soft); opacity: .5; transition: height .1s linear; }
 .spine__marks { position: absolute; inset: 0; }
 .spine__mark { position: absolute; left: 0; width: 3px; height: 2px;
-  background: var(--ink-soft); opacity: .35; transition: all .4s var(--ease-out); }
+  background: var(--ink-soft); opacity: .35; transition: all var(--t-mid) var(--ease-out); }
 .spine__mark.on { height: 22px; opacity: 1; background: var(--brass); }
 .spine__label {
   position: fixed; left: 15px; z-index: 41;
   font-family: var(--font-mono); font-size: .55rem; letter-spacing: .14em; text-transform: uppercase;
   color: var(--ink-soft); white-space: nowrap; transform-origin: left center; transform: rotate(90deg);
-  opacity: 0; transition: opacity .4s ease, top .5s var(--ease-out); pointer-events: none;
+  opacity: 0; transition: opacity var(--t-fast) ease, top var(--t-mid) var(--ease-out); pointer-events: none;
 }
 .spine__label.on { opacity: .7; }
 @media (max-width: 1100px) { .spine, .spine__label { display: none; } }
@@ -179,7 +187,7 @@ picture { display: contents; }
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line-soft);
   z-index: 100;
-  transition: background-color 0.45s ease;
+  transition: background-color var(--t-mid) ease;
 }
 .site-head__mark {
   font-family: var(--font-mono); font-weight: 500; font-size: 1rem;
@@ -194,7 +202,7 @@ picture { display: contents; }
   padding: 0.4rem 0;
   background-image: linear-gradient(var(--brass-bright), var(--brass-bright));
   background-size: 0% 1px; background-position: left bottom; background-repeat: no-repeat;
-  transition: color 0.2s ease, background-size 0.35s var(--ease-out);
+  transition: color var(--t-fast) ease, background-size var(--t-fast) var(--ease-out);
 }
 .site-nav a .n { color: var(--brass); margin-right: 0.4em; font-size: 0.62rem; }
 .site-nav a:hover { color: var(--ink); background-size: 100% 1px; }
@@ -207,7 +215,7 @@ picture { display: contents; }
   position: relative; border: 1px solid var(--line); border-radius: 999px; background: none;
   color: var(--ink-soft); cursor: pointer; padding: 0.45rem 0.95rem;
   font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.16em;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color var(--t-fast) ease, border-color var(--t-fast) ease;
 }
 .theme-toggle:hover { color: var(--brass); border-color: var(--brass); }
 .theme-toggle__txt--night { display: none; }
@@ -223,14 +231,15 @@ html[data-theme="dark"] .theme-toggle__txt--night { display: inline; }
   position: absolute; left: 0; bottom: -2px; height: 1.5px; width: 0;
   background: var(--brass); opacity: 0; pointer-events: none;
   transform: translateX(0);
-  transition: transform 0.5s var(--ease-out), width 0.5s var(--ease-out), opacity 0.3s ease;
+  transition: transform var(--t-mid) var(--ease-out), width var(--t-mid) var(--ease-out),
+              opacity var(--t-fast) ease;
 }
 .site-nav__rule.on { opacity: 1; }
 
 /* Replaying a heading's wipe on arrival. Separate from .in on purpose: the
    resting state is a plain visible heading, so adding or removing this class
    can never leave anything hidden. */
-.sheet-head h2.replay { animation: head-wipe 0.85s var(--ease-out) both; }
+.sheet-head h2.replay { animation: head-wipe var(--t-slow) var(--ease-out) both; }
 
 /* ---------- Sheets (sections) ---------- */
 main { padding-left: var(--ruler-w); }
@@ -397,13 +406,13 @@ main { padding-left: var(--ruler-w); }
   border-radius: 999px;
   font-family: var(--font-body); font-size: 0.92rem; font-weight: 500;
   color: var(--ink); text-decoration: none; background: none; cursor: pointer;
-  transition: color 0.3s var(--ease-out), border-color 0.3s ease;
+  transition: color var(--t-fast) var(--ease-out), border-color var(--t-fast) ease;
 }
 .btn::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background: var(--ink);
   transform: translateX(-101%);
-  transition: transform 0.35s var(--ease-out);
+  transition: transform var(--t-fast) var(--ease-out);
 }
 .btn:hover, .btn:focus-visible { color: var(--paper); border-color: var(--ink); }
 .btn:hover::before, .btn:focus-visible::before { transform: none; }
@@ -418,9 +427,9 @@ main { padding-left: var(--ruler-w); }
   display: inline-flex; align-items: center; justify-content: center;
   width: 48px; height: 48px; border: 1px solid var(--line); border-radius: 50%;
   color: var(--ink-soft);
-  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s var(--ease-out);
+  transition: color var(--t-fast) ease, border-color var(--t-fast) ease, transform var(--t-fast) var(--ease-out);
 }
-.icon-btn svg { width: 20px; height: 20px; transition: transform 0.3s var(--ease-out); }
+.icon-btn svg { width: 20px; height: 20px; transition: transform var(--t-fast) var(--ease-out); }
 .icon-btn:hover { color: var(--brass); border-color: var(--brass); transform: translateY(-3px); }
 .icon-btn:hover svg { transform: rotate(6deg) scale(1.1); }
 .iconrow--contact { margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid var(--line); gap: 1.25rem; }
@@ -448,7 +457,7 @@ main { padding-left: var(--ruler-w); }
 .carousel__slide a { display: block; }
 .carousel__slide img {
   width: 100%; border: 1px solid var(--line);
-  transition: filter 0.4s ease;
+  transition: filter var(--t-fast) ease;
 }
 .carousel__slide a:hover img { filter: brightness(1.05); }
 .carousel__slide figcaption { font-size: 0.62rem; color: var(--ink-soft); margin-top: 0.6rem; }
@@ -471,7 +480,7 @@ main { padding-left: var(--ruler-w); }
 .carousel__btn {
   width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; background: none;
   color: var(--ink); font-family: var(--font-mono); font-size: 1rem; cursor: pointer;
-  transition: background-color 0.25s var(--ease-out), color 0.25s, border-color 0.25s, opacity 0.25s;
+  transition: background-color var(--t-fast) var(--ease-out), color var(--t-fast), border-color var(--t-fast), opacity var(--t-fast);
 }
 .carousel__btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .carousel__btn:disabled { opacity: 0.3; cursor: default; }
@@ -1033,7 +1042,7 @@ main { padding-left: var(--ruler-w); }
     height: calc(100svh - var(--head-h));
     background: var(--paper);
     transform: translateY(-105%); opacity: 0;
-    transition: transform 0.45s var(--ease-out), opacity 0.3s ease;
+    transition: transform var(--t-mid) var(--ease-out), opacity var(--t-fast) ease;
     z-index: 99; overflow-y: auto;
   }
   .site-nav.open { transform: none; opacity: 1; }
@@ -1042,7 +1051,7 @@ main { padding-left: var(--ruler-w); }
      animations never run, the items are simply visible. The closed panel is
      already off-screen and opacity 0, so nothing needs hiding twice. */
   .site-nav.open li {
-    animation: nav-item-in 0.45s var(--ease-out) both;
+    animation: nav-item-in var(--t-mid) var(--ease-out) both;
     animation-delay: calc(var(--i, 0) * 55ms + 140ms);
   }
   @keyframes nav-item-in {
@@ -1122,7 +1131,7 @@ main { padding-left: var(--ruler-w); }
 
 /* load orchestration — nothing blocks, the page arrives in order */
 body.is-loading .site-head, body.is-loading .hero__inner > * { opacity: 0; }
-.site-head { transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+.site-head { transition: opacity var(--t-mid) var(--ease-out), transform var(--t-mid) var(--ease-out); }
 body.is-loading .site-head { transform: translateY(-100%); }
 body:not(.is-loading) .hero__inner > * { transition-delay: calc(var(--i, 0) * 80ms + 100ms); }
 

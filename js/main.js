@@ -5,6 +5,16 @@
 
   var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* Motion durations live in CSS so there is one source of truth; read them
+     here rather than hardcoding a second set that can drift. */
+  function motion(name, fallback) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    var n = parseFloat(v);
+    if (isNaN(n)) return fallback;
+    return /ms$/.test(v) ? n : n * 1000;
+  }
+
+
   /* ---------- Smooth scroll (Lenis) ---------- */
   var lenis = null;
   if (window.Lenis && !reduceMotion) {
@@ -36,7 +46,7 @@
       document.documentElement.animate(
         { clipPath: ["circle(0px at " + x + "px " + y + "px)",
                      "circle(" + far + "px at " + x + "px " + y + "px)"] },
-        { duration: 620, easing: "cubic-bezier(.22,1,.36,1)",
+        { duration: motion("--t-view", 1150), easing: "cubic-bezier(.22,1,.36,1)",
           pseudoElement: "::view-transition-new(root)" }
       );
     });
@@ -200,7 +210,7 @@
     h.classList.remove("replay");
     void h.offsetWidth;                     // force a reflow so it can replay
     h.classList.add("replay");
-    setTimeout(function () { h.classList.remove("replay"); }, 900);
+    setTimeout(function () { h.classList.remove("replay"); }, motion("--t-slow", 900) + 60);
   }
 
   document.querySelectorAll("[data-wipe]").forEach(function (link) {
@@ -238,12 +248,12 @@
           document.documentElement.animate(
             { clipPath: ["circle(0px at " + ox + "px " + oy + "px)",
                          "circle(" + far + "px at " + ox + "px " + oy + "px)"] },
-            { duration: 700, easing: "cubic-bezier(.22,1,.36,1)",
+            { duration: motion("--t-view", 1150), easing: "cubic-bezier(.22,1,.36,1)",
               pseudoElement: "::view-transition-new(root)" }
           );
         });
         vt.finished.finally(function () { vtBusy = false; });
-        setTimeout(function () { vtBusy = false; }, 1200);      // failsafe
+        setTimeout(function () { vtBusy = false; }, motion("--t-view", 1150) + 400); // failsafe
         return;
       }
 
@@ -251,11 +261,12 @@
       if (!wipeEl || wipeBusy) { jump(); return; }
       wipeBusy = true;
       wipeEl.classList.add("run");
-      setTimeout(jump, 430);                                    // covered midpoint
+      var tv = motion("--t-view", 1150);
+      setTimeout(jump, tv * 0.48);                              // covered midpoint
       setTimeout(function () {
         wipeEl.classList.remove("run");
         wipeBusy = false;
-      }, 950);
+      }, tv + 60);
     });
   });
 
