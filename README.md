@@ -15,7 +15,8 @@ llms.txt              summary for AI assistants that index or cite the site
 vercel.json           CSP, security and caching headers
 .vercelignore         keeps tools/, *.md and node_modules out of the deploy
 .pages.yml            Pages CMS config for the Course Materials admin panel
-favicon-v3.png        gear + camera aperture mark, BUET crimson
+favicon.ico           multi-size icon at the root — Google checks this path
+favicon-v3.png        gear + camera aperture mark, BUET crimson, 256px
 
 css/styles.css        tokens, layout, components, interaction layer, @font-face
 js/theme-init.js      pre-paint theme pick (external, so the CSP needs no unsafe-inline)
