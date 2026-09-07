@@ -1,8 +1,7 @@
 # Design system
 
 The rules the site is actually built on. Read this before changing anything
-visual. Written 2026-09-06, after the overhaul that replaced the original
-"Drawing Set" theme.
+visual. Written 2026-09-06, last updated 2026-09-07.
 
 Supersedes and merges the old `DESIGN.md` (the 2026-06 Drawing Set brief),
 `THEME-BRIEF.md` (the questionnaire that chose the new direction) and
@@ -115,7 +114,7 @@ All self-hosted as woff2 in `assets/fonts/`, latin subset.
 
 ## Structure
 
-Nine named sections. Research sits third, immediately after About, because it
+Ten named sections. Research sits third, immediately after About, because it
 is what the audience came for.
 
 `Title · About · Research · Teaching · Projects · Industry Experience · Skills · Recognition · Photography · Contact`
@@ -129,25 +128,92 @@ Contact button once already; an anchor that still resolves can still be wrong.
 
 ---
 
+## Motion
+
+Four duration tokens and one curve cover everything. Defined in `:root`.
+
+| Token | Value | Used for |
+|---|---|---|
+| `--t-fast` | 240ms | hovers, small state changes |
+| `--t-mid` | 520ms | panels, component reveals, the nav rule |
+| `--t-slow` | 900ms | headings, section content |
+| `--t-view` | 1150ms | the full-view moments: section change, theme change |
+
+Easing is `--ease-out`, `cubic-bezier(0.22, 1, 0.36, 1)`, everywhere.
+
+**`main.js` reads these from CSS** through a `motion(name, fallback)` helper
+rather than keeping its own copy. Changing `--t-view` retimes the section
+reveal, the theme reveal and the wipe fallback together. Do not hardcode a
+duration in JS; it will drift the first time the token is tuned.
+
+Ambient loops are deliberately outside the system: the hero drift (36s), the
+status dot (2.4s) and the scroll cue (2s) are not transitions and should not
+march to the same clock.
+
+---
+
+## Section switching
+
+Clicking a nav item does **not** scroll. It jumps instantly and reveals the
+destination with a **circle growing from the centre of the item you clicked**,
+using the View Transitions API — the same gesture as the theme toggle, and the
+same duration.
+
+Two earlier attempts and why they failed, so neither gets retried:
+
+- **A long smooth scroll** (Lenis, 1.05s) — travelling 10,000px to reach a
+  section is slow and tells you nothing.
+- **A View Transition cross-fade** — read as choppy. The cost is not the
+  snapshot; it is the *blend*. Dissolving two very different scroll positions
+  of a text-heavy page overlaps two sets of type and looks like mush. A
+  clip-path circle does no blending at all, it simply uncovers, which is why
+  the same API feels clean here and bad there.
+
+The panel wipe (`.wipe`, two panels sweeping, jump at the covered midpoint) is
+kept as a **real fallback** for browsers without View Transitions, not as dead
+code. Reduced motion falls through to an instant jump.
+
+`getBoundingClientRect()` for the circle origin must be captured **before**
+`closeMenu()`, or on mobile the collapsing panel gives a stale rect.
+
+---
+
 ## The interaction layer
 
 Content-agnostic by design. Everything is assigned **by role from JS**, never by
 hand-tagging markup, so it keeps working as sections are added or removed.
 
-- Theme toggle is a circular View Transitions reveal from the click point
 - Load orchestration: the header and hero arrive in order, with an 1800ms
   safety timeout so a stalled `load` event can never leave the page invisible
-- Section headings wipe up from their own baseline
+- Section headings wipe up from their own baseline, and replay that wipe on
+  arrival when you jump to them
 - Buttons lean toward the cursor on fine pointers
 - The spine carries scroll progress, section marks and the active section name
+- A crimson rule slides between nav items to mark the current section
+- The mobile panel staggers its items in
 
-**Rule learned the hard way: never gate visibility on an observer.** The
-heading wipe animates *from* the masked state, so the resting style is plain and
-visible. A missed observer costs an animation, never content. An earlier version
-hid every heading behind an observer that never fired.
+**Rule learned the hard way: never gate visibility on an observer, or on an
+animation.** The heading wipe animates *from* the masked state, so the resting
+style is plain and visible; a missed observer costs an animation, never
+content. The mobile nav items are animated in on `.open` for the same reason,
+rather than being hidden and released. An earlier version hid every heading
+behind an observer that never fired.
 
 Also: `picture { display: contents }` means a `<picture>` has no box and can
 never be observed. Observe a wrapper instead.
+
+---
+
+## Buttons
+
+Pills, `border-radius: 999px`, because the contact row's icon buttons were
+already circles and the two now rhyme. The resting border is `--line`, not full
+`--ink`, so a row of three reads as one group rather than three boxes.
+`:focus-visible` gets the same treatment as `:hover`.
+
+`.btn--solid`'s hover label is a hardcoded `#fff` **on purpose**: the sweep
+behind it is crimson in both themes, so `--paper` would put dark text on red in
+night shift.
 
 ---
 
