@@ -216,3 +216,11 @@
 @media (prefers-reduced-motion: reduce) {
   .board__course, .board__sort, .vote, .ask__send, .linkbtn { transition: none; }
 }
+
+/* Instructor-only notification status in the footer. Empty for students, so it
+   occupies nothing and reveals nothing. */
+.board__mail {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+.board__mail--off { color: var(--brass); }
