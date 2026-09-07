@@ -180,6 +180,9 @@
      A fixed-duration glide, then the destination announces itself by
      replaying its heading wipe. The replay class is additive: its absence
      just means a plain visible heading, never a hidden one. */
+  var wipeEl = document.querySelector(".wipe");
+  var wipeBusy = false;
+
   function currentSection() {
     var all = document.querySelectorAll(".sheet");
     var best = all[0];
@@ -207,38 +210,23 @@
       closeMenu();
       history.replaceState(null, "", link.getAttribute("href"));
 
-      var sheets = Array.prototype.slice.call(document.querySelectorAll(".sheet"));
-      var goingDown = sheets.indexOf(target) >= sheets.indexOf(currentSection());
-
-      // Land instantly. Lenis has to be told, or it keeps animating toward
-      // its own idea of the scroll position and fights the jump.
       function jump() {
-        var y = target.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(target).scrollMarginTop) || 0);
-        if (lenis) lenis.scrollTo(y, { immediate: true });
-        else scrollTo(0, y);
-      }
-
-      if (reduceMotion || !document.startViewTransition) {
-        jump();
+        // Lenis has to perform the jump itself, or it keeps animating toward
+        // its own target afterwards and drags the page back.
+        if (lenis) lenis.scrollTo(target, { immediate: true });
+        else target.scrollIntoView({ behavior: "instant", block: "start" });
         announce(target);
-        return;
       }
 
-      var vt = document.startViewTransition(jump);
-      vt.ready.then(function () {
-        var d = goingDown ? 26 : -26;
-        document.documentElement.animate(
-          { opacity: [1, 0] },
-          { duration: 220, easing: "ease-out", pseudoElement: "::view-transition-old(root)" }
-        );
-        document.documentElement.animate(
-          { opacity: [0, 1], transform: ["translateY(" + d + "px)", "translateY(0)"] },
-          { duration: 460, easing: "cubic-bezier(.22,1,.36,1)", delay: 60,
-            pseudoElement: "::view-transition-new(root)" }
-        );
-      });
-      vt.finished.then(function () { announce(target); });
-      setTimeout(function () { announce(target); }, 700);   // failsafe
+      if (reduceMotion || !wipeEl || wipeBusy) { jump(); return; }
+
+      wipeBusy = true;
+      wipeEl.classList.add("run");
+      setTimeout(jump, 430);                                    // covered midpoint
+      setTimeout(function () {
+        wipeEl.classList.remove("run");
+        wipeBusy = false;
+      }, 950);
     });
   });
 

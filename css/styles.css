@@ -135,6 +135,24 @@ picture { display: contents; }
    section, so they need the same header offset .sheet gets. */
 #contact { display: block; scroll-margin-top: calc(var(--head-h) + 12px); }
 
+
+/* ---------- Section-change wipe ----------
+   Two panels sweep down across the viewport and off again; the scroll jump
+   happens at the covered midpoint. Only transforms, so it stays on the
+   compositor and does not depend on the size of the page being left. */
+.wipe { position: fixed; inset: 0; z-index: 200; pointer-events: none; }
+.wipe__panel { position: absolute; inset: 0; transform: translateY(-102%); will-change: transform; }
+.wipe__panel--accent { background: var(--brass-bright); }
+.wipe__panel--ink { background: var(--ink); }
+.wipe.run .wipe__panel { animation: wipe-sweep 0.9s var(--ease-out) forwards; }
+.wipe.run .wipe__panel--ink { animation-delay: 0.07s; }
+@keyframes wipe-sweep {
+  0%   { transform: translateY(-102%); }
+  42%  { transform: translateY(0); }
+  58%  { transform: translateY(0); }
+  100% { transform: translateY(102%); }
+}
+
 /* ---------- Reading spine (replaces the ruler and the HUD) ---------- */
 .spine { position: fixed; left: 0; top: 0; bottom: 0; width: 3px; z-index: 40; background: var(--line-soft); }
 .spine__fill { position: absolute; top: 0; left: 0; width: 100%; height: 6%;
@@ -1068,6 +1086,7 @@ main { padding-left: var(--ruler-w); }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
+  .wipe { display: none; }
   .site-nav.open li { animation: none !important; }
   .site-nav__rule { transition: none; }
   .sheet-head h2.replay { animation: none !important; }
@@ -1094,17 +1113,12 @@ main { padding-left: var(--ruler-w); }
    do not exist yet. See THEME-OVERHAUL.md.
    ============================================================ */
 
-/* View transitions drive two things: the theme toggle's circular reveal and
-   the section jump. Both are animated from JS on the pseudo-element, so the
-   default cross-fade is switched off here and nothing competes. */
+/* The theme toggle's circular reveal is animated from JS on the pseudo-element,
+   so the browser's default cross-fade is switched off here. */
 ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 ::view-transition-old(root) { z-index: 1; }
 ::view-transition-new(root) { z-index: 9999; }
 
-/* The header and the spine do not change between sections, so name them and
-   let the browser hold them still instead of dissolving them with the page. */
-.site-head { view-transition-name: site-header; }
-.spine { view-transition-name: reading-spine; }
 
 /* load orchestration — nothing blocks, the page arrives in order */
 body.is-loading .site-head, body.is-loading .hero__inner > * { opacity: 0; }
