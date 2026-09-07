@@ -180,6 +180,15 @@
      A fixed-duration glide, then the destination announces itself by
      replaying its heading wipe. The replay class is additive: its absence
      just means a plain visible heading, never a hidden one. */
+  function currentSection() {
+    var all = document.querySelectorAll(".sheet");
+    var best = all[0];
+    for (var i = 0; i < all.length; i++) {
+      if (scrollY >= all[i].offsetTop - innerHeight * 0.4) best = all[i];
+    }
+    return best;
+  }
+
   function announce(section) {
     if (reduceMotion) return;
     var h = section.querySelector(".sheet-head h2");
@@ -198,19 +207,38 @@
       closeMenu();
       history.replaceState(null, "", link.getAttribute("href"));
 
-      if (reduceMotion || !lenis) {
-        target.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth", block: "start" });
+      var sheets = Array.prototype.slice.call(document.querySelectorAll(".sheet"));
+      var goingDown = sheets.indexOf(target) >= sheets.indexOf(currentSection());
+
+      // Land instantly. Lenis has to be told, or it keeps animating toward
+      // its own idea of the scroll position and fights the jump.
+      function jump() {
+        var y = target.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(target).scrollMarginTop) || 0);
+        if (lenis) lenis.scrollTo(y, { immediate: true });
+        else scrollTo(0, y);
+      }
+
+      if (reduceMotion || !document.startViewTransition) {
+        jump();
         announce(target);
         return;
       }
-      lenis.scrollTo(target, {
-        duration: 1.05,
-        easing: function (t) { return 1 - Math.pow(1 - t, 3); },
-        onComplete: function () { announce(target); }
+
+      var vt = document.startViewTransition(jump);
+      vt.ready.then(function () {
+        var d = goingDown ? 26 : -26;
+        document.documentElement.animate(
+          { opacity: [1, 0] },
+          { duration: 220, easing: "ease-out", pseudoElement: "::view-transition-old(root)" }
+        );
+        document.documentElement.animate(
+          { opacity: [0, 1], transform: ["translateY(" + d + "px)", "translateY(0)"] },
+          { duration: 460, easing: "cubic-bezier(.22,1,.36,1)", delay: 60,
+            pseudoElement: "::view-transition-new(root)" }
+        );
       });
-      // Failsafe: announce anyway if onComplete never fires. announce() only
-      // adds an animation, so running it twice is harmless.
-      setTimeout(function () { announce(target); }, 1150);
+      vt.finished.then(function () { announce(target); });
+      setTimeout(function () { announce(target); }, 700);   // failsafe
     });
   });
 
