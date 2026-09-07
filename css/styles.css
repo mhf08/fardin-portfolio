@@ -1094,10 +1094,17 @@ main { padding-left: var(--ruler-w); }
    do not exist yet. See THEME-OVERHAUL.md.
    ============================================================ */
 
-/* theme change as a circular reveal from the toggle */
+/* View transitions drive two things: the theme toggle's circular reveal and
+   the section jump. Both are animated from JS on the pseudo-element, so the
+   default cross-fade is switched off here and nothing competes. */
 ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 ::view-transition-old(root) { z-index: 1; }
 ::view-transition-new(root) { z-index: 9999; }
+
+/* The header and the spine do not change between sections, so name them and
+   let the browser hold them still instead of dissolving them with the page. */
+.site-head { view-transition-name: site-header; }
+.spine { view-transition-name: reading-spine; }
 
 /* load orchestration — nothing blocks, the page arrives in order */
 body.is-loading .site-head, body.is-loading .hero__inner > * { opacity: 0; }
