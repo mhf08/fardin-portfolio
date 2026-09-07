@@ -41,18 +41,22 @@ export default async function handler(req, res) {
       const id = Number(input.id);
       if (!Number.isInteger(id)) return fail(res, 400, "Unknown post.");
 
+      const admin = isAdmin(req);
       const sql = await db();
       const [post] = await sql`
         SELECT id, author_hash FROM board_posts WHERE id = ${id} AND deleted_at IS NULL`;
-      if (!post) return json(res, 200, { ok: true });
 
-      // Fardin can remove anything; everyone else only what they wrote. Nobody
-      // can touch another person's post, which is what "not public" means here.
-      // Retraction matters more now that posts carry a real name: a student who
-      // regrets one should not have to email to get it taken down.
-      if (!isAdmin(req) && post.author_hash !== me.hash) {
-        return fail(res, 403, "You can only delete your own post.");
-      }
+      /* Fardin can remove anything; everyone else only what they wrote. Nobody
+         can touch another person's post, which is what "not public" means here.
+         Retraction matters more now that posts carry a real name: a student who
+         regrets one should not have to email to get it taken down.
+
+         A missing row answers exactly as a forbidden one does, so the endpoint
+         cannot be used to find out which ids exist. Only Fardin, who may delete
+         anything anyway, gets told that the row was simply not there. */
+      const denied = () => fail(res, 403, "You can only delete your own post.");
+      if (!post) return admin ? json(res, 200, { ok: true }) : denied();
+      if (!admin && post.author_hash !== me.hash) return denied();
 
       // Soft delete: the row stays, so a deletion is reversible in the database
       // if something is ever removed by mistake or in anger.
