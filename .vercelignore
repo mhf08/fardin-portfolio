@@ -2,5 +2,8 @@
 tools
 *.md
 node_modules
-package.json
-package-lock.json
+
+# NOTE: package.json / package-lock.json used to be listed here, back when the
+# site was purely static. They must ship now: Vercel reads them to install the
+# database driver the /api/ functions import. vercel.json's installCommand adds
+# --omit=dev so sharp (a build-time-only tool) is not installed on every deploy.

@@ -56,11 +56,23 @@
     return newest;
   }
 
+  // Every course gets a link to its question board, whether or not it has any
+  // materials yet. The board is a separate page on purpose: it is noindex, and
+  // this page must keep working even if the board's API is down.
+  function askRow(c) {
+    return (
+      '<a class="course__ask mono" href="/teaching/questions/?c=' +
+      encodeURIComponent(c.code) + '">Ask a question about ' + esc(c.code) +
+      '<span aria-hidden="true"> &rarr;</span></a>'
+    );
+  }
+
   function courseCard(c) {
     var mats = Array.isArray(c.materials) ? c.materials : [];
     var body = mats.length
       ? '<ul class="mats">' + mats.map(materialRow).join("") + "</ul>"
       : '<p class="mats__empty mono">No materials posted yet.</p>';
+    body += askRow(c);
     var term = c.term ? '<span>&ensp;&middot;&ensp;' + esc(c.term) + "</span>" : "";
     var count = mats.length
       ? '<span class="course__count mono">' + mats.length + (mats.length === 1 ? " item" : " items") + "</span>"
