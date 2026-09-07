@@ -7,24 +7,38 @@
 import { db, overRateLimit, isDuplicate } from "./_lib/db.js";
 import { notify } from "./_lib/notify.js";
 import {
-  identify, handleFor, isAdmin, json, fail, sameOrigin, body,
-  clean, checkBody, COURSE_RE, LIMITS,
+  identify, isAdmin, json, fail, sameOrigin, body,
+  clean, checkBody, checkIdentity, COURSE_RE, LIMITS,
 } from "./_lib/util.js";
+import { checkRoster } from "./_lib/roster.js";
 
 const MAX_QUESTIONS = 120;
 
-function shape(row, me, votedSet) {
-  return {
+/* The single place identity is decided, so a name or a roll number cannot leak
+   by being forgotten in one branch. Everything a student is not allowed to see
+   is added only inside the `admin` block; the base object is what ships to the
+   class. */
+function shape(row, me, votedSet, admin) {
+  const post = {
     id: Number(row.id),
     body: row.body,
-    who: row.display_name || handleFor(row.author_hash),
-    named: Boolean(row.display_name),
+    who: row.is_instructor
+      ? "Fardin"
+      : row.hidden
+        ? "Anonymous to classmates"
+        : row.display_name,
+    hidden: Boolean(row.hidden),
     instructor: row.is_instructor,
     votes: Number(row.votes),
     voted: votedSet.has(Number(row.id)),
     mine: row.author_hash === me.hash,
     at: row.created_at,
   };
+  if (admin && !row.is_instructor) {
+    post.realName = row.display_name;
+    post.studentId = row.student_id;
+  }
+  return post;
 }
 
 async function list(req, res, me, admin) {
@@ -67,10 +81,9 @@ async function list(req, res, me, admin) {
   json(res, 200, {
     ok: true,
     admin,
-    me: handleFor(me.hash),
     limits: LIMITS,
     questions: questions.map((q) => ({
-      ...shape(q, me, votedSet),
+      ...shape(q, me, votedSet, admin),
       answers: byParent.get(Number(q.id)) || [],
     })),
   });
@@ -102,7 +115,20 @@ async function create(req, res, me, admin) {
   const problem = checkBody(text, kind, admin);
   if (problem) return fail(res, 400, problem);
 
-  const name = admin ? null : clean(input.name, LIMITS.name) || null;
+  // Fardin posts as himself; everyone else identifies themselves so he can tell
+  // who asked. Whether the class sees that name is the student's choice, made
+  // per post rather than once, because the embarrassing question is not always
+  // the first one.
+  let name = null;
+  let studentId = null;
+  let hidden = false;
+  if (!admin) {
+    name = clean(input.name, LIMITS.name.max);
+    studentId = clean(input.studentId, LIMITS.studentId).replace(/\s+/g, "");
+    const idProblem = checkIdentity(name, studentId) || checkRoster(course, studentId);
+    if (idProblem) return fail(res, 400, idProblem);
+    hidden = input.hidden === true;
+  }
 
   const sql = await db();
 
@@ -123,8 +149,10 @@ async function create(req, res, me, admin) {
   }
 
   const [row] = await sql`
-    INSERT INTO board_posts (course, parent_id, body, display_name, author_hash, is_instructor)
-    VALUES (${course}, ${parentId}, ${text}, ${name}, ${me.hash}, ${admin})
+    INSERT INTO board_posts
+      (course, parent_id, body, display_name, student_id, hidden, author_hash, is_instructor)
+    VALUES
+      (${course}, ${parentId}, ${text}, ${name}, ${studentId}, ${hidden}, ${me.hash}, ${admin})
     RETURNING id`;
 
   // Not awaited on purpose: the student's confirmation should not wait on a
@@ -133,6 +161,9 @@ async function create(req, res, me, admin) {
     notify({
       course,
       kind,
+      // The email carries who asked even when the class cannot see it, so he can
+      // triage from his inbox without opening the board.
+      who: `${name} (${studentId})${hidden ? ", hidden from classmates" : ""}`,
       text,
       url: `https://${req.headers.host}/teaching/questions/?c=${encodeURIComponent(course)}`,
     });

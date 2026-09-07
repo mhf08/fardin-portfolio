@@ -62,10 +62,11 @@ function setCookie(res, name, value, maxAge) {
 
 /* ---------- who is this ------------------------------------------------ */
 
-/* An anonymous, per-browser identity. No account, no email, no name required.
-   The raw id stays in an HttpOnly cookie and never reaches the page; what gets
-   stored against a post is a hash of it, so the database holds no value that
-   can be replayed as somebody's identity. */
+/* A per-browser marker, separate from who the student says they are. It is what
+   "delete your own post", one-vote-per-person and the rate limits key off, so
+   those keep working without trusting anything the student typed. The raw id
+   lives in an HttpOnly cookie and never reaches the page; only its hash is
+   stored, so the database holds nothing replayable. */
 export function identify(req, res) {
   const jar = cookies(req);
   let id = jar.mhfq_id;
@@ -74,23 +75,6 @@ export function identify(req, res) {
     setCookie(res, "mhfq_id", id, YEAR * 2);
   }
   return { id, hash: hmac("who:" + id) };
-}
-
-const ADJ = [
-  "quiet", "brisk", "amber", "candid", "steady", "keen", "patient", "lucid",
-  "sharp", "plain", "curious", "gentle", "bright", "level", "swift", "calm",
-];
-const NOUN = [
-  "otter", "heron", "lathe", "kiln", "vise", "anvil", "shuttle", "flint",
-  "beacon", "pulley", "sparrow", "gantry", "compass", "ingot", "willow", "spindle",
-];
-
-/* A stable, readable handle derived from the hash, so a thread reads
-   coherently ("the same person asked the follow-up") without anyone giving a
-   name. Nothing to store: the same hash always yields the same handle. */
-export function handleFor(hash) {
-  const n = parseInt(hash.slice(0, 8), 16);
-  return `${ADJ[n % ADJ.length]}-${NOUN[(n >> 8) % NOUN.length]}-${hash.slice(8, 11)}`;
 }
 
 /* ---------- admin ------------------------------------------------------ */
@@ -179,9 +163,24 @@ export const COURSE_RE = /^[A-Z]{2,4} \d{3}$/;
 export const LIMITS = {
   question: { min: 10, max: 1500 },
   answer: { min: 2, max: 4000 },
-  title: { min: 8, max: 140 },
-  name: 40,
+  name: { min: 3, max: 60 },
+  studentId: 12,
 };
+
+/* BUET roll numbers are seven digits. This checks the shape, not the truth of
+   it: nothing stops a student typing a classmate's number. It is attestation,
+   which is enough when the person reading every post already knows the class by
+   name. Real verification is the roster in ./roster.js, which is empty for now
+   and can be filled in later without touching this code. */
+export const STUDENT_ID_RE = /^\d{7}$/;
+
+export function checkIdentity(name, studentId) {
+  if (name.length < LIMITS.name.min) return "Please give your full name.";
+  if (name.length > LIMITS.name.max) return "That name is too long.";
+  if (!/[A-Za-z]/.test(name)) return "Please give your name, not just numbers.";
+  if (!STUDENT_ID_RE.test(studentId)) return "Student ID should be your 7-digit roll number.";
+  return null;
+}
 
 const LINK_RE = /(https?:\/\/|www\.)/i;
 

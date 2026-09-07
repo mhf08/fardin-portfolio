@@ -11,7 +11,7 @@
 
 const ENDPOINT = "https://api.resend.com/emails";
 
-export function notify({ course, kind, text, url }) {
+export function notify({ course, kind, who, text, url }) {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.NOTIFY_EMAIL;
   if (!key || !to) return;
@@ -20,7 +20,7 @@ export function notify({ course, kind, text, url }) {
   // onboarding sender, and only to the address that owns the account. That is
   // exactly this case: one recipient, himself.
   const from = process.env.NOTIFY_FROM || "Course board <onboarding@resend.dev>";
-  const subject = `${course}: new ${kind}`;
+  const subject = `${course}: new ${kind}${who ? " from " + who : ""}`;
   const preview = text.length > 600 ? text.slice(0, 600) + "..." : text;
 
   fetch(ENDPOINT, {

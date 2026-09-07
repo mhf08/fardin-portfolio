@@ -74,6 +74,38 @@
 }
 .ask textarea { min-height: 6.5rem; line-height: 1.55; }
 .ask textarea:focus-visible, .ask input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+/* Identity row. Name takes the room, the roll number needs only a dozen
+   characters, and on a phone they stack rather than squeeze. */
+.ask__who { display: flex; gap: 0.6rem; margin-top: 0.7rem; }
+.ask__field {
+  flex: 1 1 auto; min-width: 0;
+  font: inherit; font-size: 0.95rem; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+}
+.ask__field--id { flex: 0 1 11ch; font-family: var(--font-mono); font-size: 0.85rem; }
+.ask__field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.ask__hide {
+  display: flex; align-items: flex-start; gap: 0.55rem;
+  margin-top: 0.7rem; padding: 0.25rem 0;
+  font-size: 0.8rem; color: var(--ink-soft); cursor: pointer;
+}
+/* The label wraps the input, so the whole row is the tap target, but a 13px
+   default checkbox is still a poor thing to aim a thumb at. */
+.ask__hide input {
+  margin: 0.05rem 0 0; accent-color: var(--brass); flex: none;
+  width: 18px; height: 18px;
+}
+
+/* Instructor-only. Students are never sent these values, so this never renders
+   for them, but it is styled quietly so it reads as an annotation either way. */
+.q__id {
+  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.06em;
+  color: var(--ink-soft); border: 1px dashed var(--line);
+  border-radius: 4px; padding: 0.1rem 0.45rem;
+}
+
 .ask__row {
   display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
   margin-top: 0.75rem;
@@ -172,6 +204,8 @@
 .board__admin:hover { color: var(--brass); }
 
 @media (max-width: 560px) {
+  .ask__who { flex-direction: column; }
+  .ask__field--id { flex: 1 1 auto; }
   .as, .q__reply { margin-left: 0; }
   .as { padding-left: 0.9rem; }
   .q__main { gap: 0.7rem; }

@@ -79,6 +79,13 @@ async function migrate(sql) {
       created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
       deleted_at    TIMESTAMPTZ
     )`;
+  /* The table already exists in production, created on the first request before
+     names were required, so new columns are added rather than declared above.
+     ADD COLUMN IF NOT EXISTS makes this safe to run on every cold start and
+     safe on a fresh database too. */
+  await sql`ALTER TABLE board_posts ADD COLUMN IF NOT EXISTS student_id TEXT`;
+  await sql`ALTER TABLE board_posts ADD COLUMN IF NOT EXISTS hidden BOOLEAN NOT NULL DEFAULT FALSE`;
+
   await sql`
     CREATE TABLE IF NOT EXISTS board_votes (
       post_id BIGINT NOT NULL REFERENCES board_posts(id) ON DELETE CASCADE,

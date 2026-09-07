@@ -46,10 +46,13 @@ export default async function handler(req, res) {
         SELECT id, author_hash FROM board_posts WHERE id = ${id} AND deleted_at IS NULL`;
       if (!post) return json(res, 200, { ok: true });
 
-      // Fardin can remove anything. Anyone else can remove only their own post,
-      // which is the difference between moderation and censorship.
-      const admin = isAdmin(req);
-      if (!admin && post.author_hash !== me.hash) return fail(res, 403, "Not yours to delete.");
+      // Fardin can remove anything; everyone else only what they wrote. Nobody
+      // can touch another person's post, which is what "not public" means here.
+      // Retraction matters more now that posts carry a real name: a student who
+      // regrets one should not have to email to get it taken down.
+      if (!isAdmin(req) && post.author_hash !== me.hash) {
+        return fail(res, 403, "You can only delete your own post.");
+      }
 
       // Soft delete: the row stays, so a deletion is reversible in the database
       // if something is ever removed by mistake or in anger.

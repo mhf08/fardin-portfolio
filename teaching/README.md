@@ -176,6 +176,16 @@ students can answer it too, and anyone can tap "same" on a question to say they
 have it as well. Your answers are marked **Instructor** and pinned above the
 rest.
 
+**Everyone posting gives their full name and 7-digit roll number**, and both are
+always visible to you when you are signed in. Each post also has a "Hide my name
+from classmates" box: tick it and the class sees "Anonymous to classmates" while
+you still see exactly who wrote it. The roll number is never shown to students
+under any setting.
+
+**Deleting:** you can delete anything. A student can delete only their own post,
+which matters now that posts carry a real name — someone who regrets a question
+can take it down without emailing you. Nobody can touch anyone else's post.
+
 It is a separate page from the materials list on purpose. The materials page has
 no runtime dependency on any of this, so if the board ever breaks, your slides
 are untouched.
@@ -217,9 +227,29 @@ with Resend and set `NOTIFY_FROM` to an address on it.
 
 ## Moderating
 
-Sign in and a **Delete** link appears on every post. Students see Delete only on
-their own posts. Deletes are soft — the row stays in the database and can be
-brought back with a SQL update if something goes wrong.
+Sign in and a **Delete** link appears on every post, along with the writer's name
+and roll number. Students see Delete only on their own posts. Deletes are soft:
+the row stays in the database and can be brought back with a SQL update if
+something is removed by mistake.
+
+## Turning on real ID checking, later
+
+Right now the roll number is only checked for shape (7 digits). Nothing stops a
+student typing a classmate's number, so treat it as them signing their name
+rather than as proof.
+
+When you want the real thing, open `api/_lib/roster.js` and paste the roll
+numbers for a course between the brackets:
+
+```js
+export const ROSTER = {
+  "IPE 331": ["2004001", "2004002", "2004003"],
+};
+```
+
+Commit it and the server starts rejecting anything not on that list, **for that
+course only**. Courses you leave out stay on the format check, so you can switch
+it on one course at a time. No other file changes.
 
 Anything you post while signed in carries the Instructor badge and sorts to the
 top of its thread. You are also exempt from the link ban and the rate limits.
@@ -229,6 +259,7 @@ top of its thread. You are also exempt from the link ban and the rate limits.
 There is no CAPTCHA, because the site's Content-Security-Policy forbids loading
 one. Instead:
 
+- a name and roll number on every post, which is most of the deterrent
 - a hidden field no human sees; anything that fills it is silently discarded
 - posts sent in under 3 seconds of the page rendering are rejected
 - 4 posts per 10 minutes and 25 per day per browser
