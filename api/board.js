@@ -22,11 +22,13 @@ function shape(row, me, votedSet, admin) {
   const post = {
     id: Number(row.id),
     body: row.body,
+    // The `|| "A student"` covers rows written before names were required, which
+    // would otherwise render as an empty byline.
     who: row.is_instructor
       ? "Fardin"
       : row.hidden
         ? "Anonymous to classmates"
-        : row.display_name,
+        : row.display_name || "A student",
     hidden: Boolean(row.hidden),
     instructor: row.is_instructor,
     votes: Number(row.votes),
