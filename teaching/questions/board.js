@@ -19,13 +19,34 @@
     course: null,
     sort: "new",
     admin: false,
-    me: "",
-    limits: { question: { min: 10, max: 1500 }, answer: { min: 2, max: 4000 }, name: 40 },
+    limits: { question: { min: 10, max: 1500 }, answer: { min: 2, max: 4000 },
+              name: { min: 3, max: 60 }, studentId: 12 },
     questions: [],
     replyTo: null,
     opened: Date.now(),
     busy: false,
   };
+
+  /* Their name and roll number go in localStorage, not a cookie, so they never
+     travel with a request they did not trigger. Retyping both on a phone every
+     time is exactly the friction that stops someone asking. */
+  var REMEMBER = "mhfq_me";
+
+  function remembered() {
+    try {
+      return JSON.parse(localStorage.getItem(REMEMBER)) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function remember(name, studentId) {
+    try {
+      localStorage.setItem(REMEMBER, JSON.stringify({ name: name, studentId: studentId }));
+    } catch (e) {
+      /* private mode, or storage disabled: they type it again, nothing breaks */
+    }
+  }
 
   var ESCAPES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 
@@ -80,10 +101,19 @@
       ? "What did not make sense? Say which topic or which slide if you can."
       : "Answer in your own words. Say what you are unsure about, if you are.";
 
+    var saved = remembered();
     var identity = state.admin
       ? '<span class="ask__hint">Posting as instructor.</span>'
-      : '<input class="ask__name" type="text" name="name" maxlength="' + state.limits.name +
-        '" placeholder="Name (optional, leave blank to stay anonymous)" autocomplete="off">';
+      : '<div class="ask__who">' +
+        '<input class="ask__field" type="text" name="name" maxlength="' + state.limits.name.max +
+        '" placeholder="Your full name" autocomplete="name" required value="' +
+        esc(saved.name || "") + '">' +
+        '<input class="ask__field ask__field--id" type="text" name="studentId" inputmode="numeric" ' +
+        'maxlength="' + state.limits.studentId + '" placeholder="Student ID" ' +
+        'autocomplete="off" required value="' + esc(saved.studentId || "") + '">' +
+        '</div>' +
+        '<label class="ask__hide"><input type="checkbox" name="hidden">' +
+        '<span>Hide my name from classmates. Sir will still see it.</span></label>';
 
     return (
       '<form class="ask" data-parent="' + (parentId == null ? "" : parentId) + '">' +
@@ -94,7 +124,8 @@
       '" placeholder="' + placeholder + '" required></textarea>' +
       '<div class="ask__pot" aria-hidden="true"><label>Website' +
       '<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
-      '<div class="ask__row">' + identity +
+      identity +
+      '<div class="ask__row">' +
       '<button type="submit" class="ask__send">' + (isQ ? "Post question" : "Post answer") + "</button>" +
       "</div>" +
       '<p class="ask__msg" role="status"></p>' +
@@ -108,8 +139,18 @@
     var bits = [];
     if (post.instructor) bits.push('<span class="badge">Instructor</span>');
     bits.push('<span class="q__who">' + esc(post.who) + (post.mine ? " (you)" : "") + "</span>");
+
+    // Only ever sent to a signed-in instructor, so this is dead markup for a
+    // student even if they read the source.
+    if (post.studentId) {
+      bits.push('<span class="q__id">' + esc(post.realName) + " &middot; " + esc(post.studentId) +
+        (post.hidden ? " &middot; hidden from class" : "") + "</span>");
+    }
+
     bits.push("<span>" + esc(ago(post.at)) + "</span>");
     if (extra) bits.push(extra);
+    // Shown on your own post and on everything when signed in as instructor.
+    // Never on someone else's post, and the server enforces the same rule.
     if (post.mine || state.admin) {
       bits.push('<button type="button" class="linkbtn" data-delete="' + post.id + '">Delete</button>');
     }
@@ -199,7 +240,6 @@
     return api(url)
       .then(function (data) {
         state.admin = data.admin;
-        state.me = data.me;
         if (data.limits) state.limits = data.limits;
         state.questions = data.questions;
         state.replyTo = null;
@@ -289,6 +329,8 @@
     if (state.busy) return;
     var textarea = form.querySelector("textarea");
     var nameInput = form.querySelector('input[name="name"]');
+    var idInput = form.querySelector('input[name="studentId"]');
+    var hideInput = form.querySelector('input[name="hidden"]');
     var potInput = form.querySelector('input[name="website"]');
     var msg = form.querySelector(".ask__msg");
     var button = form.querySelector(".ask__send");
@@ -302,6 +344,20 @@
       return;
     }
 
+    var name = nameInput ? nameInput.value.trim() : "";
+    var studentId = idInput ? idInput.value.trim().replace(/\s+/g, "") : "";
+    if (nameInput && (name.length < state.limits.name.min || !/[A-Za-z]/.test(name))) {
+      msg.textContent = "Please give your full name.";
+      msg.className = "ask__msg ask__msg--bad";
+      return;
+    }
+    if (idInput && !/^\d{7}$/.test(studentId)) {
+      msg.textContent = "Student ID should be your 7-digit roll number.";
+      msg.className = "ask__msg ask__msg--bad";
+      return;
+    }
+    if (nameInput) remember(name, studentId);
+
     state.busy = true;
     button.disabled = true;
     msg.className = "ask__msg";
@@ -313,7 +369,9 @@
         course: state.course,
         parent: parent,
         body: text,
-        name: nameInput ? nameInput.value.trim() : "",
+        name: name,
+        studentId: studentId,
+        hidden: Boolean(hideInput && hideInput.checked),
         website: potInput ? potInput.value : "",
         elapsed: Date.now() - state.opened,
       }),
