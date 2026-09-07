@@ -182,6 +182,7 @@
      just means a plain visible heading, never a hidden one. */
   var wipeEl = document.querySelector(".wipe");
   var wipeBusy = false;
+  var vtBusy = false;
 
   function currentSection() {
     var all = document.querySelectorAll(".sheet");
@@ -210,6 +211,12 @@
       closeMenu();
       history.replaceState(null, "", link.getAttribute("href"));
 
+      // Capture the origin BEFORE closing the menu — on mobile the panel is
+      // about to collapse and the link would report a stale rect.
+      var r = link.getBoundingClientRect();
+      var ox = r.left + r.width / 2;
+      var oy = r.top + r.height / 2;
+
       function jump() {
         // Lenis has to perform the jump itself, or it keeps animating toward
         // its own target afterwards and drags the page back.
@@ -218,8 +225,30 @@
         announce(target);
       }
 
-      if (reduceMotion || !wipeEl || wipeBusy) { jump(); return; }
+      if (reduceMotion) { jump(); return; }
 
+      // Preferred: the new section is uncovered by a circle growing out of the
+      // clicked item. No blending, so nothing ghosts the way a cross-fade did.
+      if (document.startViewTransition) {
+        if (vtBusy) { jump(); return; }
+        vtBusy = true;
+        var far = Math.hypot(Math.max(ox, innerWidth - ox), Math.max(oy, innerHeight - oy));
+        var vt = document.startViewTransition(jump);
+        vt.ready.then(function () {
+          document.documentElement.animate(
+            { clipPath: ["circle(0px at " + ox + "px " + oy + "px)",
+                         "circle(" + far + "px at " + ox + "px " + oy + "px)"] },
+            { duration: 700, easing: "cubic-bezier(.22,1,.36,1)",
+              pseudoElement: "::view-transition-new(root)" }
+          );
+        });
+        vt.finished.finally(function () { vtBusy = false; });
+        setTimeout(function () { vtBusy = false; }, 1200);      // failsafe
+        return;
+      }
+
+      // Fallback where View Transitions are unavailable: the panel wipe.
+      if (!wipeEl || wipeBusy) { jump(); return; }
       wipeBusy = true;
       wipeEl.classList.add("run");
       setTimeout(jump, 430);                                    // covered midpoint
