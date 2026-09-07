@@ -4,3 +4,6 @@ ROADMAP.md
 
 # Node deps for tools/ — never committed, never deployed
 node_modules/
+
+# Local preview config for Claude Code, not part of the site
+.claude/

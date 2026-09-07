@@ -165,3 +165,85 @@ the site is affected.
 | Live page | mostofahabibfardin.vercel.app/teaching/ |
 | Filename rule | any name; just match `"file"` exactly |
 | Comma rule | comma after every entry except the last |
+
+---
+
+# The question board
+
+`/teaching/questions/` is a Reddit-style board, one per course. A student posts
+a question in their own words and it appears immediately. You answer it, other
+students can answer it too, and anyone can tap "same" on a question to say they
+have it as well. Your answers are marked **Instructor** and pinned above the
+rest.
+
+It is a separate page from the materials list on purpose. The materials page has
+no runtime dependency on any of this, so if the board ever breaks, your slides
+are untouched.
+
+The board is set to **noindex** — Google will not list it. That is deliberate:
+these are students' unedited words on a site that is also your academic profile,
+and a post you delete would otherwise live on in Google's cache.
+
+## One-time setup (about 15 minutes, all in a browser)
+
+1. **vercel.com → your project → Storage → Create Database → Neon → Create.**
+   Accept the defaults and attach it to this project. This sets `DATABASE_URL`
+   for you. Free tier; nothing to configure.
+
+2. **Settings → Environment Variables → Add**, name `ADMIN_SECRET`. The value is
+   the password you will type to sign in as instructor. Make it long and random
+   (a password manager's generator is ideal). Apply it to all environments.
+   Minimum 16 characters, and the code refuses to run below that.
+
+3. **Redeploy** (Deployments → the top one → ... → Redeploy) so the new
+   variables are picked up. The tables create themselves on the first visit.
+
+4. Open `/teaching/questions/`, click **Instructor sign in** at the bottom, and
+   paste the `ADMIN_SECRET` value. You stay signed in on that device for 45 days.
+
+## Getting told when someone posts (optional, do it later)
+
+Until then, you check the board yourself. To get an email instead, add two more
+environment variables and redeploy:
+
+- `RESEND_API_KEY` — from a free account at resend.com (3,000 emails a month)
+- `NOTIFY_EMAIL` — where the alerts go
+
+If these are not set, nothing happens and nothing breaks; the board simply does
+not email. **Note:** until a custom domain is verified with Resend, they will
+only deliver to the address that owns the Resend account. That is fine here,
+since you are the only recipient. Once the site has its own domain, verify it
+with Resend and set `NOTIFY_FROM` to an address on it.
+
+## Moderating
+
+Sign in and a **Delete** link appears on every post. Students see Delete only on
+their own posts. Deletes are soft — the row stays in the database and can be
+brought back with a SQL update if something goes wrong.
+
+Anything you post while signed in carries the Instructor badge and sorts to the
+top of its thread. You are also exempt from the link ban and the rate limits.
+
+## What stops spam
+
+There is no CAPTCHA, because the site's Content-Security-Policy forbids loading
+one. Instead:
+
+- a hidden field no human sees; anything that fills it is silently discarded
+- posts sent in under 3 seconds of the page rendering are rejected
+- 4 posts per 10 minutes and 25 per day per browser
+- the same text twice within 6 hours is rejected
+- students cannot post links at all (you can)
+- length limits: questions 10–1500 characters, answers 2–4000
+
+## Adding a course
+
+Nothing to do. The board reads the same `courses.json` as the materials page, so
+adding a course in the admin panel gives it a board automatically.
+
+## If the board says it is not loading
+
+Check, in this order: that `DATABASE_URL` and `ADMIN_SECRET` both exist in
+Vercel's environment variables; that you redeployed after adding them; and
+Vercel → your project → Logs for the actual error. The materials page and the
+rest of the site are unaffected either way.

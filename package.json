@@ -1,13 +1,17 @@
 {
-  "name": "fardin-portfolio-tools",
+  "name": "fardin-portfolio",
   "private": true,
   "version": "1.0.0",
-  "description": "Build-time image tooling only. The site itself is static and has no runtime dependencies.",
+  "type": "module",
+  "description": "Static site. The pages have no runtime dependencies; the one dependency below is used only by the /api/ serverless functions that back the course Q&A board.",
   "scripts": {
     "images": "node tools/build-images.mjs",
     "html": "node tools/build-html.mjs",
     "srcset": "node tools/build-srcset.mjs",
     "og": "node tools/build-og.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4"
   },
   "devDependencies": {
     "sharp": "^0.35.4"

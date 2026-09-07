@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Questions &middot; Mostofa Habib Fardin</title>
+
+  <!-- Deliberately kept out of Google. The questions are students' own words on
+       a page that doubles as a faculty profile, and a post that gets deleted
+       would otherwise survive in the cache. Note there is no robots.txt
+       Disallow to match: a blocked crawler never reads the noindex. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta name="theme-color" content="#F7F4F1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171516" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-v3.png" sizes="256x256">
+
+  <script src="/js/theme-init.js"></script>
+
+  <link rel="preload" href="/assets/fonts/fraunces-normal-400_650.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-normal-400_600.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/teaching/teaching.css">
+  <link rel="stylesheet" href="/teaching/questions/board.css">
+  <script src="/teaching/questions/board.js" defer></script>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+  <div class="tpage">
+    <div class="tbar">
+      <a class="tbar__logo" href="/">MHF<b>.</b></a>
+      <a class="tbar__back" href="/teaching/">&larr; Course materials</a>
+    </div>
+
+    <header class="tpage__head">
+      <p class="tpage__eyebrow mono">Course Questions</p>
+      <h1>Ask, and everyone sees the answer</h1>
+      <p class="tpage__sub">Lecturer &middot; Dept. of Industrial &amp; Production Engineering &middot; BUET</p>
+      <p class="tpage__lede">
+        If something in a lecture did not land, ask it here instead of only in my inbox.
+        You do not need an account and you do not have to give your name. I answer here
+        so that one answer reaches the whole batch, and you can answer each other too.
+      </p>
+      <p class="board__rules">
+        Please keep this to course material. For anything about
+        <strong>grades, attendance, deadlines or personal circumstances</strong>,
+        email me at <a href="mailto:fardin@ipe.buet.ac.bd">fardin@ipe.buet.ac.bd</a>
+        instead. Posts are public to anyone with the link, so do not put
+        anything private here.
+      </p>
+    </header>
+
+    <nav class="board__courses" id="courses" aria-label="Choose a course"></nav>
+
+    <main id="board">
+      <p class="board__note mono">Loading questions&hellip;</p>
+    </main>
+
+    <footer class="tfoot">
+      <button type="button" class="board__admin mono" id="admin-toggle">Instructor sign in</button>
+      <a href="/teaching/">Course materials &rarr;</a>
+    </footer>
+  </div>
+</body>
+</html>

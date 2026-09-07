@@ -1,0 +1,184 @@
+/* Course Q&A board. Inherits every token, font and rhythm from
+   ../../css/styles.css and ../teaching.css — this file adds only what the
+   board itself needs.
+
+   Accent discipline (DESIGN.md): crimson appears on exactly four things here —
+   the instructor badge, an active vote, links on hover, and the focus ring.
+   Every other piece of chrome is --ink-soft. A board is persistent furniture;
+   colouring it red is how a page starts looking like a department template. */
+
+.board__rules {
+  margin-top: 1.25rem;
+  max-width: 60ch;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--line);
+  padding-left: 1rem;
+}
+.board__rules strong { color: var(--ink); font-weight: 500; }
+.board__rules a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+.board__rules a:hover { color: var(--brass); }
+
+/* ---------- course tabs ------------------------------------------------ */
+
+.board__courses {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  padding-bottom: 1.5rem; margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.board__course {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em;
+  color: var(--ink-soft); background: none;
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.4rem 0.9rem; cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease-out),
+              color var(--t-fast) var(--ease-out),
+              background-color var(--t-fast) var(--ease-out);
+}
+.board__course:hover { border-color: var(--ink); color: var(--ink); }
+.board__course[aria-current="true"] {
+  background: var(--ink); color: var(--paper); border-color: var(--ink);
+}
+
+/* ---------- toolbar ---------------------------------------------------- */
+
+.board__bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; margin: 1.75rem 0 1.25rem;
+}
+.board__count { font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-soft); letter-spacing: 0.08em; }
+.board__sorts { display: flex; gap: 0.4rem; }
+.board__sort {
+  font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.08em;
+  color: var(--ink-soft); background: none; border: 1px solid transparent;
+  border-radius: 999px; padding: 0.3rem 0.75rem; cursor: pointer;
+  transition: color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+}
+.board__sort:hover { color: var(--ink); }
+.board__sort[aria-pressed="true"] { border-color: var(--line); color: var(--ink); }
+
+/* ---------- composer --------------------------------------------------- */
+
+.ask {
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 1rem; margin-bottom: 2rem; background: var(--paper-raised);
+}
+.ask__label {
+  font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 0.7rem;
+}
+.ask textarea, .ask input[type="text"], .ask input[type="password"] {
+  width: 100%; font: inherit; font-size: 1rem; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+  padding: 0.75rem 0.85rem; resize: vertical;
+}
+.ask textarea { min-height: 6.5rem; line-height: 1.55; }
+.ask textarea:focus-visible, .ask input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ask__row {
+  display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+.ask__name { flex: 1 1 14rem; min-width: 0; }
+.ask__hint { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink-soft); letter-spacing: 0.06em; }
+.ask__send {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em;
+  border-radius: 999px; border: 1px solid var(--ink); background: var(--ink);
+  color: var(--paper); padding: 0.55rem 1.35rem; cursor: pointer;
+  margin-left: auto;
+  transition: background-color var(--t-fast) var(--ease-out),
+              border-color var(--t-fast) var(--ease-out);
+}
+.ask__send:hover:enabled { background: var(--brass); border-color: var(--brass); color: #fff; }
+.ask__send:disabled { opacity: 0.5; cursor: default; }
+
+/* Honeypot. Off-screen rather than display:none — some bots skip hidden
+   fields but happily fill anything still in the layout. */
+.ask__pot {
+  position: absolute; left: -9999px; width: 1px; height: 1px;
+  overflow: hidden; opacity: 0;
+}
+
+.ask__msg { margin-top: 0.7rem; font-size: 0.82rem; color: var(--ink-soft); }
+.ask__msg--bad { color: var(--brass); }
+
+/* ---------- threads ---------------------------------------------------- */
+
+.qs { list-style: none; margin: 0; padding: 0; }
+.q { border-top: 1px solid var(--line-soft); padding: 1.5rem 0; }
+.q:first-child { border-top: 0; }
+
+.q__main { display: flex; gap: 0.9rem; align-items: flex-start; }
+
+.vote {
+  flex: none; display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+  min-width: 3rem; padding: 0.4rem 0.2rem;
+  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.06em;
+  color: var(--ink-soft); background: none;
+  border: 1px solid var(--line); border-radius: 12px; cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+}
+.vote:hover { border-color: var(--ink); color: var(--ink); }
+.vote[aria-pressed="true"] { border-color: var(--brass); color: var(--brass); }
+.vote__n { font-size: 1rem; font-weight: 500; line-height: 1; }
+.vote__caret { display: block; width: 0; height: 0; border: 0.36rem solid transparent; border-bottom-color: currentColor; margin-bottom: 0.15rem; }
+
+.q__text, .a__text { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; }
+.q__text { font-size: 1.02rem; }
+
+.q__meta, .a__meta {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.07em;
+  color: var(--ink-soft); margin-top: 0.55rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+}
+.q__who { color: var(--ink-soft); }
+
+.badge {
+  border: 1px solid var(--brass); color: var(--brass);
+  border-radius: 999px; padding: 0.1rem 0.5rem;
+  font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* "Answer this" and "Delete" are the actions that matter on a phone, and at
+   0.62rem the text box alone is 17px tall — under the 24px minimum target in
+   WCAG 2.2 SC 2.5.8. The padding buys the hit area without changing how the
+   link reads, since the underline stays on the text baseline either way. */
+.linkbtn {
+  font: inherit; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.07em;
+  background: none; border: 0; cursor: pointer;
+  padding: 0.32rem 0; min-height: 24px;
+  color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px;
+}
+.linkbtn:hover { color: var(--brass); }
+
+/* answers, indented under their question by a rule rather than a box: a thread
+   is one thing with a spine, not a stack of separate cards */
+.as { list-style: none; margin: 1rem 0 0 calc(3rem + 0.9rem); padding: 0 0 0 1rem; border-left: 1px solid var(--line-soft); }
+.a { padding: 0.85rem 0; }
+.a + .a { border-top: 1px solid var(--line-soft); }
+.a--instructor { border-left: 2px solid var(--brass); margin-left: -1rem; padding-left: 1rem; }
+.a__text { font-size: 0.94rem; }
+
+.q__reply { margin: 0.9rem 0 0 calc(3rem + 0.9rem); }
+
+.board__note { color: var(--ink-soft); font-size: 0.85rem; padding: 2rem 0; }
+.board__note--bad { border-left: 2px solid var(--brass); padding-left: 1rem; }
+
+.board__admin {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  background: none; border: 0; color: var(--ink-soft);
+  padding: 0.3rem 0; min-height: 24px;
+  cursor: pointer; text-align: left;
+}
+.board__admin:hover { color: var(--brass); }
+
+@media (max-width: 560px) {
+  .as, .q__reply { margin-left: 0; }
+  .as { padding-left: 0.9rem; }
+  .q__main { gap: 0.7rem; }
+  .vote { min-width: 2.6rem; }
+  .ask__send { margin-left: 0; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board__course, .board__sort, .vote, .ask__send, .linkbtn { transition: none; }
+}
