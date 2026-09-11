@@ -460,8 +460,6 @@ main { padding-left: var(--ruler-w); }
   transition: filter var(--t-fast) ease;
 }
 .carousel__slide a:hover img { filter: brightness(1.05); }
-.carousel__slide figcaption { font-size: 0.62rem; color: var(--ink-soft); margin-top: 0.6rem; }
-.carousel__slide figcaption:not(.mono) { font-size: 0.74rem; letter-spacing: 0.005em; }
 
 /* mixed-orientation photo sets get a fixed frame */
 .carousel--media .carousel__slide img,
@@ -471,6 +469,10 @@ main { padding-left: var(--ruler-w); }
 }
 .carousel--case .carousel__slide img { aspect-ratio: 16 / 10; object-fit: contain; background: var(--paper-raised); }
 
+/* Projects carousels still caption their slides (`<figcaption class="mono">`).
+   The Industry carousels no longer do, so the old `:not(.mono)` companion rule
+   that styled those plain captions was dropped with them. */
+.carousel__slide figcaption { font-size: 0.62rem; color: var(--ink-soft); margin-top: 0.6rem; }
 .carousel__bar {
   display: flex; align-items: center; justify-content: space-between;
   margin-top: 0.9rem;
