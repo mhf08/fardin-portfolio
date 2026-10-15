@@ -109,6 +109,15 @@ picture { display: contents; }
   font-weight: 500;
 }
 
+/* Secondary information in sentence case: section metas, dates and places,
+   captions. This took over most of what .mono used to carry (2026-10-15);
+   mono now marks only years, counters and the MHF mark. */
+.meta {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  letter-spacing: 0.005em;
+}
+
 /* Small uppercase headings. Deliberately NOT .mono — mono is reserved for
    annotation (item numbers, FIG. callouts, sheet metadata), not for headings. */
 .label {
@@ -141,7 +150,7 @@ picture { display: contents; }
 
 /* Stable name-based anchors for cross-page links. They sit inside their
    section, so they need the same header offset .sheet gets. */
-#contact { display: block; scroll-margin-top: calc(var(--head-h) + 12px); }
+.anchor { display: block; scroll-margin-top: calc(var(--head-h) + 12px); }
 
 
 /* ---------- Section-change wipe ----------
@@ -171,7 +180,7 @@ picture { display: contents; }
 .spine__mark.on { height: 22px; opacity: 1; background: var(--brass); }
 .spine__label {
   position: fixed; left: 15px; z-index: 41;
-  font-family: var(--font-mono); font-size: .55rem; letter-spacing: .14em; text-transform: uppercase;
+  font-family: var(--font-body); font-size: .6rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
   color: var(--ink-soft); white-space: nowrap; transform-origin: left center; transform: rotate(90deg);
   opacity: 0; transition: opacity var(--t-fast) ease, top var(--t-mid) var(--ease-out); pointer-events: none;
 }
@@ -197,24 +206,26 @@ picture { display: contents; }
 
 .site-nav ul { display: flex; gap: clamp(0.75rem, 2vw, 1.75rem); list-style: none; margin: 0; padding: 0; }
 .site-nav a {
-  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em;
-  text-transform: uppercase; text-decoration: none; color: var(--ink-soft);
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.005em;
+  text-decoration: none; color: var(--ink-soft);
   padding: 0.4rem 0;
   background-image: linear-gradient(var(--brass-bright), var(--brass-bright));
   background-size: 0% 1px; background-position: left bottom; background-repeat: no-repeat;
   transition: color var(--t-fast) ease, background-size var(--t-fast) var(--ease-out);
 }
-.site-nav a .n { color: var(--brass); margin-right: 0.4em; font-size: 0.62rem; }
 .site-nav a:hover { color: var(--ink); background-size: 100% 1px; }
 .site-nav a[aria-current="true"] { color: var(--ink); }
-.site-nav__cta { color: var(--brass) !important; }
+/* Photography sits apart from the sections: a page of its own, not a stop
+   on the scroll. */
+.site-nav__aside { margin-left: clamp(0.25rem, 1vw, 0.75rem); padding-left: clamp(1rem, 2vw, 1.75rem); border-left: 1px solid var(--line); }
+.site-nav__aside a { color: var(--ink-soft); }
 
 .site-head__tools { display: flex; align-items: center; gap: 0.75rem; }
 
 .theme-toggle {
   position: relative; border: 1px solid var(--line); border-radius: 999px; background: none;
-  color: var(--ink-soft); cursor: pointer; padding: 0.45rem 0.95rem;
-  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.16em;
+  color: var(--ink-soft); cursor: pointer; padding: 0.45rem 1rem;
+  font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
   transition: color var(--t-fast) ease, border-color var(--t-fast) ease;
 }
 .theme-toggle:hover { color: var(--brass); border-color: var(--brass); }
@@ -321,7 +332,7 @@ main { padding-left: var(--ruler-w); }
   padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
 
-.hero__eyebrow { color: var(--brass); margin-bottom: clamp(1.5rem, 4vh, 2.5rem); }
+.hero__eyebrow { color: var(--brass); font-size: 0.78rem; margin-bottom: clamp(1.5rem, 4vh, 2.5rem); }
 .hero__title {
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 7.5vw, 5.75rem);
@@ -472,7 +483,7 @@ main { padding-left: var(--ruler-w); }
 /* Projects carousels still caption their slides (`<figcaption class="mono">`).
    The Industry carousels no longer do, so the old `:not(.mono)` companion rule
    that styled those plain captions was dropped with them. */
-.carousel__slide figcaption { font-size: 0.62rem; color: var(--ink-soft); margin-top: 0.6rem; }
+.carousel__slide figcaption { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.6rem; }
 .carousel__bar {
   display: flex; align-items: center; justify-content: space-between;
   margin-top: 0.9rem;
@@ -492,12 +503,12 @@ main { padding-left: var(--ruler-w); }
 .profile__fig { margin: 0; }
 .figframe { display: block; } /* wraps the portrait; parallax adds overflow:hidden where supported */
 .profile__fig img { border: 1px solid var(--line); }
-.profile__fig figcaption { color: var(--ink-soft); margin-top: 0.7rem; font-size: 0.62rem; }
+.profile__fig figcaption { color: var(--ink-soft); margin-top: 0.7rem; font-size: 0.82rem; }
 .profile__pull {
   font-family: var(--font-display); font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   font-weight: 550; line-height: 1.3; margin-bottom: 1.75rem;
 }
-.profile__pull em { color: var(--brass); }
+.profile__pull em { color: inherit; }
 .profile__body p + p { margin-top: 1.25rem; }
 .profile__body { color: var(--ink-soft); }
 .profile__body .profile__pull { color: var(--ink); }
@@ -511,12 +522,12 @@ main { padding-left: var(--ruler-w); }
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
   margin-top: 2.5rem; border-top: 1px solid var(--line); padding-top: 1.5rem;
 }
-.statrow dt { color: var(--ink-soft); font-size: 0.6rem; margin-bottom: 0.35rem; }
+.statrow dt { color: var(--ink-soft); font-size: 0.68rem; margin-bottom: 0.35rem; }
 .statrow dd {
   margin: 0; font-family: var(--font-display);
   font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 600; color: var(--ink);
 }
-.statrow__sub { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink-soft); margin-left: 0.4em; letter-spacing: 0.08em; }
+.statrow__sub { font-family: var(--font-body); font-size: 0.82rem; font-weight: 400; color: var(--ink-soft); margin-left: 0.4em; }
 
 /* ---------- Sheet 04: Experience ---------- */
 .xp {
@@ -540,7 +551,7 @@ main { padding-left: var(--ruler-w); }
 .xp__head h3 { font-family: var(--font-display); font-size: clamp(1.35rem, 2.4vw, 1.8rem); font-weight: 600; }
 .xp__now {
   display: inline-flex; align-items: center; gap: 0.45em;
-  font-size: 0.56rem; color: var(--brass); vertical-align: 0.35em;
+  font-size: 0.62rem; color: var(--brass); vertical-align: 0.35em;
   border: 1px solid var(--brass); border-radius: 999px; padding: 0.2em 0.65em;
   margin-left: 0.6rem;
 }
@@ -552,13 +563,22 @@ main { padding-left: var(--ruler-w); }
 .xp__list li::before {
   content: "—"; position: absolute; left: 0; color: var(--brass-bright);
 }
-.xp__link { margin-top: 1.5rem; font-size: 0.72rem; }
+.xp__link { margin-top: 1.5rem; font-size: 0.92rem; font-weight: 500; }
 .xp__link a { color: var(--brass); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
 .xp__link a:hover { border-color: var(--brass); }
 
 /* ---------- Sheet 06: Projects ---------- */
 .case + .case { margin-top: clamp(4rem, 10vh, 6.5rem); padding-top: clamp(3rem, 7vh, 5rem); border-top: 1px solid var(--line-soft); }
-.case__no { color: var(--ink-soft); margin-bottom: 0.9rem; }
+.case__no { color: var(--ink-soft); font-size: 0.74rem; margin-bottom: 0.9rem; }
+/* one headline figure per case, taken from the case text itself */
+.case__metric {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 0.9rem;
+  margin: 0 0 1.25rem; color: var(--ink-soft); font-size: 0.95rem;
+}
+.case__metric b {
+  font-family: var(--font-display); font-weight: 600; color: var(--ink);
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1; font-variant-numeric: tabular-nums;
+}
 .case h3 {
   font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.4rem);
   font-weight: 600; max-width: 26ch; margin-bottom: 1rem;
@@ -568,12 +588,10 @@ main { padding-left: var(--ruler-w); }
   margin: 0 0 clamp(1.75rem, 4vh, 2.5rem); padding: 0;
 }
 .tags li {
-  font-size: 0.6rem; color: var(--ink-soft);
-  border: 1px solid var(--line); border-radius: 999px;
-  padding: 0.3rem 0.7rem; white-space: nowrap;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.8rem; color: var(--ink-soft);
+  border: 1px solid var(--line-soft); border-radius: 999px;
+  padding: 0.25rem 0.75rem; white-space: nowrap;
 }
-.tags li:hover { color: var(--brass); border-color: var(--brass); }
 .case__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 4.5vw, 4rem); align-items: start; }
 .case__grid--flip .case__text { order: 2; }
 .case__grid--flip .carousel { order: 1; }
@@ -608,58 +626,48 @@ main { padding-left: var(--ruler-w); }
 .yt__btn:hover .yt__play::before { transform: translate(-50%, -50%) scale(1.08); }
 .yt iframe { width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); display: block; }
 
-/* ---------- Sheet 05: Thesis ---------- */
-.thesis__abstract {
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.6vw, 2rem); font-weight: 500; line-height: 1.45;
-  max-width: 34ch;
-  border-left: 3px solid var(--brass-bright); padding-left: clamp(1.25rem, 3vw, 2rem);
+/* ---------- Research & publications ----------
+   The thesis findings came off the page on 2026-10-15 while the paper is in
+   preparation; the section is an agenda plus a publication list. */
+.research__lede {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.3rem, 2.4vw, 1.85rem); line-height: 1.45; max-width: 40ch;
+  margin-bottom: 1.5rem;
 }
-.thesis__label { display: block; font-size: 0.62rem; color: var(--ink-soft); margin-bottom: 0.75rem; letter-spacing: 0.2em; }
-
-.thesis__cols {
-  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 3.5rem);
-  margin-top: clamp(2.5rem, 6vh, 4rem);
+.research__intro .tags { margin-bottom: 0; }
+.pubs { margin-top: clamp(3rem, 7vh, 4.5rem); }
+.pubs__list { list-style: none; margin: 0; padding: 0; }
+.pub { padding: 1.5rem 0; border-bottom: 1px solid var(--line-soft); }
+.pub:first-child { padding-top: 0.25rem; }
+.pub__kind { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; color: var(--ink-soft); font-size: 0.7rem; margin-bottom: 0.6rem; }
+.pub__status {
+  color: var(--brass); border: 1px solid currentColor; border-radius: 999px;
+  padding: 0.15em 0.7em; font-size: 0.62rem;
 }
-.thesis__col h3 { color: var(--brass); font-size: 0.72rem; margin-bottom: 1rem; }
-.thesis__col p { color: var(--ink-soft); }
-.thesis__col ul { margin: 1rem 0 0; padding: 0; list-style: none; color: var(--ink-soft); }
-.thesis__col li { padding-left: 1.4rem; position: relative; }
-.thesis__col li + li { margin-top: 0.6rem; }
-.thesis__col li::before { content: "·"; position: absolute; left: 0.3rem; color: var(--brass-bright); font-weight: 700; }
-.thesis__col strong { color: var(--ink); font-weight: 600; }
-
-.thesis__interests {
-  margin-top: clamp(2.5rem, 6vh, 4rem);
-  border-top: 1px solid var(--line); padding-top: clamp(1.5rem, 4vh, 2.25rem);
+.pub__date { color: var(--ink-soft); font-weight: 500; }
+.pub__title {
+  font-family: var(--font-display); font-weight: 550;
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem); line-height: 1.4; max-width: 62ch;
 }
-.thesis__interests h3 { color: var(--brass); font-size: 0.72rem; margin-bottom: 1rem; }
-.thesis__interests p { color: var(--ink-soft); max-width: 70ch; margin-bottom: 1.5rem; }
+.pub__who { color: var(--ink-soft); margin-top: 0.5rem; }
+.pub__who a { color: var(--ink-soft); }
+.pub__who a:hover { color: var(--brass); }
+.pub__note { color: var(--ink-soft); max-width: 72ch; margin-top: 0.85rem; }
 
-.thesis__results {
-  margin-top: clamp(2.5rem, 6vh, 4rem); border: 1px solid var(--ink);
-  background: var(--paper-raised); padding: clamp(1.5rem, 3.5vw, 2.5rem);
-}
-.thesis__results h3 { color: var(--brass); font-size: 0.72rem; margin-bottom: 1.25rem; }
-.thesis__findings p { color: var(--ink-soft); max-width: 75ch; }
-.thesis__findings p + p { margin-top: 1rem; }
-.thesis__findings .mono { color: var(--ink-soft); margin-right: 0.9rem; }
-
-/* ---------- Sheet 03: Toolkit ---------- */
-.bom__title { color: var(--ink-soft); margin-bottom: 1rem; }
+/* ---------- Skills table (inside Experience) ---------- */
+.xp-skills { margin-top: clamp(3rem, 7vh, 4.5rem); }
 .bom table { width: 100%; border-collapse: collapse; border: 1px solid var(--ink); background: var(--paper-raised); }
 .bom th {
-  text-align: left; font-size: 0.62rem; letter-spacing: 0.18em; color: var(--ink-soft);
+  text-align: left; font-size: 0.7rem; color: var(--ink-soft);
   padding: 0.8rem 1.1rem; border-bottom: 2px solid var(--ink);
 }
 .bom td { padding: 0.8rem 1.1rem; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
 .bom tbody:last-of-type tr:last-child td { border-bottom: 0; }
-.bom td.mono { color: var(--ink-soft); font-size: 0.68rem; }
-.bom td:nth-child(2) { font-weight: 550; white-space: nowrap; }
-.bom td:nth-child(3) { color: var(--ink-soft); }
+.bom td:nth-child(1) { font-weight: 550; white-space: nowrap; }
+.bom td:nth-child(2) { color: var(--ink-soft); }
 .bom__group th {
   text-align: left; padding: 1.1rem 1.1rem 0.55rem;
-  color: var(--brass); font-size: 0.68rem; font-weight: 500;
+  color: var(--ink-soft); font-size: 0.7rem;
   border-bottom: 1px solid var(--line-soft);
   background: color-mix(in srgb, var(--ink) 5%, transparent);
 }
@@ -683,30 +691,12 @@ main { padding-left: var(--ruler-w); }
 }
 .edu__seal img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
 .edu__item h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; }
-.edu__meta { color: var(--ink-soft); margin: 0.4rem 0 0.6rem; font-size: 0.66rem; }
+.edu__meta { color: var(--ink-soft); margin: 0.4rem 0 0.6rem; }
 .edu__details { list-style: none; margin: 0; padding: 0; color: var(--ink-soft); font-size: 0.95rem; }
 .edu__details li + li { margin-top: 0.5rem; }
 .edu__details strong { color: var(--ink); font-weight: 600; }
 
-/* ---------- Sheet 07: Achievements ---------- */
-.awards__list { list-style: none; margin: 0; padding: 0; }
-.awards__list > li { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; }
-.awards__list > li + li { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--line-soft); }
-.awards__year { color: var(--brass); padding-top: 0.3rem; }
-.awards__list h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; }
-.awards__list p { color: var(--ink-soft); font-size: 0.95rem; }
-.awards__list p + p { margin-top: 0.4rem; }
-.awards__list strong { color: var(--ink); font-weight: 600; }
-.carousel--awards { margin-top: 1.25rem; max-width: 460px; }
-
-.awards__certs-h { margin-top: 3rem; }
-.certs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-.certs img { border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; width: 100%; transition: transform 0.3s var(--ease-out); }
-.certs a:hover img { transform: translateY(-3px); }
-.certs p { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.7rem; line-height: 1.55; }
-.certs strong { color: var(--ink); font-weight: 600; }
-
-/* ---------- Sheet 08: Photography ---------- */
+/* ---------- Photography page: intro + series heads (used by /photography/) ---------- */
 .photointro {
   font-family: var(--font-display); font-style: italic;
   font-size: clamp(1.15rem, 2.2vw, 1.6rem); line-height: 1.55;
@@ -721,7 +711,56 @@ main { padding-left: var(--ruler-w); }
 .series__sub { color: var(--brass); font-size: 0.9rem; margin: 0.6rem 0 1rem; }
 .series__desc { color: var(--ink-soft); }
 
-/* ---------- Sheet 09: Contact ---------- */
+/* ---------- Honours (inside About) ----------
+   A CV-style list. Event photos and certificates open in the lightbox from
+   a text link instead of sitting inline. */
+.honours { margin-top: clamp(3rem, 7vh, 4.5rem); }
+.honours__list { list-style: none; margin: 0; padding: 0; }
+.honours__list > li { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--line-soft); }
+.honours__list > li:first-child { padding-top: 0; }
+.honours__year { color: var(--ink-soft); padding-top: 0.2rem; }
+.honours__t { font-weight: 600; color: var(--ink); }
+.honours__d { color: var(--ink-soft); font-size: 0.95rem; margin-top: 0.15rem; }
+.honours__ph {
+  font-size: 0.85rem; font-weight: 500; white-space: nowrap; margin-left: 0.35rem;
+  color: var(--ink-soft); text-decoration: underline; text-decoration-color: var(--line);
+}
+.honours__ph:hover { color: var(--brass); text-decoration-color: currentColor; }
+.honours__certs-h { margin-top: 2.5rem; }
+.honours__certs { list-style: none; margin: 0; padding: 0; color: var(--ink-soft); font-size: 0.95rem; }
+.honours__certs li + li { margin-top: 0.6rem; }
+.honours__certs strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- Photography band ----------
+   A short stop before Contact. The series live on /photography/. */
+.sheet--band { padding-block: clamp(3rem, 8vh, 5rem); }
+.band { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.band__h { font-family: var(--font-display); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 600; margin-bottom: 0.9rem; }
+.band__intro { color: var(--ink-soft); max-width: 46ch; }
+.band__all { display: inline-block; margin-top: 1.25rem; font-weight: 500; font-size: 0.95rem; color: var(--ink); text-decoration-color: var(--line); }
+.band__all:hover { color: var(--brass); text-decoration-color: currentColor; }
+.band__covers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(0.75rem, 1.6vw, 1.25rem); }
+.thumb { display: grid; gap: 0.6rem; color: var(--ink-soft); text-decoration: none; font-size: 0.85rem; }
+/* Square crops: two of the three sources are portrait, one is 16:9. Each
+   thumb sets its own focal point so the subject survives the crop and the
+   burned-in MHF watermark (bottom-left on the portraits) falls outside. */
+.thumb__img { display: block; aspect-ratio: 1 / 1; overflow: hidden; background: var(--paper-raised); }
+.thumb__img source { display: none; }
+.thumb__img img {
+  width: 100%; height: 100%; object-fit: cover; object-position: var(--focus-xy, 50% 50%);
+  transition: transform 0.6s var(--ease-out);
+}
+.thumb--genba  { --focus-xy: 50% 8%; }   /* the whole clock, top of the frame */
+.thumb--nature { --focus-xy: 45% 50%; }  /* both trees and the pylon line */
+.thumb--hour   { --focus-xy: 50% 15%; }  /* canopy and the light shafts */
+.thumb--genba img { filter: grayscale(1) contrast(1.05); }
+.thumb:hover img, .thumb:focus-visible img { transform: scale(1.04); }
+.thumb:hover .thumb__t, .thumb:focus-visible .thumb__t { color: var(--ink); }
+@media (max-width: 880px) {
+  .band { grid-template-columns: 1fr; }
+}
+
+/* ---------- Contact ---------- */
 .contact { border-bottom: 0; }
 .contact__h3 {
   font-family: var(--font-display); font-size: clamp(1.6rem, 3.4vw, 2.6rem);
@@ -742,27 +781,33 @@ main { padding-left: var(--ruler-w); }
   transition: color 0.25s ease, background-size 0.5s var(--ease-out);
 }
 .contact__mail:hover { color: var(--brass); background-size: 100% 2px; }
-.contact__alt { color: var(--ink-soft); font-size: 0.74rem; line-height: 2; margin: 0 0 clamp(1.5rem, 4vh, 2.5rem); }
+.contact__alt { color: var(--ink-soft); line-height: 1.9; margin: 0 0 clamp(1.5rem, 4vh, 2.5rem); }
 .contact__alt a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line); transition: color 0.2s ease, border-color 0.2s ease; }
 .contact__alt a:hover { color: var(--brass); border-color: var(--brass); }
 .contact__copied {
   min-height: 1.2em; margin: 0 0 clamp(1rem, 3vh, 1.5rem);
-  color: var(--brass); font-size: 0.7rem;
+  color: var(--brass);
   opacity: 0; transition: opacity 0.2s ease;
 }
 .contact__copied.on { opacity: 1; }
 .contact__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 
 /* ---------- Footer ---------- */
-.site-foot { padding-left: var(--ruler-w); border-top: 2px solid var(--ink); }
+.site-foot { padding-left: var(--ruler-w); border-top: 1px solid var(--line); }
 .site-foot__block {
   max-width: 1400px; margin-inline: auto;
-  display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; justify-content: space-between;
-  padding: 1.5rem clamp(1.25rem, 4vw, 3rem);
-  color: var(--ink-soft); font-size: 0.64rem;
+  display: grid; grid-template-columns: 1fr auto; gap: 1.5rem 3rem;
+  padding: clamp(2rem, 5vh, 3rem) clamp(1.25rem, 4vw, 3rem) 1.75rem;
+  color: var(--ink-soft); font-size: 0.88rem; line-height: 1.6;
 }
-.site-foot a { color: var(--brass); text-decoration: none; }
-.site-foot a:hover { color: var(--brass-bright); }
+.site-foot__name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
+.site-foot__links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; justify-items: start; }
+.site-foot__meta { grid-column: 1 / -1; padding-top: 1.25rem; border-top: 1px solid var(--line-soft); font-size: 0.8rem; }
+.site-foot a { color: var(--ink-soft); text-decoration: none; }
+.site-foot a:hover { color: var(--brass); }
+@media (max-width: 640px) {
+  .site-foot__block { grid-template-columns: 1fr; }
+}
 
 /* ---------- Lightbox ---------- */
 .lightbox {
@@ -847,23 +892,6 @@ main { padding-left: var(--ruler-w); }
   to   { font-variation-settings: "opsz" 144, "wght" 600; }
 }
 
-/* ---------- Thesis headline figures ---------- */
-.figures {
-  list-style: none; margin: clamp(2rem, 5vh, 3.25rem) 0 clamp(2.5rem, 6vh, 4rem); padding: 0;
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 3rem);
-  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-  padding-block: clamp(1.75rem, 4vh, 2.75rem);
-}
-.figures li { display: grid; gap: 0.7rem; align-content: start; }
-.figures__n {
-  font-family: var(--font-display); font-weight: 600;
-  font-size: clamp(2.6rem, 7vw, 5.25rem); line-height: 0.9;
-  letter-spacing: -0.02em; color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-.figures__plus { color: var(--brass); }
-.figures__k { color: var(--ink-soft); font-size: 0.66rem; line-height: 1.7; }
-
 /* ---------- Sheet density ---------- */
 /* Not every sheet carries the same weight, so they no longer get the same room. */
 .sheet--feature { padding-block: clamp(6rem, 15vh, 11rem); }
@@ -884,6 +912,7 @@ main { padding-left: var(--ruler-w); }
 
 /* ---- the shared frame ---- */
 .frame, .plate { margin: 0; }
+.frame { position: relative; }   /* anchors the grease-pencil marks to their own frame */
 .frame > a, .plate > a {
   display: block; position: relative; overflow: hidden;
   border: 1px solid var(--line);
@@ -945,9 +974,12 @@ main { padding-left: var(--ruler-w); }
   content: ""; position: absolute; z-index: 4; pointer-events: none;
   border: 1.5px solid var(--brass-bright); opacity: 0.85;
 }
+/* a select is circled the way an editor does it: one loose loop round the
+   whole frame and its number, a little off true */
 .frame[data-mark="select"]::after {
-  inset: -5px -5px auto auto; width: 26px; height: 26px; border-radius: 50%;
-  top: -6px; right: -6px;
+  inset: -9px -8px -7px -10px;
+  border-width: 2px; border-radius: 46% 54% 43% 57% / 55% 44% 56% 45%;
+  transform: rotate(-1.6deg);
 }
 .frame[data-mark="maybe"]::after {
   inset: auto -4px -4px auto; width: 18px; height: 18px; border-radius: 0;
@@ -986,7 +1018,7 @@ main { padding-left: var(--ruler-w); }
 }
 .currently__k {
   display: inline-block; color: var(--brass); margin-right: 0.6rem;
-  font-size: 0.6rem; vertical-align: 0.12em;
+  font-size: 0.68rem; vertical-align: 0.08em;
 }
 .currently strong { display: block; margin-top: 0.5rem; color: var(--ink); font-weight: 600; }
 .contact__pos { color: var(--ink-soft); margin-bottom: 1.25rem; }
@@ -997,26 +1029,6 @@ main { padding-left: var(--ruler-w); }
 @media (prefers-reduced-motion: no-preference) {
   .bom tbody tr { opacity: 0; transform: translateX(-14px); transition: opacity 0.5s ease, transform 0.55s var(--ease-out); }
   .bom.in tbody tr { opacity: 1; transform: none; transition-delay: calc(0.1s + var(--d, 0) * 0.05s); }
-}
-
-/* Self-drawing dimension line down the left of the portrait (scale annotation) */
-.profile__fig { position: relative; }
-@media (prefers-reduced-motion: no-preference) {
-  .profile__fig::before {
-    content: ""; position: absolute; left: -15px; top: 3px; width: 1px;
-    height: calc(100% - 2.3rem);
-    background: var(--brass); transform: scaleY(0); transform-origin: top;
-    transition: transform 1s var(--ease-out) 0.25s;
-  }
-  .profile__fig.in::before { transform: scaleY(1); }
-  .profile__fig::after {
-    content: "1:1"; position: absolute; left: -15px; top: 50%;
-    transform: translate(-50%, -50%) rotate(-90deg);
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.16em;
-    color: var(--brass); background: var(--paper); padding: 0.1rem 0.3rem;
-    opacity: 0; transition: opacity 0.5s ease 0.95s;
-  }
-  .profile__fig.in::after { opacity: 1; }
 }
 
 /* ---------- Mobile menu & responsive ---------- */
@@ -1068,16 +1080,15 @@ main { padding-left: var(--ruler-w); }
     font-weight: 550; color: var(--ink);
     background-image: none;
   }
-  .site-nav a .n { font-family: var(--font-mono); font-size: 0.7rem; margin-right: 1rem; vertical-align: 0.35em; }
+  .site-nav__aside { margin: 1rem 0 0; padding: 0; border-left: 0; }
+  .site-nav__aside a { font-family: var(--font-body); font-size: 1rem; color: var(--ink-soft); }
 
   .profile { grid-template-columns: 1fr; }
   .profile__fig { max-width: 380px; }
-  .profile__fig::before, .profile__fig::after { display: none; } /* dimension line: desktop only */
   .xp__grid { grid-template-columns: 1fr; }
   .case__grid { grid-template-columns: 1fr; }
   .case__grid--flip .case__text { order: 1; }
   .case__grid--flip .carousel { order: 2; }
-  .thesis__cols { grid-template-columns: 1fr; }
   .edu-grid { grid-template-columns: 1fr; }
   .exhibit { grid-template-columns: 1fr; }
   .statrow { grid-template-columns: repeat(2, 1fr); gap: 1.25rem 0.75rem; }
@@ -1085,13 +1096,11 @@ main { padding-left: var(--ruler-w); }
 }
 
 @media (max-width: 520px) {
-  .certs { grid-template-columns: 1fr; }
-  .awards__list > li { grid-template-columns: 1fr; gap: 0.4rem; }
+  .honours__list > li { grid-template-columns: 1fr; gap: 0.2rem; }
   .hero__cta .btn { width: 100%; justify-content: center; }
   .contact__actions .btn { width: 100%; justify-content: center; }
   .bom { overflow-x: auto; }
   .bom table { min-width: 560px; }
-  .figures { grid-template-columns: 1fr; gap: 1.75rem; }
   .tags li { white-space: normal; max-width: 100%; }
 }
 
@@ -1148,9 +1157,6 @@ body:not(.is-loading) .hero__inner > * { transition-delay: calc(var(--i, 0) * 80
 }
 .sheet-head.in h2 { animation: head-wipe .9s var(--ease-out) both; }
 
-/* buttons lean toward the cursor */
-.btn { will-change: transform; }
-.btn.is-magnetic { transition: transform .08s linear, border-color .25s ease; }
 
 @media (prefers-reduced-motion: reduce) {
   .sheet-head.in h2 { animation: none !important; }

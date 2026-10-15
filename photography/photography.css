@@ -1,0 +1,211 @@
+/* Photography page. Reuses tokens, the frame/plate component, the contact
+   sheet and the lightbox from ../css/styles.css. What lives here is only what
+   the dedicated page adds: the rooms, the prints, the wall and the tinted room.
+
+   Each series keeps the form that carries its meaning:
+   Genba    a contact sheet, then the select-marked frames printed full frame
+   Nature   an exhibition wall: wide plate, diptych, wide plate, diptych
+   Hour     the room takes on the colour of the light in view */
+
+.ppage {
+  padding-left: 0;
+  overflow-x: clip;                      /* lets the print wall and wide plates break the column */
+  --g: clamp(1.25rem, 4vw, 3rem);        /* the page gutter */
+}
+
+/* ---------- top bar ---------- */
+.pbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 1.5rem;
+  height: var(--head-h);
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.pbar__logo {
+  font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.1em;
+  color: var(--ink); text-decoration: none; font-size: 0.95rem;
+}
+.pbar__logo b { color: var(--brass-bright); }
+.pbar__back {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft); text-decoration: none;
+}
+.pbar__back:hover { color: var(--brass); }
+
+/* ---------- page head + series index ---------- */
+.phead {
+  max-width: 1400px; margin: 0 auto;
+  padding: clamp(4rem, 12vh, 8rem) clamp(1.25rem, 4vw, 3rem) clamp(3rem, 8vh, 5rem);
+}
+.phead__eyebrow { color: var(--brass); font-size: 0.72rem; letter-spacing: 0.22em; margin-bottom: 1rem; }
+.phead h1 {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em;
+  font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1.05;
+  margin-bottom: clamp(2rem, 5vh, 3rem);
+}
+
+.sindex { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+.sindex a {
+  display: grid; grid-template-columns: 3rem minmax(0, 1.2fr) minmax(0, 1.4fr) auto;
+  align-items: baseline; gap: 1.5rem;
+  padding: 1.15rem 0; border-top: 1px solid var(--line);
+  color: var(--ink); text-decoration: none;
+}
+.sindex__no { color: var(--ink-soft); font-size: 0.66rem; letter-spacing: 0.14em; }
+.sindex__title {
+  font-family: var(--font-display); font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 600;
+  transition: transform 0.4s var(--ease-out);
+}
+.sindex__sub { color: var(--ink-soft); font-size: 0.92rem; }
+.sindex__count { color: var(--ink-soft); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.sindex a:hover .sindex__title, .sindex a:focus-visible .sindex__title { transform: translateX(6px); }
+.sindex a:hover .sindex__no, .sindex a:focus-visible .sindex__no { color: var(--brass); }
+
+/* ---------- rooms ---------- */
+.room {
+  border-top: 1px solid var(--line-soft);
+  scroll-margin-top: var(--head-h);
+}
+.room__inner {
+  max-width: 1400px; margin: 0 auto;
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 4vw, 3rem);
+}
+.room__no { color: var(--ink-soft); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.9rem; }
+.room .series__head h2 {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em;
+  font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.1;
+}
+
+/* ---------- Room 1: the contact sheet reads as film ----------
+   Frame numbers only, like the edge of a strip. Each frame's caption still
+   reaches the reader: in the lightbox, and under the prints below. */
+.room--genba .contactsheet .frame__note { display: none; }
+.room--genba .contactsheet .frame figcaption { margin-top: 0.55rem; }
+.room--genba .contactsheet .frame__no { font-size: 0.6rem; letter-spacing: 0.2em; }
+
+/* ---------- Room 1: the print wall ----------
+   The circled frames come off the sheet as real enlargements: paper border,
+   a wall that runs edge to edge, one pool of light from above. The wall is
+   dark in both themes, because black and white prints read as prints there.
+   On arrival each print develops, the way it would in the tray. */
+.prints {
+  --ink: #EDE7E4; --ink-soft: #A2999B; --line: rgba(237, 231, 228, 0.16);
+  position: relative;
+  width: 100vw; margin: clamp(4rem, 10vh, 6.5rem) calc(50% - 50vw) 0;
+  /* the wall closes the room: no band of paper between it and the next one */
+  margin-bottom: calc(-1 * clamp(5rem, 13vh, 9rem));
+  padding: clamp(4rem, 11vh, 7rem) var(--g) clamp(4rem, 10vh, 6rem);
+  background:
+    radial-gradient(ellipse 60% 75% at 50% -10%, rgba(255, 238, 214, 0.10), transparent 70%),
+    #0c0b0b;
+  color: var(--ink);
+}
+.prints__label {
+  text-align: center; color: var(--ink-soft);
+  font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: clamp(2.5rem, 7vh, 4.5rem);
+}
+.prints__row {
+  --print-h: min(58vh, 640px);
+  display: flex; justify-content: center; align-items: flex-end;
+  gap: clamp(1.5rem, 3.5vw, 4.5rem);
+}
+.print {
+  margin: 0; min-width: 0;
+  flex: 0 1 calc(var(--print-h) * var(--ar, 0.8) + 2 * var(--mat));
+  --mat: clamp(8px, 0.9vw, 16px);
+}
+.print > a {
+  display: block; padding: var(--mat); background: #F2EFE9;
+  box-shadow: 0 34px 60px -24px rgba(0, 0, 0, 0.9), 0 3px 8px rgba(0, 0, 0, 0.45);
+  transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
+}
+.print > a:hover, .print > a:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 46px 70px -26px rgba(0, 0, 0, 0.95), 0 3px 8px rgba(0, 0, 0, 0.45);
+}
+.print img { display: block; width: 100%; height: auto; filter: grayscale(1) contrast(1.06); }
+.print figcaption { display: grid; gap: 0.35rem; margin-top: 1.1rem; }
+.print .frame__no { color: var(--ink-soft); }
+.print .frame__note { color: var(--ink); }
+
+/* own keyframes: the lightbox's `develop` ends on filter: none, which would
+   hand the prints back their colour */
+@keyframes print-develop {
+  from { filter: grayscale(1) contrast(0.3) brightness(1.7); opacity: 0.15; }
+  to   { filter: grayscale(1) contrast(1.06); opacity: 1; }
+}
+.prints.in .print img { animation: print-develop 2.2s ease both; }
+.prints.in .print:nth-child(2) img { animation-delay: 0.35s; }
+.prints.in .print:nth-child(3) img { animation-delay: 0.7s; }
+
+/* ---------- Room 2: the wall ----------
+   Wide plates run nearly edge to edge; the portraits hang in pairs at a
+   shared height (each plate's flex share is its aspect ratio, so both
+   images come out exactly as tall as each other). Labels sit under the work. */
+.wall { display: grid; gap: clamp(5rem, 15vh, 10rem); }
+.wall .plate--wide {
+  /* nearly edge to edge, but never taller than the screen */
+  --w: min(calc(100vw - 2 * var(--g)), 1760px, calc(84vh * 1.78));
+  width: var(--w); margin-inline: calc((100% - var(--w)) / 2);
+}
+.wall .plate--wide img { width: 100%; height: auto; }
+.wall .plate--wide .plate__label { max-width: 52ch; }
+.wall__pair {
+  display: flex; align-items: flex-start;
+  gap: clamp(1.25rem, 3vw, 2.75rem);
+  width: 100%; max-width: 1240px; margin-inline: auto;
+}
+.wall__pair .plate { flex: var(--ar) 1 0; min-width: 0; }
+.wall__pair .plate img { width: 100%; height: auto; }
+
+/* ---------- Room 3: the tinted room ----------
+   photography.js sets --tint to the colour of the plate in view. The mix is
+   gentle, and stronger at night where the paper is dark enough to carry it. */
+.room--hour {
+  --tint-amt: 14%;
+  background-color: color-mix(in srgb, var(--tint, var(--paper)) var(--tint-amt), var(--paper));
+  transition: background-color 1.6s ease;
+}
+html[data-theme="dark"] .room--hour { --tint-amt: 34%; }
+.hour { display: grid; gap: clamp(5rem, 14vh, 9rem); justify-items: center; }
+.hour__item { width: fit-content; max-width: 100%; }
+.hour__item > a { width: fit-content; max-width: 100%; }
+.hour__item img { width: auto; max-width: 100%; max-height: 84vh; height: auto; }
+
+/* ---------- foot ---------- */
+.pfoot {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; justify-content: space-between; gap: 1rem;
+  padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 3.5rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono); font-size: 0.72rem;
+}
+.pfoot a { color: var(--ink-soft); text-decoration: none; }
+.pfoot a:hover { color: var(--brass); }
+
+/* ---------- small screens ---------- */
+@media (max-width: 880px) {
+  .sindex a { grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0.35rem 1rem; }
+  .sindex__sub, .sindex__count { grid-column: 2; }
+  .prints__row { flex-direction: column; align-items: center; }
+  .print { flex: none; width: min(100%, 420px); }
+  .hour__item img { max-height: none; width: 100%; }
+}
+@media (max-width: 640px) {
+  .wall__pair { flex-direction: column; gap: clamp(3rem, 10vh, 5rem); }
+  .wall__pair .plate { flex: none; width: 100%; }
+}
+@media (max-width: 520px) {
+  .pbar__back { font-size: 0.66rem; }
+  .pbar .theme-toggle { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room--hour { transition: none; }
+  .prints.in .print img { animation: none; }
+  .print > a { transition: none; }
+  .sindex__title { transition: none; }
+}

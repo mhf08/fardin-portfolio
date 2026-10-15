@@ -1,26 +1,25 @@
-# Mostofa Habib Fardin · Portfolio ("The Drawing Set")
+# Mostofa Habib Fardin · Lecturer, IPE, BUET
 
 > Personal portfolio of Mostofa Habib Fardin, an Industrial and Production Engineer
 > (B.Sc., Bangladesh University of Engineering and Technology, graduated Jun 2026) now
 > teaching at IPE, BUET as a full-time Lecturer, carrying his ML-driven supply-chain
 > research into the classroom. Also a photographer.
 
-The site is a single page organized as nine named sections:
-About (bio + education), Research (thesis, findings, publications), Teaching
-(courses and duties), Projects, Industry Experience, Skills, Recognition,
-Photography, Contact.
+The site is a single page organized as seven named sections:
+About (bio, education, honours and awards), Research (agenda and publications),
+Teaching (courses and duties), Projects, Experience (industry work and skills),
+a short Photography band linking to /photography/, and Contact.
 
 ## Key facts
 
 - Role: Industrial and Production Engineer, currently Lecturer at the Department of Industrial and Production Engineering, BUET (Jun 2026–present; adjunct Jun 19–Jul 7, full-time from Jul 8, 2026). Departmental faculty profile: https://ipe.buet.ac.bd/faculty/mostofa-habib-fardin. Open to academic collaborations and research partnerships.
 - Education: B.Sc. IPE, BUET (graduated Jun 2026, CGPA 3.88/4.00, Dean's List 2022 & 2023); HSC, Notre Dame College Dhaka (GPA 5.00/5.00)
-- Thesis (defended June 2026, manuscript in preparation): "Taming the Bullwhip Under Geopolitical Uncertainty: A Multi-Echelon Simulation of Machine Learning Forecasting and Blockchain-Enabled Information Visibility". Five-echelon simulator, 5,740-day horizon, six forecasting models benchmarked over 1,000+ simulation runs, supervised by Prof. Dr. Sultana Parveen
-- Key thesis findings: geopolitical disruption dominates the bullwhip effect (ratio 4,716 → 7,218); forecast-signal consistency beats point accuracy (TFT vs XGBoost paradox); pipeline blockchain visibility ≈ full visibility; ARIMA breaks down structurally under disruption (coefficient of variation past 70%, two numerical overflows), a failure mode not previously documented in the literature
+- Publications: journal manuscript in preparation, "Taming the Bullwhip Under Geopolitical Uncertainty: A Multi-Echelon Simulation of Machine Learning Forecasting and Blockchain-Enabled Information Visibility", with Sheikh Mahir Abrar and Prof. Dr. Sultana Parveen, developed from his B.Sc. thesis (BUET, defended June 2026). Results are withheld until publication. Poster (Aug 2025): "Smart IoT-Based System for Monitoring and Control of Ammonia Gas Concentration and Ambient Condition in Fertilizer Factory", on ResearchGate.
 - Experience: Lecturer at IPE, BUET (Jun 2026–present, full-time from Jul 8, 2026; teaching, examination question setting and answer script evaluation, accompanying students on industrial visits); Nextern Intern, Product / Consumer Mobility Business at Grameenphone Ltd (Jun 2026); industrial attachment at RANCON Auto Industries & RANCON Motorbikes (time studies, SOP upgrades, Rack ID inventory traceability, 5S); industrial visit at A1 Polymer (Anwar Group)
 - Projects: IoT ammonia gas monitoring for fertilizer plants; the HydroPedal pedal-powered irrigation pump (25–30 L/min @ 20 ft head, zero fuel); 50+ part SolidWorks radial drilling machine with validated kinematics
 - Skills: SolidWorks, CATIA, AutoCAD, Ansys (FEA/CFD), ARENA, Python, MATLAB, C, XGBoost, LightGBM, Temporal Fusion Transformers, IoT, blockchain modeling, 5S/Kaizen/Poka-Yoke, line balancing, time studies
-- Recognition: IRC WASH Water Hackathon finalist (2025), ISCEA Global Supply Chain Case Competition 60% scholarship award (2025), Bizzmania champion (2022), HULT Prize at BUET 1st runner-up (2022); Dean’s List 2022 and 2023; Lean Six Sigma White Belt
-- Photography: two ongoing series, "Echoes of the Genba" (monochrome street/industrial) and "The Design of Nature"
+- Honours and awards: IRC WASH Water Hackathon finalist (2025), ISCEA Global Supply Chain Case Competition 60% scholarship award (2025), Bizzmania champion (2022), HULT Prize at BUET 1st runner-up (2022); Dean’s List 2022 and 2023; Lean Six Sigma White Belt
+- Photography: three ongoing series, "Echoes of the Genba" (monochrome street/industrial), "The Design of Nature" and "The Hour Between" (light and atmosphere); full series at https://mostofahabibfardin.vercel.app/photography/
 
 ## Contact
 
