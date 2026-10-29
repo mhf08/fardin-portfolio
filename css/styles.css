@@ -679,9 +679,15 @@ main { padding-left: var(--ruler-w); }
 
 /* Education block on the Toolkit sheet */
 .toolkit-edu { margin-top: clamp(3rem, 7vh, 4.5rem); }
-.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 3.5rem); }
-
-.edu__item + .edu__item { margin-top: 2rem; }
+/* M.Sc. and HSC stack on the left, the longer B.Sc. card spans both rows on the right */
+.edu-grid {
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr;
+  grid-template-areas: "msc bsc" "hsc bsc";
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+.edu__item--msc { grid-area: msc; }
+.edu__item--bsc { grid-area: bsc; }
+.edu__item--hsc { grid-area: hsc; }
 .edu__top { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.55rem; }
 .edu__seal {
   flex-shrink: 0; width: 58px; height: 58px;
@@ -691,8 +697,7 @@ main { padding-left: var(--ruler-w); }
 }
 .edu__seal img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
 .edu__item h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; }
-.edu__meta { color: var(--ink-soft); margin: 0.4rem 0 0.6rem; }
-.edu__details { list-style: none; margin: 0; padding: 0; color: var(--ink-soft); font-size: 0.95rem; }
+.edu__meta { color: var(--ink-soft); margin: 0.4rem 0 0.6rem; }.edu__details { list-style: none; margin: 0; padding: 0; color: var(--ink-soft); font-size: 0.95rem; }
 .edu__details li + li { margin-top: 0.5rem; }
 .edu__details strong { color: var(--ink); font-weight: 600; }
 
@@ -1089,7 +1094,7 @@ main { padding-left: var(--ruler-w); }
   .case__grid { grid-template-columns: 1fr; }
   .case__grid--flip .case__text { order: 1; }
   .case__grid--flip .carousel { order: 2; }
-  .edu-grid { grid-template-columns: 1fr; }
+  .edu-grid { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "msc" "bsc" "hsc"; }
   .exhibit { grid-template-columns: 1fr; }
   .statrow { grid-template-columns: repeat(2, 1fr); gap: 1.25rem 0.75rem; }
   .hero__scroll { display: none; }
