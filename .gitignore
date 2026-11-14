@@ -7,3 +7,6 @@ node_modules/
 
 # Local preview config for Claude Code, not part of the site
 .claude/
+
+# Unpublished photos awaiting a series (originals; local only)
+photos-pending/

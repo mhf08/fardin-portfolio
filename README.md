@@ -28,7 +28,7 @@ assets/fonts/         self-hosted woff2 (Fraunces, Inter, IBM Plex Mono, latin s
 assets/img/           every image as .jpg + .avif + .webp, most with an 800px tier
 assets/og.jpg         social share card
 
-Mostofa-Habib-Fardin-Resume.pdf
+Mostofa-Habib-Fardin-CV.pdf
                       at the repo root ON PURPOSE — inside /assets/ it would inherit
                       vercel.json's 1-year immutable cache, so a swapped résumé
                       could serve stale for months

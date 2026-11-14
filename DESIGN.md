@@ -67,7 +67,15 @@ emphasis. Never set a paragraph in it.
 `#BF1430` is **2.91:1** on `#171516` — it fails even the 3:1 non-text floor.
 `#A10F26` is worse at 2.26:1. Lightening a crimson to clear contrast pushes it
 toward rose, so night shift reads slightly rosier than the brand. That is
-physics, not preference. Night is the default, so most visitors see it.
+physics, not preference.
+
+### Default theme (since 2026-10-15)
+
+Day is the default on the main site. The old reason for a night default (the
+monochrome Genba series) moved to `/photography/`, which defaults to night.
+`js/theme-init.js` resolves: saved choice (`mhf-theme`) → the page's
+`<html data-default-theme="dark|light|auto">` → day. The teaching pages use
+`auto` (follow the OS), which is what every page did before.
 
 ---
 
@@ -78,6 +86,9 @@ item numbers, frame numbers, plate numerals, borders, links and all the chrome.
 If crimson inherits all of that the site turns red and looks institutional
 regardless of the tokens. **Coverage is deliberately about a third of what
 brass had.**
+
+**Crimson italic budget:** two places, the hero surname and "compare notes"
+in Contact. The About pull quote is ink.
 
 **Crimson is allowed on:** the hero surname · the hero eyebrow · `.label`
 section headings · link and nav hover · the focus ring · the status dot · the
@@ -100,13 +111,18 @@ now neutral.
 
 ## Type
 
-Four faces, one job each.
+Three faces, one job each, plus three text roles.
 
 - **Fraunces** — display. The name, section headings, big numerals, photo captions.
 - **Inter** — interface and body. Nav, labels, buttons, prose.
-- **IBM Plex Mono** — annotation only, and rarely: index numbers, metadata
-  stamps, section metas. It is not for headings; the `.label` class covers
-  small uppercase headings in Inter.
+- **IBM Plex Mono** — almost gone (2026-10-15). Only years in the honours list,
+  carousel and lightbox counters, and the MHF mark. Mono everywhere is what
+  made the site read as a developer portfolio.
+
+Text roles: `.label` (Inter, uppercase, tracked) for small headings and
+eyebrows; `.meta` (Inter, sentence case, 0.88rem) for section metas, dates and
+places, captions; plain body for everything else. The nav and the theme toggle
+are Inter in sentence case.
 
 All self-hosted as woff2 in `assets/fonts/`, latin subset.
 
@@ -114,13 +130,28 @@ All self-hosted as woff2 in `assets/fonts/`, latin subset.
 
 ## Structure
 
-Ten named sections. Research sits third, immediately after About, because it
-is what the audience came for.
+Eight sections, six in the nav (since 2026-10-15). Research sits third,
+immediately after About, because it is what the audience came for.
 
-`Title · About · Research · Teaching · Projects · Industry Experience · Skills · Recognition · Photography · Contact`
+`Title · About · Research · Teaching · Projects · Experience · Photography band · Contact`
 
-Education lives in About. Recognition (competitions and certificates) sits
-after the substantive work, not level with the thesis.
+- **About** holds education and **Honours & Awards** (a CV-style year / award /
+  one line list; event photos and certificates open in the lightbox from a text
+  link, never inline).
+- **Research** is an agenda paragraph, interest tags and **Publications &
+  Output**. The thesis findings and headline numbers are off the page while the
+  paper is in preparation; do not put them back (or into llms.txt) until it is
+  published.
+- **Experience** is industry work plus the **Skills & Methods** table (no item
+  numbers).
+- **Photography** is a short band before Contact: intro, three thumbnails, a
+  link. It is not in the nav; a quiet "Photography ↗" sits after a divider.
+- Contact is not crimson in the nav. "Resume" is called **CV** everywhere; the
+  file is `Mostofa-Habib-Fardin-CV.pdf` and `vercel.json` redirects the old
+  `-Resume.pdf` path.
+
+Name anchors for links from outside: `#research`, `#publications`,
+`#photography`, `#contact` (`.anchor` spans).
 
 **Cross-page links use stable name-based anchors** (`#contact`), never
 `#sheet-NN`. Renumbering sections silently redirected the teaching page's
@@ -187,7 +218,6 @@ hand-tagging markup, so it keeps working as sections are added or removed.
   safety timeout so a stalled `load` event can never leave the page invisible
 - Section headings wipe up from their own baseline, and replay that wipe on
   arrival when you jump to them
-- Buttons lean toward the cursor on fine pointers
 - The spine carries scroll progress, section marks and the active section name
 - A crimson rule slides between nav items to mark the current section
 - The mobile panel staggers its items in
@@ -219,14 +249,33 @@ night shift.
 
 ## Photography
 
-Two series, one component. Both share the frame, the hover and the caption
+Three series, one component. All share the frame, the hover and the caption
 block (index, title, optional datum). They differ only where the difference
-carries meaning:
+carries meaning.
 
-- **Echoes of the Genba** — a contact sheet. Square crops, monochrome, four
-  across, film-edge header, grease-pencil select marks.
-- **The Design of Nature** — plates. Natural aspect, colour, two across with a
-  full-width span.
+**Two places (since 2026-10-15).** The main page has a short Photography band
+before Contact (intro, one thumbnail per series, a link). The full series live on `/photography/`, built as three
+rooms after a series index:
+
+- **Echoes of the Genba**: a contact sheet. Square crops, monochrome, four
+  across, film-edge header, frame numbers only (captions live under the prints
+  and in the lightbox). Selects are circled with a loose grease-pencil loop.
+  Below the sheet, the selects hang as paper prints (white border, shadow) on
+  an edge-to-edge dark wall lit from above, and "develop" in on arrival.
+  Select = print: circle a frame (`data-mark="select"`) and add it to the wall.
+- **The Design of Nature**: an exhibition wall with a fixed rhythm: wide plate
+  (near edge to edge, never taller than the screen), pair of portraits at a
+  shared height, wide plate, pair. Labels sit under each work. A pair's flex
+  share is each plate's aspect ratio (`--ar`), which is what equalises heights.
+- **The Hour Between**: a sequence of large uncropped colour plates. The room's
+  background mixes in each plate's `data-tint` as it scrolls into view
+  (`photography/photography.js`); off under reduced motion. Copy never names a
+  time of day, because dawn photos will join.
+
+Main-page band (since 2026-10-15): one thumbnail per series, Genba = the clock
+(G12), Nature = N01, Hour = Haze and Halo. The two-image covers and the dice
+went with the full sheet; the clock was the user's must-keep. Thumbs are square, unbordered, each with its own
+focal point (`--focus-xy`) so the subject survives and the watermark is cropped out.
 
 Captions sit below the image and are always visible. They used to be
 hover-only overlays, which made them invisible to anyone without a mouse.

@@ -1,4 +1,4 @@
-/* The Drawing Set — interactions.
+/* Site interactions.
    Everything degrades: no JS still yields a complete, navigable page. */
 (function () {
   "use strict";
@@ -26,32 +26,34 @@
   var root = document.documentElement;
   var toggle = document.querySelector(".theme-toggle");
 
-  function syncToggle() {
-    var dark = root.dataset.theme === "dark";
-    toggle.setAttribute("aria-pressed", String(dark));
-    toggle.setAttribute("aria-label", dark ? "Switch to day mode" : "Switch to night mode");
-  }
-  toggle.addEventListener("click", function (ev) {
-    var swap = function () {
-      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      try { localStorage.setItem("mhf-theme", next); } catch (e) {}
-      syncToggle();
-    };
-    // Circular reveal from the button itself where the browser supports it.
-    if (reduceMotion || !document.startViewTransition) { swap(); return; }
-    var x = ev.clientX, y = ev.clientY;
-    var far = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-    document.startViewTransition(swap).ready.then(function () {
-      document.documentElement.animate(
-        { clipPath: ["circle(0px at " + x + "px " + y + "px)",
-                     "circle(" + far + "px at " + x + "px " + y + "px)"] },
-        { duration: motion("--t-view", 1150), easing: "cubic-bezier(.22,1,.36,1)",
-          pseudoElement: "::view-transition-new(root)" }
-      );
+  if (toggle) {
+    function syncToggle() {
+      var dark = root.dataset.theme === "dark";
+      toggle.setAttribute("aria-pressed", String(dark));
+      toggle.setAttribute("aria-label", dark ? "Switch to day mode" : "Switch to night mode");
+    }
+    toggle.addEventListener("click", function (ev) {
+      var swap = function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("mhf-theme", next); } catch (e) {}
+        syncToggle();
+      };
+      // Circular reveal from the button itself where the browser supports it.
+      if (reduceMotion || !document.startViewTransition) { swap(); return; }
+      var x = ev.clientX, y = ev.clientY;
+      var far = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      document.startViewTransition(swap).ready.then(function () {
+        document.documentElement.animate(
+          { clipPath: ["circle(0px at " + x + "px " + y + "px)",
+                       "circle(" + far + "px at " + x + "px " + y + "px)"] },
+          { duration: motion("--t-view", 1150), easing: "cubic-bezier(.22,1,.36,1)",
+            pseudoElement: "::view-transition-new(root)" }
+        );
+      });
     });
-  });
-  syncToggle();
+    syncToggle();
+  }
 
   /* ---------- Reading spine: progress, section marks, active label ----------
      Does what the ruler and the HUD used to do. Builds itself from whatever
@@ -150,41 +152,22 @@
   }, { rootMargin: "0px 0px -8% 0px" });
   document.querySelectorAll(".reveal").forEach(function (el) { revealer.observe(el); });
 
-  /* ---------- Count-ups: measurements resolving ---------- */
-  var counterObs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      counterObs.unobserve(e.target);
-      var el = e.target;
-      var target = parseFloat(el.dataset.count);
-      var dec = parseInt(el.dataset.decimals || "0", 10);
-      if (reduceMotion || isNaN(target)) { el.textContent = target.toFixed(dec); return; }
-      var dur = 1100, start = null;
-      (function tick(t) {
-        if (!start) start = t;
-        var p = Math.min(1, (t - start) / dur);
-        var eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = (target * eased).toFixed(dec);
-        if (p < 1) requestAnimationFrame(tick);
-        else el.textContent = target.toFixed(dec);
-      })(performance.now());
-    });
-  }, { threshold: 0.6 });
-  document.querySelectorAll("[data-count]").forEach(function (c) { counterObs.observe(c); });
-
   /* ---------- Mobile menu ---------- */
   var menuBtn = document.querySelector(".menu-btn");
   var nav = document.getElementById("site-nav");
   function closeMenu() {
+    if (!menuBtn) return;
     nav.classList.remove("open");
     menuBtn.setAttribute("aria-expanded", "false");
     menuBtn.setAttribute("aria-label", "Open menu");
   }
-  menuBtn.addEventListener("click", function () {
-    var open = nav.classList.toggle("open");
-    menuBtn.setAttribute("aria-expanded", String(open));
-    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  });
+  if (menuBtn) {
+    menuBtn.addEventListener("click", function () {
+      var open = nav.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+      menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+  }
 
   /* ---------- Section switching ----------
      A fixed-duration glide, then the destination announces itself by
@@ -325,105 +308,107 @@
 
   /* ---------- Lightbox ---------- */
   var box = document.querySelector(".lightbox");
-  var boxImg = box.querySelector("img");
-  var boxCaption = box.querySelector(".lightbox__caption");
-  var boxCounter = box.querySelector(".lightbox__counter");
-  var galleries = {};
-  var current = { group: null, index: 0 };
+  if (box) {
+    var boxImg = box.querySelector("img");
+    var boxCaption = box.querySelector(".lightbox__caption");
+    var boxCounter = box.querySelector(".lightbox__counter");
+    var galleries = {};
+    var current = { group: null, index: 0 };
 
-  // Serve full-size images in the best format the browser decodes.
-  // Anchors point at .jpg; we swap the extension once support is probed.
-  var lbExt = ".jpg";
-  function probeFormat(uri) {
-    return new Promise(function (resolve) {
-      var im = new Image();
-      im.onload = function () { resolve(im.width > 0); };
-      im.onerror = function () { resolve(false); };
-      im.src = uri;
-    });
-  }
-  probeFormat("data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=")
-    .then(function (avifOk) {
-      if (avifOk) { lbExt = ".avif"; return; }
-      return probeFormat("data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA")
-        .then(function (webpOk) { if (webpOk) lbExt = ".webp"; });
-    });
-
-  function fullSrc(a) { return a.getAttribute("href").replace(/\.jpg$/i, lbExt); }
-
-  document.querySelectorAll("[data-lightbox]").forEach(function (a) {
-    var group = a.dataset.lightbox;
-    (galleries[group] = galleries[group] || []).push(a);
-    a.addEventListener("click", function (ev) {
-      ev.preventDefault();
-      openBox(group, galleries[group].indexOf(a));
-    });
-  });
-
-  function openBox(group, index) {
-    current = { group: group, index: index };
-    paintBox();
-    box.showModal();
-    if (!reduceMotion) {
-      boxImg.classList.remove("developing");
-      void boxImg.offsetWidth; // restart the develop animation
-      boxImg.classList.add("developing");
+    // Serve full-size images in the best format the browser decodes.
+    // Anchors point at .jpg; we swap the extension once support is probed.
+    var lbExt = ".jpg";
+    function probeFormat(uri) {
+      return new Promise(function (resolve) {
+        var im = new Image();
+        im.onload = function () { resolve(im.width > 0); };
+        im.onerror = function () { resolve(false); };
+        im.src = uri;
+      });
     }
-  }
-  function paintBox() {
-    var items = galleries[current.group];
-    var a = items[current.index];
-    boxImg.src = fullSrc(a);
-    boxImg.alt = a.querySelector("img") ? a.querySelector("img").alt : "";
-    boxCaption.textContent = a.dataset.caption || "";
-    boxCounter.textContent = (current.index + 1) + " / " + items.length;
-    preloadNeighbors();
-  }
-  function preloadNeighbors() {
-    var items = galleries[current.group];
-    if (!items || items.length < 2) return;
-    [1, -1].forEach(function (d) {
-      var a = items[(current.index + d + items.length) % items.length];
-      new Image().src = fullSrc(a);
+    probeFormat("data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=")
+      .then(function (avifOk) {
+        if (avifOk) { lbExt = ".avif"; return; }
+        return probeFormat("data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA")
+          .then(function (webpOk) { if (webpOk) lbExt = ".webp"; });
+      });
+
+    function fullSrc(a) { return a.getAttribute("href").replace(/\.jpg$/i, lbExt); }
+
+    document.querySelectorAll("[data-lightbox]").forEach(function (a) {
+      var group = a.dataset.lightbox;
+      (galleries[group] = galleries[group] || []).push(a);
+      a.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        openBox(group, galleries[group].indexOf(a));
+      });
     });
+
+    function openBox(group, index) {
+      current = { group: group, index: index };
+      paintBox();
+      box.showModal();
+      if (!reduceMotion) {
+        boxImg.classList.remove("developing");
+        void boxImg.offsetWidth; // restart the develop animation
+        boxImg.classList.add("developing");
+      }
+    }
+    function paintBox() {
+      var items = galleries[current.group];
+      var a = items[current.index];
+      boxImg.src = fullSrc(a);
+      boxImg.alt = a.querySelector("img") ? a.querySelector("img").alt : "";
+      boxCaption.textContent = a.dataset.caption || "";
+      boxCounter.textContent = (current.index + 1) + " / " + items.length;
+      preloadNeighbors();
+    }
+    function preloadNeighbors() {
+      var items = galleries[current.group];
+      if (!items || items.length < 2) return;
+      [1, -1].forEach(function (d) {
+        var a = items[(current.index + d + items.length) % items.length];
+        new Image().src = fullSrc(a);
+      });
+    }
+    function step(delta) {
+      var items = galleries[current.group];
+      current.index = (current.index + delta + items.length) % items.length;
+      paintBox();
+    }
+
+    // If a derived .avif/.webp is ever missing, fall back to the original JPEG
+    boxImg.addEventListener("error", function () {
+      if (current.group == null || /\.jpg$/i.test(boxImg.src)) return;
+      boxImg.src = galleries[current.group][current.index].getAttribute("href");
+    });
+
+    // Touch: swipe horizontally to flip prints
+    var swipeX = null, swipeY = null;
+    box.addEventListener("touchstart", function (ev) {
+      var t = ev.changedTouches[0];
+      swipeX = t.clientX; swipeY = t.clientY;
+    }, { passive: true });
+    box.addEventListener("touchend", function (ev) {
+      if (swipeX === null) return;
+      var t = ev.changedTouches[0];
+      var dx = t.clientX - swipeX, dy = t.clientY - swipeY;
+      swipeX = swipeY = null;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    box.querySelector(".lightbox__close").addEventListener("click", function () { box.close(); });
+    box.querySelector(".lightbox__nav--prev").addEventListener("click", function () { step(-1); });
+    box.querySelector(".lightbox__nav--next").addEventListener("click", function () { step(1); });
+    box.addEventListener("keydown", function (ev) {
+      if (ev.key === "ArrowLeft") step(-1);
+      if (ev.key === "ArrowRight") step(1);
+    });
+    box.addEventListener("click", function (ev) {
+      if (ev.target === box) box.close(); // backdrop click
+    });
+    box.addEventListener("close", function () { boxImg.removeAttribute("src"); });
   }
-  function step(delta) {
-    var items = galleries[current.group];
-    current.index = (current.index + delta + items.length) % items.length;
-    paintBox();
-  }
-
-  // If a derived .avif/.webp is ever missing, fall back to the original JPEG
-  boxImg.addEventListener("error", function () {
-    if (current.group == null || /\.jpg$/i.test(boxImg.src)) return;
-    boxImg.src = galleries[current.group][current.index].getAttribute("href");
-  });
-
-  // Touch: swipe horizontally to flip prints
-  var swipeX = null, swipeY = null;
-  box.addEventListener("touchstart", function (ev) {
-    var t = ev.changedTouches[0];
-    swipeX = t.clientX; swipeY = t.clientY;
-  }, { passive: true });
-  box.addEventListener("touchend", function (ev) {
-    if (swipeX === null) return;
-    var t = ev.changedTouches[0];
-    var dx = t.clientX - swipeX, dy = t.clientY - swipeY;
-    swipeX = swipeY = null;
-    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
-  }, { passive: true });
-
-  box.querySelector(".lightbox__close").addEventListener("click", function () { box.close(); });
-  box.querySelector(".lightbox__nav--prev").addEventListener("click", function () { step(-1); });
-  box.querySelector(".lightbox__nav--next").addEventListener("click", function () { step(1); });
-  box.addEventListener("keydown", function (ev) {
-    if (ev.key === "ArrowLeft") step(-1);
-    if (ev.key === "ArrowRight") step(1);
-  });
-  box.addEventListener("click", function (ev) {
-    if (ev.target === box) box.close(); // backdrop click
-  });
-  box.addEventListener("close", function () { boxImg.removeAttribute("src"); });
 
   /* ---------- Click-to-load YouTube ---------- */
   document.querySelectorAll(".yt").forEach(function (fig) {
@@ -519,23 +504,6 @@
   // Heading masks are driven purely by CSS off the site's existing .reveal/.in
   // observer. A second observer proved unreliable here, and <picture> is
   // display:contents so it has no box to observe at all.
-
-  // buttons lean toward the cursor
-  if (!reduceMotion && matchMedia("(pointer: fine)").matches) {
-      document.querySelectorAll(".btn").forEach(function (btn) {
-        btn.addEventListener("mousemove", function (e) {
-          var r = btn.getBoundingClientRect();
-          var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
-          var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
-          btn.classList.add("is-magnetic");
-          btn.style.transform = "translate(" + (dx * 9).toFixed(1) + "px," + (dy * 5).toFixed(1) + "px)";
-        });
-        btn.addEventListener("mouseleave", function () {
-          btn.classList.remove("is-magnetic");
-          btn.style.transform = "";
-        });
-      });
-  }
 
   /* ---------- Footer year ---------- */
   var year = document.querySelector("[data-year]");
